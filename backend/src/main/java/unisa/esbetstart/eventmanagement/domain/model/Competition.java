@@ -16,6 +16,7 @@ public class Competition {
     private String name;
     private String originCountry;
 
+
     @Builder
     public Competition(UUID id, String name, String originCountry) {
         this.id = id;
@@ -24,4 +25,5 @@ public class Competition {
     }
 
     //TODO da completare con i metodi
+
 }
