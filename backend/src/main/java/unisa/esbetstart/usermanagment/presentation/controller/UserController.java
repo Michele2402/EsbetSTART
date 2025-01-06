@@ -22,7 +22,6 @@ public class UserController {
         log.info("User Registration Started");
 
         registrationUseCase.register(request);
-
     }
 
 }

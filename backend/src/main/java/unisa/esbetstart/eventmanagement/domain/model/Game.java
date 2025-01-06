@@ -29,12 +29,13 @@ public class Game {
 
     public void addCompetition(Competition competition) {
 
-        if(competitions.contains(competition)) {
+        if(competitions.stream().anyMatch(c -> c.getName().equals(competition.getName()))) {
             log.error("Competition {} already exists in {}", competition.getName(), name);
             throw new DomainAttributeException("Competition " + competition.getName() + " already exists in " + name);
         }
 
         competitions.add(competition);
+        competition.setGame(this);
     }
 
     public void updateGame(String name, Set<Rule> rules) {

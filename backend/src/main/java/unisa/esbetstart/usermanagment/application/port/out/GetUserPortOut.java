@@ -2,8 +2,8 @@ package unisa.esbetstart.usermanagment.application.port.out;
 
 import unisa.esbetstart.usermanagment.domain.model.User;
 
-public interface FindUserPortOut {
+public interface GetUserPortOut {
 
-    User findUserByEmail(String email);
+    User getUserByEmail(String email);
 
 }

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import unisa.esbetstart.common.exceptions.DomainAttributeException;
+import unisa.esbetstart.common.exceptions.*;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -37,5 +37,23 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return exceptionHandled(exception, HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @ExceptionHandler({AttributeIsNullException.class})
+    private ResponseEntity<Object> attributeIsNullException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler({InvalidUUIDException.class})
+    private ResponseEntity<Object> invalidUUIDException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ObjectNotFoundException.class})
+    private ResponseEntity<Object> objectNotFoundException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({ObjectIsNullException.class})
+    private ResponseEntity<Object> objectIsNullException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.usermanagment.application.port.in.RegistrationUseCase;
-import unisa.esbetstart.usermanagment.application.port.out.FindUserPortOut;
+import unisa.esbetstart.usermanagment.application.port.out.GetUserPortOut;
 import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
@@ -16,7 +16,7 @@ public class AuthManagerService implements RegistrationUseCase {
 
     private final CheckTypeAttribute checkTypeAttribute;
 
-    private final FindUserPortOut findUserPortOut;
+    private final GetUserPortOut getUserPortOut;
 
     @Override
     public void register(RegisterRequest request) {
@@ -31,7 +31,7 @@ public class AuthManagerService implements RegistrationUseCase {
                 .username(request.getUsername())
                 .build();
 
-        User savedUser = findUserPortOut.findUserByEmail(request.getEmail());
+        User savedUser = getUserPortOut.getUserByEmail(request.getEmail());
 
         if(savedUser != null) {
             log.error("User already exists");
