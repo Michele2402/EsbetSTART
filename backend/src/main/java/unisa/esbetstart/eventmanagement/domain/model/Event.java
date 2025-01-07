@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Event {
+public class Event implements Searchable {
 
     private UUID id;
     private String name;
@@ -42,10 +42,20 @@ public class Event {
         odds.add(odd);
     }
 
+    public void removeOdd(Odd odd) {
+
+        if(!odds.contains(odd)) {
+            log.error("Odd {} does not exist in {}", odd.getName(), name);
+            throw new DomainAttributeException("Odd " + odd.getName() + " does not exist in " + name);
+        }
+
+        odds.remove(odd);
+    }
+
 
     public void updateEvent(String name, LocalDateTime date, Set<Odd> odds) {
 
-        if(name == null || date == null || competition == null || odds == null) {
+        if(name == null || date == null || odds == null) {
             log.error("Event name, date, competition or odds cannot be null");
             throw new DomainAttributeException("Event name, date, competition or odds cannot be null");
         }
@@ -57,7 +67,6 @@ public class Event {
 
         this.name = name;
         this.date = date;
-        this.competition = competition;
         this.odds = odds;
     }
 

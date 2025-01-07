@@ -6,17 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Competition {
+public class Competition implements Searchable {
 
     private UUID id;
     private String name;
     private String originCountry;
     private Game game;
+    private Set<Event> events;
 
     @Builder
     public Competition(UUID id, String name, String originCountry, Game game) {
@@ -27,7 +29,6 @@ public class Competition {
         this.game = game;
 
     }
-
 
     /**
      * This method updates the competition name and origin country
@@ -54,5 +55,35 @@ public class Competition {
         this.name = name;
         this.originCountry = originCountry;
     }
+
+    public void addEvent(Event event) {
+
+        if(events.contains(event)) {
+            log.error("Event {} already exists in {}", event.getName(), name);
+            throw new DomainAttributeException("Event " + event.getName() + " already exists in " + name);
+        }
+
+        if (event == null) {
+            log.error("Event cannot be null");
+            throw new DomainAttributeException("Event cannot be null");
+        }
+
+        events.add(event);
+    }
+
+    public void removeEvent(Event event) {
+        if (event == null) {
+            log.error("Event cannot be null");
+            throw new DomainAttributeException("Event cannot be null");
+        }
+
+        if (!events.contains(event)) {
+            log.error("Event {} does not exist in {}", event.getName(), name);
+            throw new DomainAttributeException("Event " + event.getName() + " does not exist in " + name);
+        }
+
+        events.remove(event);
+    }
+
 
 }

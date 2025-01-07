@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import unisa.esbetstart.slipmanagment.domain.model.OddStatic;
 
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -17,6 +19,7 @@ public class Odd {
     private String name;
     private double value;
     private Event event;
+    private Set<OddStatic> oddStatics;
 
     @Builder
     public Odd(UUID id, String name, double value, Event event) {
@@ -26,4 +29,9 @@ public class Odd {
         this.event = event;
     }
 
+    private void evaluate() {
+
+
+
+    }
 }
