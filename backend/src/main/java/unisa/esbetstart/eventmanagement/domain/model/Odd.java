@@ -6,21 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.UUID;
+
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Rule {
+public class Odd {
 
+    private UUID id;
     private String name;
-    private Integer position;
-    private Game game;
+    private double value;
+    private Event event;
 
     @Builder
-    public Rule(String name, Integer position, Game game) {
+    public Odd(UUID id, String name, double value, Event event) {
+        this.id = id;
         this.name = name;
-        this.position = position;
-        this.game = game;
+        this.value = value;
+        this.event = event;
     }
-
 
 }
