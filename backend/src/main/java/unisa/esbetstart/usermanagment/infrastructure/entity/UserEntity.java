@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
 
 import java.util.Set;
 
@@ -31,4 +32,8 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private Set<BetPlacedEntity> bets;
 
+    @ManyToMany (mappedBy = "user")
+    private Set<OfferEntity> offers;
+
+    //TODO creare la gerarchia con gambler e modificare le relazioni di conseguenza, inoltre aggiungere la relazione con la classe oddStaticEntity
 }
