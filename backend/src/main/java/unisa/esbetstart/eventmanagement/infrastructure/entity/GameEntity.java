@@ -18,14 +18,11 @@ public class GameEntity {
     @Id
     @Column(columnDefinition = "UUID")
     private UUID id;
-
     private String name;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
-    @ToString.Exclude
     private Set<CompetitionEntity> competitions;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
-    @ToString.Exclude
     private Set<RuleEntity> rules;
 }

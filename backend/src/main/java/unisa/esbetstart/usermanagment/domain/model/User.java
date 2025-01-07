@@ -27,6 +27,5 @@ public class User {
 
     private void validate() {
 
-
     }
 }

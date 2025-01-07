@@ -1,8 +1,11 @@
 package unisa.esbetstart.eventmanagement.infrastructure.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -11,16 +14,19 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-@Table(name = "rule")
-public class RuleEntity {
-
+public class EventEntity {
     @Id
     @Column(columnDefinition = "UUID")
     private UUID id;
+
     private String name;
-    private Integer position;
+    private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    private GameEntity game;
+    @JoinColumn(name = "competition_id", nullable = false)
+    private CompetitionEntity competition;
+
+    @OneToMany(mappedBy = "event")
+    private Set<OddEntity> odds;
+
 }

@@ -2,6 +2,7 @@ package unisa.esbetstart.eventmanagement.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 
 import java.util.UUID;
 
@@ -11,16 +12,19 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-@Table(name = "rule")
-public class RuleEntity {
-
+public class OddEntity {
     @Id
     @Column(columnDefinition = "UUID")
     private UUID id;
+
+    private double value;
     private String name;
-    private Integer position;
 
     @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    private GameEntity game;
+    @JoinColumn(name = "event_id", nullable = false)
+    private EventEntity event;
+
+    @ManyToOne
+    @JoinColumn(name = "slip_id", nullable = false)
+    private SlipEntity slip;
 }
