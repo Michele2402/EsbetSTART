@@ -36,17 +36,19 @@ public class Game {
      * @throws DomainAttributeException if the competition is null
      */
     public void addCompetition(Competition competition) {
+
+        //null check
+        if (competition == null) {
+            log.error("Competition cannot be null");
+            throw new DomainAttributeException("Competition cannot be null");
+        }
+
         // checks if a competition with the same name exists in the list
         if (competitions.stream().anyMatch(existingCompetition -> existingCompetition.getName().equals(competition.getName()))) {
             log.error("Competition {} already exists in the game", competition.getName());
             throw new DomainAttributeException("Competition " + competition.getName() + " already exists in the game");
         }
 
-        //null check
-        if(competition == null) {
-            log.error("Competition cannot be null");
-            throw new DomainAttributeException("Competition cannot be null");
-        }
 
         competitions.add(competition);
     }
@@ -63,6 +65,12 @@ public class Game {
         if (name == null || rules == null) {
             log.error("Game name or rules cannot be null");
             throw new DomainAttributeException("Game name or rules cannot be null");
+        }
+
+        //isempty check
+        if (name.isEmpty()) {
+            log.error("Game name cannot be empty");
+            throw new DomainAttributeException("Game name cannot be empty");
         }
 
         if (name.length() > 30) {

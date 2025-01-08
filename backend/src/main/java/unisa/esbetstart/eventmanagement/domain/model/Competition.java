@@ -67,17 +67,18 @@ public class Competition {
      */
     public void addEvent(Event event) {
 
+        //null check
+        if(event == null) {
+            log.error("Event cannot be null");
+            throw new DomainAttributeException("Event cannot be null");
+        }
+
         // checks if an event with the same name exists in the list
         if (events.stream().anyMatch(existingEvent -> existingEvent.getName().equals(event.getName()))) {
             log.error("Event {} already exists in the competition", event.getName());
             throw new DomainAttributeException("Event " + event.getName() + " already exists in the competition");
         }
 
-        //null check
-        if(event == null) {
-            log.error("Event cannot be null");
-            throw new DomainAttributeException("Event cannot be null");
-        }
 
         events.add(event);
     }
