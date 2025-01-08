@@ -28,33 +28,36 @@ public class Game {
     }
 
     /**
-     * This method adds a competition to the game
+     * This method adds a competition to the game.
+     * It checks if a competition with the same name exists in the list before adding.
+     *
      * @param competition the competition to be added
+     * @throws DomainAttributeException if a competition with the same name already exists
      */
     public void addCompetition(Competition competition) {
-
-        if(competitions.contains(competition)) {
-            log.error("Competition {} already exists in {}", competition.getName(), name);
-            throw new DomainAttributeException("Competition " + competition.getName() + " already exists in " + name);
+        // checks if a competition with the same name exists in the list
+        if (competitions.stream().anyMatch(existingCompetition -> existingCompetition.getName().equals(competition.getName()))) {
+            log.error("Competition {} already exists in the game", competition.getName());
+            throw new DomainAttributeException("Competition " + competition.getName() + " already exists in the game");
         }
-
         competitions.add(competition);
     }
 
 
     /**
      * This method updates the game name and rules
-     * @param name the new name of the game
+     *
+     * @param name  the new name of the game
      * @param rules the new rules of the game
      */
     public void updateGame(String name, Set<Rule> rules) {
 
-        if(name == null || rules == null) {
+        if (name == null || rules == null) {
             log.error("Game name or rules cannot be null");
             throw new DomainAttributeException("Game name or rules cannot be null");
         }
 
-        if(name.length() > 30) {
+        if (name.length() > 30) {
             log.error("Game name cannot be longer than 30 characters");
             throw new DomainAttributeException("Game name cannot be longer than 30 characters");
         }
