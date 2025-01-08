@@ -32,33 +32,88 @@ public class Event {
         this.odds = odds;
     }
 
-    public void addOdd(Odd odd) {
+    /**
+     * This method updates the event name, date, competition and odds
+     *
+     * @param name the new name of the event
+     * @param date the new date of the event
+     * @throws DomainAttributeException if the name, date or odds are null
+     * @throws DomainAttributeException if the name is longer than 30 characters
+     */
+    public void updateEvent(String name, LocalDateTime date) {
 
-        if(odds.contains(odd)) {
-            log.error("Odd {} already exists in {}", odd.getName(), name);
-            throw new DomainAttributeException("Odd " + odd.getName() + " already exists in " + name);
-        }
-
-        odds.add(odd);
-    }
-
-
-    public void updateEvent(String name, LocalDateTime date, Set<Odd> odds) {
-
-        if(name == null || date == null || competition == null || odds == null) {
+        if (name == null || date == null) {
             log.error("Event name, date, competition or odds cannot be null");
             throw new DomainAttributeException("Event name, date, competition or odds cannot be null");
         }
 
-        if(name.length() > 30) {
+        if (name.length() > 30) {
             log.error("Event name cannot be longer than 30 characters");
             throw new DomainAttributeException("Event name cannot be longer than 30 characters");
         }
 
         this.name = name;
         this.date = date;
-        this.competition = competition;
-        this.odds = odds;
+    }
+
+    /**
+     * This method adds an odd to the event
+     *
+     * @param odd the odd to add
+     * @throws DomainAttributeException if the odd already exists in the event
+     * @throws DomainAttributeException if the odd is null
+     */
+    public void addOdd(Odd odd) {
+
+        //null check
+        if (odd == null) {
+            log.error("Odd cannot be null");
+            throw new DomainAttributeException("Odd cannot be null");
+        }
+
+        // checks if the odd already exists in the list by comparing the name
+        if (odds.stream().anyMatch(existingOdd -> existingOdd.getName().equals(odd.getName()))) {
+            log.error("Odd {} already exists in the event", odd.getName());
+            throw new DomainAttributeException("Odd " + odd.getName() + " already exists in the event");
+        }
+
+        odds.add(odd);
+    }
+
+
+    /**
+     * This method removes an odd from the event
+     *
+     * @param odd the odd to remove
+     * @throws DomainAttributeException if the odd does not exist in the event
+     * @throws DomainAttributeException if the odd is null
+     */
+    public void removeOdd(Odd odd) {
+
+        //null check
+        if (odd == null) {
+            log.error("Odd cannot be null");
+            throw new DomainAttributeException("Odd cannot be null");
+        }
+
+        // checks if the odd exists in the list by comparing the name
+        if (odds.stream().noneMatch(existingOdd -> existingOdd.getName().equals(odd.getName()))) {
+            log.error("Odd {} does not exist in the event", odd.getName());
+            throw new DomainAttributeException("Odd " + odd.getName() + " does not exist in the event");
+        }
+
+        odds.remove(odd);
+
+    }
+
+    //TODO add method to end event
+    public void endEvent() {
+        //TODO implement
+    }
+
+    //TODO add method to end odd
+    public void endOdd() {
+        //TODO implement
     }
 
 }
