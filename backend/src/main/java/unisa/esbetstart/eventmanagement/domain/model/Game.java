@@ -53,6 +53,30 @@ public class Game implements Searchable {
         competitions.add(competition);
     }
 
+    /**
+     * This method removes a competition from the game.
+     *
+     * @param competition the competition to be removed
+     * @throws DomainAttributeException if the competition is null
+     * @throws DomainAttributeException if the competition does not exist in the game
+     */
+    public void removeCompetition(Competition competition) {
+
+        //null check
+        if (competition == null) {
+            log.error("Competition cannot be null");
+            throw new DomainAttributeException("Competition cannot be null");
+        }
+
+        // checks if the competition exists in the list
+        if (!competitions.contains(competition)) {
+            log.error("Competition {} does not exist in the game", competition.getName());
+            throw new DomainAttributeException("Competition " + competition.getName() + " does not exist in the game");
+        }
+
+        competitions.remove(competition);
+    }
+
 
     /**
      * This method updates the game name and rules
