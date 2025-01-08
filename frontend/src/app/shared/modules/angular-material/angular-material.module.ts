@@ -12,7 +12,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
-import {MatCardModule} from "@angular/material/card";
+import {MatCard, MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
@@ -31,34 +31,10 @@ import {MatGridListModule} from "@angular/material/grid-list";
 
 
 const modules = [
-  MatCheckboxModule,
   MatButtonModule,
-  MatInputModule,
-  MatAutocompleteModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatListModule,
-  MatCardModule,
-  MatTabsModule,
-  MatExpansionModule,
-  MatButtonToggleModule,
-  MatChipsModule,
   MatIconModule,
   MatProgressSpinnerModule,
-  MatDialogModule,
-  MatTooltipModule,
-  MatSnackBarModule,
-  MatTableModule,
-  MatTreeModule,
-  MatSortModule,
-  MatPaginatorModule,
-  MatNativeDateModule,
-  MatGridListModule,
+  MatCardModule
 ];
 
 @NgModule({
