@@ -33,6 +33,7 @@ public class Game {
      *
      * @param competition the competition to be added
      * @throws DomainAttributeException if a competition with the same name already exists
+     * @throws DomainAttributeException if the competition is null
      */
     public void addCompetition(Competition competition) {
         // checks if a competition with the same name exists in the list
@@ -40,6 +41,13 @@ public class Game {
             log.error("Competition {} already exists in the game", competition.getName());
             throw new DomainAttributeException("Competition " + competition.getName() + " already exists in the game");
         }
+
+        //null check
+        if(competition == null) {
+            log.error("Competition cannot be null");
+            throw new DomainAttributeException("Competition cannot be null");
+        }
+
         competitions.add(competition);
     }
 
