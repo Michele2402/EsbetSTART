@@ -7,18 +7,23 @@ import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.eventmanagement.domain.model.Odd;
 
 import java.util.Set;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Data
 @Slf4j
 public class Slip {
 
+    private UUID id;
     private double amount;
     private Set<Odd> odds;
 
-    public Slip(double amount, Set<Odd> odds) {
+    public Slip(UUID id, double amount, Set<Odd> odds) {
+
+        this.id = id;
         this.amount = amount;
         this.odds = odds;
+
     }
 
     /**
