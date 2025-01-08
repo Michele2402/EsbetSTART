@@ -49,7 +49,6 @@ public class Game implements Searchable {
             throw new DomainAttributeException("Competition " + competition.getName() + " already exists in the game");
         }
 
-
         competitions.add(competition);
     }
 
@@ -104,6 +103,7 @@ public class Game implements Searchable {
 
         this.name = name;
         this.rules = rules;
+
     }
 
 }

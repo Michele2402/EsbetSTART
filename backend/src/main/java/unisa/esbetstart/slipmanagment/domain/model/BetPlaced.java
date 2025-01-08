@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
 import java.util.Map;
 import java.util.Set;
@@ -19,11 +20,13 @@ public class BetPlaced {
     private UUID id;
     private double amount;
     private ResultEnum result;
+    private Gambler gambler;
     private Set<OddStatic> oddStatics;
 
     @Builder
-    public BetPlaced(double amount, ResultEnum result, Set<OddStatic> oddStatics, UUID id) {
+    public BetPlaced(double amount, Gambler gambler, ResultEnum result, Set<OddStatic> oddStatics, UUID id) {
 
+        this.gambler = gambler;
         this.id = id;
         this.amount = amount;
         this.result = result;
