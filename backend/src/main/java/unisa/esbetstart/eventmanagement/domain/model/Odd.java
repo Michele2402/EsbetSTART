@@ -29,9 +29,6 @@ public class Odd {
         this.event = event;
     }
 
-    private void evaluate() {
-
-
-
-    }
+    //TODO: implement the evaluate method
+    private void evaluate() {}
 }
