@@ -27,31 +27,83 @@ public class Game {
         this.rules = rules;
     }
 
+    /**
+     * This method adds a competition to the game.
+     * It checks if a competition with the same name exists in the list before adding.
+     *
+     * @param competition the competition to be added
+     * @throws DomainAttributeException if a competition with the same name already exists
+     * @throws DomainAttributeException if the competition is null
+     */
     public void addCompetition(Competition competition) {
 
-        if(competitions.stream().anyMatch(c -> c.getName().equals(competition.getName()))) {
-            log.error("Competition {} already exists in {}", competition.getName(), name);
-            throw new DomainAttributeException("Competition " + competition.getName() + " already exists in " + name);
+        //null check
+        if (competition == null) {
+            log.error("Competition cannot be null");
+            throw new DomainAttributeException("Competition cannot be null");
+        }
+
+        // checks if a competition with the same name exists in the list
+        if (competitions.stream().anyMatch(existingCompetition -> existingCompetition.getName().equals(competition.getName()))) {
+            log.error("Competition {} already exists in the game", competition.getName());
+            throw new DomainAttributeException("Competition " + competition.getName() + " already exists in the game");
         }
 
         competitions.add(competition);
-        competition.setGame(this);
     }
 
+    /**
+     * This method removes a competition from the game.
+     *
+     * @param competition the competition to be removed
+     * @throws DomainAttributeException if the competition is null
+     * @throws DomainAttributeException if the competition does not exist in the game
+     */
+    public void removeCompetition(Competition competition) {
+
+        //null check
+        if (competition == null) {
+            log.error("Competition cannot be null");
+            throw new DomainAttributeException("Competition cannot be null");
+        }
+
+        // checks if the competition exists in the list
+        if (!competitions.contains(competition)) {
+            log.error("Competition {} does not exist in the game", competition.getName());
+            throw new DomainAttributeException("Competition " + competition.getName() + " does not exist in the game");
+        }
+
+        competitions.remove(competition);
+    }
+
+
+    /**
+     * This method updates the game name and rules
+     *
+     * @param name  the new name of the game
+     * @param rules the new rules of the game
+     */
     public void updateGame(String name, Set<Rule> rules) {
 
-        if(name == null || rules == null) {
+        if (name == null || rules == null) {
             log.error("Game name or rules cannot be null");
             throw new DomainAttributeException("Game name or rules cannot be null");
         }
 
-        if(name.length() > 30) {
+        //isempty check
+        if (name.isEmpty()) {
+            log.error("Game name cannot be empty");
+            throw new DomainAttributeException("Game name cannot be empty");
+        }
+
+        if (name.length() > 30) {
             log.error("Game name cannot be longer than 30 characters");
             throw new DomainAttributeException("Game name cannot be longer than 30 characters");
         }
 
         this.name = name;
         this.rules = rules;
+
     }
 
 }
