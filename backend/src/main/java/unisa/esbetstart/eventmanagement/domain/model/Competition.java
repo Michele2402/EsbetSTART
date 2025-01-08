@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -17,6 +18,7 @@ public class Competition {
     private String name;
     private String originCountry;
     private Game game;
+    private Set<Event> events;
 
     @Builder
     public Competition(UUID id, String name, String originCountry, Game game) {
@@ -54,5 +56,55 @@ public class Competition {
         this.name = name;
         this.originCountry = originCountry;
     }
+
+    /**
+     * This method adds an event to the competition.
+     * It checks if an event with the same name exists in the list before adding.
+     *
+     * @param event the event to be added
+     * @throws DomainAttributeException if an event with the same name already exists
+     * @throws DomainAttributeException if the event is null
+     */
+    public void addEvent(Event event) {
+
+        // checks if an event with the same name exists in the list
+        if (events.stream().anyMatch(existingEvent -> existingEvent.getName().equals(event.getName()))) {
+            log.error("Event {} already exists in the competition", event.getName());
+            throw new DomainAttributeException("Event " + event.getName() + " already exists in the competition");
+        }
+
+        //null check
+        if(event == null) {
+            log.error("Event cannot be null");
+            throw new DomainAttributeException("Event cannot be null");
+        }
+
+        events.add(event);
+    }
+
+    /**
+     * This method removes an event from the competition.
+     * It checks if the event exists in the list before removing.
+     *
+     * @param event the event to be removed
+     * @throws DomainAttributeException if the event does not exist in the competition
+     * @throws DomainAttributeException if the event is null
+     */
+    public void removeEvent(Event event) {
+
+        //null check
+        if(event == null) {
+            log.error("Event cannot be null");
+            throw new DomainAttributeException("Event cannot be null");
+        }
+
+        if (events.stream().noneMatch(existingEvent -> existingEvent.getName().equals(event.getName()))) {
+            log.error("Event {} does not exist in the competition", event.getName());
+            throw new DomainAttributeException("Event " + event.getName() + " does not exist in the competition");
+        }
+
+        events.remove(event);
+    }
+
 
 }
