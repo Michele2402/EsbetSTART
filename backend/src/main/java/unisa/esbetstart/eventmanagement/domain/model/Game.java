@@ -27,6 +27,10 @@ public class Game {
         this.rules = rules;
     }
 
+    /**
+     * This method adds a competition to the game
+     * @param competition the competition to be added
+     */
     public void addCompetition(Competition competition) {
 
         if(competitions.contains(competition)) {
@@ -37,6 +41,12 @@ public class Game {
         competitions.add(competition);
     }
 
+
+    /**
+     * This method updates the game name and rules
+     * @param name the new name of the game
+     * @param rules the new rules of the game
+     */
     public void updateGame(String name, Set<Rule> rules) {
 
         if(name == null || rules == null) {
