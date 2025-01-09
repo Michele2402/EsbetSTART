@@ -1,11 +1,10 @@
 package unisa.esbetstart.transactionmanagment.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -14,6 +13,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
+@Table(name = "offer")
 public class OfferEntity {
 
     @Id
@@ -26,5 +26,8 @@ public class OfferEntity {
     private LocalDateTime expiration_date;
     private String type;
     private double goal;
+
+    @OneToMany(mappedBy = "offer")
+    private Set<ActivatedOfferEntity> activatedOffers;
 
 }

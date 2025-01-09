@@ -20,7 +20,7 @@ public class RuleEntity {
     private String name;
     private Integer position;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", nullable = false)
     private GameEntity game;
 }

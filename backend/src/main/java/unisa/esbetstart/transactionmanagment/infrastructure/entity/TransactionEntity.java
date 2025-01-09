@@ -1,11 +1,10 @@
 package unisa.esbetstart.transactionmanagment.infrastructure.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
+import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,6 +15,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
+@Table(name = "transaction")
 public class TransactionEntity {
 
     @Id
@@ -24,5 +24,9 @@ public class TransactionEntity {
     private double amount;
     private TransactionTypeEnum type;
     private LocalDateTime date;
+
+    @ManyToOne
+    @JoinColumn(name = "gambler_id", nullable = false)
+    private GamblerEntity gambler;
 
 }

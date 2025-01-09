@@ -3,6 +3,7 @@ package unisa.esbetstart.slipmanagment.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -27,7 +28,9 @@ public class OddStaticEntity {
 
     @ManyToOne
     @JoinColumn(name = "oddStatic_id", nullable = false)
-    private OddStaticEntity oddStaticEntity;
+    private BetPlacedEntity betPlaced;
 
-    //TODO aggiungere la relazione con la classe User
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "odd_id", nullable = false)
+    private OddEntity odd;
 }

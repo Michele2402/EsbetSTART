@@ -22,7 +22,7 @@ public class EventEntity {
     private String name;
     private LocalDateTime date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "competition_id", nullable = false)
     private CompetitionEntity competition;
 
