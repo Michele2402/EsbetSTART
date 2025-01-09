@@ -9,6 +9,7 @@ import org.springframework.cglib.core.Local;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -106,14 +107,24 @@ public class Event {
 
     }
 
-    //TODO add method to end event
-    public void endEvent() {
-        //TODO implement
-    }
 
-    //TODO add method to end odd
-    public void endOdd() {
-        //TODO implement
+    /**
+     * This method ends the event by setting the odds as won or lost
+     *
+     * @param winningOdds the list of winning odds
+     * @throws DomainAttributeException if the winning odds are null
+     */
+    public void endEvent(List<UUID> winningOdds) {
+
+        // null check
+        if (winningOdds == null) {
+            log.error("Winning odds cannot be null");
+            throw new DomainAttributeException("Winning odds cannot be null");
+        }
+
+        for (Odd odd : odds) {
+            odd.evaluate(winningOdds.contains(odd.getId()));
+        }
     }
 
 }

@@ -45,4 +45,19 @@ public class CheckTypeAttribute {
         }
     }
 
+    /**
+     * Checks if an integer is null or negative. If so, logs an error message and throws an exception.
+     *
+     * @param integer       the integer to check
+     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
+     * @throws AttributeIsNullException if the integer is null or negative
+     */
+    public void checkIntegerIsNullOrNegative(Integer integer, String infoAttribute) {
+        if (integer == null || integer < 0) {
+            log.error("{} is null or negative", infoAttribute);
+            throw new AttributeIsNullException(infoAttribute + " is null or negative");
+        }
+
+    }
+
 }

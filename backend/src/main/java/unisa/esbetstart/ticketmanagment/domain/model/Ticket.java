@@ -16,12 +16,12 @@ import java.util.*;
 @Slf4j
 public class Ticket {
 
-    private String category;
-    private UUID assignedOperator;
-    private TicketStatusEnum status;
     private UUID id;
-    private List<Message> messages = new ArrayList<>();
+    private String category;
+    private TicketStatusEnum status;
+    private UUID assignedOperator;
     private Gambler openedBy;
+    private List<Message> messages = new ArrayList<>();
 
     @Builder
     public Ticket(String category, UUID assignedOperator, TicketStatusEnum status, UUID id, List<Message> messages, Gambler openedBy) {

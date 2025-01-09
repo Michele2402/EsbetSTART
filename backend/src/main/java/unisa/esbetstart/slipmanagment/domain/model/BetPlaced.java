@@ -49,7 +49,37 @@ public class BetPlaced {
         this.oddStatics.add(oddStatic);
     }
 
-    //TODO: implement the evaluateResult method
-    public void evaluateResult() { }
+    /**
+     * This method evaluates the BetPlaced
+     * <p>
+     * Sets the result of the BetPlaced to WON if all the OddStatics are WON
+     * <p>
+     * Sets the result of the BetPlaced to LOST if at least one OddStatic is LOST
+     * <p>
+     * Sets the result of the BetPlaced to PLAYING if at least one OddStatic is PLAYING and none are LOST
+     * @return the result of the BetPlaced
+     */
+    public ResultEnum evaluateResult() {
+
+        for(OddStatic oddStatic : oddStatics) {
+
+            if(oddStatic.getResult() == ResultEnum.LOST) {
+                result = ResultEnum.LOST;
+                return ResultEnum.LOST;
+            }
+        }
+
+        for (OddStatic oddStatic : oddStatics) {
+
+            if(oddStatic.getResult() == ResultEnum.PLAYING) {
+                result = ResultEnum.PLAYING;
+                return ResultEnum.PLAYING;
+            }
+        }
+
+        result = ResultEnum.WON;
+        return ResultEnum.WON;
+
+    }
 
 }
