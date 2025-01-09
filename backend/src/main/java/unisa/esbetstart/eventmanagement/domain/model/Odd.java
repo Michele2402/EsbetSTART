@@ -10,6 +10,8 @@ import unisa.esbetstart.slipmanagment.domain.model.OddStatic;
 import java.util.Set;
 import java.util.UUID;
 
+import static unisa.esbetstart.slipmanagment.domain.enums.ResultEnum.*;
+
 @NoArgsConstructor
 @Data
 @Slf4j
@@ -29,6 +31,37 @@ public class Odd {
         this.event = event;
     }
 
-    //TODO: implement the evaluate method
-    private void evaluate() {}
+
+    /**
+     * This method evaluates the Odd
+     * @param isWon true if the Odd is won, false otherwise
+     */
+    public void evaluate(boolean isWon) {
+
+        if(isWon) {
+            log.info("Odd with id {} is won", id);
+            oddStatics.forEach(oddStatic -> oddStatic.setResult(WON));
+        } else {
+            log.info("Odd with id {} is lost", id);
+            oddStatics.forEach(oddStatic -> oddStatic.setResult(LOST));
+
+        }
+    }
+
+    /**
+     * This method maps the Odd to an OddStatic
+     * @return the OddStatic
+     */
+    public OddStatic toOddStatic() {
+        return OddStatic.builder()
+                .id(UUID.randomUUID())
+                .date(event.getDate())
+                .competition(event.getCompetition().getName())
+                .game(event.getCompetition().getGame().getName())
+                .result(PLAYING)
+                .name(name)
+                .value(value)
+                .build();
+    }
+
 }

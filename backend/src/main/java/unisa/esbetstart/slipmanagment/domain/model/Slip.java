@@ -5,9 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.eventmanagement.domain.model.Odd;
+import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Data
@@ -17,13 +20,13 @@ public class Slip {
     private UUID id;
     private double amount;
     private Set<Odd> odds;
+    private Gambler gambler;
 
-    public Slip(UUID id, double amount, Set<Odd> odds) {
-
+    public Slip(UUID id, double amount, Set<Odd> odds, Gambler gambler) {
         this.id = id;
         this.amount = amount;
         this.odds = odds;
-
+        this.gambler = gambler;
     }
 
     /**
@@ -72,8 +75,36 @@ public class Slip {
         this.odds.remove(odd);
     }
 
-    //TODO: implement the placeBet method
-    public void placeBet() {
+
+    /**
+     * This method places a bet
+     *
+     * @return the BetPlaced
+     * @throws DomainAttributeException if the slip is empty
+     * @throws DomainAttributeException if the slip amount is less than or equal to 0
+     */
+    public BetPlaced placeBet() {
+
+        //check if the slip is empty
+        if (odds.isEmpty()) {
+            log.error("Slip cannot be empty");
+            throw new DomainAttributeException("Slip cannot be empty");
+        }
+
+        //check if the slip is valid
+        if (amount <= 0) {
+            log.error("Slip amount must be greater than 0");
+            throw new DomainAttributeException("Slip amount must be greater than 0");
+        }
+
+        return BetPlaced.builder()
+                .id(UUID.randomUUID())
+                .amount(amount)
+                .result(ResultEnum.PLAYING)
+                .gambler(gambler)
+                .oddStatics(odds.stream().map(Odd::toOddStatic).collect(Collectors.toSet()))
+                .build();
+
     }
 
 }
