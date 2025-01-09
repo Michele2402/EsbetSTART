@@ -14,4 +14,6 @@ public interface GameJpaRepository extends JpaRepository<GameEntity, UUID> {
     @Query("SELECT g FROM GameEntity g WHERE g.id = :gameId")
     Optional<GameEntity> findByIdWithCompetitions(UUID gameId);*/
 
+    Optional<GameEntity> findByName(String gameName);
+
 }
