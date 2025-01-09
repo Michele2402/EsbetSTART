@@ -47,6 +47,8 @@ public class CreateGameManagerService implements CreateGameUseCase {
                 .rules(request.getRules().stream().map(applicationRuleMapper::toRuleModel).collect(Collectors.toSet()))
                 .build();
 
+        game.getRules().forEach(rule -> rule.setGame(game));
+
         // Check if a game with the same name already exists
         if (getGamePortOut.getGameByName(request.getName()) != null) {
             log.error("Game with name {} already exists", request.getName());

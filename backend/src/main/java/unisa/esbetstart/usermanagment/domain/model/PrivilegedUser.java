@@ -16,7 +16,7 @@ public class PrivilegedUser extends User {
 
     private RolesEnum role;
 
-    @Builder
+    //@Builder
     public PrivilegedUser(String name, String surname, String email, String username, String password, RolesEnum role) {
         super(name, surname, email, username, password);
         this.role = role;

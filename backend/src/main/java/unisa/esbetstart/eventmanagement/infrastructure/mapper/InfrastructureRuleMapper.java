@@ -3,6 +3,7 @@ package unisa.esbetstart.eventmanagement.infrastructure.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import unisa.esbetstart.eventmanagement.domain.model.Rule;
+import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.RuleEntity;
 import unisa.esbetstart.eventmanagement.presentation.request.AddRuleRequest;
 
@@ -17,6 +18,9 @@ public class InfrastructureRuleMapper {
                 .id(rule.getId())
                 .name(rule.getName())
                 .position(rule.getPosition())
+                .game(GameEntity.builder()
+                        .id(rule.getGame().getId())
+                        .build())
                 .build();
     }
 }

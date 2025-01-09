@@ -17,6 +17,7 @@ public class Game {
     private UUID id;
     private String name;
     private Set<Competition> competitions;
+    //TODO: escludere dal tostring
     private Set<Rule> rules;
 
     @Builder
