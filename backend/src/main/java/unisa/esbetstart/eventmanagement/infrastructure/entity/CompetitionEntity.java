@@ -21,12 +21,10 @@ public class CompetitionEntity {
     private String name;
     private String originCountry;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", nullable = false)
     private GameEntity game;
 
-    @OneToMany (mappedBy = "competition")
+    @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL)
     private Set<EventEntity> events;
-
-    //TODO da continuare
 }
