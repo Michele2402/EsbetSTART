@@ -27,10 +27,6 @@ public class OddEntity {
     @JoinColumn(name = "event_id", nullable = false)
     private EventEntity event;
 
-    @ManyToOne
-    @JoinColumn(name = "slip_id", nullable = false)
-    private SlipEntity slip;
-
     @OneToMany(mappedBy = "odd")
     private Set<OddStaticEntity> oddStatics;
 }

@@ -22,12 +22,13 @@ public class Competition {
     private Set<Event> events;
 
     @Builder
-    public Competition(UUID id, String name, String originCountry, Game game) {
+    public Competition(UUID id, String name, String originCountry, Game game, Set<Event> events) {
 
         this.id = id;
         this.name = name;
         this.originCountry = originCountry;
         this.game = game;
+        this.events = events;
 
     }
 
@@ -82,6 +83,8 @@ public class Competition {
 
 
         events.add(event);
+        event.setCompetition(this);
+
     }
 
     /**

@@ -16,4 +16,5 @@ public class AddEventRequest {
     private String name;
     private LocalDateTime date;
     private List<AddOddRequest> odds;
+
 }
