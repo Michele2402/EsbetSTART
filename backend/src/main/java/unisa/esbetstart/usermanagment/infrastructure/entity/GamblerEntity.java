@@ -2,15 +2,16 @@ package unisa.esbetstart.usermanagment.infrastructure.entity;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.BetPlacedEntity;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.ticketmanagment.infrastructure.entity.TicketEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.ActivatedOfferEntity;
-import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.TransactionEntity;
-import unisa.esbetstart.usermanagment.domain.model.User;
 
 import java.util.Set;
 

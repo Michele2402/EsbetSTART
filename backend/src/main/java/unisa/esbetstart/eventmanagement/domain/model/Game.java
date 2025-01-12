@@ -51,6 +51,7 @@ public class Game {
         }
 
         competitions.add(competition);
+        competition.setGame(this);
     }
 
     /**
