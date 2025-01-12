@@ -2,6 +2,7 @@ package unisa.esbetstart.usermanagment.infrastructure.mapper;
 
 import org.springframework.stereotype.Component;
 import unisa.esbetstart.usermanagment.domain.model.User;
+import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.UserEntity;
 
 @Component
@@ -17,13 +18,16 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
-    public UserEntity toUserEntity(User user) {
-        return UserEntity.builder()
+    public GamblerEntity toGamblerEntity(User user) {
+        return GamblerEntity.builder()
                 .email(user.getEmail())
                 .name(user.getName())
                 .surname(user.getSurname())
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .balance(0)
+                .bonusBalance(0)
+                .withdrawableBalance(0)
                 .build();
     }
 }
