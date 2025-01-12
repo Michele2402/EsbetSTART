@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <div class="navbar-container">
+
+    <div class="navbar-logo">
+      <img ngSrc="assets/logo.png" alt="Logo" width="500" height="500">
+    </div>
+
+
+    <!-- <div class="navbar-search">
+      <div class="search-input">
+       <input type="text" placeholder="Cerca">
+       <button mat-icon-button>
+         <mat-icon class="navbar-icon">search</mat-icon>
+       </button>
+        </div>
+     </div> -->
+
+    <div class="navbar-search">
+      <div class="search-input">
+        <mat-form-field appearance="outline">
+          <mat-label>Cerca</mat-label>
+          <input matInput placeholder="Cerca">
+          <button mat-icon-button matSuffix>
+            <mat-icon class="navbar-icon">search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="navbar-buttons">
+      <button class="login-button" mat-stroked-button>LOGIN</button>
+      <button class="join-button" mat-stroked-button>JOIN NOW</button>
+    </div>
+
+  </div>
+
+</nav>

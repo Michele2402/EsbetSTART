@@ -5,4 +5,7 @@ export const environmentPaths = {
 
   //PAGES ROUTES
   home_page: 'homepage',
+  e_sports: 'esports',
+  login_page: 'login',
+  registration_page: 'registration',
 }
