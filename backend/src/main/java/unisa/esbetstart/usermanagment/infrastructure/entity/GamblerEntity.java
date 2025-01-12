@@ -21,7 +21,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @Entity
-@DiscriminatorValue("gambler")
+@DiscriminatorValue("GAMBLER")
 public class GamblerEntity extends UserEntity {
 
     private Integer balance;

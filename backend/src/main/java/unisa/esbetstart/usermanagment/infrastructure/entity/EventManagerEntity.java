@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @Entity
-@DiscriminatorValue("event_manager")
+@DiscriminatorValue("EVENT_MANAGER")
 public class EventManagerEntity extends UserEntity {
 
 }

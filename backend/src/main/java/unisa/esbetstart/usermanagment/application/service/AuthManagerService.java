@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.usermanagment.application.port.in.LoginUseCase;
@@ -15,7 +16,9 @@ import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.presentation.request.LoginRequest;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
+import unisa.esbetstart.usermanagment.security.CustomUserDetails;
 import unisa.esbetstart.usermanagment.security.JwtService;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Service
 @Slf4j
@@ -71,11 +74,14 @@ public class AuthManagerService implements RegistrationUseCase, LoginUseCase {
                 )
         );
 
-        if(authentication.isAuthenticated()) {
+        if (authentication.isAuthenticated()) {
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            String role = userDetails.getAuthorities().stream()
+                    .findFirst()
+                    .map(GrantedAuthority::getAuthority)
+                    .orElse("GAMBLER");
             log.info("User Login Completed");
-            return jwtService.generateToken(
-                    request.getEmail()
-            );
+            return jwtService.generateToken(request.getEmail(), role);
         }
 
         log.error("User Login Failed");

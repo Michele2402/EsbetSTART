@@ -12,6 +12,6 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @Entity
-@DiscriminatorValue("customer_service_operator")
+@DiscriminatorValue("CUSTOMER_SERVICE_OPERATOR")
 public class CustomerServiceOperatorEntity extends UserEntity {
 }

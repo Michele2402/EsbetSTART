@@ -23,4 +23,9 @@ public class UserEntity {
     private String username;
     private String password;
 
+    @Transient
+    public String getRole() {
+        return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+    }
+
 }

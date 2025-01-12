@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (requests) -> requests
                                 .requestMatchers("/users/register", "/users/login").permitAll()
+                                .requestMatchers("/games/**", "/competitions/**").hasAuthority("EVENT_MANAGER")
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

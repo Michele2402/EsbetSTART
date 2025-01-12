@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @Entity
-@DiscriminatorValue("transaction_manager")
+@DiscriminatorValue("TRANSACTION_MANAGER")
 public class TransactionManagerEntity extends UserEntity {
 }
