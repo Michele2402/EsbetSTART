@@ -1,0 +1,18 @@
+<form id="precision-form" [formGroup]="precisionForm" (ngSubmit)="onSubmit()">
+  <div id="precision-form-group">
+    <label for="precision-input">Precision (30-500)</label>
+    <div class="input-icon-container">
+      <input id="precision-input" matInput type="number" formControlName="precision"/>
+      <button mat-icon-button color="primary" type="submit" [disabled]="precisionForm.invalid">
+        <mat-icon>upload</mat-icon>
+      </button>
+    </div>
+    @if(precisionForm.get('precision')?.invalid &&( precisionForm.get('precision')?.touched || precisionForm.get('precision')?.dirty)) {
+      @if(precisionForm.get('precision')?.errors?.['required']) {
+        <mat-error>Precision is required</mat-error>
+      } @else if(precisionForm.get('precision')?.errors?.['min'] || precisionForm.get('precision')?.errors?.['max']) {
+        <mat-error>Please enter a value between 30 and 500</mat-error>
+      }
+    }
+  </div>
+</form>
