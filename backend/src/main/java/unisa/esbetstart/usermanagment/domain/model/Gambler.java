@@ -11,6 +11,7 @@ import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.ticketmanagment.domain.model.Ticket;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
+import unisa.esbetstart.usermanagment.domain.enums.RolesEnum;
 
 import java.util.Set;
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class Gambler extends User {
 
     //@Builder
     public Gambler(String name, String surname, String email, String username, String password, double balance, double bonusBalance, double withdrawalBalance, Set<ActivatedOffer> activatedOffers, Set<Ticket> tickets) {
-        super(name, surname, email, username, password);
+        super(name, surname, email, username, password, RolesEnum.GAMBLER);
         this.balance = balance;
         this.bonusBalance = bonusBalance;
         this.withdrawalBalance = withdrawalBalance;

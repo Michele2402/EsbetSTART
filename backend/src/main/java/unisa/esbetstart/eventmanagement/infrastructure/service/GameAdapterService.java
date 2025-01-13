@@ -28,7 +28,7 @@ public class GameAdapterService implements GetGamePortOut, CreateGamePortOut {
      */
     @Override
     public Game getGameById(UUID gameId) {
-        Optional<GameEntity> optionalGameEntity = gameJpaRepository.findById(gameId);
+        Optional<GameEntity> optionalGameEntity = gameJpaRepository.findByIdWithCompetitions(gameId);
 
         return optionalGameEntity
                 .map(infrastructureGameMapper::toGameModelWithCompetitions)
