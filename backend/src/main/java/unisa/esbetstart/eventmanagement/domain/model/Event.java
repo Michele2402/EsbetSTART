@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cglib.core.Local;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 
 import java.time.LocalDateTime;

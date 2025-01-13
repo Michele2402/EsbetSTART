@@ -27,7 +27,7 @@ public class SlipEntity {
     @JoinColumn(name = "user_email", nullable = false)
     private GamblerEntity gambler;
 
-    @OneToMany(mappedBy = "slip")
+    @OneToMany()
     private Set<OddEntity> odds;
 
 }

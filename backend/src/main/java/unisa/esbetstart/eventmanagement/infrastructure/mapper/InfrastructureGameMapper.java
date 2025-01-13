@@ -18,7 +18,7 @@ public class InfrastructureGameMapper {
         return Game.builder()
                 .id(gameEntity.getId())
                 .name(gameEntity.getName())
-                .competitions(infrastructureCompetitionMapper.toCompetitionWithSimpleDetailsList(gameEntity.getCompetitions()))
+                .competitions(infrastructureCompetitionMapper.toCompetitionModelWithSimpleDetailsList(gameEntity.getCompetitions()))
                 .build();
     }
 

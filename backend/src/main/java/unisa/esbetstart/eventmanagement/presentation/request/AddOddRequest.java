@@ -11,4 +11,5 @@ public class AddOddRequest {
 
     private String name;
     private Float value;
+
 }
