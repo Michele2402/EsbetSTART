@@ -10,7 +10,9 @@ import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.mapper.InfrastructureGameMapper;
 import unisa.esbetstart.eventmanagement.infrastructure.repository.GameJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -48,6 +50,17 @@ public class GameAdapterService implements GetGamePortOut, CreateGamePortOut {
                 .map(infrastructureGameMapper::toGameModelWithCompetitions)
                 .orElse(null);
 
+    }
+
+    /**
+     * Gets all games from the database.
+     */
+    @Override
+    public Set<Game> getAllGames() {
+
+        List<GameEntity> gameEntities = gameJpaRepository.findAllWithRules();
+
+        return infrastructureGameMapper.toGameModelWithRulesSet(gameEntities);
     }
 
     /**
