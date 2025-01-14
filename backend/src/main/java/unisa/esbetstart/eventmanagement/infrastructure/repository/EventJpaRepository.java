@@ -11,9 +11,4 @@ import java.util.UUID;
 
 public interface EventJpaRepository extends JpaRepository<EventEntity, UUID> {
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE EventEntity e SET e.name = :name, e.date = :date WHERE e.id = :id")
-    void update(UUID id, String name, LocalDateTime date);
-
 }

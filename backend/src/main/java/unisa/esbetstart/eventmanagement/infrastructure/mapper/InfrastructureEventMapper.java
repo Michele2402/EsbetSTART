@@ -28,17 +28,16 @@ public class InfrastructureEventMapper {
                 .build();
     }
 
-    public Event toEventModel (EventEntity eventEntity) {
+    public Event toEventModelWithSimpleDetails (EventEntity eventEntity) {
         return Event.builder()
                 .id(eventEntity.getId())
                 .name(eventEntity.getName())
                 .date(eventEntity.getDate())
-                .competition(infrastructureCompetitionMapper.toCompetitionModelWithSimpleDetails(eventEntity.getCompetition()))
+                .competition(Competition.builder()
+                        .id(eventEntity.getCompetition().getId()).build())
                 .odds(eventEntity.getOdds().stream().map(
                         oddEntity -> Odd.builder()
                                 .id(oddEntity.getId())
-                                .name(oddEntity.getName())
-                                .value(oddEntity.getValue())
                                 .build()
                 ).collect(Collectors.toSet()))
                 .build();

@@ -40,7 +40,7 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     @Override
     public void updateEvent(Event event) {
 
-            eventJpaRepository.update(event.getId(), event.getName(), event.getDate());
+            eventJpaRepository.save(infrastructureEventMapper.toEventEntity(event));
 
     }
 
@@ -48,7 +48,7 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     public Event getEventById(UUID eventId) {
 
         Optional<EventEntity> event = eventJpaRepository.findById(eventId);
-        return event.map(infrastructureEventMapper::toEventModel).orElse(null);
+        return event.map(infrastructureEventMapper::toEventModelWithSimpleDetails).orElse(null);
 
     }
 }

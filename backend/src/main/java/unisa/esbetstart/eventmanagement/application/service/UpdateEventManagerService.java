@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.eventmanagement.application.port.in.UpdateEventUseCase;
+import unisa.esbetstart.eventmanagement.application.port.out.GetEventPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.UpdateEventPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateEventRequest;
@@ -21,6 +22,7 @@ public class UpdateEventManagerService implements UpdateEventUseCase {
 
     private final CheckTypeAttribute checkTypeAttribute;
     private final UpdateEventPortOut updateEventPortOut;
+    private final GetEventPortOut getEventPortOut;
 
     @Override
     public void updateEvent(UpdateEventRequest request) {
@@ -33,15 +35,19 @@ public class UpdateEventManagerService implements UpdateEventUseCase {
         //check the update event request
         checkUpdateEventRequest(request);
 
-        //build the updated object
-        Event updatedEvent = Event.builder()
-                .id(eventId)
-                .name(request.getName())
-                .date(request.getDate())
-                .build();
+        //get the event
+        Event eventToUpdate = getEventPortOut.getEventById(eventId);
+
+        //check if the event exists
+        if (eventToUpdate == null) {
+            log.error("Event with id {} not found", eventId.toString());
+            throw new ObjectIsNullException("Event with id " + eventId + " not found");
+        }
+
+        eventToUpdate.updateEvent(request.getName(), request.getDate());
 
         //update the event
-        updateEventPortOut.updateEvent(updatedEvent);
+        updateEventPortOut.updateEvent(eventToUpdate);
 
         log.info("Event with id {} updated", eventId.toString());
 
