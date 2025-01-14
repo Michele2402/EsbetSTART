@@ -7,6 +7,7 @@ import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.common.exceptions.SizeMismatchException;
+import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.eventmanagement.application.mapper.ApplicationOddMapper;
 import unisa.esbetstart.eventmanagement.application.port.in.CreateEventUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.CreateEventPortOut;
@@ -17,7 +18,7 @@ import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.eventmanagement.domain.model.Rule;
 import unisa.esbetstart.eventmanagement.presentation.request.AddEventRequest;
 import unisa.esbetstart.eventmanagement.presentation.request.AddOddRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.CheckTypeAttribute;
 
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 public class CreateEventManagerService implements CreateEventUseCase {
 
     private final CheckTypeAttribute checkTypeAttribute;
+    private final ParseAttribute parseAttribute;
     private final GetCompetitionPortOut getCompetitionPortOut;
     private final GetGamePortOut getGamePortOut;
     private final ApplicationOddMapper applicationOddMapper;
@@ -41,7 +43,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
         log.info("Adding event {} to database", request.getName());
 
         //check and get competition id
-        UUID competitionId = checkTypeAttribute.checkUUIDIsNullOrInvalid(request.getCompetitionId(), "Competition Id in event");
+        UUID competitionId = parseAttribute.checkUUIDIsNullOrInvalid(request.getCompetitionId(), "Competition Id in event");
 
         //get competition
         Competition competition = getCompetitionPortOut.getCompetitionByIdWithRules(competitionId);

@@ -11,7 +11,7 @@ import unisa.esbetstart.eventmanagement.application.port.out.GetGamePortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Game;
 import unisa.esbetstart.eventmanagement.presentation.request.AddGameRequest;
 import unisa.esbetstart.eventmanagement.presentation.request.AddRuleRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.CheckTypeAttribute;
 
 import java.util.UUID;
 import java.util.stream.Collectors;

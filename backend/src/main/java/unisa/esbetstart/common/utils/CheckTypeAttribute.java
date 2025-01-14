@@ -1,4 +1,4 @@
-package unisa.esbetstart.usermanagment.application.utils;
+package unisa.esbetstart.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,26 +33,6 @@ public class CheckTypeAttribute {
         if (string == null || string.isEmpty()) {
             log.error("{} is null or empty", infoAttribute);
             throw new AttributeIsNullException(infoAttribute + " is null or empty");
-        }
-    }
-
-    /**
-     * Checks if a UUID is null or invalid. If so, logs an error message and throws an exception.
-     *
-     * @param uuid          the UUID to check
-     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
-     * @throws InvalidUUIDException if the UUID is null or invalid
-     */
-    public UUID checkUUIDIsNullOrInvalid(String uuid, String infoAttribute) {
-        if (uuid == null || uuid.isEmpty()) {
-            log.error("{} is null or empty", infoAttribute);
-            throw new AttributeIsNullException(infoAttribute + " is null or empty");
-        }
-        try {
-            return UUID.fromString(uuid);
-        } catch (IllegalArgumentException e) {
-            log.error("{} is not a valid UUID", infoAttribute);
-            throw new InvalidUUIDException(infoAttribute + " is not a valid UUID");
         }
     }
 

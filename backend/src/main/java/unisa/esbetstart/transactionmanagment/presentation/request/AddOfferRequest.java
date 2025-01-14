@@ -14,8 +14,8 @@ public class AddOfferRequest {
 
     private String description;
     private String name;
-    private LocalDateTime expirationDate;
+    private String expirationDate;
     private Integer goal;
-    private OfferTypeEnum type;
+    private String type;
     private Float price;
 }

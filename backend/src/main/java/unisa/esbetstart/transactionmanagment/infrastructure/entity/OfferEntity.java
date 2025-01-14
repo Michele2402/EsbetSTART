@@ -2,6 +2,8 @@ package unisa.esbetstart.transactionmanagment.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import unisa.esbetstart.transactionmanagment.domain.enums.OfferTypeEnum;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -23,8 +25,11 @@ public class OfferEntity {
     private String description;
     private double price;
     private String name;
-    private LocalDateTime expiration_date;
-    private String type;
+    private LocalDateTime expirationDate;
+
+    @Enumerated(EnumType.STRING)
+    private OfferTypeEnum type;
+
     private double goal;
 
     @OneToMany(mappedBy = "offer")

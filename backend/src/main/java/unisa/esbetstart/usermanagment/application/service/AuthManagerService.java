@@ -12,13 +12,12 @@ import unisa.esbetstart.usermanagment.application.port.in.LoginUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.RegistrationUseCase;
 import unisa.esbetstart.usermanagment.application.port.out.CreateUserPortOut;
 import unisa.esbetstart.usermanagment.application.port.out.GetUserPortOut;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.presentation.request.LoginRequest;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
 import unisa.esbetstart.usermanagment.security.CustomUserDetails;
 import unisa.esbetstart.usermanagment.security.JwtService;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Service
 @Slf4j
