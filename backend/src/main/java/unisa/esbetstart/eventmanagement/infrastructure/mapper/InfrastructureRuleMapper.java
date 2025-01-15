@@ -23,4 +23,12 @@ public class InfrastructureRuleMapper {
                         .build())
                 .build();
     }
+
+    public Rule toRuleModel (RuleEntity ruleEntity) {
+        return Rule.builder()
+                .id(ruleEntity.getId())
+                .name(ruleEntity.getName())
+                .position(ruleEntity.getPosition())
+                .build();
+    }
 }
