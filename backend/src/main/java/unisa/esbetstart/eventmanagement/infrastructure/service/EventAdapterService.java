@@ -40,15 +40,15 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     @Override
     public void updateEvent(Event event) {
 
-            eventJpaRepository.save(infrastructureEventMapper.toEventEntity(event));
+            eventJpaRepository.save(infrastructureEventMapper.toEventEntityWithoutOdds(event));
 
     }
 
     @Override
     public Event getEventById(UUID eventId) {
 
-        Optional<EventEntity> event = eventJpaRepository.findById(eventId);
-        return event.map(infrastructureEventMapper::toEventModelWithSimpleDetails).orElse(null);
+        Optional<EventEntity> event = eventJpaRepository.findByIdWithCompetition(eventId);
+        return event.map(infrastructureEventMapper::toEventModelWithoutOdds).orElse(null);
 
     }
 }

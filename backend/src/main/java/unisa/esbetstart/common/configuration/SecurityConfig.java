@@ -34,6 +34,7 @@ public class SecurityConfig {
                         (requests) -> requests
                                 .requestMatchers("/users/register", "/users/login").permitAll()
                                 .requestMatchers("/games/**", "/competitions/**").hasAuthority("EVENT_MANAGER")
+                                .requestMatchers("/events/**").hasAuthority("EVENT_MANAGER")
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
