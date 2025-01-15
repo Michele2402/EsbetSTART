@@ -3,8 +3,9 @@ package unisa.esbetstart.transactionmanagment.presentation.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import unisa.esbetstart.transactionmanagment.application.port.in.CreateOfferUseCase;
+import unisa.esbetstart.transactionmanagment.application.port.in.*;
 import unisa.esbetstart.transactionmanagment.presentation.request.AddOfferRequest;
+import unisa.esbetstart.transactionmanagment.presentation.request.UpdateOfferRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,6 +15,7 @@ import unisa.esbetstart.transactionmanagment.presentation.request.AddOfferReques
 public class OfferController {
 
     private final CreateOfferUseCase createOfferUseCase;
+    private final UpdateOfferUseCase updateOfferUseCase;
 
     /**
      * Adds a new offer to the database.
@@ -24,5 +26,16 @@ public class OfferController {
             @RequestBody AddOfferRequest request
     ) {
         createOfferUseCase.createOffer(request);
+    }
+
+    /**
+     * Updates an offer in the database.
+     * @param request the UpdateOfferRequest containing the offer data
+     */
+    @PostMapping("/update")
+    public void updateOffer(
+            @RequestBody UpdateOfferRequest request
+    ) {
+        updateOfferUseCase.updateOffer(request);
     }
 }

@@ -57,4 +57,13 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut 
         public void addOffer(Offer offer) {
             offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
         }
+
+        /**
+        * Updates an existing offer in the database.
+        * @param offer the offer to update
+        */
+        @Override
+        public void updateOffer(Offer offer) {
+            offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
+        }
 }

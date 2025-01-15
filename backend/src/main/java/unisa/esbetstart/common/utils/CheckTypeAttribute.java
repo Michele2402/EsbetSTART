@@ -3,24 +3,29 @@ package unisa.esbetstart.common.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import unisa.esbetstart.common.exceptions.AttributeIsNullException;
-import unisa.esbetstart.common.exceptions.InvalidUUIDException;
 import unisa.esbetstart.common.exceptions.SizeMismatchException;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Component
 @Slf4j
 public class CheckTypeAttribute {
 
 
+    /**
+     * Checks if a string's length is less than the specified limit.
+     * If the string's length exceeds the limit, logs an error message and throws an exception.
+     *
+     * @param string        the string to check
+     * @param limit         the maximum allowed length for the string
+     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
+     * @throws SizeMismatchException if the string's length exceeds the specified limit
+     */
     public void checkStringIsLessThan(String string, int limit, String infoAttribute) {
         if (string.length() > limit) {
             log.error("{} is longer than 30 characters", infoAttribute);
             throw new SizeMismatchException(infoAttribute + " is longer than 30 characters");
         }
     }
-
 
     /**
      * Checks if a string is null or empty. If so, logs an error message and throws an exception.
