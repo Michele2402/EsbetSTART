@@ -23,25 +23,11 @@
 }
 
 
-
-.navbar-search {
-  display: block;
-  align-items: center;
-
-
-
-}
-
 .search-input {
   border: none;
-  width: 40%;
-  padding: 10px 20px;
   border-radius: 20px;
   outline: none;
-  margin-left: 1020px;
-  margin-top: 20px;
   font-weight: bold;
-
   color: white;
   font-family: Cambria;
 }
@@ -58,8 +44,6 @@
 .navbar-buttons .login-button {
   padding: 10px 20px;
   font-size: 13px;
-  font-family: Cambria;
-  font-weight: bold;
   border-radius: 20px;
   cursor: pointer;
   color: white;
@@ -72,8 +56,6 @@
 .navbar-buttons .join-button {
   padding: 10px 20px;
   font-size: 13px;
-  font-weight: bold;
-  font-family: Cambria;
   border-radius: 20px;
   cursor: pointer;
   background-color: black;
