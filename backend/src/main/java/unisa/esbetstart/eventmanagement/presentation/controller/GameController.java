@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import unisa.esbetstart.eventmanagement.application.port.in.CreateGameUseCase;
+import unisa.esbetstart.eventmanagement.application.port.in.UpdateGameUseCase;
 import unisa.esbetstart.eventmanagement.presentation.request.AddGameRequest;
+import unisa.esbetstart.eventmanagement.presentation.request.UpdateGameRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,6 +16,7 @@ import unisa.esbetstart.eventmanagement.presentation.request.AddGameRequest;
 public class GameController {
 
     private final CreateGameUseCase createGameUseCase;
+    private final UpdateGameUseCase updateGameUseCase;
 
     /**
      * Adds a new game to a competition.
@@ -24,6 +27,13 @@ public class GameController {
             @RequestBody AddGameRequest request
     ) {
         createGameUseCase.createGame(request);
+    }
+
+    @PostMapping("/update")
+    public void updateGame(
+            @RequestBody UpdateGameRequest request
+    ) {
+        updateGameUseCase.updateGame(request);
     }
 
 }

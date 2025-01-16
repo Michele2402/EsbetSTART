@@ -29,4 +29,17 @@ public class InfrastructureGameMapper {
                 .rules(game.getRules().stream().map(infrastructureRuleMapper::toRuleEntity).collect(Collectors.toSet()))
                 .build();
     }
+
+    /**
+     * Maps a GameEntity to a Game model without external classes
+     * @param gameEntity the GameEntity to map
+     * @return the Game model
+
+     */
+    public Game toGameModel(GameEntity gameEntity) {
+        return Game.builder()
+                .id(gameEntity.getId())
+                .name(gameEntity.getName())
+                .build();
+    }
 }
