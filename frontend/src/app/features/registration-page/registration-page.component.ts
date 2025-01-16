@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {signal} from "@angular/core";
 
 @Component({
   selector: 'app-registration-page',
@@ -9,23 +10,33 @@ import {FormBuilder, Validators} from "@angular/forms";
 export class RegistrationPageComponent {
 
   precisionForm = this._fb.group({
-    precision: [0, [Validators.required, Validators.min(30), Validators.max(500)]],
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    surname: ['', Validators.required],
+    telephone: ['', Validators.required],
+    date: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    nationality: ['', Validators.required],
   });
 
   constructor(
     private _fb: FormBuilder
-   /* private _authService: AuthService */
   ) {
-
   }
 
-  onSubmit() {
-    console.log(this.precisionForm);
-
+  onSubmit(): void {
     if (this.precisionForm.valid) {
+      console.log('Form submitted:', this.precisionForm.value);
+    } else {
+      console.log('Form is invalid');
     }
   }
 
+
+  hide = signal(true);
+  clickEvent(event?: MouseEvent) {
+    this.hide.set(!this.hide());
+    event?.stopPropagation();
+  }
 
 }

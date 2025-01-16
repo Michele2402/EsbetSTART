@@ -1,18 +1,110 @@
-<form id="precision-form" [formGroup]="precisionForm" (ngSubmit)="onSubmit()">
-  <div id="precision-form-group">
-    <label for="precision-input">Precision (30-500)</label>
-    <div class="input-icon-container">
-      <input id="precision-input" matInput type="number" formControlName="precision"/>
-      <button mat-icon-button color="primary" type="submit" [disabled]="precisionForm.invalid">
-        <mat-icon>upload</mat-icon>
-      </button>
-    </div>
-    @if(precisionForm.get('precision')?.invalid &&( precisionForm.get('precision')?.touched || precisionForm.get('precision')?.dirty)) {
-      @if(precisionForm.get('precision')?.errors?.['required']) {
-        <mat-error>Precision is required</mat-error>
-      } @else if(precisionForm.get('precision')?.errors?.['min'] || precisionForm.get('precision')?.errors?.['max']) {
-        <mat-error>Please enter a value between 30 and 500</mat-error>
-      }
-    }
-  </div>
+
+<form class="registration-form" [formGroup]="precisionForm" (ngSubmit)="onSubmit()">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <div class="registration">
+        <table class="name-surname-container" ><tr>
+          <td><mat-form-field class="name-container">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+            @if(precisionForm.get('name')?.invalid &&( precisionForm.get('name')?.touched || precisionForm.get('name')?.dirty)) {
+            }@else if(precisionForm.get('name')?.errors?.['required']) {
+              <mat-error>Name is required</mat-error>
+            }
+          </mat-form-field></td>
+          <td><mat-form-field class="surname-container">
+            <mat-label>Surname</mat-label>
+            <input matInput formControlName="surname">
+            @if(precisionForm.get('surname')?.invalid &&( precisionForm.get('surname')?.touched || precisionForm.get('surname')?.dirty)) {
+            }@else if(precisionForm.get('surname')?.errors?.['required']) {
+              <mat-error>Surname is required</mat-error>
+            }
+          </mat-form-field></td>
+        </tr></table>
+
+
+        <mat-form-field class="telephone-container">
+          <mat-label>Telephone</mat-label>
+          <span matTextPrefix>+39 &nbsp;</span>
+          <input type="tel" matInput placeholder="555-555-1234" formControlName="telephone">
+          <mat-icon matSuffix>mode_edit</mat-icon>
+          @if(precisionForm.get('telephone')?.invalid &&( precisionForm.get('telephone')?.touched || precisionForm.get('telephone')?.dirty)) {
+          }@else if(precisionForm.get('telephone')?.errors?.['required']) {
+            <mat-error>Please enter a valid telephone</mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field class="date-container">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="datepicker" formControlName="date"/>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+          @if(precisionForm.get('date')?.invalid &&( precisionForm.get('date')?.touched || precisionForm.get('date')?.dirty)) {
+          }@else if(precisionForm.get('date')?.errors?.['required']) {
+            <mat-error>Please enter a valid date</mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field class="email-container">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formGroup]="precisionForm" formControlName="email" placeholder="miao@example.com">
+          @if (precisionForm.hasError('email') && !precisionForm.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+          }
+          @if (precisionForm.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+
+
+        <div class="password-container">
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+            >
+              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            @if(precisionForm.get('password')?.invalid &&( precisionForm.get('password')?.touched || precisionForm.get('password')?.dirty)) {
+            }@else if(precisionForm.get('password')?.errors?.['required']) {
+              <mat-error>Please enter a valid password</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="nationality-container">
+          <mat-form-field>
+            <mat-label>Select</mat-label>
+            <mat-select formControlName="nationality">
+              <mat-option value="one">Italy</mat-option>
+              <mat-option value="two">Spain</mat-option>
+              <mat-option value="three">Germany</mat-option>
+              <mat-option value="four">Canada</mat-option>
+              <mat-option value="five">United Kingdom</mat-option>
+            </mat-select>
+            @if(precisionForm.get('nationality')?.invalid &&( precisionForm.get('nationality')?.touched || precisionForm.get('nationality')?.dirty)) {
+            }@else if(precisionForm.get('nationality')?.errors?.['required']) {
+              <mat-error>Please select a nationality</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button class="registration-button" mat-stroked-button  [disabled]="precisionForm.invalid">Join now</button>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
 </form>

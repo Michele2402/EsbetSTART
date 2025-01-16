@@ -2,29 +2,17 @@
   <div class="navbar-container">
 
     <div class="navbar-logo">
-      <img ngSrc="assets/logo.png" alt="Logo" width="500" height="500">
+      <img src="assets/logo.png" alt="Logo">
     </div>
 
-
-    <!-- <div class="navbar-search">
-      <div class="search-input">
-       <input type="text" placeholder="Cerca">
-       <button mat-icon-button>
-         <mat-icon class="navbar-icon">search</mat-icon>
-       </button>
-        </div>
-     </div> -->
-
-    <div class="navbar-search">
-      <div class="search-input">
-        <mat-form-field appearance="outline">
-          <mat-label>Cerca</mat-label>
-          <input matInput placeholder="Cerca">
-          <button mat-icon-button matSuffix>
-            <mat-icon class="navbar-icon">search</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
+    <div class="search-input">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchQuery" placeholder="Type to search on ESbet START.." />
+        <button mat-icon-button matSuffix (click)="onSearch()">
+          <mat-icon class="navbar-icon">search</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
 
 
