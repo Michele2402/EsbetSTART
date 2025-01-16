@@ -39,7 +39,6 @@ public class ParseAttribute {
      * @param infoAttribute a description of the associated attribute, used for logging and exception messages
      * @throws InvalidUUIDException if the UUID is null or invalid
      */
-
     public UUID checkUUIDIsNullOrInvalid(String uuid, String infoAttribute) {
         if (uuid == null || uuid.isEmpty()) {
             log.error("{} is null or empty", infoAttribute);

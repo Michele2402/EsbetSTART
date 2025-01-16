@@ -16,6 +16,7 @@ public class OfferController {
 
     private final CreateOfferUseCase createOfferUseCase;
     private final UpdateOfferUseCase updateOfferUseCase;
+    private final RemoveOfferUseCase removeOfferUseCase;
 
     /**
      * Adds a new offer to the database.
@@ -37,5 +38,16 @@ public class OfferController {
             @RequestBody UpdateOfferRequest request
     ) {
         updateOfferUseCase.updateOffer(request);
+    }
+
+    /**
+     * Removes an offer from the database.
+     * @param offerId the id of the offer
+     */
+    @PostMapping("/remove")
+    public void removeOffer(
+            @RequestBody String offerId
+    ) {
+        removeOfferUseCase.removeOffer(offerId);
     }
 }

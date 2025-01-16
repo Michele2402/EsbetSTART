@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.transactionmanagment.application.port.out.CreateOfferPortOut;
 import unisa.esbetstart.transactionmanagment.application.port.out.GetOfferPortOut;
+import unisa.esbetstart.transactionmanagment.application.port.out.RemoveOfferPortOut;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut {
+public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut, RemoveOfferPortOut {
 
         private final OfferJpaRepository offerJpaRepository;
 
@@ -65,5 +66,10 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut 
         @Override
         public void updateOffer(Offer offer) {
             offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
+        }
+
+        @Override
+        public void removeOffer(UUID offerId) {
+            offerJpaRepository.deleteById(offerId);
         }
 }
