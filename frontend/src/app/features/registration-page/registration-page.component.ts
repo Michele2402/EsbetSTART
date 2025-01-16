@@ -10,10 +10,10 @@ import {signal} from "@angular/core";
 export class RegistrationPageComponent {
 
   precisionForm = this._fb.group({
-    name: ['', Validators.required, Validators.maxLength(30)],
-    surname: ['', Validators.required, Validators.maxLength(30)],
-    email: ['', [Validators.required, Validators.email], Validators.maxLength(30)],
-    username: ['', Validators.required, Validators.maxLength(30)],
+    name: ['', [Validators.required, Validators.maxLength(30)]],
+    surname: ['', [Validators.required, Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]],
+    username: ['', [Validators.required, Validators.maxLength(30)]],
     password: ['',
       [
         Validators.required,
