@@ -56,4 +56,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     private ResponseEntity<Object> objectIsNullException(Exception exception) {
         return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({SizeMismatchException.class})
+    private ResponseEntity<Object> sizeMismatchException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
+    }
 }

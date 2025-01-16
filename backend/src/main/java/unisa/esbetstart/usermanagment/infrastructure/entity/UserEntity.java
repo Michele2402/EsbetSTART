@@ -1,22 +1,19 @@
 package unisa.esbetstart.usermanagment.infrastructure.entity;
 
 import jakarta.persistence.*;
-import unisa.esbetstart.slipmanagment.infrastructure.entity.BetPlacedEntity;
-import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
-
-import java.util.Set;
+import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+@SuperBuilder
 @Entity
-@Table(name = "user")
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type")
 public class UserEntity {
 
     @Id
@@ -26,14 +23,9 @@ public class UserEntity {
     private String username;
     private String password;
 
-    @OneToOne(mappedBy = "user")
-    private SlipEntity slip;
+    @Transient
+    public String getRole() {
+        return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+    }
 
-    @OneToMany(mappedBy = "user")
-    private Set<BetPlacedEntity> bets;
-
-    @ManyToMany (mappedBy = "user")
-    private Set<OfferEntity> offers;
-
-    //TODO creare la gerarchia con gambler e modificare le relazioni di conseguenza, inoltre aggiungere la relazione con la classe oddStaticEntity
 }

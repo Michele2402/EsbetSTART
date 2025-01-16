@@ -3,6 +3,7 @@ package unisa.esbetstart.slipmanagment.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
+import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.UserEntity;
 
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
+@Table(name = "bet_placed")
 public class BetPlacedEntity {
     @Id
     @Column(columnDefinition = "UUID")
@@ -24,9 +26,9 @@ public class BetPlacedEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    private GamblerEntity gambler;
 
     @OneToMany (mappedBy = "betPlaced")
-    private Set<OddEntity> oddEntitySet;
+    private Set<OddStaticEntity> odds;
 
 }

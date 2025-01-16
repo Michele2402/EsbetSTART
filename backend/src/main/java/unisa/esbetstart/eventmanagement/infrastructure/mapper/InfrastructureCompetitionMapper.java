@@ -2,17 +2,19 @@ package unisa.esbetstart.eventmanagement.infrastructure.mapper;
 
 import org.springframework.stereotype.Component;
 import unisa.esbetstart.eventmanagement.domain.model.Competition;
+import unisa.esbetstart.eventmanagement.domain.model.Event;
+import unisa.esbetstart.eventmanagement.domain.model.Game;
+import unisa.esbetstart.eventmanagement.domain.model.Rule;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class InfrastructureCompetitionMapper {
+public class  InfrastructureCompetitionMapper {
 
-    public Set<Competition> toCompetitionWithSimpleDetailsList (Set<CompetitionEntity> competitionEntities) {
+    public Set<Competition> toCompetitionModelWithSimpleDetailsList(Set<CompetitionEntity> competitionEntities) {
 
         return competitionEntities
                 .stream()
@@ -25,6 +27,37 @@ public class InfrastructureCompetitionMapper {
                 .id(competitionEntity.getId())
                 .name(competitionEntity.getName())
                 .originCountry(competitionEntity.getOriginCountry())
+                .build();
+    }
+
+    public Competition toCompetitionWithRules (CompetitionEntity competitionEntity) {
+
+        Set<Rule> rules = competitionEntity.getGame().getRules()
+                .stream()
+                .map(ruleEntity -> Rule.builder()
+                        .id(ruleEntity.getId())
+                        .name(ruleEntity.getName())
+                        .position(ruleEntity.getPosition())
+                        .build())
+                .collect(Collectors.toSet());
+
+        Set<Event> events = competitionEntity.getEvents()
+                .stream()
+                .map(eventEntity -> Event.builder()
+                        .id(eventEntity.getId())
+                        .name(eventEntity.getName())
+                        .build())
+                .collect(Collectors.toSet());
+
+        return Competition.builder()
+                .id(competitionEntity.getId())
+                .name(competitionEntity.getName())
+                .originCountry(competitionEntity.getOriginCountry())
+                .events(events)
+                .game(Game.builder()
+                        .id(competitionEntity.getGame().getId())
+                        .rules(rules)
+                        .build())
                 .build();
     }
 

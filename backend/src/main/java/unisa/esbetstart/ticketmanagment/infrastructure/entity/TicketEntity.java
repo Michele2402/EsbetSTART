@@ -1,10 +1,8 @@
 package unisa.esbetstart.ticketmanagment.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
+import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +13,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
+@Table(name = "ticket")
 public class TicketEntity {
 
     @Id
@@ -25,4 +24,8 @@ public class TicketEntity {
 
     @OneToMany(mappedBy = "ticket")
     private List<MessageEntity> messages;
+
+    @ManyToOne
+    @JoinColumn(name = "gambler_id", nullable = false)
+    private GamblerEntity gambler;
 }

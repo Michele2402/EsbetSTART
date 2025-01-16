@@ -3,6 +3,7 @@ package unisa.esbetstart.slipmanagment.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
+import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.UserEntity;
 
 import java.util.Set;
@@ -24,9 +25,9 @@ public class SlipEntity {
 
     @OneToOne
     @JoinColumn(name = "user_email", nullable = false)
-    private UserEntity user;
+    private GamblerEntity gambler;
 
-    @OneToMany(mappedBy = "slip")
+    @OneToMany()
     private Set<OddEntity> odds;
 
 }

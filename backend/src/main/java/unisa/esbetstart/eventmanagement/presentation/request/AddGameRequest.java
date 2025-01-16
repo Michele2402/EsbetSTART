@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.xml.parsers.SAXParser;
 import java.util.List;
 
 @Getter
@@ -12,5 +13,5 @@ import java.util.List;
 public class AddGameRequest {
 
     private String name;
-    private List<String> rules;
+    private List<AddRuleRequest> rules;
 }

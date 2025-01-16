@@ -1,0 +1,7 @@
+
+@for (game of (allGames$ | async); track game) {
+  <p>Game: {{game.name}}</p>
+  @for (rule of game.rules; track rule) {
+    <div>rule {{rule.position}}: {{rule.name}}</div>
+  }
+}
