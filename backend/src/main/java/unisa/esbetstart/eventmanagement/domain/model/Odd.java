@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.model.OddStatic;
 
 import java.util.Set;
@@ -19,16 +20,18 @@ public class Odd {
 
     private UUID id;
     private String name;
+    private int position;
     private double value;
     private Event event;
     private Set<OddStatic> oddStatics;
 
     @Builder
-    public Odd(UUID id, String name, double value, Event event) {
+    public Odd(UUID id, String name, double value, Event event, int position) {
         this.id = id;
         this.name = name;
         this.value = value;
         this.event = event;
+        this.position = position;
     }
 
 
@@ -46,6 +49,20 @@ public class Odd {
             oddStatics.forEach(oddStatic -> oddStatic.setResult(LOST));
 
         }
+    }
+
+    /**
+     * This method updates the Odd value
+     * @param value the new value
+     */
+    public void updateOdd(double value) {
+
+        if(value < 0) {
+            log.error("Odd value cannot be negative");
+            throw new DomainAttributeException("Odd value cannot be negative");
+        }
+
+        this.value = value;
     }
 
     /**

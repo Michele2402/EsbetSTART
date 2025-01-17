@@ -104,6 +104,10 @@ public class CreateEventManagerService implements CreateEventUseCase {
         checkRuleMatch(request.getOdds(), rules);
     }
 
+    /**
+     * Checks the AddOddRequest object.
+     * @param request the AddOddRequest object to check
+     */
     private void checkAddOddRequest(AddOddRequest request) {
 
         //null check
@@ -115,6 +119,11 @@ public class CreateEventManagerService implements CreateEventUseCase {
         checkTypeAttribute.checkFloatIsNullOrNegative(request.getValue(), "Odd value");
     }
 
+    /**
+     * Checks if the rules match the odds. Sets the odds to the rules position
+     * @param request the list of AddOddRequest objects
+     * @param rules the set of Rule objects
+     */
     private void checkRuleMatch(List<AddOddRequest> request, Set<Rule> rules) {
 
         if(request.stream().map(AddOddRequest::getName).distinct().count() != request.size()) {
@@ -127,6 +136,14 @@ public class CreateEventManagerService implements CreateEventUseCase {
                 log.error("Rule with name {} not found", odd.getName());
                 throw new ObjectNotFoundException("Rule with name " + odd.getName() + " not found");
             }
+        }
+
+        //for each request set the position parameter to be equal to that in the rule
+        for (AddOddRequest odd : request) {
+            rules.stream()
+                    .filter(rule -> rule.getName().equals(odd.getName()))
+                    .findFirst()
+                    .ifPresent(rule -> odd.setPosition(rule.getPosition()));
         }
 
     }
