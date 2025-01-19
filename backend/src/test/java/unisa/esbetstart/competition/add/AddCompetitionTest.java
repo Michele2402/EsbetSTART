@@ -1,6 +1,5 @@
 package unisa.esbetstart.competition.add;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.repository.GameJpaRepository;
 
-import java.util.Map;
 import java.util.UUID;
 
 @SpringBootTest

@@ -9,7 +9,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import unisa.esbetstart.TestController;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.RuleEntity;
@@ -32,8 +31,6 @@ public class AddEventTest {
 
     @Autowired
     private CompetitionJpaRepository competitionJpaRepository;
-    @Autowired
-    private TestController testController;
 
     private void databaseSetup() {
         GameEntity game = GameEntity.builder()
