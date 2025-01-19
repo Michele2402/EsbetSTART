@@ -49,7 +49,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
         //check if the competition exists
         if (competition == null) {
             log.error("Competition with id {} not found", competitionId);
-            throw new ObjectIsNullException("Competition with id " + competitionId + " not found");
+            throw new ObjectNotFoundException("Competition with id " + competitionId + " not found");
         }
 
         //get rules

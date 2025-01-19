@@ -7,7 +7,7 @@ import {GameWithRulesResponse} from "../../model/response/game-response";
 @Injectable({
   providedIn: 'root'
 })
-export class GameServiceService {
+export class GameService {
 
   private basePath = environmentPaths.base_path;
 

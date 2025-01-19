@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {catchError, Observable, Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, catchError, Observable, Subject, takeUntil} from "rxjs";
 import {GameWithRulesResponse} from "../../model/response/game-response";
-import {GameServiceService} from "../../core/services/game-service.service";
+import {GameService} from "../../core/services/game.service";
 
 @Component({
   selector: 'app-esports-admin-page',
@@ -15,7 +15,7 @@ export class EsportsAdminPageComponent implements OnInit, OnDestroy{
   private _destroy$ = new Subject<void>();
 
   constructor(
-    private gameService: GameServiceService
+    private gameService: GameService,
   ) {
 
   }
@@ -33,6 +33,7 @@ export class EsportsAdminPageComponent implements OnInit, OnDestroy{
           return [];
         })
       )
+
   }
 
   ngOnDestroy(): void {

@@ -8,6 +8,7 @@ import unisa.esbetstart.eventmanagement.domain.model.Rule;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 public class  InfrastructureCompetitionMapper {
 
     public Set<Competition> toCompetitionModelWithSimpleDetailsList(Set<CompetitionEntity> competitionEntities) {
+
+        if(competitionEntities == null)
+            return new HashSet<>();
 
         return competitionEntities
                 .stream()
@@ -41,13 +45,17 @@ public class  InfrastructureCompetitionMapper {
                         .build())
                 .collect(Collectors.toSet());
 
-        Set<Event> events = competitionEntity.getEvents()
-                .stream()
-                .map(eventEntity -> Event.builder()
-                        .id(eventEntity.getId())
-                        .name(eventEntity.getName())
-                        .build())
-                .collect(Collectors.toSet());
+        Set<Event> events = new HashSet<>();
+
+        if(competitionEntity.getEvents() != null) {
+            events = competitionEntity.getEvents()
+                    .stream()
+                    .map(eventEntity -> Event.builder()
+                            .id(eventEntity.getId())
+                            .name(eventEntity.getName())
+                            .build())
+                    .collect(Collectors.toSet());
+        }
 
         return Competition.builder()
                 .id(competitionEntity.getId())

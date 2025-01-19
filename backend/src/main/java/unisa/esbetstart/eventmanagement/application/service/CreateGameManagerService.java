@@ -74,6 +74,11 @@ public class CreateGameManagerService implements CreateGameUseCase {
         // Check the game name
         checkTypeAttribute.checkStringIsNullOrEmpty(request.getName(), "Name");
 
+        if(request.getRules().isEmpty()) {
+            log.error("AddGameRequest has no rules");
+            throw new ObjectIsNullException("AddGameRequest has no rules");
+        }
+
         // Check each rule in the request
         request.getRules().forEach(this::checkAddRuleRequest);
     }
@@ -83,7 +88,7 @@ public class CreateGameManagerService implements CreateGameUseCase {
      * @param request the AddRuleRequest to check
      */
     private void checkAddRuleRequest(AddRuleRequest request) {
-        if (request == null) {
+        if (request == null ) {
             log.error("AddRuleRequest is null");
             throw new ObjectIsNullException("AddRuleRequest is null");
         }
