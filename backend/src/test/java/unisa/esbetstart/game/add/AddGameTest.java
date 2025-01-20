@@ -37,6 +37,9 @@ public class AddGameTest {
                         .content(AddGameJsonPayloads.INVALID_GAME_NAME_REQUEST)
         ).andReturn();
 
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when name is null or empty");
+
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Name is null or empty"),
                 "Expected error message to mention 'Name is null or empty'");
@@ -50,6 +53,10 @@ public class AddGameTest {
                         .content(AddGameJsonPayloads.EMPTY_RULES_REQUEST)
         ).andReturn();
 
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when rules are empty");
+
+
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("AddGameRequest has no rules"),
                 "Expected error message to mention 'AddGameRequest has no rules'");
@@ -62,6 +69,9 @@ public class AddGameTest {
                         .contentType("application/json")
                         .content(AddGameJsonPayloads.INVALID_RULE_NAME_REQUEST)
         ).andReturn();
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when rule name is null or empty");
+
 
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Rule name is null or empty"),
@@ -75,6 +85,10 @@ public class AddGameTest {
                         .contentType("application/json")
                         .content(AddGameJsonPayloads.INVALID_RULE_POSITION_REQUEST)
         ).andReturn();
+
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when rule position is null or negative");
+
 
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Rule position is null or negative"),

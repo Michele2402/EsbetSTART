@@ -51,6 +51,9 @@ public class AddCompetitionTest {
                         .content(AddCompetitionJsonPayloads.INVALID_GAME_ID_REQUEST)
         ).andReturn();
 
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when game id is null or empty");
+
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Game Id is null or empty"),
                 "Expected error message to mention 'Game Id is null or empty'");
@@ -63,6 +66,9 @@ public class AddCompetitionTest {
                         .contentType("application/json")
                         .content(AddCompetitionJsonPayloads.INVALID_COMPETITION_NAME_REQUEST)
         ).andReturn();
+
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when name is null or empty");
 
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Competition Name is null or empty"),
@@ -77,6 +83,9 @@ public class AddCompetitionTest {
                         .content(AddCompetitionJsonPayloads.INVALID_ORIGIN_COUNTRY_REQUEST)
         ).andReturn();
 
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when origin country is null or empty");
+
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Competition Origin Country is null or empty"),
                 "Expected error message to mention 'Competition Origin Country is null or empty'");
@@ -90,6 +99,9 @@ public class AddCompetitionTest {
                         .content(AddCompetitionJsonPayloads.INVALID_GAME_ID_FORMAT_REQUEST)
         ).andReturn();
 
+        Assertions.assertEquals(400, result.getResponse().getStatus(),
+                "Expected status code 400 when game id is not a valid UUID");
+
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Game Id is not a valid UUID"),
                 "Expected error message to mention 'Game Id is not a valid UUID'");
@@ -102,6 +114,9 @@ public class AddCompetitionTest {
                         .contentType("application/json")
                         .content(AddCompetitionJsonPayloads.WRONG_GAME_ID)
         ).andReturn();
+
+        Assertions.assertEquals(404, result.getResponse().getStatus(),
+                "Expected status code 404 when game id is not found");
 
         String responseBody = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseBody.contains("Game with id f47ac10b-58cc-4372-a567-0e02b2c3d478 not found"),
