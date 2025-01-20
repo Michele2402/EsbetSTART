@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         (requests) -> requests
-                                .requestMatchers("/users/register", "/users/login").permitAll()
+                                .requestMatchers("/**").permitAll()
                                 .requestMatchers("/games/**", "/competitions/**").hasAuthority("EVENT_MANAGER")
                                 .anyRequest().authenticated()
                 )
