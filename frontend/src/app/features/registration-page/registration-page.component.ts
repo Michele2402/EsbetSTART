@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {signal} from "@angular/core";
 
 @Component({
   selector: 'app-registration-page',
@@ -8,24 +9,41 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class RegistrationPageComponent {
 
-  precisionForm = this._fb.group({
-    precision: [0, [Validators.required, Validators.min(30), Validators.max(500)]],
-    name: ['', Validators.required]
+    precisionForm = this._fb.group({
+    name: ['', [Validators.required, Validators.maxLength(30)]], // Solo validatori sincroni nel secondo parametro
+    surname: ['', [Validators.required, Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]],
+    username: ['', [Validators.required, Validators.maxLength(30)]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/),
+      ],
+    ],
   });
+
 
   constructor(
     private _fb: FormBuilder
-   /* private _authService: AuthService */
   ) {
-
   }
 
-  onSubmit() {
-    console.log(this.precisionForm);
-
+  onSubmit(): void {
     if (this.precisionForm.valid) {
+      console.log(this.precisionForm.value);
+    } else {
+      console.log('Form is invalid');
     }
   }
 
+  hide = signal(true);
+
+  clickEvent(event?: MouseEvent) {
+    this.hide.set(!this.hide());
+    event?.stopPropagation();
+  }
 
 }

@@ -2,10 +2,10 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: red;
   height: 70px;
-  padding: 5px 20px;
+  padding: 10px 20px;
 }
 
 .navbar-container {
@@ -15,40 +15,36 @@
   width: 1200%;
 }
 
-
 .navbar-logo img {
   height: 210px;
   width: auto;
   margin-top: 40px;
 }
-
-
-
-.navbar-search {
-  display: block;
-  align-items: center;
-
-
-
-}
-
 .search-input {
   border: none;
-  width: 40%;
-  padding: 10px 20px;
   border-radius: 20px;
   outline: none;
-  margin-left: 1020px;
-  margin-top: 20px;
   font-weight: bold;
+  font-family: Cambria, serif;
+  margin-left: 970px;
+  background-color: black;
+}
 
+.search-input input {
+  background: black;
+  border-radius: 20px;
+  padding: 10px 20px;
   color: white;
-  font-family: Cambria;
 }
-.navbar-icon {
 
-
+.search-button {
+  background: black;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
 }
+
 .navbar-buttons {
   width: auto;
   display: flex;
@@ -56,25 +52,24 @@
 }
 
 .navbar-buttons .login-button {
+  font-family: Cambria, serif;
   padding: 10px 20px;
-  font-size: 13px;
-  font-family: Cambria;
-  font-weight: bold;
-  border-radius: 20px;
+
+  border-radius: 15px;
   cursor: pointer;
   color: white;
   background-color: black;
   border: none;
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin-left: 1070px;
+  margin-left: 10px;
 }
 
 .navbar-buttons .join-button {
+  font-family: Cambria, serif;
+  white-space: nowrap;
   padding: 10px 20px;
   font-size: 13px;
-  font-weight: bold;
-  font-family: Cambria;
-  border-radius: 20px;
+  border-radius: 15px;
   cursor: pointer;
   background-color: black;
   border: none;
@@ -83,7 +78,7 @@
 }
 
 .login-button:hover,
-.join-button:hover {
-  background-color: white;
-  color: black;
+.join-button:hover, .search-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
