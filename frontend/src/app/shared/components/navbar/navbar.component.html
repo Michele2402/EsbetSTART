@@ -5,22 +5,28 @@
       <img src="assets/logo.png" alt="Logo">
     </div>
 
-    <div class="search-input">
+   <!-- <div class="search-input">
       <mat-form-field appearance="outline">
-        <mat-label>Search</mat-label>
-        <input matInput [(ngModel)]="searchQuery" placeholder="Type to search on ESbet START.." />
+        <input matInput [(ngModel)]="searchQuery" placeholder="Type to search on ESbet START..." />
         <button mat-icon-button matSuffix (click)="onSearch()">
-          <mat-icon class="navbar-icon">search</mat-icon>
+          <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
-    </div>
+    </div> -->
 
 
     <div class="navbar-buttons">
-      <button class="login-button" mat-stroked-button>Login</button>
-      <button class="join-button" mat-stroked-button>Join Now</button>
-    </div>
+      <a mat-fab class="search-button" extended routerLink=".">
+        <mat-icon>search</mat-icon>
+       Search on ESbet START...
+      </a>
+      <a mat-fab class="search-button" extended routerLink=".">
+       Login
+      </a>
+      <a mat-fab class="search-button" extended routerLink=".">
+        Join Now
+      </a>
+     </div>
 
-  </div>
-
-</nav>
+   </div>
+ </nav>

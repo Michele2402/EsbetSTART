@@ -9,20 +9,22 @@ import {signal} from "@angular/core";
 })
 export class RegistrationPageComponent {
 
-  precisionForm = this._fb.group({
-    name: ['', Validators.required, Validators.maxLength(30)],
-    surname: ['', Validators.required, Validators.maxLength(30)],
-    email: ['', [Validators.required, Validators.email], Validators.maxLength(30)],
-    username: ['', Validators.required, Validators.maxLength(30)],
-    password: ['',
+    precisionForm = this._fb.group({
+    name: ['', [Validators.required, Validators.maxLength(30)]], // Solo validatori sincroni nel secondo parametro
+    surname: ['', [Validators.required, Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]],
+    username: ['', [Validators.required, Validators.maxLength(30)]],
+    password: [
+      '',
       [
         Validators.required,
         Validators.maxLength(30),
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/)
-      ]
-    ]
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/),
+      ],
+    ],
   });
+
 
   constructor(
     private _fb: FormBuilder
@@ -31,12 +33,11 @@ export class RegistrationPageComponent {
 
   onSubmit(): void {
     if (this.precisionForm.valid) {
-      console.log('Form submitted:', this.precisionForm.value);
+      console.log(this.precisionForm.value);
     } else {
       console.log('Form is invalid');
     }
   }
-
 
   hide = signal(true);
 

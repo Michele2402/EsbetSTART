@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RegistrationPageComponent} from "./registration-page.component";
 import {SharedModule} from "../../shared/shared.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegistrationPageRoutingModule} from "./registration-page-routing,module";
 
 
@@ -11,11 +11,12 @@ import {RegistrationPageRoutingModule} from "./registration-page-routing,module"
   declarations: [
     RegistrationPageComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    RegistrationPageRoutingModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        RegistrationPageRoutingModule,
+        FormsModule,
+    ]
 })
 export class RegistrationPageModule { }

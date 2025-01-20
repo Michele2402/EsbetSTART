@@ -1,19 +1,62 @@
 .registration-form {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: white;
-  padding: 20px 10px;
-  height: 150px;
-
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
 }
 
+mat-card {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.registration {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+}
+mat-error {
+  font-size: 12px;
+  color: crimson;
+  margin-top: 3px;
+}
+.password-error {
+  margin-top: -33px;
+  margin-left: 16px;
+}
+.name-container, .surname-container, .email-container, .username-container, .password-container {
+  display: flex;
+  flex-direction: column;
+}
 
 .registration-button {
+  padding: 10px 20px;
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
   background-color: black;
-  color:white;
-
-}
-
-.registration-form:hover {
+  border: none;
+  color: white;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+.registration-form:hover {
+  background-color: white;
+  color: black;
 }
