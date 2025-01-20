@@ -5,6 +5,7 @@ import {GameService} from "../../core/services/game.service";
 import {AbstractControl, FormArray, FormBuilder, ValidationErrors, Validators} from "@angular/forms";
 import {ChangeDetectorRef} from '@angular/core';
 import {AddGameRequest} from "../../model/request/add-game-request";
+import {SnackbarService} from "../../core/services/snackbar/snackbar.service";
 
 function minMaxArrayLengthValidator(min: number, max: number) {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -43,6 +44,7 @@ export class EsportsAdminPageComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private _fb: FormBuilder,
+    private _snackBarService: SnackbarService,
     private _cdr: ChangeDetectorRef
   ) {
 
@@ -106,12 +108,24 @@ export class EsportsAdminPageComponent implements OnInit, OnDestroy {
       }
 
       this.gameService.addGame(addGameRequest)
-        .pipe(takeUntil(this._destroy$))
+        .pipe(
+          takeUntil(this._destroy$),
+          catchError((error) => {
+            this._snackBarService.showSnackbarMessage(
+              error.error.errors, 'error-snackbar'
+            )
+            return [];
+          })
+        )
         .subscribe(() => {
           this.isAddingGame = false;
           this.loadAllGames();
+          this._snackBarService.showSnackbarMessage(
+            'Game Added', 'success-snackbar'
+          )
         });
     }
+
   }
 
   ngOnDestroy(): void {
