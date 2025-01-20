@@ -2,31 +2,19 @@
   <div class="navbar-container">
 
     <div class="navbar-logo">
-      <img src="assets/logo.png" alt="Logo">
+      <img src="assets/logo.png" alt="Logo" (click)="toHomePage()">
     </div>
 
-   <!-- <div class="search-input">
-      <mat-form-field appearance="outline">
-        <input matInput [(ngModel)]="searchQuery" placeholder="Type to search on ESbet START..." />
-        <button mat-icon-button matSuffix (click)="onSearch()">
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
-    </div> -->
+    <ng-content></ng-content>
 
+    <!-- <div class="search-input">
+       <mat-form-field appearance="outline">
+         <input matInput [(ngModel)]="searchQuery" placeholder="Type to search on ESbet START..." />
+         <button mat-icon-button matSuffix (click)="onSearch()">
+           <mat-icon>search</mat-icon>
+         </button>
+       </mat-form-field>
+     </div> -->
 
-    <div class="navbar-buttons">
-      <a mat-fab class="search-button" extended routerLink=".">
-        <mat-icon>search</mat-icon>
-       Search on ESbet START...
-      </a>
-      <a mat-fab class="search-button" extended routerLink=".">
-       Login
-      </a>
-      <a mat-fab class="search-button" extended routerLink=".">
-        Join Now
-      </a>
-     </div>
-
-   </div>
- </nav>
+  </div>
+</nav>

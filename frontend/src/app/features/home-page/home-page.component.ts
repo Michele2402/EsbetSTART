@@ -8,12 +8,18 @@ import{environmentPaths} from "../../environments/environment";
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
+
   constructor(
     private router: Router,
   ) {
 
   }
-  toNetGraph() {
-    this.router.navigate(['/' + environmentPaths.e_sports]);
+
+  toLogin() {
+    this.router.navigate([environmentPaths.login_page]);
+  }
+
+  toRegister() {
+    this.router.navigate([environmentPaths.registration_page]);
   }
 }

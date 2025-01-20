@@ -15,4 +15,5 @@ export const environmentPaths = {
 
   //API ENDPOINTS
   get_all_games: 'games/get-all',
+  add_game: 'games/add',
 }

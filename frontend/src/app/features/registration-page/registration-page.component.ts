@@ -32,6 +32,9 @@ export class RegistrationPageComponent {
   }
 
   onSubmit(): void {
+
+    console.log(this.precisionForm)
+
     if (this.precisionForm.valid) {
       console.log(this.precisionForm.value);
     } else {
