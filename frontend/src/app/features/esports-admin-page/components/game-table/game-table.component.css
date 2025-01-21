@@ -1,0 +1,63 @@
+
+.games-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.game-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.game-name {
+  font-size: 18px;
+  font-weight: bold;
+  width: 200px;
+}
+
+.rules-list {
+  display: flex;
+  gap: 8px;
+  flex-grow: 1;
+  padding-left: 15px;
+}
+
+.rule {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.modify-button,
+.remove-button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modify-button:hover,
+.remove-button:hover {
+  background-color: #e64a19;
+}
+
+.modify-button:focus,
+.remove-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.4);
+}

@@ -4,12 +4,16 @@ import {EsportsAdminPageComponent} from "./esports-admin-page.component";
 import {EsportsAdminPageRoutingModule} from "./esports-admin-page-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AddGameButtonComponent} from "./components/add-game-button/add-game-button.component";
+import {GameTableComponent} from "./components/game-table/game-table.component";
 
 
 
 @NgModule({
   declarations: [
-    EsportsAdminPageComponent
+    EsportsAdminPageComponent,
+    AddGameButtonComponent,
+    GameTableComponent
   ],
   imports: [
     CommonModule,

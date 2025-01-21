@@ -21,4 +21,8 @@ export class GameService {
   addGame(request: AddGameRequest): Observable<any> {
     return this.http.post<any>(this.basePath + environmentPaths.add_game, request);
   }
+
+  removeGame(id: string): Observable<any> {
+    return this.http.delete<any>(this.basePath + environmentPaths.remove_game + '/' + id);
+  }
 }

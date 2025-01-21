@@ -1,0 +1,23 @@
+
+<div class="games-container">
+  @for (game of (allGames$ | async); track game) {
+    <div class="game-row">
+      <div class="game-name">
+        {{ game.name }}
+      </div>
+
+      <div class="rules-list">
+        @for (rule of game.rules; track rule) {
+          <div class="rule">
+            {{ rule.name }}
+          </div>
+        }
+      </div>
+
+      <div class="buttons">
+        <button class="modify-button">Update</button>
+        <button class="remove-button" (click)="removeGame(game.id)" >Remove</button>
+      </div>
+    </div>
+  }
+</div>

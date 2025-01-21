@@ -10,6 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class GameWithRulesResponse {
+    private String id;
     private String name;
     private Set<RuleResponse> rules;
 }

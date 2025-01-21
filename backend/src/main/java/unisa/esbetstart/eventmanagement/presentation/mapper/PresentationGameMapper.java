@@ -29,6 +29,7 @@ public class PresentationGameMapper {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return GameWithRulesResponse.builder()
+                .id(game.getId().toString())
                 .name(game.getName())
                 .rules(rules)
                 .build();

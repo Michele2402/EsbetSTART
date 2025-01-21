@@ -1,0 +1,55 @@
+
+<div class="add-game-section">
+  <button class="add-game-button" (click)="toggleAddGame()">Add Game</button>
+
+  <form class="add-game-form" [formGroup]="addGameForm" (ngSubmit)="addGame()"
+        [ngClass]="{'hidden': !isAddingGame}"
+  >
+    <mat-card appearance="outlined">
+      <mat-card-content>
+
+        <div class="static-form-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name"/>
+            @if (addGameForm.get('name')?.invalid && (addGameForm.get('name')?.touched)) {
+            }
+            @if (addGameForm.get('name')?.errors?.['required']) {
+              <mat-error>Name is required</mat-error>
+            } @else if (addGameForm.get('name')?.errors?.['maxlength']) {
+              <mat-error>Please enter a name with a max of 30 characters</mat-error>
+            }
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" (click)="addRule($event)">Add Rule</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="addGameForm.invalid">Submit</button>
+        </div>
+
+        <div formArrayName="rules" class="rules-to-add">
+          <div *ngFor="let ruleControl of rules.controls; let i = index" [formGroupName]="i">
+            <mat-form-field class="rule-to-add-input" appearance="outline">
+              <mat-label>Rule {{ i + 1 }}</mat-label>
+              <input matInput formControlName="rule"/>
+              @if (ruleControl.get('rule')?.invalid && (ruleControl.get('rule')?.touched)) {
+              }
+              @if (ruleControl.get('rule')?.errors?.['required']) {
+                <mat-error>Rule is required</mat-error>
+              } @else if (ruleControl.get('rule')?.errors?.['maxlength']) {
+                <mat-error>Max 30 characters</mat-error>
+              }
+            </mat-form-field>
+            <button mat-icon-button color="warn" (click)="removeRule(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        @if (addGameForm.get('rules')?.invalid) {
+          @if (addGameForm.get('rules')?.errors?.['minLength'] || addGameForm.get('rules')?.errors?.['maxLength']) {
+            <div>Please enter between 1 and 100 rules</div>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+  </form>
+
+</div>

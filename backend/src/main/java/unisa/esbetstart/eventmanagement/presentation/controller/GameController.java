@@ -20,8 +20,6 @@ import java.util.Set;
 @CrossOrigin("*")
 public class GameController {
 
-    //TODO aggiungere un immagine ai giochi nel database
-
     private final CreateGameUseCase createGameUseCase;
     private final GetGameUseCase getGameUseCase;
 
