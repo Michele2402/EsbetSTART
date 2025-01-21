@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface GetEventPortOut {
 
-    public Event getEventById(UUID eventId);
+    public Event getEventByIdWithoutOdds(UUID eventId);
 
 }

@@ -63,6 +63,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
                 .id(UUID.randomUUID())
                 .name(request.getName())
                 .date(request.getDate())
+                .isEnded(false)
                 .odds(request.getOdds().stream().map(applicationOddMapper::toOddModel).collect(Collectors.toSet()))
                 .build();
 

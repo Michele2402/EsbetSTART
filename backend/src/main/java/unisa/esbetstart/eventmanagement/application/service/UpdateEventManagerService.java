@@ -36,7 +36,7 @@ public class UpdateEventManagerService implements UpdateEventUseCase {
         checkUpdateEventRequest(request);
 
         //get the event
-        Event eventToUpdate = getEventPortOut.getEventById(eventId);
+        Event eventToUpdate = getEventPortOut.getEventByIdWithoutOdds(eventId);
 
         //check if the event exists
         if (eventToUpdate == null) {

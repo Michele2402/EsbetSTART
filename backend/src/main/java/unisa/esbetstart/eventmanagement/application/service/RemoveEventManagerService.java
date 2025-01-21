@@ -8,6 +8,7 @@ import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.eventmanagement.application.port.in.RemoveEventUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.GetEventPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.RemoveEventPortOut;
+import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
 
 import java.util.UUID;
@@ -28,10 +29,11 @@ public class RemoveEventManagerService implements RemoveEventUseCase {
         // Check if eventId is null or invalid
         UUID id = checkTypeAttribute.checkUUIDIsNullOrInvalid(eventId, "Event Id in remove call");
 
-        // Check if the event exists
-        if (getEventPortOut.getEventById(id) == null) {
-            log.error("Event with id {} not found", eventId);
-            throw new ObjectIsNullException("Event with id " + eventId + " not found");
+        // Check if the event exists and is ended
+        Event event = getEventPortOut.getEventByIdWithoutOdds(id);
+
+        if (event == null || !event.isEnded()) {
+            throw new ObjectIsNullException("Event with id " + eventId + " not found or not ended");
         }
 
         // Remove the event

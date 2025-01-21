@@ -20,18 +20,18 @@ public class Event implements Searchable{
     private UUID id;
     private String name;
     private LocalDateTime date;
-    private boolean isEnded;
+    private boolean isEnded = false;
     private Competition competition;
     private Set<Odd> odds;
 
     @Builder
-    public Event(UUID id, String name, LocalDateTime date, Competition competition, Set<Odd> odds) {
+    public Event(UUID id, String name, LocalDateTime date, Competition competition, Set<Odd> odds, boolean isEnded) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.competition = competition;
         this.odds = odds;
-        this.isEnded = false;
+        this.isEnded = isEnded;
     }
 
     /**

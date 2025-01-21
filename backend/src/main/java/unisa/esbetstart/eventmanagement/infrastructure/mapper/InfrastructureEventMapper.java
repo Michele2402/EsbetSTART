@@ -23,6 +23,7 @@ public class InfrastructureEventMapper {
                 .id(event.getId())
                 .name(event.getName())
                 .date(event.getDate())
+                .isEnded(event.isEnded())
                 .competition(CompetitionEntity.builder()
                         .id(event.getCompetition().getId()).build())
                 .odds(event.getOdds().stream().map(infrastructureOddMapper::toOddEntity).collect(Collectors.toSet()))
@@ -41,6 +42,7 @@ public class InfrastructureEventMapper {
                 .id(eventEntity.getId())
                 .name(eventEntity.getName())
                 .date(eventEntity.getDate())
+                .isEnded(eventEntity.isEnded())
                 .competition(Competition.builder()
                         .id(eventEntity.getCompetition().getId()).build())
                 .odds(eventEntity.getOdds().stream().map(
@@ -62,6 +64,7 @@ public class InfrastructureEventMapper {
                 .id(event.getId())
                 .name(event.getName())
                 .date(event.getDate())
+                .isEnded(event.isEnded())
                 .competition(CompetitionEntity.builder()
                         .id(event.getCompetition().getId()).build())
                 .build();
@@ -77,6 +80,7 @@ public class InfrastructureEventMapper {
                 .id(eventEntity.getId())
                 .name(eventEntity.getName())
                 .date(eventEntity.getDate())
+                .isEnded(eventEntity.isEnded())
                 .competition(Competition.builder()
                         .id(eventEntity.getCompetition().getId()).build())
                 .build();

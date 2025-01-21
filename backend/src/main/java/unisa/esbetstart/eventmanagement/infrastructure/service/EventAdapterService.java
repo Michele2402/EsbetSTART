@@ -46,12 +46,12 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     }
 
     /**
-     * Gets an event by its ID.
+     * Gets an event by its ID, it has the competition in it.
      * @param eventId the ID of the event
      * @return the event
      */
     @Override
-    public Event getEventById(UUID eventId) {
+    public Event getEventByIdWithoutOdds(UUID eventId) {
 
         Optional<EventEntity> event = eventJpaRepository.findByIdWithCompetition(eventId);
         return event.map(infrastructureEventMapper::toEventModelWithoutOdds).orElse(null);
