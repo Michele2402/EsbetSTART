@@ -9,6 +9,7 @@ export const environmentPaths = {
   login_page: 'login',
   registration_page: 'registration',
   e_sports_admin_page: 'esports-admin',
+  search_page: 'search',
 
   //BACKEND
   base_path: 'http://localhost:8080/',

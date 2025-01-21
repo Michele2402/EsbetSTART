@@ -17,9 +17,15 @@ import {
 } from "@angular/material/datepicker";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatChip, MatChipsModule} from "@angular/material/chips";
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 
 
 const modules = [
+  MatPaginatorModule,
+  MatTableModule,
   MatButtonModule,
   MatIconModule,
   MatProgressSpinnerModule,
