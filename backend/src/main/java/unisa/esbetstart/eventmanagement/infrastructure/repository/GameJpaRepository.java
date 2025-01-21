@@ -15,6 +15,10 @@ public interface GameJpaRepository extends JpaRepository<GameEntity, UUID> {
     @Query("SELECT g FROM GameEntity g WHERE g.id = :gameId")
     Optional<GameEntity> findByIdWithCompetitions(UUID gameId);
 
+    @EntityGraph(attributePaths = {"competitions.events"})
+    @Query("SELECT g FROM GameEntity g WHERE g.id = :gameId")
+    Optional<GameEntity> findByIdWithCompetitionsAndEvents(UUID gameId);
+
     Optional<GameEntity> findByName(String name);
 
     @EntityGraph(attributePaths = {"rules"})

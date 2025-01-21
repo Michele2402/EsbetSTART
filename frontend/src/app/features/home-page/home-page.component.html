@@ -1,10 +1,21 @@
-
-<app-navbar></app-navbar>
-
+<app-navbar>
+  <div class="navbar-buttons">
+    <a mat-fab class="search-button" extended routerLink=".">
+      <mat-icon>search</mat-icon>
+      Search on ESbet START...
+    </a>
+    <a mat-fab class="search-button" (click)="toLogin()">
+      Login
+    </a>
+    <a mat-fab class="search-button" (click)="toRegister()">
+      Join Now
+    </a>
+  </div>
+</app-navbar>
 <div class="container">
-<app-leftbar></app-leftbar>
-<app-banner></app-banner>
+  <app-leftbar></app-leftbar>
+  <app-banner></app-banner>
 </div>
-  <app-footer></app-footer>
+
 
 

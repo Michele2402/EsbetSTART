@@ -26,7 +26,7 @@ public class UserController {
         registrationUseCase.register(request);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(
             @RequestBody LoginRequest request
     ) {

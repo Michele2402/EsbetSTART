@@ -6,7 +6,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public interface GetGamePortOut {
+
     Game getGameById(UUID gameId);
     Game getGameByName(String gameName);
     Set<Game> getAllGames();
+    Game getGameByIdWithSimpleDetails(UUID gameId);
+    Game getGameByIdWithCompetitionsAndEvents(UUID gameId);
 }

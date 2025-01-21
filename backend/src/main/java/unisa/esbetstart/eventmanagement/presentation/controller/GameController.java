@@ -8,10 +8,13 @@ import unisa.esbetstart.eventmanagement.application.port.in.CreateGameUseCase;
 import unisa.esbetstart.eventmanagement.application.port.in.GetGameUseCase;
 import unisa.esbetstart.eventmanagement.domain.model.Game;
 import unisa.esbetstart.eventmanagement.presentation.mapper.PresentationGameMapper;
+import unisa.esbetstart.eventmanagement.application.port.in.RemoveGameUseCase;
+import unisa.esbetstart.eventmanagement.application.port.in.UpdateGameUseCase;
 import unisa.esbetstart.eventmanagement.presentation.request.AddGameRequest;
 import unisa.esbetstart.eventmanagement.presentation.response.GameWithRulesResponse;
 
 import java.util.Set;
+import unisa.esbetstart.eventmanagement.presentation.request.UpdateGameRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +29,8 @@ public class GameController {
     private final GetGameUseCase getGameUseCase;
 
     private final PresentationGameMapper presentationGameMapper;
+    private final UpdateGameUseCase updateGameUseCase;
+    private final RemoveGameUseCase removeGameUseCase;
 
     /**
      * Adds a new game to a competition.
@@ -49,4 +54,17 @@ public class GameController {
         return ResponseEntity.ok(presentationGameMapper.toGameWithRulesResponseSet(games));
     }
 
+    @PostMapping("/update")
+    public void updateGame(
+            @RequestBody UpdateGameRequest request
+    ) {
+        updateGameUseCase.updateGame(request);
+    }
+
+    @DeleteMapping("/remove")
+    public void removeGame(
+            @RequestParam String gameId
+    ) {
+        removeGameUseCase.removeGame(gameId);
+    }
 }

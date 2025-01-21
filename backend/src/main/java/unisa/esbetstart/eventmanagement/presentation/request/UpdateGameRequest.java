@@ -13,5 +13,6 @@ public class UpdateGameRequest {
 
     private String gameId;
     private String name;
-    private List<String> rules;
+    private List<AddRuleRequest> rules;
+
 }

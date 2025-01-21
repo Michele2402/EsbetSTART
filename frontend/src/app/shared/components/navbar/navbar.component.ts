@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
-import {NgOptimizedImage} from "@angular/common";
+import {Router} from "@angular/router";
+import {environmentPaths} from "../../../environments/environment";
 
 @Component({
   selector: 'app-navbar',
@@ -12,4 +9,9 @@ import {NgOptimizedImage} from "@angular/common";
 })
 export class NavbarComponent {
 
+  constructor(private router: Router) { }
+
+  toHomePage() {
+    this.router.navigate([environmentPaths.home_page]);
+  }
 }

@@ -12,6 +12,10 @@ export const routes: Routes = [
     loadChildren: () => import('./features/login-page/login-page.module').then(m => m.LoginPageModule)
   },
   {
+    path: environmentPaths.search_page,
+    loadChildren: () => import('./features/search-page/search-page.module').then(m => m.SearchPageModule)
+  },
+  {
     path: environmentPaths.registration_page,
     loadChildren: () => import('./features/registration-page/registration-page.module').then(m => m.RegistrationPageModule)
   },
