@@ -7,4 +7,7 @@ import java.util.UUID;
 public interface GetCompetitionPortOut {
 
     Competition getCompetitionByIdWithRules(UUID competitionId);
+    Competition getCompetitionByIdWithSimpleGame(UUID competitionId);
+    Competition getCompetitionByIdWithEventsList(UUID competitionId);
+
 }

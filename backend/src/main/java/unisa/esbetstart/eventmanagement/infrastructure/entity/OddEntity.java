@@ -22,6 +22,7 @@ public class OddEntity {
 
     private double value;
     private String name;
+    private int position;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", nullable = false)

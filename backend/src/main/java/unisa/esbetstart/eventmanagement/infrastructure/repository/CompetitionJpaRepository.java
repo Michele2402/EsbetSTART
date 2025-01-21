@@ -14,4 +14,11 @@ public interface CompetitionJpaRepository extends JpaRepository<CompetitionEntit
     @Query("SELECT c FROM CompetitionEntity c WHERE c.id = :competitionId")
     Optional<CompetitionEntity> findByIdWithGameRules(UUID competitionId);
 
+    @EntityGraph(attributePaths = {"game"})
+    @Query("SELECT c FROM CompetitionEntity c WHERE c.id = :competitionId")
+    Optional<CompetitionEntity> findByIdWithGame(UUID competitionId);
+
+    @EntityGraph(attributePaths = {"events"})
+    @Query("SELECT c FROM CompetitionEntity c WHERE c.id = :competitionId")
+    Optional<CompetitionEntity> findByIdWithEventsList(UUID competitionId);
 }

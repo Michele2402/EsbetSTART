@@ -23,6 +23,6 @@ public class GameEntity {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private Set<CompetitionEntity> competitions;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RuleEntity> rules;
 }

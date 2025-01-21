@@ -68,8 +68,10 @@ public class CreateCompetitionManagerService implements AddCompetitionUseCase {
     public void checkAddCompetitionRequest(AddCompetitionRequest request) {
 
         if(request == null) {
+
             log.error("AddCompetitionRequest is null");
             throw new ObjectIsNullException("AddCompetitionRequest is null");
+
         }
 
         checkTypeAttribute.checkStringIsNullOrEmpty(request.getName(), "Competition Name");
