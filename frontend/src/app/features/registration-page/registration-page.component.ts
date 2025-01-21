@@ -1,13 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {signal} from "@angular/core";
+import {RegistrationService} from "../../core/services/registration.service";
+import {RegisterRequest} from "../../model/request/register-request";
 
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.css'
 })
-export class RegistrationPageComponent {
+export class RegistrationPageComponent implements OnInit, OnDestroy {
 
     precisionForm = this._fb.group({
     name: ['', [Validators.required, Validators.maxLength(30)]], // Solo validatori sincroni nel secondo parametro
@@ -25,10 +27,13 @@ export class RegistrationPageComponent {
     ],
   });
 
-
   constructor(
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private registrationService : RegistrationService,
   ) {
+  }
+
+  ngOnInit(): void {
   }
 
   onSubmit(): void {
@@ -36,7 +41,14 @@ export class RegistrationPageComponent {
     console.log(this.precisionForm)
 
     if (this.precisionForm.valid) {
-      console.log(this.precisionForm.value);
+
+      const formData: RegisterRequest = this.precisionForm.value as RegisterRequest;
+
+      this.registrationService.signUp(formData).subscribe(data =>  {
+        console.log(data);
+      })
+      this.precisionForm.reset()
+
     } else {
       console.log('Form is invalid');
     }
@@ -49,4 +61,6 @@ export class RegistrationPageComponent {
     event?.stopPropagation();
   }
 
+  ngOnDestroy(): void {
+  }
 }
