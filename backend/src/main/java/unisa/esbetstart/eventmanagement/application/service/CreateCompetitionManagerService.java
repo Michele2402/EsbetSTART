@@ -5,13 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
+import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.eventmanagement.application.port.in.AddCompetitionUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.CreateCompetitionPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.GetGamePortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Competition;
 import unisa.esbetstart.eventmanagement.domain.model.Game;
 import unisa.esbetstart.eventmanagement.presentation.request.AddCompetitionRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.CheckTypeAttribute;
 
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class CreateCompetitionManagerService implements AddCompetitionUseCase {
 
     private final CheckTypeAttribute checkTypeAttribute;
+    private final ParseAttribute parseAttribute;
 
     private final GetGamePortOut getGamePortOut;
     private final CreateCompetitionPortOut createCompetitionPortOut;
@@ -37,7 +39,7 @@ public class CreateCompetitionManagerService implements AddCompetitionUseCase {
         checkAddCompetitionRequest(request);
 
         //check and get Game id
-        UUID gameId =  checkTypeAttribute.checkUUIDIsNullOrInvalid(request.getGameId(), "Game Id");
+        UUID gameId =  parseAttribute.checkUUIDIsNullOrInvalid(request.getGameId(), "Game Id");
 
         Competition competition = Competition.builder()
                 .id(UUID.randomUUID())

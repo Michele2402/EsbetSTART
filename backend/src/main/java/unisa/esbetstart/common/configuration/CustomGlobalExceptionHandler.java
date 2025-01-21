@@ -31,7 +31,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, httpStatus);
     }
 
-
     @ExceptionHandler({DomainAttributeException.class})
     private ResponseEntity<Object> alreadyPresentProtocolException(Exception exception) {
         return exceptionHandled(exception, HttpStatus.NOT_ACCEPTABLE);
@@ -59,6 +58,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     @ExceptionHandler({SizeMismatchException.class})
     private ResponseEntity<Object> sizeMismatchException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({InvalidParsingException.class})
+    private ResponseEntity<Object> invalidDateException(Exception exception) {
         return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
     }
 }

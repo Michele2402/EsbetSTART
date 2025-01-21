@@ -1,0 +1,10 @@
+package unisa.esbetstart.transactionmanagment.application.port.out;
+
+import unisa.esbetstart.transactionmanagment.domain.model.Offer;
+
+import java.util.UUID;
+
+public interface GetOfferPortOut {
+    Offer getOfferById(UUID offerId);
+    Offer getOfferByName(String offerName);
+}

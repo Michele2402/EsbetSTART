@@ -9,7 +9,7 @@ import unisa.esbetstart.eventmanagement.application.port.out.GetOddPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.UpdateOddPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Odd;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateOddRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.*;
 
 import java.util.UUID;
 
@@ -21,6 +21,7 @@ public class UpdateOddManagerService implements UpdateOddUseCase {
     private final CheckTypeAttribute checkTypeAttribute;
     private final GetOddPortOut getOddPortOut;
     private final UpdateOddPortOut updateOddPortOut;
+    private final ParseAttribute parseAttribute;
 
     @Override
     public void updateOdd(UpdateOddRequest request) {
@@ -28,7 +29,7 @@ public class UpdateOddManagerService implements UpdateOddUseCase {
         log.info("Updating odd with id: {}", request.getOddId());
 
         //check the id
-        UUID oddId = checkTypeAttribute.checkUUIDIsNullOrInvalid(request.getOddId(), "Odd Id in update odd call");
+        UUID oddId = parseAttribute.checkUUIDIsNullOrInvalid(request.getOddId(), "Odd Id in update odd call");
 
         //check the update odd request
         checkUpdateOddRequest(request);
