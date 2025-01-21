@@ -93,6 +93,30 @@ public class  InfrastructureCompetitionMapper {
     }
 
     /**
+     * Maps a CompetitionEntity to a complete Competition model with events, odds not included.
+     * @param competitionEntity the CompetitionEntity to map
+     * @return the Competition model
+     */
+    public Competition toCompetitionModelWithSimpleEventsList(CompetitionEntity competitionEntity) {
+        Set<Event> events = competitionEntity.getEvents()
+                .stream()
+                .map(eventEntity -> Event.builder()
+                        .id(eventEntity.getId())
+                        .name(eventEntity.getName())
+                        .date(eventEntity.getDate())
+                        .isEnded(eventEntity.isEnded())
+                        .build())
+                .collect(Collectors.toSet());
+
+        return Competition.builder()
+                .id(competitionEntity.getId())
+                .name(competitionEntity.getName())
+                .originCountry(competitionEntity.getOriginCountry())
+                .events(events)
+                .build();
+    }
+
+    /**
      * Maps a Competition model to a CompetitionEntity with the game id.
      * @param competition the Competition model to map
      * @return the CompetitionEntity

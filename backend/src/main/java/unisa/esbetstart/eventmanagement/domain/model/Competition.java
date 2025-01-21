@@ -111,5 +111,12 @@ public class Competition implements Searchable{
         events.remove(event);
     }
 
+    /**
+     * This method checks if the competition has events that are not ended.
+     * @return true if the competition has events that are not ended, false otherwise
+     */
+    public boolean hasNotEndedEvents() {
+        return events.stream().anyMatch(event -> !event.isEnded());
+    }
 
 }
