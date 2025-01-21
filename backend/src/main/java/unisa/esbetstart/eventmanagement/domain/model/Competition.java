@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Competition {
+public class Competition implements Searchable{
 
     private UUID id;
     private String name;

@@ -1,5 +1,7 @@
 package unisa.esbetstart.eventmanagement.infrastructure.repository;
 
+import lombok.NonNull;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +21,9 @@ public interface EventJpaRepository extends JpaRepository<EventEntity, UUID> {
     @Query("SELECT e FROM EventEntity e WHERE e.id = :eventId")
     Optional<EventEntity> findByIdWithCompetition(UUID eventId);
 
+    /**
+     * Delete an event by its id
+     * @param eventId the id of the event
+     */
+    void deleteById(@NonNull UUID eventId);
 }

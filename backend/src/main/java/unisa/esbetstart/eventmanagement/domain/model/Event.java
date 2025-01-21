@@ -15,11 +15,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Event {
+public class Event implements Searchable{
 
     private UUID id;
     private String name;
     private LocalDateTime date;
+    private boolean isEnded;
     private Competition competition;
     private Set<Odd> odds;
 
@@ -30,6 +31,7 @@ public class Event {
         this.date = date;
         this.competition = competition;
         this.odds = odds;
+        this.isEnded = false;
     }
 
     /**
@@ -124,6 +126,8 @@ public class Event {
         for (Odd odd : odds) {
             odd.evaluate(winningOdds.contains(odd.getId()));
         }
+
+        isEnded = true;
     }
 
 }
