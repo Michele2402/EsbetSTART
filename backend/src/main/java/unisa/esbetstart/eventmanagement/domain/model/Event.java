@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Event implements Searchable{
+public class Event implements Searchable {
 
     private UUID id;
     private String name;

@@ -5,7 +5,7 @@ package unisa.esbetstart.eventmanagement.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import unisa.esbetstart.common.exceptions.ObjectIsNullException;
+import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.eventmanagement.application.port.in.RemoveGameUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.GetGamePortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.RemoveGamePortOut;
@@ -34,7 +34,7 @@ public class RemoveGameManagerService implements RemoveGameUseCase {
         Game game = getGamePortOut.getGameByIdWithCompetitionsAndEvents(id);
 
         if (game == null || game.hasNotEndedEventsInCompetitions()) {
-            throw new ObjectIsNullException("Game with id " + gameId + " not found or has running events in competitions");
+            throw new ObjectNotFoundException("Game with id " + gameId + " not found or has running events in competitions");
         }
 
         // Remove the game

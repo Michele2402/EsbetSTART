@@ -3,7 +3,7 @@ package unisa.esbetstart.eventmanagement.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import unisa.esbetstart.common.exceptions.ObjectIsNullException;
+import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.eventmanagement.application.port.out.GetCompetitionPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.RemoveCompetitionPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Competition;
@@ -35,7 +35,7 @@ public class RemoveCompetitionManagerService implements RemoveCompetitionUseCase
         Competition competition = getCompetitionPortOut.getCompetitionByIdWithEventsList(id);
 
         if (competition == null || competition.hasNotEndedEvents()) {
-            throw new ObjectIsNullException("Competition with id " + competitionId + " not found or has not ended events");
+            throw new ObjectNotFoundException("Competition with id " + competitionId + " not found or has not ended events");
         }
 
         // Remove the competition

@@ -4,7 +4,7 @@ package unisa.esbetstart.eventmanagement.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import unisa.esbetstart.common.exceptions.ObjectIsNullException;
+import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.eventmanagement.application.port.in.RemoveEventUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.GetEventPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.RemoveEventPortOut;
@@ -33,7 +33,7 @@ public class RemoveEventManagerService implements RemoveEventUseCase {
         Event event = getEventPortOut.getEventByIdWithoutOdds(id);
 
         if (event == null || !event.isEnded()) {
-            throw new ObjectIsNullException("Event with id " + eventId + " not found or not ended");
+            throw new ObjectNotFoundException("Event with id " + eventId + " not found or not ended");
         }
 
         // Remove the event
