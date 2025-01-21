@@ -17,6 +17,7 @@ public class ApplicationOddMapper {
                 .id(UUID.randomUUID())
                 .name(request.getName())
                 .value(request.getValue())
+                .position(request.getPosition())
                 .build();
     }
 

@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Game {
+public class Game implements Searchable{
 
     private UUID id;
     private String name;
@@ -106,6 +106,16 @@ public class Game {
         this.name = name;
         this.rules = rules;
 
+    }
+
+    public boolean hasNotEndedEventsInCompetitions() {
+
+        for (Competition competition : competitions) {
+            if (competition.hasNotEndedEvents()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

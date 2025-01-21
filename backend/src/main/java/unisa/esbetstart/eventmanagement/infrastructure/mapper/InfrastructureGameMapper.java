@@ -20,6 +20,11 @@ public class InfrastructureGameMapper {
     public final InfrastructureCompetitionMapper infrastructureCompetitionMapper;
     private final InfrastructureRuleMapper infrastructureRuleMapper;
 
+    /**
+     * Maps a GameEntity to a Game model with competitions
+     * @param gameEntity the GameEntity to map
+     * @return the Game model with competitions
+     */
     public Game toGameModelWithCompetitions (GameEntity gameEntity) {
         return Game.builder()
                 .id(gameEntity.getId())
@@ -28,6 +33,12 @@ public class InfrastructureGameMapper {
                 .build();
     }
 
+
+    /**
+     * Maps a GameEntity to a Game model with rules
+     * @param game the Game to map
+     * @return the Game model with rules
+     */
     public GameEntity toGameEntityWithRules(Game game) {
         return GameEntity.builder()
                 .id(game.getId())
@@ -52,6 +63,27 @@ public class InfrastructureGameMapper {
                         .sorted(Comparator.comparing(RuleEntity::getPosition))
                         .map(infrastructureRuleMapper::toRuleModel)
                         .collect(Collectors.toCollection(LinkedHashSet::new)))
+                .build();
+    }
+
+    /**
+     * Maps a GameEntity to a Game model without external classes
+     * @param gameEntity the GameEntity to map
+     * @return the Game model
+
+     */
+    public Game toGameModel(GameEntity gameEntity) {
+        return Game.builder()
+                .id(gameEntity.getId())
+                .name(gameEntity.getName())
+                .build();
+    }
+
+    public Game toGameModelWithCompetitionsAndEvents(GameEntity gameEntity) {
+        return Game.builder()
+                .id(gameEntity.getId())
+                .name(gameEntity.getName())
+                .competitions(gameEntity.getCompetitions().stream().map(infrastructureCompetitionMapper::toCompetitionModelWithSimpleEventsList).collect(Collectors.toSet()))
                 .build();
     }
 }
