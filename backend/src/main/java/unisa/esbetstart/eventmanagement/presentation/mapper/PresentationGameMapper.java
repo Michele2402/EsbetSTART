@@ -7,6 +7,7 @@ import unisa.esbetstart.eventmanagement.presentation.response.RuleResponse;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.LinkedHashSet;
 
 @Component
 public class PresentationGameMapper {
@@ -14,7 +15,7 @@ public class PresentationGameMapper {
     public Set<GameWithRulesResponse> toGameWithRulesResponseSet(Set<Game> games) {
         return games.stream()
                 .map(this::toGameWithRulesResponse)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public GameWithRulesResponse toGameWithRulesResponse(Game game) {
@@ -25,7 +26,7 @@ public class PresentationGameMapper {
                         .position(rule.getPosition())
                         .build()
                 )
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return GameWithRulesResponse.builder()
                 .name(game.getName())

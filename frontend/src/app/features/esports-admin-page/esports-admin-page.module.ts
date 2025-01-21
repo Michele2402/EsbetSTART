@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {EsportsAdminPageComponent} from "./esports-admin-page.component";
 import {EsportsAdminPageRoutingModule} from "./esports-admin-page-routing.module";
+import {SharedModule} from "../../shared/shared.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -11,7 +13,9 @@ import {EsportsAdminPageRoutingModule} from "./esports-admin-page-routing.module
   ],
   imports: [
     CommonModule,
-    EsportsAdminPageRoutingModule
+    EsportsAdminPageRoutingModule,
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class EsportsAdminPageModule { }

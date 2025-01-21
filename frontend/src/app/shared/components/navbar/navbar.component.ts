@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
+import {environmentPaths} from "../../../environments/environment";
 
 @Component({
   selector: 'app-navbar',
@@ -6,9 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  searchQuery: string = '';
 
-  onSearch() {
-    console.log('Search query:', this.searchQuery);
+  constructor(private router: Router) { }
+
+  toHomePage() {
+    this.router.navigate([environmentPaths.home_page]);
   }
 }
