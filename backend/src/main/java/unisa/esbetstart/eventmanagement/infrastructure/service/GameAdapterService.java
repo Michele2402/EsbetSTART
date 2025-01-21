@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.eventmanagement.application.port.out.CreateGamePortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.GetGamePortOut;
+import unisa.esbetstart.eventmanagement.application.port.out.RemoveGamePortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.UpdateGamePortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Game;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class GameAdapterService implements GetGamePortOut, CreateGamePortOut, UpdateGamePortOut {
+public class GameAdapterService implements GetGamePortOut, CreateGamePortOut, UpdateGamePortOut, RemoveGamePortOut {
 
     private final GameJpaRepository gameJpaRepository;
 
@@ -65,6 +66,19 @@ public class GameAdapterService implements GetGamePortOut, CreateGamePortOut, Up
     }
 
     /**
+     * Gets a game by its id with the competition list and the event list from the database.
+     * @param gameId the id of the game
+     */
+    @Override
+    public Game getGameByIdWithCompetitionsAndEvents(UUID gameId) {
+        Optional<GameEntity> optionalGameEntity = gameJpaRepository.findByIdWithCompetitionsAndEvents(gameId);
+
+        return optionalGameEntity
+                .map(infrastructureGameMapper::toGameModelWithCompetitionsAndEvents)
+                .orElse(null);
+    }
+
+    /**
      * Adds a new game to the database.
      * @param game the game to add
      */
@@ -82,5 +96,14 @@ public class GameAdapterService implements GetGamePortOut, CreateGamePortOut, Up
     @Override
     public void updateGame(Game game) {
         gameJpaRepository.save(infrastructureGameMapper.toGameEntityWithRules(game));
+    }
+
+    /**
+     * Removes a game from the database.
+     * @param gameId the id of the game to remove
+     */
+    @Override
+    public void removeGame(UUID gameId) {
+        gameJpaRepository.deleteById(gameId);
     }
 }

@@ -9,5 +9,5 @@ public interface GetGamePortOut {
     Game getGameById(UUID gameId);
     Game getGameByName(String gameName);
     Game getGameByIdWithSimpleDetails(UUID gameId);
-
+    Game getGameByIdWithCompetitionsAndEvents(UUID gameId);
 }

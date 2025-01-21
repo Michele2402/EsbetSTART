@@ -108,4 +108,14 @@ public class Game implements Searchable{
 
     }
 
+    public boolean hasNotEndedEventsInCompetitions() {
+
+        for (Competition competition : competitions) {
+            if (competition.hasNotEndedEvents()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
