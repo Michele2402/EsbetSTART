@@ -9,7 +9,7 @@ import unisa.esbetstart.eventmanagement.application.port.out.GetCompetitionPortO
 import unisa.esbetstart.eventmanagement.application.port.out.UpdateCompetitionPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Competition;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateCompetitionRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.*;
 
 import java.util.UUID;
 
@@ -21,6 +21,7 @@ public class UpdateCompetitionManagerService implements UpdateCompetitionUseCase
     private final CheckTypeAttribute checkTypeAttribute;
     private final UpdateCompetitionPortOut updateCompetitionPortOut;
     private final GetCompetitionPortOut getCompetitionPortOut;
+    private final ParseAttribute parseAttribute;
 
     @Override
     public void updateCompetition(UpdateCompetitionRequest request) {
@@ -28,7 +29,7 @@ public class UpdateCompetitionManagerService implements UpdateCompetitionUseCase
         log.info("Updating competition with id: {}", request.getCompetitionId());
 
         //check and get competition id
-        UUID competitionId = checkTypeAttribute.checkUUIDIsNullOrInvalid(request.getCompetitionId(), "Competition Id in update call");
+        UUID competitionId = parseAttribute.checkUUIDIsNullOrInvalid(request.getCompetitionId(), "Competition Id in update call");
 
         //check the update competition request
         checkUpdateCompetitionRequest(request);

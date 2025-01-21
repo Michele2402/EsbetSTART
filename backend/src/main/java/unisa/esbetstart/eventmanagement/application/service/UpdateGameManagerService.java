@@ -12,7 +12,7 @@ import unisa.esbetstart.eventmanagement.domain.model.Game;
 import unisa.esbetstart.eventmanagement.domain.model.Rule;
 import unisa.esbetstart.eventmanagement.presentation.request.AddRuleRequest;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateGameRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -27,6 +27,7 @@ public class UpdateGameManagerService implements UpdateGameUseCase {
     private final GetGamePortOut getGamePortOut;
     private final ApplicationRuleMapper applicationRuleMapper;
     private final UpdateGamePortOut updateGamePortOut;
+    private final ParseAttribute parseAttribute;
 
     @Override
     public void updateGame(UpdateGameRequest request) {
@@ -34,7 +35,7 @@ public class UpdateGameManagerService implements UpdateGameUseCase {
         log.info("Updating game with id: {}", request.getGameId());
 
         //check the update game request
-        UUID gameId = checkTypeAttribute.checkUUIDIsNullOrInvalid(request.getGameId(), "Game Id in update call");
+        UUID gameId = parseAttribute.checkUUIDIsNullOrInvalid(request.getGameId(), "Game Id in update call");
 
         //check the update game request
         checkUpdateGameRequest(request);

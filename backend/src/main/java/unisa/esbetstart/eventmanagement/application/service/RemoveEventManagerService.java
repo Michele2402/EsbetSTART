@@ -9,7 +9,7 @@ import unisa.esbetstart.eventmanagement.application.port.in.RemoveEventUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.GetEventPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.RemoveEventPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Event;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.*;
 
 import java.util.UUID;
 
@@ -18,16 +18,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RemoveEventManagerService implements RemoveEventUseCase {
 
-    private final CheckTypeAttribute checkTypeAttribute;
     private final RemoveEventPortOut removeEventPortOut;
     private final GetEventPortOut getEventPortOut;
+    private final ParseAttribute parseAttribute;
 
     @Override
     public void removeEvent(String eventId) {
         log.info("Removing event with id: {}", eventId);
 
         // Check if eventId is null or invalid
-        UUID id = checkTypeAttribute.checkUUIDIsNullOrInvalid(eventId, "Event Id in remove call");
+        UUID id = parseAttribute.checkUUIDIsNullOrInvalid(eventId, "Event Id in remove call");
 
         // Check if the event exists and is ended
         Event event = getEventPortOut.getEventByIdWithoutOdds(id);

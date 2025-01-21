@@ -9,7 +9,7 @@ import unisa.esbetstart.eventmanagement.application.port.out.GetEventPortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.UpdateEventPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateEventRequest;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.*;
 
 import java.util.UUID;
 
@@ -23,6 +23,7 @@ public class UpdateEventManagerService implements UpdateEventUseCase {
     private final CheckTypeAttribute checkTypeAttribute;
     private final UpdateEventPortOut updateEventPortOut;
     private final GetEventPortOut getEventPortOut;
+    private final ParseAttribute parseAttribute;
 
     @Override
     public void updateEvent(UpdateEventRequest request) {
@@ -30,7 +31,7 @@ public class UpdateEventManagerService implements UpdateEventUseCase {
         log.info("Updating event with id: {}", request.getEventId());
 
         //check and get event id
-        UUID eventId = checkTypeAttribute.checkUUIDIsNullOrInvalid(request.getEventId(), "Event Id in update call");
+        UUID eventId = parseAttribute.checkUUIDIsNullOrInvalid(request.getEventId(), "Event Id in update call");
 
         //check the update event request
         checkUpdateEventRequest(request);

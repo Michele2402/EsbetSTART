@@ -10,7 +10,7 @@ import unisa.esbetstart.eventmanagement.application.port.in.RemoveGameUseCase;
 import unisa.esbetstart.eventmanagement.application.port.out.GetGamePortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.RemoveGamePortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Game;
-import unisa.esbetstart.usermanagment.application.utils.CheckTypeAttribute;
+import unisa.esbetstart.common.utils.*;
 
 import java.util.UUID;
 
@@ -19,16 +19,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RemoveGameManagerService implements RemoveGameUseCase {
 
-    private final CheckTypeAttribute checkTypeAttribute;
     private final RemoveGamePortOut removeGamePortOut;
     private final GetGamePortOut getGamePortOut;
+    private final ParseAttribute parseAttribute;
 
     @Override
     public void removeGame(String gameId) {
         log.info("Removing game with id: {}", gameId);
 
         // Check if gameId is null or invalid
-        UUID id = checkTypeAttribute.checkUUIDIsNullOrInvalid(gameId, "Game Id in remove call");
+        UUID id = parseAttribute.checkUUIDIsNullOrInvalid(gameId, "Game Id in remove call");
 
         // Check if the game exists and has no running events in its competitions
         Game game = getGamePortOut.getGameByIdWithCompetitionsAndEvents(id);
