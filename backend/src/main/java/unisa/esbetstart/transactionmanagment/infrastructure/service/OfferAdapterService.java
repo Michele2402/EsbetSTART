@@ -3,12 +3,15 @@ package unisa.esbetstart.transactionmanagment.infrastructure.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import unisa.esbetstart.transactionmanagment.application.port.out.CreateActivatedOfferPortOut;
 import unisa.esbetstart.transactionmanagment.application.port.out.CreateOfferPortOut;
 import unisa.esbetstart.transactionmanagment.application.port.out.GetOfferPortOut;
 import unisa.esbetstart.transactionmanagment.application.port.out.RemoveOfferPortOut;
+import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
+import unisa.esbetstart.transactionmanagment.infrastructure.repository.ActivatedOfferJpaRepository;
 import unisa.esbetstart.transactionmanagment.infrastructure.repository.OfferJpaRepository;
 
 import java.util.Optional;
@@ -17,9 +20,11 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut, RemoveOfferPortOut {
+public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut, RemoveOfferPortOut, CreateActivatedOfferPortOut {
 
         private final OfferJpaRepository offerJpaRepository;
+
+        private final ActivatedOfferJpaRepository activatedOfferJpaRepository;
 
         private final InfrastructureOfferMapper infrastructureOfferMapper;
 
@@ -68,8 +73,21 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut,
             offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
         }
 
+        /**
+        * Removes an offer from the database.
+        * @param offerId the id of the offer
+        */
         @Override
         public void removeOffer(UUID offerId) {
             offerJpaRepository.deleteById(offerId);
+        }
+
+        /**
+        * Adds an accepted offer to the database.
+        * @param offer the offer to add
+        */
+        @Override
+        public void addAcceptedOffer(ActivatedOffer offer) {
+            activatedOfferJpaRepository.save(infrastructureOfferMapper.toActivatedOfferEntity(offer));
         }
 }

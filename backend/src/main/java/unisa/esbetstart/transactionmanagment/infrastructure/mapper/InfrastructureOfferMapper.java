@@ -36,15 +36,34 @@ public class InfrastructureOfferMapper {
                 .build();
     }
 
-    public ActivatedOfferEntity toActivatedOfferEntity (ActivatedOffer offer) {
+    /**
+     * Maps an ActivatedOffer to an ActivatedOfferEntity with only id and Offer
+     * @param activatedOffer is the activated offer to be mapped
+     * @return ActivatedOfferEntity
+     */
+    public ActivatedOfferEntity toActivatedOfferEntity (ActivatedOffer activatedOffer) {
         return ActivatedOfferEntity.builder()
                 .progress(0.0)
-                .id(offer.getId())
+                .id(activatedOffer.getId())
                 .gambler(GamblerEntity.builder().
-                        email(offer.getGambler().getEmail()).build()
+                        email(activatedOffer.getGambler().getEmail()).build()
                 )
                 .offer(OfferEntity.builder()
-                        .id(offer.getOffer().getId()).build())
+                        .id(activatedOffer.getOffer().getId()).build())
+                .build();
+    }
+
+    /**
+     * Maps an ActivatedOfferEntity to an ActivatedOffer with only id and Offer
+     * @param activatedOfferEntity is the activated offer entity to be mapped
+     * @return ActivatedOffer
+     */
+    public ActivatedOffer toActivatedOfferModel (ActivatedOfferEntity activatedOfferEntity) {
+        return ActivatedOffer.builder()
+                .id(activatedOfferEntity.getId())
+                .offer(Offer.builder()
+                        .id(activatedOfferEntity.getOffer().getId())
+                        .build())
                 .build();
     }
 }

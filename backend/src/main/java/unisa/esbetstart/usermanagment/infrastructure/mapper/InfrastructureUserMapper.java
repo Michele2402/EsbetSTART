@@ -1,13 +1,20 @@
 package unisa.esbetstart.usermanagment.infrastructure.mapper;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.UserEntity;
 
+import java.util.stream.Collectors;
+
 @Component
+@RequiredArgsConstructor
 public class InfrastructureUserMapper {
+
+    private final InfrastructureOfferMapper infrastructureOfferMapper;
 
     public User toUserModel(UserEntity userEntity) {
         return User.builder()
@@ -32,16 +39,15 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
-    public Gambler toGamblerModel(GamblerEntity gamblerEntity) {
+    public Gambler toGamblerModelWithActivatedOffers(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())
                 .name(gamblerEntity.getName())
                 .surname(gamblerEntity.getSurname())
                 .username(gamblerEntity.getUsername())
                 .password("Password123!")
-                .balance(0)
-                .bonusBalance(0)
-                .withdrawalBalance(0)
+                .activatedOffers(gamblerEntity.getActivatedOffers()
+                        .stream().map(infrastructureOfferMapper::toActivatedOfferModel).collect(Collectors.toSet()))
                 .build();
     }
 }

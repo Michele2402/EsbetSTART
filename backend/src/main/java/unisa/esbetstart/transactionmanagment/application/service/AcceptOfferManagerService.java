@@ -7,15 +7,12 @@ import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.transactionmanagment.application.port.in.AcceptOfferUseCase;
+import unisa.esbetstart.transactionmanagment.application.port.out.CreateActivatedOfferPortOut;
 import unisa.esbetstart.transactionmanagment.application.port.out.GetOfferPortOut;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
-import unisa.esbetstart.transactionmanagment.infrastructure.entity.ActivatedOfferEntity;
-import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
-import unisa.esbetstart.transactionmanagment.infrastructure.repository.ActivatedOfferJpaRepository;
 import unisa.esbetstart.transactionmanagment.presentation.request.AcceptOfferRequest;
 import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
-import unisa.esbetstart.usermanagment.application.port.out.GetUserPortOut;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
 import java.util.UUID;
@@ -29,8 +26,7 @@ public class AcceptOfferManagerService implements AcceptOfferUseCase {
     private final GetOfferPortOut getOfferPortOut;
     private final GetGamblerPortOut getGamblerPortOut;
     private final CheckTypeAttribute CheckTypeAttribute;
-    private final InfrastructureOfferMapper infrastructureOfferMapper;
-    private final ActivatedOfferJpaRepository activatedOfferRepository;
+    private final CreateActivatedOfferPortOut createActivatedOfferPortOut;
 
     @Override
     public void acceptOffer(AcceptOfferRequest request) {
@@ -51,10 +47,6 @@ public class AcceptOfferManagerService implements AcceptOfferUseCase {
             throw new ObjectNotFoundException("Offer not found");
         }
 
-        //TODO la funzione acceptOffer deve controllare che il gambler non abbia un offerta attiva che abbia lo stesso
-        // Offer id dell'offer passato in input.
-        // Quindi gambler si deve mappare tutte le activatedOfferEntity con entityGraph e modificare il suo metodo interno
-
         if(gambler == null) {
             log.error("Gambler not found");
             throw new ObjectNotFoundException("Gambler not found");
@@ -63,11 +55,8 @@ public class AcceptOfferManagerService implements AcceptOfferUseCase {
         // Accept the offer
         ActivatedOffer activatedOffer = gambler.acceptOffer(offer);
 
-        // Map the activated offer to an entity
-        ActivatedOfferEntity activatedOfferEntity = infrastructureOfferMapper.toActivatedOfferEntity(activatedOffer);
-
         // Save the activated offer
-        activatedOfferRepository.save(activatedOfferEntity);
+        createActivatedOfferPortOut.addAcceptedOffer(activatedOffer);
 
         log.info("Offer accepted");
     }
