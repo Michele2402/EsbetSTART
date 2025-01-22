@@ -1,7 +1,7 @@
 <div class="games-container">
     @for (game of (allGames$ | async); track game) {
         <div class="game-row">
-            <div class="game-name">
+            <div class="game-name" (click) ="selectGame(game)">
                 {{ game.name }}
             </div>
 

@@ -1,0 +1,101 @@
+.container {
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.game-title {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.8em;
+  font-weight: bold;
+  min-width: 300px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.championships {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.championship-item {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 80px;
+  min-width: 300px;
+}
+
+.championship-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.competition-name {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.origin-country {
+  font-size: 0.9em;
+  color: #777;
+  display: flex;
+  align-items: center;
+}
+
+.country-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.championship-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 15px;
+  font-size: 0.9em;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.update-btn {
+  background-color: #007BFF;
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+}
+
+.remove-btn {
+  background-color: #FF4D4D;
+  color: white;
+}
+
+.remove-btn:hover {
+  background-color: #E63939;
+}
+

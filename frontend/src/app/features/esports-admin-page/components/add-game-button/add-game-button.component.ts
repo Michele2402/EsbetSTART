@@ -3,7 +3,7 @@ import {AbstractControl, FormArray, FormBuilder, ValidationErrors, Validators} f
 import {AddGameRequest} from "../../../../model/request/add-game-request";
 import {catchError, Subject, takeUntil} from "rxjs";
 import {GameService} from "../../../../core/services/game.service";
-import {SnackbarService} from "../../../../core/services/snackbar/snackbar.service";
+import {SnackbarService} from "../../../../core/services/snackbar.service";
 import {AddRuleRequest} from "../../../../model/request/add-rule-request";
 
 export function minMaxArrayLengthValidator(min: number, max: number) {

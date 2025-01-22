@@ -9,6 +9,7 @@ export const environmentPaths = {
   login_page: 'login',
   registration_page: 'registration',
   e_sports_admin_page: 'esports-admin',
+  competitions_admin_page: 'competitions-admin',
   search_page: 'search',
 
   //BACKEND
@@ -19,5 +20,9 @@ export const environmentPaths = {
   add_game: 'games/add',
   remove_game: 'games/remove',
   update_game: 'games/update',
+
   register: 'users/register',
+
+  get_all_competitions: 'competitions/get-all-by-game',
+  remove_competition: 'competitions/remove',
 }

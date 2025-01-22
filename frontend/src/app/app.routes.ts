@@ -21,7 +21,12 @@ export const routes: Routes = [
   },
   {
     path: environmentPaths.e_sports_admin_page,
-    loadChildren: () => import('./features/esports-admin-page/esports-admin-page.module').then(m => m.EsportsAdminPageModule)},
+    loadChildren: () => import('./features/esports-admin-page/esports-admin-page.module').then(m => m.EsportsAdminPageModule)
+  },
+  {
+    path: environmentPaths.competitions_admin_page,
+    loadChildren: () => import('./features/competitions-admin-page/competitions-admin-page.module').then(m => m.CompetitionsAdminPageModule)
+  },
   {
     path: '',
     redirectTo: environmentPaths.home_page,

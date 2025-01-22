@@ -2,11 +2,13 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {catchError, Observable, Subject, takeUntil} from "rxjs";
 import {GameService} from "../../../../core/services/game.service";
 import {GameWithRulesResponse} from "../../../../model/response/game-response";
-import {SnackbarService} from "../../../../core/services/snackbar/snackbar.service";
+import {SnackbarService} from "../../../../core/services/snackbar.service";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {minMaxArrayLengthValidator} from "../add-game-button/add-game-button.component";
 import {UpdateGameRequest} from "../../../../model/request/update-game-request";
 import {AddRuleRequest} from "../../../../model/request/add-rule-request";
+import {Router} from "@angular/router";
+import {environmentPaths} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-game-table',
@@ -29,7 +31,8 @@ export class GameTableComponent implements OnInit, OnDestroy {
     private gameService: GameService,
     private _fb: FormBuilder,
     private snackBarService: SnackbarService,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
+    private router: Router
   ) {
   }
 
@@ -48,6 +51,11 @@ export class GameTableComponent implements OnInit, OnDestroy {
           return [];
         })
       );
+  }
+
+  selectGame(game: GameWithRulesResponse): void {
+    sessionStorage.setItem('selectedGame', JSON.stringify(game));
+    this.router.navigate([environmentPaths.competitions_admin_page]);
   }
 
   removeGame(id: string): void {
@@ -137,6 +145,9 @@ export class GameTableComponent implements OnInit, OnDestroy {
           })
         ).subscribe(() => {
         this.loadAllGames();
+        this.snackBarService.showSnackbarMessage(
+          'Game updated successfully', 'success-snackbar'
+        )
       });
     }
 

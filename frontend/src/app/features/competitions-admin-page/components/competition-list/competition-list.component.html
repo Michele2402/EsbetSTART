@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="game-title">
+    @if (found) {
+      {{ selectedGame?.name }}
+    } @else {
+      No game selected
+    }
+  </div>
+  <div class="championships">
+    @for (competition of (competitions$ | async); track competition) {
+      <div class="championship-item">
+        <div class="championship-details">
+          <span class="competition-name">{{ competition.name }}</span>
+          <span class="origin-country">
+            Origin country:
+            <img
+              class="country-icon"
+              src="assets/countries/{{competition.originCountry}}.png"
+              alt="{{competition.originCountry}}"
+            />
+          </span>
+        </div>
+        <div class="championship-actions">
+          <button class="btn update-btn" (click)="updateCompetition(competition)">Update</button>
+          <button class="btn remove-btn" (click)="removeCompetition(competition.id)">Remove</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
