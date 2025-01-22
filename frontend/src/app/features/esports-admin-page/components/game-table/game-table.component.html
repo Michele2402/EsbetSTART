@@ -1,23 +1,70 @@
-
 <div class="games-container">
-  @for (game of (allGames$ | async); track game) {
-    <div class="game-row">
-      <div class="game-name">
-        {{ game.name }}
-      </div>
+    @for (game of (allGames$ | async); track game) {
+        <div class="game-row">
+            <div class="game-name">
+                {{ game.name }}
+            </div>
 
-      <div class="rules-list">
-        @for (rule of game.rules; track rule) {
-          <div class="rule">
-            {{ rule.name }}
-          </div>
-        }
-      </div>
+            <div class="rules-list">
+                @for (rule of game.rules; track rule) {
+                    <div class="rule">
+                        {{ rule.name }}
+                    </div>
+                }
+            </div>
 
-      <div class="buttons">
-        <button class="modify-button">Update</button>
-        <button class="remove-button" (click)="removeGame(game.id)" >Remove</button>
-      </div>
-    </div>
-  }
+            <div class="buttons">
+                <button class="modify-button" (click)="toggleEditing(game)">Update</button>
+                <button class="remove-button" (click)="removeGame(game.id)">Remove</button>
+            </div>
+        </div>
+
+        <form class="edit-form" [formGroup]="editGameForm" (ngSubmit)="saveChanges()"
+              [ngClass]="{'hidden': editingGame?.id !== game.id}">
+
+            <div class="name-input-to-update">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name"/>
+                    @if (editGameForm.get('name')?.invalid && (editGameForm.get('name')?.touched)) {
+                    }
+                    @if (editGameForm.get('name')?.errors?.['required']) {
+                        <mat-error>Name is required</mat-error>
+                    } @else if (editGameForm.get('name')?.errors?.['maxlength']) {
+                        <mat-error>Please enter a name with a max of 30 characters</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div formArrayName="rules" class="rules-to-edit">
+                <div *ngFor="let ruleControl of rules.controls; let i = index" [formGroupName]="i" class="rule-item">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Rule {{ i + 1 }}</mat-label>
+                        <input matInput formControlName="name"/>
+                        @if (ruleControl.get('name')?.invalid && (ruleControl.get('name')?.touched || ruleControl.get('name')?.dirty) ) {
+                        }
+                        @if (ruleControl.get('name')?.errors?.['required']) {
+                            <mat-error>Rule is required</mat-error>
+                        } @else if (ruleControl.get('name')?.errors?.['maxlength']) {
+                            <mat-error>Max 30 characters</mat-error>
+                        }
+                    </mat-form-field>
+                    <button mat-icon-button color="warn" (click)="removeRule(i, $event)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="buttons-container">
+                <button (click)="addRule($event)" class="add-rule-button">Add Rule</button>
+                <button
+                        class="save-button"
+                        type="submit"
+                        [disabled]="editGameForm.invalid"
+                        [ngClass]="{'disabled': editGameForm.invalid}"
+                >Save</button>
+            </div>
+        </form>
+
+    }
 </div>

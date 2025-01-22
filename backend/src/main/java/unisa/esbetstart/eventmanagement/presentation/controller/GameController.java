@@ -59,9 +59,9 @@ public class GameController {
         updateGameUseCase.updateGame(request);
     }
 
-    @DeleteMapping("/remove")
+    @DeleteMapping("/remove/{gameId}")
     public void removeGame(
-            @RequestParam String gameId
+            @PathVariable String gameId
     ) {
         removeGameUseCase.removeGame(gameId);
     }

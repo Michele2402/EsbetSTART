@@ -18,5 +18,6 @@ export const environmentPaths = {
   get_all_games: 'games/get-all',
   add_game: 'games/add',
   remove_game: 'games/remove',
+  update_game: 'games/update',
   register: 'users/register',
 }

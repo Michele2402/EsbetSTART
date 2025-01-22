@@ -3,6 +3,7 @@ package unisa.esbetstart.usermanagment.domain.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.usermanagment.domain.enums.RolesEnum;
@@ -10,6 +11,7 @@ import unisa.esbetstart.usermanagment.domain.enums.RolesEnum;
 @NoArgsConstructor
 @Data
 @Slf4j
+@SuperBuilder
 public class User {
     private String name;
     private String surname;
@@ -18,7 +20,6 @@ public class User {
     private String password;
     private RolesEnum role;
 
-    @Builder
     public User(String name, String surname, String email, String username, String password, RolesEnum role) {
         this.name = name;
         this.surname = surname;

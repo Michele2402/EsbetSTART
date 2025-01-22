@@ -4,8 +4,9 @@ import {AddGameRequest} from "../../../../model/request/add-game-request";
 import {catchError, Subject, takeUntil} from "rxjs";
 import {GameService} from "../../../../core/services/game.service";
 import {SnackbarService} from "../../../../core/services/snackbar/snackbar.service";
+import {AddRuleRequest} from "../../../../model/request/add-rule-request";
 
-function minMaxArrayLengthValidator(min: number, max: number) {
+export function minMaxArrayLengthValidator(min: number, max: number) {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control || !control.value || !Array.isArray(control.value)) {
       return null;
@@ -74,7 +75,7 @@ export class AddGameButtonComponent implements OnDestroy {
     let addGameRequest: AddGameRequest;
 
     const name = this.addGameForm.get('name')?.value;
-    const rules = [];
+    const rules = [] as AddRuleRequest[];
 
     for (let i = 0; i < this.rules.length; i++) {
       if (this.rules.at(i).get('rule')?.value) {

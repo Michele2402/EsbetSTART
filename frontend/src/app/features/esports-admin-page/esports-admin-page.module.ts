@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {EsportsAdminPageComponent} from "./esports-admin-page.component";
 import {EsportsAdminPageRoutingModule} from "./esports-admin-page-routing.module";
 import {SharedModule} from "../../shared/shared.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AddGameButtonComponent} from "./components/add-game-button/add-game-button.component";
 import {GameTableComponent} from "./components/game-table/game-table.component";
 
@@ -19,7 +19,8 @@ import {GameTableComponent} from "./components/game-table/game-table.component";
     CommonModule,
     EsportsAdminPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class EsportsAdminPageModule { }
