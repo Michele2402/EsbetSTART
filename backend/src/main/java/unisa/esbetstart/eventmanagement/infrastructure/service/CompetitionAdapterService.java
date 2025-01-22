@@ -12,12 +12,18 @@ import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.mapper.InfrastructureCompetitionMapper;
 import unisa.esbetstart.eventmanagement.infrastructure.repository.CompetitionJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CompetitionAdapterService implements CreateCompetitionPortOut, GetCompetitionPortOut, UpdateCompetitionPortOut, RemoveCompetitionPortOut {
+public class CompetitionAdapterService implements
+        CreateCompetitionPortOut,
+        GetCompetitionPortOut,
+        UpdateCompetitionPortOut,
+        RemoveCompetitionPortOut
+{
 
     private final CompetitionJpaRepository competitionJpaRepository;
 
@@ -66,10 +72,26 @@ public class CompetitionAdapterService implements CreateCompetitionPortOut, GetC
         return optionalCompetition.map(infrastructureCompetitionMapper::toCompetitionModelWithSimpleGame).orElse(null);
     }
 
+    /**
+     * Gets a competition by its id from the database.
+     * It is retrieved with the list of events
+     * @param competitionId the id of the competition
+     */
     @Override
     public Competition getCompetitionByIdWithEventsList(UUID competitionId) {
         Optional<CompetitionEntity> optionalCompetition = competitionJpaRepository.findByIdWithEventsList(competitionId);
         return optionalCompetition.map(infrastructureCompetitionMapper::toCompetitionModelWithSimpleEventsList).orElse(null);
+    }
+
+
+    /**
+     * Gets all competitions by game id.
+     * @param gameId the id of the game
+     */
+    @Override
+    public List<Competition> getAllByGameId(UUID gameId) {
+        List<CompetitionEntity> competitions = competitionJpaRepository.findAllByGameId(gameId);
+        return infrastructureCompetitionMapper.toCompetitionModelWithSimpleDetailsList(competitions);
     }
 
     /**

@@ -9,6 +9,7 @@ import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,14 @@ public class  InfrastructureCompetitionMapper {
                 .name(competitionEntity.getName())
                 .originCountry(competitionEntity.getOriginCountry())
                 .build();
+    }
+
+    public List<Competition> toCompetitionModelWithSimpleDetailsList(List<CompetitionEntity> competitionEntities) {
+
+        return competitionEntities
+                .stream()
+                .map(this::toCompetitionModelWithSimpleDetails)
+                .collect(Collectors.toList());
     }
 
     /**

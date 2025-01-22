@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,4 +22,6 @@ public interface CompetitionJpaRepository extends JpaRepository<CompetitionEntit
     @EntityGraph(attributePaths = {"events"})
     @Query("SELECT c FROM CompetitionEntity c WHERE c.id = :competitionId")
     Optional<CompetitionEntity> findByIdWithEventsList(UUID competitionId);
+
+    List<CompetitionEntity> findAllByGameId(UUID gameId);
 }
