@@ -1,7 +1,7 @@
 package unisa.esbetstart.usermanagment.domain.model;
 
 
-import lombok.Builder;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -80,6 +80,14 @@ public class Gambler extends User {
      * @return the activated offer
      */
     public ActivatedOffer acceptOffer(Offer offer) {
+
+        //check if the offer has already been activated by the gambler
+        for (ActivatedOffer activatedOffer : activatedOffers) {
+            if (activatedOffer.getOffer().getId().equals(offer.getId())) {
+                log.error("Offer already activated");
+                throw new DomainAttributeException("Offer already activated");
+            }
+        }
 
         return ActivatedOffer.builder()
                 .id(UUID.randomUUID())

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AcceptOfferRequest {
 
-    private String gamblerId;
+    private String gamblerEmail;
     private String offerId;
 }

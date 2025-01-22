@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import unisa.esbetstart.transactionmanagment.application.port.in.*;
+import unisa.esbetstart.transactionmanagment.presentation.request.AcceptOfferRequest;
 import unisa.esbetstart.transactionmanagment.presentation.request.AddOfferRequest;
 import unisa.esbetstart.transactionmanagment.presentation.request.UpdateOfferRequest;
 
@@ -17,6 +18,7 @@ public class OfferController {
     private final CreateOfferUseCase createOfferUseCase;
     private final UpdateOfferUseCase updateOfferUseCase;
     private final RemoveOfferUseCase removeOfferUseCase;
+    private final AcceptOfferUseCase acceptOfferUseCase;
 
     /**
      * Adds a new offer to the database.
@@ -44,10 +46,17 @@ public class OfferController {
      * Removes an offer from the database.
      * @param offerId the id of the offer
      */
-    @PostMapping("/remove")
+    @DeleteMapping("/remove/{offerId}")
     public void removeOffer(
-            @RequestBody String offerId
+            @PathVariable String offerId
     ) {
         removeOfferUseCase.removeOffer(offerId);
+    }
+
+    @PostMapping("/accept")
+    public void acceptOffer(
+            @RequestBody AcceptOfferRequest request
+    ) {
+        acceptOfferUseCase.acceptOffer(request);
     }
 }
