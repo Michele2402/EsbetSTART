@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 
 @Component({
   selector: 'app-login-page',
@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
+
+
+  hide = signal(true);
+
+  clickEvent(event?: MouseEvent) {
+    this.hide.set(!this.hide());
+    event?.stopPropagation();
+  }
 
 }

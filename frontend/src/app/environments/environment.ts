@@ -21,8 +21,9 @@ export const environmentPaths = {
   remove_game: 'games/remove',
   update_game: 'games/update',
 
-  register: 'users/register',
-
   get_all_competitions: 'competitions/get-all-by-game',
   remove_competition: 'competitions/remove',
+
+  register: 'users/register',
+  login: 'users/login',
 }

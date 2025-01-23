@@ -20,6 +20,10 @@ export const routes: Routes = [
     loadChildren: () => import('./features/registration-page/registration-page.module').then(m => m.RegistrationPageModule)
   },
   {
+    path: environmentPaths.e_sports,
+    loadChildren: () => import('./features/esports-page/esports-page.module').then(m => m.EsportsPageModule)
+  },
+  {
     path: environmentPaths.e_sports_admin_page,
     loadChildren: () => import('./features/esports-admin-page/esports-admin-page.module').then(m => m.EsportsAdminPageModule)
   },

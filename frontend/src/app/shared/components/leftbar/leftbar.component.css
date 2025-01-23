@@ -1,12 +1,9 @@
-.leftbar {
-  width: 200px;
+.leftBar {
+  width: 300px;
   background-color: white;
   padding: 10px;
-  border-bottom: #0a0c0f;
 }
 
 .options {
   margin: 10px 0;
 }
-
-

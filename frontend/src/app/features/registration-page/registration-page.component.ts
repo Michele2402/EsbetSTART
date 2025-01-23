@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {signal} from "@angular/core";
 import {RegistrationService} from "../../core/services/registration.service";
 import {RegisterRequest} from "../../model/request/register-request";
+import {catchError, takeUntil} from "rxjs";
+import {SnackbarService} from "../../core/services/snackbar/snackbar.service";
 
 @Component({
   selector: 'app-registration-page',
@@ -34,6 +36,7 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.onSubmit();
   }
 
   onSubmit(): void {
@@ -47,8 +50,6 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
       this.registrationService.signUp(formData).subscribe(data =>  {
         console.log(data);
       })
-      this.precisionForm.reset()
-
     } else {
       console.log('Form is invalid');
     }
@@ -62,5 +63,6 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.onSubmit();
   }
 }
