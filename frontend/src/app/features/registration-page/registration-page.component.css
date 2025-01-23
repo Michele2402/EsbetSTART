@@ -1,3 +1,8 @@
+h1{
+  margin-left: 750px;
+}
+
+
 .registration-form {
   display: flex;
   justify-content: center;
@@ -47,16 +52,15 @@ mat-error {
 }
 
 .registration-button {
-  padding: 10px 20px;
-  font-size: 13px;
+  background: black;
+  color: white;
   border-radius: 20px;
   cursor: pointer;
-  background-color: black;
-  border: none;
-  color: white;
+  height: 50px;
+  padding: 0 40px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-.registration-form:hover {
-  background-color: white;
-  color: black;
+.registration-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }

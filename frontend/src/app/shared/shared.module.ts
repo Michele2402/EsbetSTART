@@ -5,6 +5,7 @@ import {FooterComponent} from "./components/footer/footer.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {FormsModule} from "@angular/forms";
 import {LeftbarComponent} from "./components/leftbar/leftbar.component";
+import {RouterLink} from "@angular/router";
 
 
 
@@ -14,11 +15,12 @@ import {LeftbarComponent} from "./components/leftbar/leftbar.component";
     FooterComponent,
     LeftbarComponent
   ],
-  imports: [
-    CommonModule,
-    AngularMaterialModule,
-    FormsModule,
-  ],
+    imports: [
+        CommonModule,
+        AngularMaterialModule,
+        FormsModule,
+        RouterLink,
+    ],
   exports: [
     AngularMaterialModule,
     FooterComponent,

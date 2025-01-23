@@ -18,4 +18,5 @@ export const environmentPaths = {
   get_all_games: 'games/get-all',
   add_game: 'games/add',
   register: 'users/register',
+  login: 'users/login',
 }

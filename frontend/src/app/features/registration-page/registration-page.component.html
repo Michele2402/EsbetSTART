@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 
+<h1>Registration</h1>
+
 <form class="registration-form" [formGroup]="precisionForm">
 
   <mat-card appearance="outlined">
@@ -94,7 +96,9 @@
       </div>
 
       <form (ngSubmit)="onSubmit()">
-        <button class="registration-button" mat-stroked-button>Join now</button>
+        <a mat-fab class="registration-button">
+          Join Now
+        </a>
       </form>
 
     </mat-card-content>
