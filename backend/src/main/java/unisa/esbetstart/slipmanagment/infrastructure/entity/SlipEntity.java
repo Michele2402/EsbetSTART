@@ -21,7 +21,7 @@ public class SlipEntity {
     @Id
     @Column(columnDefinition = "UUID")
     private UUID id;
-    private int amount;
+    private double amount;
 
     @OneToOne
     @JoinColumn(name = "user_email", nullable = false)

@@ -6,6 +6,7 @@ import unisa.esbetstart.common.exceptions.AttributeIsNullException;
 import unisa.esbetstart.common.exceptions.SizeMismatchException;
 
 import java.time.LocalDateTime;
+
 @Component
 @Slf4j
 public class CheckTypeAttribute {
@@ -78,6 +79,20 @@ public class CheckTypeAttribute {
      * @throws AttributeIsNullException if the float is null or negative
      */
     public void checkFloatIsNullOrNegative(Float value, String infoAttribute) {
+        if (value == null || value < 0) {
+            log.error("{} is null or negative", infoAttribute);
+            throw new AttributeIsNullException(infoAttribute + " is null or negative");
+        }
+    }
+
+    /**
+     * Checks if a double is null or negative. If so, logs an error message and throws an exception.
+     *
+     * @param value         the double to check
+     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
+     * @throws AttributeIsNullException if the double is null or negative
+     */
+    public void checkDoubleIsNullOrNegative(Double value, String infoAttribute) {
         if (value == null || value < 0) {
             log.error("{} is null or negative", infoAttribute);
             throw new AttributeIsNullException(infoAttribute + " is null or negative");

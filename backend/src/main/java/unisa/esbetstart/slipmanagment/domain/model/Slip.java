@@ -1,5 +1,6 @@
 package unisa.esbetstart.slipmanagment.domain.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class Slip {
     private Set<Odd> odds;
     private Gambler gambler;
 
+    @Builder
     public Slip(UUID id, double amount, Set<Odd> odds, Gambler gambler) {
         this.id = id;
         this.amount = amount;
@@ -104,6 +106,13 @@ public class Slip {
                 .gambler(gambler)
                 .oddStatics(odds.stream().map(Odd::toOddStatic).collect(Collectors.toSet()))
                 .build();
+
+    }
+
+    public void updateSlip(double amount, Set<Odd> odds) {
+
+        this.amount = amount;
+        this.odds = odds;
 
     }
 
