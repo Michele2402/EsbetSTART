@@ -1,11 +1,4 @@
 <div class="container">
-  <div class="game-title">
-    @if (found) {
-      {{ selectedGame?.name }}
-    } @else {
-      No game selected
-    }
-  </div>
   <div class="championships">
     @for (competition of (competitions$ | async); track competition) {
       <div class="championship-item">

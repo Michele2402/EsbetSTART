@@ -1,19 +1,6 @@
 .container {
-  padding: 20px;
+  padding: 0 20px;
   font-family: 'Roboto', sans-serif;
-}
-
-.game-title {
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 1.8em;
-  font-weight: bold;
-  min-width: 300px;
-  width: fit-content;
-  margin-bottom: 20px;
 }
 
 .championships {
@@ -25,10 +12,10 @@
 
 .championship-item {
   padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
+  background-color: #F5F5F5;
+  border: 1px solid #B71C1C;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   gap: 30px;
   align-items: center;
@@ -48,12 +35,12 @@
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #333;
+  color: #212121;
 }
 
 .origin-country {
   font-size: 0.9em;
-  color: #777;
+  color: #616161;
   display: flex;
   align-items: center;
 }
@@ -63,7 +50,7 @@
   height: 24px;
   margin-left: 5px;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid #B71C1C;
 }
 
 .championship-actions {
@@ -82,20 +69,19 @@
 }
 
 .update-btn {
-  background-color: #007BFF;
+  background-color: #B71C1C;
   color: white;
 }
 
 .update-btn:hover {
-  background-color: #0056b3;
+  background-color: #880E4F;
 }
 
 .remove-btn {
-  background-color: #FF4D4D;
+  background-color: #D32F2F;
   color: white;
 }
 
 .remove-btn:hover {
-  background-color: #E63939;
+  background-color: #B71C1C;
 }
-

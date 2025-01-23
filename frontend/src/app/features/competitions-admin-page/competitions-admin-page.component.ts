@@ -5,8 +5,6 @@ import {Component} from '@angular/core';
   templateUrl: './competitions-admin-page.component.html',
   styleUrl: './competitions-admin-page.component.css'
 })
-export class CompetitionsAdminPageComponent  {
-
-
+export class CompetitionsAdminPageComponent {
 
 }

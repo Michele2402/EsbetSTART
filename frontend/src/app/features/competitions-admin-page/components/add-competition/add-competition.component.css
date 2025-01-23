@@ -1,0 +1,12 @@
+.game-title {
+  margin: 20px;
+  background-color: #D32F2F;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1.8em;
+  font-weight: bold;
+  min-width: 300px;
+  width: fit-content;
+}

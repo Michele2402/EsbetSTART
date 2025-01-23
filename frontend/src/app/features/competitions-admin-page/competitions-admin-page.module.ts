@@ -4,13 +4,15 @@ import {SharedModule} from "../../shared/shared.module";
 import {CompetitionsAdminPageRoutingModule} from "./competitions-admin-page-routing-module";
 import {CompetitionsAdminPageComponent} from "./competitions-admin-page.component";
 import {CompetitionListComponent} from "./components/competition-list/competition-list.component";
+import {AddCompetitionComponent} from "./components/add-competition/add-competition.component";
 
 
 
 @NgModule({
   declarations: [
     CompetitionsAdminPageComponent,
-    CompetitionListComponent
+    CompetitionListComponent,
+    AddCompetitionComponent
   ],
   imports: [
     CommonModule,

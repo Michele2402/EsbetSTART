@@ -16,8 +16,6 @@ export class GameService {
   constructor(private http: HttpClient) {
   }
 
-  //----------------------------------------------
-
   getAllGames(): Observable<GameWithRulesResponse[]> {
     return this.http.get<GameWithRulesResponse[]>(this.basePath + environmentPaths.get_all_games);
   }
