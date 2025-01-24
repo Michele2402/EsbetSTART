@@ -3,6 +3,7 @@ package unisa.esbetstart.transactionmanagment.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.transactionmanagment.application.port.in.RemoveOfferUseCase;
 import unisa.esbetstart.transactionmanagment.application.port.out.GetOfferPortOut;
@@ -32,7 +33,7 @@ public class RemoveOfferManagerService implements RemoveOfferUseCase {
 
         if(getOfferPortOut.getOfferById(id) == null) {
             log.error("Offer with id {} not found", id);
-            return;
+            throw new ObjectIsNullException("Offer with id " + id + " not found");
         }
 
         // Remove the offer from the database

@@ -6,6 +6,7 @@ import unisa.esbetstart.common.exceptions.AttributeIsNullException;
 import unisa.esbetstart.common.exceptions.InvalidParsingException;
 import unisa.esbetstart.common.exceptions.InvalidUUIDException;
 import unisa.esbetstart.transactionmanagment.domain.enums.OfferTypeEnum;
+import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -67,6 +68,15 @@ public class ParseAttribute {
         } catch (IllegalArgumentException e) {
             log.error("{} is not a valid OfferType", infoAttribute);
             throw new InvalidParsingException(infoAttribute + " is not a valid OfferType");
+        }
+    }
+
+    public TransactionTypeEnum convertStringIntoTransactionType(String type, String infoAttribute) {
+        try {
+            return TransactionTypeEnum.valueOf(type);
+        } catch (IllegalArgumentException e) {
+            log.error("{} is not a valid TransactionType", infoAttribute);
+            throw new InvalidParsingException(infoAttribute + " is not a valid TransactionType");
         }
     }
 

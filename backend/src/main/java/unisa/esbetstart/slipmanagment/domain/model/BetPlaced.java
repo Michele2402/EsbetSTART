@@ -8,9 +8,9 @@ import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Data
@@ -22,15 +22,17 @@ public class BetPlaced {
     private ResultEnum result;
     private Gambler gambler;
     private Set<OddStatic> oddStatics;
+    private LocalDateTime date;
 
     @Builder
-    public BetPlaced(double amount, Gambler gambler, ResultEnum result, Set<OddStatic> oddStatics, UUID id) {
+    public BetPlaced(double amount, Gambler gambler, ResultEnum result, Set<OddStatic> oddStatics, UUID id, LocalDateTime date) {
 
         this.gambler = gambler;
         this.id = id;
         this.amount = amount;
         this.result = result;
         this.oddStatics = oddStatics;
+        this.date = date;
 
     }
 
@@ -80,6 +82,12 @@ public class BetPlaced {
         result = ResultEnum.WON;
         return ResultEnum.WON;
 
+    }
+
+    public void orderOddStatic() {
+        oddStatics = oddStatics.stream()
+                .sorted(Comparator.comparing(oddStatic -> oddStatic.getOdd().getPosition()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
 }

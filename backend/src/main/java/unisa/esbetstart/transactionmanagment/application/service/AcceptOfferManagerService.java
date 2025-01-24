@@ -40,7 +40,7 @@ public class AcceptOfferManagerService implements AcceptOfferUseCase {
 
         // Get the offer and the gambler
         Offer offer = getOfferPortOut.getOfferById(offerId);
-        Gambler gambler = getGamblerPortOut.getGamblerByEmail(request.getGamblerEmail());
+        Gambler gambler = getGamblerPortOut.getGamblerByEmailWithActivatedOffers(request.getGamblerEmail());
 
         if(offer == null) {
             log.error("Offer not found");

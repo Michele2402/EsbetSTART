@@ -2,10 +2,10 @@ package unisa.esbetstart.slipmanagment.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
+import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
-import unisa.esbetstart.usermanagment.infrastructure.entity.UserEntity;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,7 +22,9 @@ public class BetPlacedEntity {
     private UUID id;
 
     private double amount;
-    private String result;
+    @Enumerated(EnumType.STRING)
+    private ResultEnum resultEnum;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

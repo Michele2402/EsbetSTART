@@ -4,8 +4,8 @@ package unisa.esbetstart.slipmanagment.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
+import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -19,10 +19,10 @@ public class OddStaticEntity {
     @Column(columnDefinition = "UUID")
     private UUID id;
 
-    private LocalDateTime date;
     private String name;
     private double value;
-    private String result;
+    @Enumerated(EnumType.STRING)
+    private ResultEnum result;
     private String competition;
     private String game;
 

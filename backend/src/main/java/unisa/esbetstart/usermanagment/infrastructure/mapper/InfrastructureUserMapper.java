@@ -2,7 +2,9 @@ package unisa.esbetstart.usermanagment.infrastructure.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import unisa.esbetstart.slipmanagment.infrastructure.mapper.InfrastructureBetMapper;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
+import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureTransactionMapper;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class InfrastructureUserMapper {
 
     private final InfrastructureOfferMapper infrastructureOfferMapper;
+    private final InfrastructureTransactionMapper infrastructureTransactionMapper;
+    private final InfrastructureBetMapper  infrastructureBetMapper;
 
     public User toUserModel(UserEntity userEntity) {
         return User.builder()
@@ -48,6 +52,30 @@ public class InfrastructureUserMapper {
                 .password("Password123!")
                 .activatedOffers(gamblerEntity.getActivatedOffers()
                         .stream().map(infrastructureOfferMapper::toActivatedOfferModel).collect(Collectors.toSet()))
+                .build();
+    }
+
+    public Gambler toGamblerModelWithTransactions(GamblerEntity gamblerEntity) {
+        return Gambler.builder()
+                .email(gamblerEntity.getEmail())
+                .name(gamblerEntity.getName())
+                .surname(gamblerEntity.getSurname())
+                .username(gamblerEntity.getUsername())
+                .password("Password123!")
+                .transactions(gamblerEntity.getTransactions()
+                        .stream().map(infrastructureTransactionMapper::toTransactionModel).collect(Collectors.toSet()))
+                .build();
+    }
+
+    public Gambler toGabmlerModelWithBets(GamblerEntity gamblerEntity) {
+        return Gambler.builder()
+                .email(gamblerEntity.getEmail())
+                .name(gamblerEntity.getName())
+                .surname(gamblerEntity.getSurname())
+                .username(gamblerEntity.getUsername())
+                .password("Password123!")
+                .bets(gamblerEntity.getBets()
+                        .stream().map(infrastructureBetMapper::toBetModelWithOddStatic).collect(Collectors.toSet()))
                 .build();
     }
 }
