@@ -2,10 +2,9 @@ package unisa.esbetstart.slipmanagment.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import unisa.esbetstart.slipmanagment.application.port.in.UpdateSlipUseCase;
+import unisa.esbetstart.slipmanagment.presentation.request.UpdateSlipRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class SlipController {
 
-    @PostMapping("/save")
-    public void saveSlip() {
+    private final UpdateSlipUseCase updateSlipUseCase;
 
-        log.info("Slip saved");
+    @PostMapping("/save")
+    public void saveSlip(@RequestBody UpdateSlipRequest request) {
+
+        updateSlipUseCase.updateSlip(request);
+
     }
 }

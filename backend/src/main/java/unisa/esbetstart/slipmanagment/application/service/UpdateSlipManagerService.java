@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
+import unisa.esbetstart.common.exceptions.SizeMismatchException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.eventmanagement.application.port.out.GetOddPortOut;
@@ -70,12 +71,12 @@ public class UpdateSlipManagerService implements UpdateSlipUseCase {
 
         checkTypeAttribute.checkDoubleIsNullOrNegative(request.getAmount(), "Amount in slip update call");
 
-
         Set<Odd> odds = request.getOddsIds()
                 .stream()
                 .map(odd ->
                         getOddPortOut.getOddByIdWithSimpleDetails(parseAttribute.checkUUIDIsNullOrInvalid(odd, "Odd id in slip update call")))
                 .collect(Collectors.toSet());
+
 
         odds.forEach(odd -> {
             if (odd == null) {

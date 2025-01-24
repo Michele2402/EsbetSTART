@@ -2,12 +2,15 @@ package unisa.esbetstart.usermanagment.infrastructure.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import unisa.esbetstart.slipmanagment.domain.model.Slip;
+import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.UserEntity;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,6 +39,10 @@ public class InfrastructureUserMapper {
                 .balance(0)
                 .bonusBalance(0)
                 .withdrawableBalance(0)
+                .slip(SlipEntity.builder()
+                        .id(UUID.randomUUID())
+                        .gambler(GamblerEntity.builder().email(user.getEmail()).build())
+                        .build())
                 .build();
     }
 

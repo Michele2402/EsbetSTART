@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
+import unisa.esbetstart.slipmanagment.domain.model.Slip;
 import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.ticketmanagment.domain.model.Ticket;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
@@ -29,16 +30,18 @@ public class Gambler extends User {
     private double withdrawalBalance;
     private Set<ActivatedOffer> activatedOffers;
     private Set<Ticket> tickets;
+    private Slip slip;
 
     //TODO: michele metti sto cazzo di builder risolvi il problema del costruttore e poi fai il merge con il tuo branch
 
-    public Gambler(String name, String surname, String email, String username, String password, double balance, double bonusBalance, double withdrawalBalance, Set<ActivatedOffer> activatedOffers, Set<Ticket> tickets) {
+    public Gambler(String name, String surname, String email, String username, String password, double balance, double bonusBalance, double withdrawalBalance, Set<ActivatedOffer> activatedOffers, Set<Ticket> tickets, Slip slip) {
         super(name, surname, email, username, password, RolesEnum.GAMBLER);
         this.balance = balance;
         this.bonusBalance = bonusBalance;
         this.withdrawalBalance = withdrawalBalance;
         this.activatedOffers = activatedOffers;
         this.tickets = tickets;
+        this.slip = slip;
     }
 
 
