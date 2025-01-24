@@ -24,4 +24,20 @@ public class PresentationTransactionMapper {
                 .date(transaction.getDate())
                 .build();
     }
+
+    public Set<TransactionResponse> toTransactionResponseSetWithGambler(Set<Transaction> transactions) {
+        return transactions.stream()
+                .map(this::toTransactionResponseWithGambler)
+                .collect(Collectors.toSet());
+    }
+
+    public TransactionResponse toTransactionResponseWithGambler(Transaction transaction) {
+        return TransactionResponse.builder()
+                .id(transaction.getId())
+                .amount(transaction.getAmount())
+                .type(transaction.getType())
+                .date(transaction.getDate())
+                .gambler(transaction.getGambler().getEmail())
+                .build();
+    }
 }

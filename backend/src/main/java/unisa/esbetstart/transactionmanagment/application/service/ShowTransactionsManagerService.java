@@ -7,6 +7,7 @@ import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.transactionmanagment.application.port.in.ShowTransactionsUseCase;
+import unisa.esbetstart.transactionmanagment.application.port.out.GetTransactionPortOut;
 import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 import unisa.esbetstart.transactionmanagment.domain.model.Transaction;
 import unisa.esbetstart.transactionmanagment.presentation.request.ShowUserTransactionRequest;
@@ -23,6 +24,7 @@ public class ShowTransactionsManagerService implements ShowTransactionsUseCase {
     private final CheckTypeAttribute checkTypeAttribute;
     private final GetGamblerPortOut getGamblerPortOut;
     private final ParseAttribute parseAttribute;
+    private final GetTransactionPortOut getTransactionPortOut;
 
     @Override
     public Set<Transaction> showTransactions(ShowUserTransactionRequest request) {
@@ -46,6 +48,24 @@ public class ShowTransactionsManagerService implements ShowTransactionsUseCase {
         Set<Transaction> transactions = gambler.getTransactions();
 
         log.info("Transactions for user {} retrieved", request.getGamblerEmail());
+
+        return transactions;
+    }
+
+    @Override
+    public Set<Transaction> showAllTransactions() {
+        log.info("Showing all transactions");
+
+        // Get the transactions
+        Set<Transaction> transactions = getTransactionPortOut.getAllTransactions();
+
+        // Check if the transactions are null
+        if(transactions == null) {
+            log.error("Transactions not found");
+            throw new ObjectIsNullException("Transactions not found");
+        }
+
+        log.info("All transactions retrieved");
 
         return transactions;
     }

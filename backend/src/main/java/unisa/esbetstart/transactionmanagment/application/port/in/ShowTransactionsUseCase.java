@@ -8,4 +8,5 @@ import java.util.Set;
 public interface ShowTransactionsUseCase {
 
     Set<Transaction> showTransactions(ShowUserTransactionRequest request);
+    Set<Transaction> showAllTransactions();
 }

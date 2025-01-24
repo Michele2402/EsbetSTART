@@ -17,4 +17,5 @@ public class TransactionResponse {
     private double amount;
     private TransactionTypeEnum type;
     private LocalDateTime date;
+    private String gambler;
 }

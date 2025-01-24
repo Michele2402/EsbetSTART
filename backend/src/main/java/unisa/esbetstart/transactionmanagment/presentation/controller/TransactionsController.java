@@ -35,4 +35,11 @@ public class TransactionsController {
 
         return ResponseEntity.ok(presentationTransactionMapper.toTransactionResponseSet(transactions));
     }
+
+    @PostMapping("/showAll")
+    public ResponseEntity<Set<TransactionResponse>> showAllTransactions() {
+    	Set<Transaction> transactions = showTransactionsUseCase.showAllTransactions();
+
+    	return ResponseEntity.ok(presentationTransactionMapper.toTransactionResponseSetWithGambler(transactions));
+    }
 }
