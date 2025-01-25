@@ -4,73 +4,131 @@ import {catchError, Observable, Subject, takeUntil} from "rxjs";
 import {CompetitionResponse} from "../../../../model/response/competition-response";
 import {CompetitionService} from "../../../../core/services/competition.service";
 import {SnackbarService} from "../../../../core/services/snackbar.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AddCompetitionRequest} from "../../../../model/request/add-competition-request";
+import {UpdateCompetitionRequest} from "../../../../model/request/update-competition-request";
 
 @Component({
-    selector: 'app-competition-list',
-    templateUrl: './competition-list.component.html',
-    styleUrl: './competition-list.component.css'
+  selector: 'app-competition-list',
+  templateUrl: './competition-list.component.html',
+  styleUrl: './competition-list.component.css'
 })
 export class CompetitionListComponent implements OnInit, OnDestroy {
 
-    selectedGame: GameWithRulesResponse | null = null;
+  selectedGame: GameWithRulesResponse | null = null;
 
-    competitions$: Observable<CompetitionResponse[]> = new Observable()
+  competitions$: Observable<CompetitionResponse[]> = new Observable()
 
-    private _destroy$ = new Subject<void>();
+  selectedCompetition: CompetitionResponse | null = null;
 
-    constructor(
-        private competitionService: CompetitionService,
-        private snackBarService: SnackbarService
-    ) {
+  private _destroy$ = new Subject<void>();
+  updateCompetitionForm: FormGroup = this.fb.group({
+    name: [this.selectedCompetition?.name, [Validators.required, Validators.maxLength(30)]],
+    originCountry: [this.selectedCompetition?.originCountry, [Validators.required, Validators.maxLength(30)]]
+  });
+
+  formVisible = false
+
+  constructor(
+    private competitionService: CompetitionService,
+    private snackBarService: SnackbarService,
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit(): void {
+
+    this.selectedGame = JSON.parse(sessionStorage.getItem('selectedGame')!);
+    this.loadAllCompetitions()
+  }
+
+  loadAllCompetitions() {
+    if (this.selectedGame) {
+      this.competitions$ = this.competitionService.getAllByGameId(this.selectedGame.id).pipe(
+        takeUntil(this._destroy$),
+        catchError((error) => {
+          this.snackBarService.showSnackbarMessage(
+            error.error.errors, 'error-snackbar'
+          )
+          return [];
+        })
+      )
     }
+  }
 
-    ngOnInit(): void {
+  updateCompetition(competition: CompetitionResponse) {
 
-        this.selectedGame = JSON.parse(sessionStorage.getItem('selectedGame')!);
-        this.loadAllCompetitions()
+    this.updateCompetitionForm.patchValue({
+      name: competition.name,
+      originCountry: competition.originCountry
+    })
+
+    if (this.selectedCompetition === competition) {
+      this.formVisible = false
+      this.selectedCompetition = null
+    } else {
+      this.selectedCompetition = competition
+      this.formVisible = true
     }
+  }
 
-    loadAllCompetitions() {
-        if (this.selectedGame) {
-            this.competitions$ = this.competitionService.getAllByGameId(this.selectedGame.id).pipe(
-                takeUntil(this._destroy$),
-                catchError((error) => {
-                    this.snackBarService.showSnackbarMessage(
-                        error.error.errors, 'error-snackbar'
-                    )
-                    return [];
-                })
+  onSubmit() {
+    if (this.updateCompetitionForm.valid) {
+
+      const updateCompetitionRequest: UpdateCompetitionRequest = {
+        competitionId: this.selectedCompetition!.id,
+        name: this.updateCompetitionForm.get('name')?.value,
+        originCountry: this.updateCompetitionForm.get('originCountry')?.value
+      };
+
+      console.log(updateCompetitionRequest)
+
+      this.competitionService.updateCompetition(updateCompetitionRequest)
+        .pipe(
+          takeUntil(this._destroy$),
+          catchError((error) => {
+            this.snackBarService.showSnackbarMessage(
+              error.error.errors, 'error-snackbar'
             )
-        }
-    }
-
-    updateCompetition(competition: CompetitionResponse) {
-
-    }
-
-    removeCompetition(competitionId: string) {
-        this.competitionService.removeCompetition(competitionId)
-            .pipe(
-                takeUntil(this._destroy$),
-                catchError((error) => {
-                    this.snackBarService.showSnackbarMessage(
-                        error.error.errors, 'error-snackbar'
-                    )
-                    return [];
-                })
-            ).subscribe(
-            () => {
-                this.loadAllCompetitions();
-                this.snackBarService.showSnackbarMessage(
-                    'Competition removed', 'success-snackbar'
-                )
-            }
+            return []
+          })
         )
+        .subscribe(() => {
+            this.snackBarService.showSnackbarMessage(
+              'Competition updated', 'success-snackbar'
+            )
 
+            this.loadAllCompetitions()
+            this.updateCompetitionForm.reset();
+            this.formVisible = false;
+          }
+        )
     }
+  }
 
-    ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
-    }
+  removeCompetition(competitionId: string) {
+    this.competitionService.removeCompetition(competitionId)
+      .pipe(
+        takeUntil(this._destroy$),
+        catchError((error) => {
+          this.snackBarService.showSnackbarMessage(
+            error.error.errors, 'error-snackbar'
+          )
+          return [];
+        })
+      ).subscribe(
+      () => {
+        this.loadAllCompetitions();
+        this.snackBarService.showSnackbarMessage(
+          'Competition removed', 'success-snackbar'
+        )
+      }
+    )
+
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
 }

@@ -1,4 +1,38 @@
 <div class="container">
+
+  @if (formVisible) {
+    <h2>Update competition: {{ selectedCompetition?.name }}</h2>
+    <form [formGroup]="updateCompetitionForm" (ngSubmit)="onSubmit()" class="competition-form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name"/>
+        @if (updateCompetitionForm.get('name')?.invalid && (updateCompetitionForm.get('name')?.touched)) {
+        }
+        @if (updateCompetitionForm.get('name')?.errors?.['required']) {
+          <mat-error>Name is required</mat-error>
+        } @else if (updateCompetitionForm.get('name')?.errors?.['maxlength']) {
+          <mat-error>Please enter a name with at most 30 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Origin Country</mat-label>
+        <input matInput formControlName="originCountry"/>
+        @if (updateCompetitionForm.get('originCountry')?.invalid && (updateCompetitionForm.get('originCountry')?.touched)) {
+        }
+        @if (updateCompetitionForm.get('originCountry')?.errors?.['required']) {
+          <mat-error>Origin Country is required</mat-error>
+        } @else if (updateCompetitionForm.get('originCountry')?.errors?.['maxlength']) {
+          <mat-error>Please enter an origin country with at most 30 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" [disabled]="updateCompetitionForm.invalid || !selectedGame">
+        Submit
+      </button>
+    </form>
+  }
+
   <div class="championships">
     @for (competition of (competitions$ | async); track competition) {
       <div class="championship-item">
@@ -10,6 +44,7 @@
               class="country-icon"
               src="assets/countries/{{competition.originCountry}}.png"
               alt="{{competition.originCountry}}"
+              onerror="this.src='assets/default.png'"
             />
           </span>
         </div>

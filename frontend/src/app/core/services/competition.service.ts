@@ -4,6 +4,7 @@ import {CompetitionResponse} from "../../model/response/competition-response";
 import {HttpClient} from "@angular/common/http";
 import {environmentPaths} from "../../environments/environment";
 import {AddCompetitionRequest} from "../../model/request/add-competition-request";
+import {UpdateCompetitionRequest} from "../../model/request/update-competition-request";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class CompetitionService {
 
   addCompetition(request: AddCompetitionRequest): Observable<any> {
     return this.http.post(this.basePath + environmentPaths.add_competition, request);
+  }
+
+  updateCompetition(request: UpdateCompetitionRequest): Observable<any> {
+    return this.http.post(this.basePath + environmentPaths.update_competition, request);
   }
 }

@@ -13,6 +13,7 @@
     </div>
 
     @if (formVisible) {
+      <h2>Add new competition</h2>
         <form [formGroup]="competitionForm" (ngSubmit)="onSubmit()" class="competition-form">
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Name</mat-label>

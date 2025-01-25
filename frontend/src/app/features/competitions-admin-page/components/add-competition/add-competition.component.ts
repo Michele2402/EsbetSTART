@@ -11,7 +11,7 @@ import {environmentPaths} from "../../../../environments/environment";
 @Component({
     selector: 'app-add-competition',
     templateUrl: './add-competition.component.html',
-    styleUrls: ['./add-competition.component.css']
+    styleUrl: './add-competition.component.css'
 })
 export class AddCompetitionComponent implements OnInit, OnDestroy {
 

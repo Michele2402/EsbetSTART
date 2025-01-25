@@ -24,6 +24,7 @@ export const environmentPaths = {
   get_all_competitions: 'competitions/get-all-by-game',
   add_competition: 'competitions/add',
   remove_competition: 'competitions/remove',
+  update_competition: 'competitions/update',
 
   register: 'users/register',
   login: 'users/login',
