@@ -18,18 +18,39 @@ export class CompetitionService {
   constructor(private http: HttpClient) { }
 
   getAllByGameId(gameId: string): Observable<CompetitionResponse[]> {
-    return this.http.get<CompetitionResponse[]>(this.basePath + environmentPaths.get_all_competitions + '/' + gameId);
+    const token = sessionStorage.getItem('token');
+
+    return this.http.get<CompetitionResponse[]>(
+      this.basePath + environmentPaths.get_all_competitions + '/' + gameId,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
   }
 
   removeCompetition(competitionId: string): Observable<any> {
-    return this.http.delete(this.basePath + environmentPaths.remove_competition + '/' + competitionId);
+    const token = sessionStorage.getItem('token');
+
+    return this.http.delete(
+      this.basePath + environmentPaths.remove_competition + '/' + competitionId,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    )
   }
 
   addCompetition(request: AddCompetitionRequest): Observable<any> {
-    return this.http.post(this.basePath + environmentPaths.add_competition, request);
+    const token = sessionStorage.getItem('token');
+
+    return this.http.post(
+      this.basePath + environmentPaths.add_competition, request,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
   }
 
   updateCompetition(request: UpdateCompetitionRequest): Observable<any> {
-    return this.http.post(this.basePath + environmentPaths.update_competition, request);
+    const token = sessionStorage.getItem('token');
+
+    return this.http.post(
+      this.basePath + environmentPaths.update_competition,
+      request,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    )
   }
 }

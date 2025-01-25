@@ -17,18 +17,40 @@ export class GameService {
   }
 
   getAllGames(): Observable<GameWithRulesResponse[]> {
-    return this.http.get<GameWithRulesResponse[]>(this.basePath + environmentPaths.get_all_games);
+    const token = sessionStorage.getItem('token');
+
+    return this.http.get<GameWithRulesResponse[]>(
+      this.basePath + environmentPaths.get_all_games,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
   }
 
   addGame(request: AddGameRequest): Observable<any> {
-    return this.http.post<any>(this.basePath + environmentPaths.add_game, request);
+    const token = sessionStorage.getItem('token')
+
+    return this.http.post<any>(
+      this.basePath + environmentPaths.add_game, request,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
   }
 
   removeGame(id: string): Observable<any> {
-    return this.http.delete<any>(this.basePath + environmentPaths.remove_game + '/' + id);
+    const token = sessionStorage.getItem('token')
+
+    return this.http.delete<any>(
+      this.basePath + environmentPaths.remove_game + '/' + id,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    )
   }
 
   updateGame(request: UpdateGameRequest): Observable<any> {
-    return this.http.post<any>(this.basePath + environmentPaths.update_game, request);
+
+    const token = sessionStorage.getItem('token')
+
+    return this.http.post<any>(
+      this.basePath + environmentPaths.update_game,
+      request,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    )
   }
 }

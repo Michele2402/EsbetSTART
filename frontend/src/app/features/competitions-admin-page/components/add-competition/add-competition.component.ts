@@ -62,10 +62,11 @@ export class AddCompetitionComponent implements OnInit, OnDestroy {
                 .pipe(
                     takeUntil(this._destroy$),
                     catchError((error) => {
-                        this.snackBarService.showSnackbarMessage(
-                            error.error.errors, 'error-snackbar'
-                        )
-                        return []
+
+                      let errorMessage: string = 'Failed to add competition'
+                      this.snackBarService.errorHandler(errorMessage, error)
+
+                      return [];
                     })
                 )
                 .subscribe(() => {

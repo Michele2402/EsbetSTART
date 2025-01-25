@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {catchError, Observable, Subject, takeUntil} from "rxjs";
 import {GameService} from "../../core/services/game.service";
 import {GameWithRulesResponse} from "../../model/response/game-response";
+import {SnackbarService} from "../../core/services/snackbar.service";
 
 @Component({
   selector: 'app-esports-page',
@@ -16,6 +17,7 @@ export class EsportsPageComponent implements OnInit, OnDestroy{
 
   constructor(
     private gameService: GameService,
+    private snackBarService: SnackbarService
   ) {
 
   }
@@ -28,7 +30,10 @@ export class EsportsPageComponent implements OnInit, OnDestroy{
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
-          console.log(error);
+
+          let errorMessage = 'Failed to load games'
+          this.snackBarService.errorHandler(errorMessage, error)
+
           return [];
         })
       )

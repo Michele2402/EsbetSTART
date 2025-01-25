@@ -47,9 +47,10 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
       this.competitions$ = this.competitionService.getAllByGameId(this.selectedGame.id).pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
-          this.snackBarService.showSnackbarMessage(
-            error.error.errors, 'error-snackbar'
-          )
+
+          let defaultErrorMessage: string = 'Failed to load competitions'
+          this.snackBarService.errorHandler(defaultErrorMessage, error)
+
           return [];
         })
       )
@@ -87,10 +88,11 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
         .pipe(
           takeUntil(this._destroy$),
           catchError((error) => {
-            this.snackBarService.showSnackbarMessage(
-              error.error.errors, 'error-snackbar'
-            )
-            return []
+
+            let defaultErrorMessage: string = 'Failed to update competition'
+            this.snackBarService.errorHandler(defaultErrorMessage, error)
+
+            return [];
           })
         )
         .subscribe(() => {
@@ -111,9 +113,10 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
-          this.snackBarService.showSnackbarMessage(
-            error.error.errors, 'error-snackbar'
-          )
+
+          let errorMessage: string = 'Failed to remove competition'
+          this.snackBarService.errorHandler(errorMessage, error)
+
           return [];
         })
       ).subscribe(
