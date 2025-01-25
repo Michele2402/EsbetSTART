@@ -65,4 +65,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     private ResponseEntity<Object> invalidDateException(Exception exception) {
         return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({AuthorizationException.class})
+    private ResponseEntity<Object> authorizationException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.UNAUTHORIZED);
+    }
 }

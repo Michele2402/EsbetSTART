@@ -7,12 +7,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
+import unisa.esbetstart.common.exceptions.AuthorizationException;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
+import unisa.esbetstart.slipmanagment.domain.model.Slip;
 import unisa.esbetstart.usermanagment.application.port.in.LoginUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.RegistrationUseCase;
 import unisa.esbetstart.usermanagment.application.port.out.CreateUserPortOut;
 import unisa.esbetstart.usermanagment.application.port.out.GetUserPortOut;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.presentation.request.LoginRequest;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
@@ -39,7 +42,7 @@ public class AuthManagerService implements RegistrationUseCase, LoginUseCase {
 
         validateRegistrationRequest(request);
 
-        User user = User.builder()
+        Gambler user = Gambler.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
                 .email(request.getEmail())
@@ -47,11 +50,13 @@ public class AuthManagerService implements RegistrationUseCase, LoginUseCase {
                 .username(request.getUsername())
                 .build();
 
+        //TODO fare un api setROle, in cui si cambia il ruolo ad un utente e si cancella la schedina
+
         User savedUser = getUserPortOut.getUserByEmail(request.getEmail());
 
         if(savedUser != null) {
-            log.error("User already exists");
-            throw new IllegalArgumentException("User already exists");
+            log.error("User with email {} already exists", request.getEmail());
+            throw new AuthorizationException("User with email " + request.getEmail() + " already exists");
         }
 
         createUserPortOut.createUser(user);

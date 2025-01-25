@@ -2,11 +2,18 @@ package unisa.esbetstart.transactionmanagment.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unisa.esbetstart.transactionmanagment.application.port.in.GetOfferUseCase;
 import unisa.esbetstart.transactionmanagment.application.port.in.*;
+import unisa.esbetstart.transactionmanagment.domain.model.Offer;
+import unisa.esbetstart.transactionmanagment.presentation.mapper.PresentationOfferMapper;
 import unisa.esbetstart.transactionmanagment.presentation.request.AcceptOfferRequest;
 import unisa.esbetstart.transactionmanagment.presentation.request.AddOfferRequest;
 import unisa.esbetstart.transactionmanagment.presentation.request.UpdateOfferRequest;
+import unisa.esbetstart.transactionmanagment.presentation.response.OfferResponse;
+
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +26,9 @@ public class OfferController {
     private final UpdateOfferUseCase updateOfferUseCase;
     private final RemoveOfferUseCase removeOfferUseCase;
     private final AcceptOfferUseCase acceptOfferUseCase;
+    private final GetOfferUseCase getOfferUseCase;
+
+    private final PresentationOfferMapper presentationOfferMapper;
 
     /**
      * Adds a new offer to the database.
@@ -58,5 +68,13 @@ public class OfferController {
             @RequestBody AcceptOfferRequest request
     ) {
         acceptOfferUseCase.acceptOffer(request);
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<Set<OfferResponse>> getAllOffers() {
+
+        Set<Offer> offers = getOfferUseCase.getALlOffers();
+
+        return ResponseEntity.ok(presentationOfferMapper.toResponseSet(offers));
     }
 }
