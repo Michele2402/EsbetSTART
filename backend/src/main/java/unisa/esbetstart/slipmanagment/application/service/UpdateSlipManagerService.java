@@ -5,13 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
-import unisa.esbetstart.common.exceptions.SizeMismatchException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.eventmanagement.application.port.out.GetOddPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Odd;
 import unisa.esbetstart.slipmanagment.application.port.in.UpdateSlipUseCase;
-import unisa.esbetstart.slipmanagment.application.port.out.GetSlipByIdPortOut;
+import unisa.esbetstart.slipmanagment.application.port.out.GetSlipPortOut;
 import unisa.esbetstart.slipmanagment.application.port.out.UpdateSlipPortOut;
 import unisa.esbetstart.slipmanagment.domain.model.Slip;
 import unisa.esbetstart.slipmanagment.presentation.request.UpdateSlipRequest;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UpdateSlipManagerService implements UpdateSlipUseCase {
 
-    private final GetSlipByIdPortOut getSlipByIdPortOut;
+    private final GetSlipPortOut getSlipByIdPortOut;
     private final ParseAttribute parseAttribute;
     private final GetOddPortOut getOddPortOut;
     private final CheckTypeAttribute checkTypeAttribute;

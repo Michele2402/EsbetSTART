@@ -27,7 +27,11 @@ public class InfrastructureOddMapper {
                 .build();
     }
 
-
+    /**
+     * Maps an OddEntity to an Odd model with no external classes.
+     * @param oddEntity the OddEntity to map
+     * @return the Odd model
+     */
     public Odd toOddModel (OddEntity oddEntity) {
         return Odd.builder()
                 .id(oddEntity.getId())

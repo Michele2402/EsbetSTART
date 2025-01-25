@@ -109,11 +109,26 @@ public class Slip {
 
     }
 
+    /**
+     * This method updates the slip
+     *
+     * @param amount the amount to be updated
+     * @param odds   the odds to be updated
+     */
     public void updateSlip(double amount, Set<Odd> odds) {
 
         this.amount = amount;
         this.odds = odds;
 
+    }
+
+
+    /**
+     * This method resets the slip
+     */
+    public void resetslip() {
+        this.amount = 0;
+        this.odds.clear();
     }
 
 }

@@ -4,6 +4,7 @@ package unisa.esbetstart.slipmanagment.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
+import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -22,12 +23,12 @@ public class OddStaticEntity {
     private LocalDateTime date;
     private String name;
     private double value;
-    private String result;
+    private ResultEnum result;
     private String competition;
     private String game;
 
     @ManyToOne
-    @JoinColumn(name = "oddStatic_id", nullable = false)
+    @JoinColumn(name = "bet_placed_id", nullable = false)
     private BetPlacedEntity betPlaced;
 
     @ManyToOne(fetch = FetchType.LAZY)

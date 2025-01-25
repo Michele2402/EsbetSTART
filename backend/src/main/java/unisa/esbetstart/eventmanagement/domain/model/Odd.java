@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.model.OddStatic;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -78,6 +79,9 @@ public class Odd {
                 .result(PLAYING)
                 .name(name)
                 .value(value)
+                .odd(Odd.builder()
+                        .id(id)
+                        .build())
                 .build();
     }
 
