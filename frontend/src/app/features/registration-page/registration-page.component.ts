@@ -1,17 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {signal} from "@angular/core";
 import {RegistrationService} from "../../core/services/registration.service";
 import {RegisterRequest} from "../../model/request/register-request";
-import {catchError, takeUntil} from "rxjs";
-import {SnackbarService} from "../../core/services/snackbar/snackbar.service";
+import {SnackbarService} from "../../core/services/snackbar.service";
+import {catchError, Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.css'
 })
-export class RegistrationPageComponent implements OnInit, OnDestroy {
+export class RegistrationPageComponent implements OnDestroy {
 
     precisionForm = this._fb.group({
     name: ['', [Validators.required, Validators.maxLength(30)]], // Solo validatori sincroni nel secondo parametro
@@ -29,29 +28,43 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
     ],
   });
 
+  private _destroy$ = new Subject<void>();
+
   constructor(
     private _fb: FormBuilder,
     private registrationService : RegistrationService,
+    private snackbarService: SnackbarService
   ) {
-  }
-
-  ngOnInit(): void {
-    this.onSubmit();
   }
 
   onSubmit(): void {
 
-    console.log(this.precisionForm)
+    const formData: RegisterRequest = this.precisionForm.value as RegisterRequest;
 
     if (this.precisionForm.valid) {
+      this.registrationService.signUp(formData)
+        .pipe(
+          takeUntil(this._destroy$),
+          catchError((error) => {
+            this.snackbarService.showSnackbarMessage(
+              error.error.errors, 'error-snackbar'
+            )
+            return [];
+          })
+        )
+        .subscribe(() =>  {
+        this.snackbarService.showSnackbarMessage(
+          'Registration successful, you can now login', 'success-snackbar'
+        )
 
-      const formData: RegisterRequest = this.precisionForm.value as RegisterRequest;
-
-      this.registrationService.signUp(formData).subscribe(data =>  {
-        console.log(data);
+        this.precisionForm.reset();
+          Object.keys(this.precisionForm.controls).forEach(key => {
+            const control = this.precisionForm.get(key);
+            control?.setErrors(null);
+            control?.markAsPristine();
+            control?.markAsUntouched();
+          });
       })
-    } else {
-      console.log('Form is invalid');
     }
   }
 
@@ -63,6 +76,7 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onSubmit();
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

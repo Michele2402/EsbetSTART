@@ -146,7 +146,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
         ).subscribe(() => {
         this.loadAllGames();
         this.snackBarService.showSnackbarMessage(
-          'Game updated successfully', 'success-snackbar'
+          'Game updated', 'success-snackbar'
         )
       });
     }

@@ -1,6 +1,27 @@
-.game-title {
+.add-competition-container {
+  display: flex;
+  flex-direction: column;
   margin: 20px;
-  background-color: #D32F2F;
+  width: fit-content;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.no-game-selected {
+  cursor: pointer;
+}
+
+.game-header button {
+  align-self: center;
+  margin-left: 20px;
+}
+
+.game-title {
+  background-color: #d32f2f;
   color: white;
   padding: 15px 25px;
   border-radius: 8px;
@@ -9,4 +30,25 @@
   font-weight: bold;
   min-width: 300px;
   width: fit-content;
+}
+
+.add-competition-button {
+  margin-left: 20px;
+}
+
+.competition-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-field {
+  width: 300px;
+}
+
+.competition-form button {
+  margin-top: 10px;
+}
+
+mat-form-field {
+  margin-right: 20px;
 }

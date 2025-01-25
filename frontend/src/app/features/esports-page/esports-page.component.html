@@ -17,7 +17,7 @@
 
 <div class="sport-container">
   @for (sport of (allGames$ | async); track sport) {
-    <img src="assets/esports" class="sport-image"/>
+    <img src="assets/esports/{{sport.name}}.png" class="sport-image"/>
       <div class="sport-name">
         {{ sport.name }}
       </div>

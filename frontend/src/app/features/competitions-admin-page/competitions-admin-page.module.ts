@@ -5,6 +5,7 @@ import {CompetitionsAdminPageRoutingModule} from "./competitions-admin-page-rout
 import {CompetitionsAdminPageComponent} from "./competitions-admin-page.component";
 import {CompetitionListComponent} from "./components/competition-list/competition-list.component";
 import {AddCompetitionComponent} from "./components/add-competition/add-competition.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -14,10 +15,11 @@ import {AddCompetitionComponent} from "./components/add-competition/add-competit
     CompetitionListComponent,
     AddCompetitionComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CompetitionsAdminPageRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        CompetitionsAdminPageRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class CompetitionsAdminPageModule { }

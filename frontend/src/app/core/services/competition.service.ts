@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {CompetitionResponse} from "../../model/response/competition-response";
 import {HttpClient} from "@angular/common/http";
 import {environmentPaths} from "../../environments/environment";
+import {AddCompetitionRequest} from "../../model/request/add-competition-request";
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class CompetitionService {
 
   removeCompetition(competitionId: string): Observable<any> {
     return this.http.delete(this.basePath + environmentPaths.remove_competition + '/' + competitionId);
+  }
+
+  addCompetition(request: AddCompetitionRequest): Observable<any> {
+    return this.http.post(this.basePath + environmentPaths.add_competition, request);
   }
 }

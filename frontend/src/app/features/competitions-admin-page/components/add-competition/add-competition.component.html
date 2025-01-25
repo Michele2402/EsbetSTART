@@ -1,3 +1,46 @@
-<div class="game-title">
-  {{selectedGame?.name}}
+<div class="add-competition-container">
+    <div class="game-header">
+        <div class="game-title">
+            @if (selectedGame) {
+                {{ selectedGame.name }}
+            } @else {
+                <div class="no-game-selected" (click)="toAdminEsportsPage()">Select a game</div>
+            }
+        </div>
+        <button mat-raised-button color="primary" (click)="toggleForm()" [disabled]="!selectedGame" class="add-competition-button">
+            Add Competition
+        </button>
+    </div>
+
+    @if (formVisible) {
+        <form [formGroup]="competitionForm" (ngSubmit)="onSubmit()" class="competition-form">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name"/>
+                @if (competitionForm.get('name')?.invalid && (competitionForm.get('name')?.touched)) {
+                }
+                @if (competitionForm.get('name')?.errors?.['required']) {
+                    <mat-error>Name is required</mat-error>
+                } @else if (competitionForm.get('name')?.errors?.['maxlength']) {
+                    <mat-error>Please enter a name with at most 30 characters</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Origin Country</mat-label>
+                <input matInput formControlName="originCountry"/>
+                @if (competitionForm.get('originCountry')?.invalid && (competitionForm.get('originCountry')?.touched)) {
+                }
+                @if (competitionForm.get('originCountry')?.errors?.['required']) {
+                    <mat-error>Origin Country is required</mat-error>
+                } @else if (competitionForm.get('originCountry')?.errors?.['maxlength']) {
+                    <mat-error>Please enter an origin country with at most 30 characters</mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" [disabled]="competitionForm.invalid || !selectedGame">
+                Submit
+            </button>
+        </form>
+    }
 </div>

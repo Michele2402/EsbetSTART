@@ -1,6 +1,6 @@
 
 <div class="add-game-section">
-  <button class="add-game-button" (click)="toggleAddGame()">Add Game</button>
+  <button mat-raised-button color="primary"  (click)="toggleAddGame()">Add Game</button>
 
   <form class="add-game-form" [formGroup]="addGameForm" (ngSubmit)="addGame()"
         [ngClass]="{'hidden': !isAddingGame}"
@@ -17,7 +17,7 @@
             @if (addGameForm.get('name')?.errors?.['required']) {
               <mat-error>Name is required</mat-error>
             } @else if (addGameForm.get('name')?.errors?.['maxlength']) {
-              <mat-error>Please enter a name with a max of 30 characters</mat-error>
+              <mat-error>Please enter a name with at most 30 characters</mat-error>
             }
           </mat-form-field>
 
