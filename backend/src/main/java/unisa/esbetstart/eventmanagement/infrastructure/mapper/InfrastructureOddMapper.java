@@ -6,11 +6,15 @@ import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.eventmanagement.domain.model.Odd;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.EventEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.OddEntity;
+import unisa.esbetstart.slipmanagment.infrastructure.mapper.InfrastructureOddStaticMapper;
+
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class InfrastructureOddMapper {
 
+    private final InfrastructureOddStaticMapper infrastructureOddStaticMapper;
     /**
      * Maps an Odd model to an OddEntity.
      * @param odd the Odd model to map
@@ -55,5 +59,25 @@ public class InfrastructureOddMapper {
                 .event(Event.builder()
                         .id(oddEntity.getEvent().getId()).build())
                 .build();
+    }
+
+    public Odd toOddModelWithAlotOfDetails (OddEntity oddEntity) {
+        return Odd.builder()
+                .id(oddEntity.getId())
+                .oddStatics(oddEntity.getOddStatics().stream()
+                        .map(infrastructureOddStaticMapper::toOddStaticModelWithAlotOfDetails)
+                        .collect(Collectors.toSet()))
+                .build();
+    }
+
+    public OddEntity toOddEntityWithAlotOfDetails (Odd odd) {
+
+        return OddEntity.builder()
+                .id(odd.getId())
+                .oddStatics(odd.getOddStatics().stream()
+                        .map(infrastructureOddStaticMapper::toOddStaticEntityWithAlotOfDetails)
+                        .collect(Collectors.toSet()))
+                .build();
+
     }
 }

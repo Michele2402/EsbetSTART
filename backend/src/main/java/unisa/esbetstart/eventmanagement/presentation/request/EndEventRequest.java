@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -12,5 +13,5 @@ import java.util.List;
 public class EndEventRequest {
 
     private String eventId;
-    private List<OddResultRequest> oddResults;
+    private List<UUID> winningOdds;
 }

@@ -27,12 +27,14 @@ public class Odd {
     private Set<OddStatic> oddStatics;
 
     @Builder
-    public Odd(UUID id, String name, double value, Event event, int position) {
+    public Odd(UUID id, String name, double value, Event event, int position, Set<OddStatic> oddStatics) {
         this.id = id;
         this.name = name;
         this.value = value;
         this.event = event;
         this.position = position;
+        this.oddStatics = oddStatics;
+
     }
 
 

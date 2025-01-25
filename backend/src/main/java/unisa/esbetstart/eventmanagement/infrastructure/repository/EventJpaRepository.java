@@ -1,7 +1,6 @@
 package unisa.esbetstart.eventmanagement.infrastructure.repository;
 
 import lombok.NonNull;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +19,16 @@ public interface EventJpaRepository extends JpaRepository<EventEntity, UUID> {
     @EntityGraph(attributePaths = {"competition"})
     @Query("SELECT e FROM EventEntity e WHERE e.id = :eventId")
     Optional<EventEntity> findByIdWithCompetition(UUID eventId);
+
+    /**
+     * Find an event by its id with entities up to bet placed
+     * @param eventId the id of the event
+     * @return the event entity
+     */
+    @EntityGraph(attributePaths = {"odds.oddstatics.betplaced"})
+    @Query("SELECT e FROM EventEntity e WHERE e.id = :eventId")
+    Optional<EventEntity> findByIdToBetPlaced(UUID eventId);
+    
 
     /**
      * Delete an event by its id

@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventAdapterService implements CreateEventPortOut, UpdateEventPortOut, GetEventPortOut, RemoveEventPortOut {
+public class EventAdapterService implements CreateEventPortOut, UpdateEventPortOut, GetEventPortOut, RemoveEventPortOut{
 
     private final EventJpaRepository eventJpaRepository;
     private final InfrastructureEventMapper infrastructureEventMapper;
@@ -59,11 +59,27 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     }
 
     /**
+     * Gets an event by its ID. Has the odds in it.
+     * @param eventId the ID of the event
+     * @return the event
+     */
+    @Override
+    public Event getEventByIdToBetPlaced(UUID eventId) {
+        Optional<EventEntity> event = eventJpaRepository.findByIdToBetPlaced(eventId);
+        return event.map(infrastructureEventMapper::toEventModelWithAlotOfDetails).orElse(null);
+    }
+
+    /**
      * Removes an event from the database.
      * @param eventId the ID of the event to remove
      */
     @Override
     public void removeEvent(UUID eventId) {
         eventJpaRepository.deleteById(eventId);
+    }
+
+    @Override
+    public void endEvent(Event event) {
+        eventJpaRepository.save(infrastructureEventMapper.toEventEntitytoBetPlaced(event));
     }
 }

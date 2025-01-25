@@ -123,6 +123,12 @@ public class Event implements Searchable {
             throw new DomainAttributeException("Winning odds cannot be null");
         }
 
+        //check if the list of winning odds only has odds that are in the event
+        if (winningOdds.stream().anyMatch(oddId -> odds.stream().noneMatch(odd -> odd.getId().equals(oddId)))) {
+            log.error("Winning odds must be in the event");
+            throw new DomainAttributeException("Winning odds must be in the event");
+        }
+
         for (Odd odd : odds) {
             odd.evaluate(winningOdds.contains(odd.getId()));
         }

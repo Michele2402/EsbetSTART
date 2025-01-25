@@ -7,5 +7,5 @@ import java.util.UUID;
 public interface GetEventPortOut {
 
     public Event getEventByIdWithoutOdds(UUID eventId);
-
+    public Event getEventByIdToBetPlaced(UUID eventId);
 }

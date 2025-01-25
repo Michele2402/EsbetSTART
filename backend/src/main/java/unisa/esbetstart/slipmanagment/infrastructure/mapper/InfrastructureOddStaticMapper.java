@@ -16,6 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class InfrastructureOddStaticMapper {
 
+    private final InfrastructureBetPlacedMapper infrastructureBetPlacedMapper;
 
     /**
      * This method maps an OddStatic to an OddStaticEntity
@@ -34,6 +35,27 @@ public class InfrastructureOddStaticMapper {
                 .competition(oddStatic.getCompetition())
                 .game(oddStatic.getGame())
                 .date(oddStatic.getDate())
+                .build();
+    }
+
+    public OddStatic toOddStaticModelWithAlotOfDetails(OddStaticEntity oddStaticEntity) {
+
+        return OddStatic.builder()
+                .id(oddStaticEntity.getId())
+                .betPlaced(infrastructureBetPlacedMapper.toBetPlacedModel(oddStaticEntity.getBetPlaced()))
+                .result(oddStaticEntity.getResult())
+                .build();
+
+    }
+
+    public OddStaticEntity toOddStaticEntityWithAlotOfDetails(OddStatic oddStatic) {
+
+        return OddStaticEntity.builder()
+                .id(oddStatic.getId())
+                .betPlaced(BetPlacedEntity.builder().id(oddStatic.getBetPlaced().getId()).build())
+                .value(oddStatic.getValue())
+                .name(oddStatic.getName())
+                .result(oddStatic.getResult())
                 .build();
     }
 
