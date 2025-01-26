@@ -5,9 +5,7 @@
   <form class="add-game-form" [formGroup]="addGameForm" (ngSubmit)="addGame()"
         [ngClass]="{'hidden': !isAddingGame}"
   >
-    <mat-card appearance="outlined">
-      <mat-card-content>
-
+    <h2>Add new competition</h2>
         <div class="static-form-container">
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
@@ -48,8 +46,6 @@
             <div>Please enter between 1 and 100 rules</div>
           }
         }
-      </mat-card-content>
-    </mat-card>
   </form>
 
 </div>

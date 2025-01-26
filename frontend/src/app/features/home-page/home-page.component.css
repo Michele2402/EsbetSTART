@@ -1,16 +1,38 @@
 
 .container {
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
 }
 
 .search-button {
-  background: black;
+  background: #212121;
   color: white;
   border-radius: 20px;
   cursor: pointer;
   height: 50px;
   padding: 0 40px;
+  font-size: 16px;
+}
+
+.logout-button {
+  background: #212121;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
+  margin-left: 20px;
+}
+
+.admin-button {
+  background: #212121;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
+  margin-left: 20px;
+  width: fit-content;
+  padding: 0 10px;
+  font-size: 16px;
 }
 
 .navbar-buttons {

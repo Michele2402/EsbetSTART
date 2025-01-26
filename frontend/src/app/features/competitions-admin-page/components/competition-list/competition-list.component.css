@@ -61,8 +61,14 @@ h2 {
 .competition-name {
   font-size: 1.2em;
   font-weight: 600;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
   margin-bottom: 5px;
-  color: #212121;
+}
+
+.competition-name:hover {
+  color: #d32f2f;
 }
 
 .origin-country {

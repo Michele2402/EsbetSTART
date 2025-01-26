@@ -38,6 +38,11 @@ export const routes: Routes = [
     canActivate: [EventManagerGuardService]
   },
   {
+    path: environmentPaths.events_admin_page,
+    loadChildren: () => import('./features/events-admin-page/events-admin-page.module').then(m => m.EventsAdminPageModule),
+    canActivate: [EventManagerGuardService]
+  },
+  {
     path: '',
     redirectTo: environmentPaths.home_page,
     pathMatch: 'full'

@@ -14,7 +14,7 @@ export const environmentPaths = {
   search_page: 'search',
 
   //BACKEND
-  base_path: 'http://localhost:8080/',
+  base_path: 'http://79.49.37.224:12312/',
 
   //API ENDPOINTS
   get_all_games: 'games/get-all',

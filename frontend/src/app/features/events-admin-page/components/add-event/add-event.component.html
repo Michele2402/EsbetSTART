@@ -1,0 +1,58 @@
+<div class="add-event-container">
+
+  <div class="competition-header">
+    <div class="competition-title">
+      @if (selectedGame) {
+        {{ selectedGame.name }}
+        @if (selectedCompetition) {
+          - {{ selectedCompetition.name }}
+        } @else {
+          <span class="no-competition-selected" (click)="toAdminCompetitionsPage()">- Select a competition</span>
+        }
+      } @else {
+        <div class="no-game-selected" (click)="toAdminEsportsPage()">Select a game</div>
+      }
+    </div>
+    <button mat-raised-button color="primary" (click)="toggleAddEvent()" [disabled]="!selectedGame"
+            class="add-competition-button">
+      Add Event
+    </button>
+  </div>
+
+  @if (isAddingEvent) {
+    <h2>Add New Event</h2>
+    <form class="add-event-form" [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
+
+      <h4>Event Details:</h4>
+      <div class="input-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Event Name</mat-label>
+          <input matInput formControlName="name"/>
+          <mat-error *ngIf="addEventForm.get('name')?.hasError('required')">Name is required</mat-error>
+          <mat-error *ngIf="addEventForm.get('name')?.hasError('maxlength')">Max 30 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Event Date</mat-label>
+          <input type="datetime-local" matInput formControlName="date"/>
+          <mat-error *ngIf="addEventForm.get('date')?.hasError('required')">Date is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <h4>Odd values:</h4>
+      <div formArrayName="rules" class="input-container">
+        <div *ngFor="let ruleControl of rules.controls; let i = index" [formGroupName]="i" class="rule-item">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ ruleControl.get('ruleName')?.value }}</mat-label>
+            <input matInput formControlName="value" placeholder="Enter value"/>
+            <mat-error *ngIf="ruleControl.get('value')?.hasError('required')">Value is required</mat-error>
+            <mat-error *ngIf="ruleControl.get('value')?.hasError('min')">Value must be at least 1</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="addEventForm.invalid">Submit</button>
+    </form>
+  }
+
+</div>

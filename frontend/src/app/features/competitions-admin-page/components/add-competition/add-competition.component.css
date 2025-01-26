@@ -43,12 +43,12 @@
 
 h2 {
   margin-bottom: 20px;
-  font-size: 2em; /* Incrementa la dimensione */
+  font-size: 2em;
   font-weight: 700;
   background: linear-gradient(to right, #B71C1C, #880E4F);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #333333; /* Per il fallback */
+  color: #333333;
 }
 
 .form-field {

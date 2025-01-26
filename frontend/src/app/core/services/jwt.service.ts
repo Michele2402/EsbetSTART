@@ -10,7 +10,6 @@ export class JwtService {
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        console.log(payload)
         return payload.role || null;
       } catch (error) {
         return null;
@@ -19,5 +18,12 @@ export class JwtService {
     return null
   }
 
+  getCurrentUserRole(): string | null {
+    const token = sessionStorage.getItem('token');
+    if(token) {
+      return this.getRoleFromToken(token)
+    }
+    return null;
+  }
 
 }

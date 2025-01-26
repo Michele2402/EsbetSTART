@@ -31,6 +31,8 @@ export class RegistrationPageComponent implements OnDestroy {
     ],
   });
 
+  paths = environmentPaths.base_path + environmentPaths.register
+
   requestStatus: RequestStatus = RequestStatus.NOT_SENT;
 
   private _destroy$ = new Subject<void>();
@@ -47,9 +49,10 @@ export class RegistrationPageComponent implements OnDestroy {
 
     const formData: RegisterRequest = this.precisionForm.value as RegisterRequest;
 
-    this.requestStatus = RequestStatus.LOADING
-
     if (this.precisionForm.valid) {
+
+      this.requestStatus = RequestStatus.LOADING
+
       this.registrationService.signUp(formData)
         .pipe(
           takeUntil(this._destroy$),

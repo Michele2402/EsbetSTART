@@ -38,7 +38,6 @@ export class AddCompetitionComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.selectedGame = JSON.parse(sessionStorage.getItem('selectedGame')!);
-        console.log(this.selectedGame)
     }
 
     toAdminEsportsPage() {
@@ -62,10 +61,7 @@ export class AddCompetitionComponent implements OnInit, OnDestroy {
                 .pipe(
                     takeUntil(this._destroy$),
                     catchError((error) => {
-
-                      let errorMessage: string = 'Failed to add competition'
-                      this.snackBarService.errorHandler(errorMessage, error)
-
+                      this.snackBarService.errorHandler('Failed to add competition', error)
                       return [];
                     })
                 )

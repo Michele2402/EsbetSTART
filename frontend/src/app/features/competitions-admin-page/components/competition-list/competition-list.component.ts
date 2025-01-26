@@ -7,6 +7,8 @@ import {SnackbarService} from "../../../../core/services/snackbar.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddCompetitionRequest} from "../../../../model/request/add-competition-request";
 import {UpdateCompetitionRequest} from "../../../../model/request/update-competition-request";
+import {environmentPaths} from "../../../../environments/environment";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-competition-list',
@@ -19,12 +21,12 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
 
   competitions$: Observable<CompetitionResponse[]> = new Observable()
 
-  selectedCompetition: CompetitionResponse | null = null;
+  competitionToUpdate: CompetitionResponse | null = null;
 
   private _destroy$ = new Subject<void>();
   updateCompetitionForm: FormGroup = this.fb.group({
-    name: [this.selectedCompetition?.name, [Validators.required, Validators.maxLength(30)]],
-    originCountry: [this.selectedCompetition?.originCountry, [Validators.required, Validators.maxLength(30)]]
+    name: [this.competitionToUpdate?.name, [Validators.required, Validators.maxLength(30)]],
+    originCountry: [this.competitionToUpdate?.originCountry, [Validators.required, Validators.maxLength(30)]]
   });
 
   formVisible = false
@@ -32,7 +34,8 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
   constructor(
     private competitionService: CompetitionService,
     private snackBarService: SnackbarService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
   }
 
@@ -57,6 +60,11 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectCompetition(competition: CompetitionResponse) {
+    sessionStorage.setItem('selectedCompetition', JSON.stringify(competition));
+    this.router.navigate([environmentPaths.events_admin_page]);
+  }
+
   updateCompetition(competition: CompetitionResponse) {
 
     this.updateCompetitionForm.patchValue({
@@ -64,11 +72,11 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
       originCountry: competition.originCountry
     })
 
-    if (this.selectedCompetition === competition) {
+    if (this.competitionToUpdate === competition) {
       this.formVisible = false
-      this.selectedCompetition = null
+      this.competitionToUpdate = null
     } else {
-      this.selectedCompetition = competition
+      this.competitionToUpdate = competition
       this.formVisible = true
     }
   }
@@ -77,12 +85,10 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
     if (this.updateCompetitionForm.valid) {
 
       const updateCompetitionRequest: UpdateCompetitionRequest = {
-        competitionId: this.selectedCompetition!.id,
+        competitionId: this.competitionToUpdate!.id,
         name: this.updateCompetitionForm.get('name')?.value,
         originCountry: this.updateCompetitionForm.get('originCountry')?.value
       };
-
-      console.log(updateCompetitionRequest)
 
       this.competitionService.updateCompetition(updateCompetitionRequest)
         .pipe(

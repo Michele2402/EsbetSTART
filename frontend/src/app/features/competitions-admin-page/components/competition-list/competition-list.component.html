@@ -1,7 +1,7 @@
 <div class="container">
 
   @if (formVisible) {
-    <h2>Update competition: {{ selectedCompetition?.name }}</h2>
+    <h2>Update competition: {{ competitionToUpdate?.name }}</h2>
     <form [formGroup]="updateCompetitionForm" (ngSubmit)="onSubmit()" class="competition-form">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Name</mat-label>
@@ -37,7 +37,7 @@
     @for (competition of (competitions$ | async); track competition) {
       <div class="championship-item">
         <div class="championship-details">
-          <span class="competition-name">{{ competition.name }}</span>
+          <span class="competition-name" (click)="selectCompetition(competition)">{{ competition.name }}</span>
           <span class="origin-country">
             Origin country:
             <img
