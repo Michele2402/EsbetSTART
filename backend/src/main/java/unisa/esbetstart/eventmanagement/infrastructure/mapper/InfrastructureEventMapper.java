@@ -9,6 +9,7 @@ import unisa.esbetstart.eventmanagement.domain.model.Odd;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.CompetitionEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.EventEntity;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -83,6 +84,20 @@ public class InfrastructureEventMapper {
                 .isEnded(eventEntity.isEnded())
                 .competition(Competition.builder()
                         .id(eventEntity.getCompetition().getId()).build())
+                .build();
+    }
+
+    public List<Event> toModelWithOddsList (List<EventEntity> eventEntityList) {
+        return eventEntityList.stream().map(this::toModelWithOdds).collect(Collectors.toList());
+    }
+
+    public Event toModelWithOdds (EventEntity eventEntity) {
+        return Event.builder()
+                .id(eventEntity.getId())
+                .name(eventEntity.getName())
+                .date(eventEntity.getDate())
+                .isEnded(eventEntity.isEnded())
+                .odds(eventEntity.getOdds().stream().map(infrastructureOddMapper::toOddModel).collect(Collectors.toSet()))
                 .build();
     }
 
