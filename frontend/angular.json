@@ -54,6 +54,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "test": {
+              "optimization": false,
+              "aot": true,
+              "namedChunks": true,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environment.ts",
+                  "with": "src/app/environments/environment.test.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
