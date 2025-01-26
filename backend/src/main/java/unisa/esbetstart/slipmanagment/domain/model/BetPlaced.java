@@ -9,8 +9,8 @@ import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Data
@@ -82,12 +82,6 @@ public class BetPlaced {
         result = ResultEnum.WON;
         return ResultEnum.WON;
 
-    }
-
-    public void orderOddStatic() {
-        oddStatics = oddStatics.stream()
-                .sorted(Comparator.comparing(oddStatic -> oddStatic.getOdd().getPosition()))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
 }

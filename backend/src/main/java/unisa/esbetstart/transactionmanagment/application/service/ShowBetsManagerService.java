@@ -21,8 +21,6 @@ public class ShowBetsManagerService implements ShowBetsUseCase {
     private final CheckTypeAttribute checkTypeAttribute;
     private final GetGamblerPortOut getGamblerPortOut;
 
-    //TODO
-
     @Override
     public Set<BetPlaced> showBets(ShowUserBetsRequest request) {
         log.info("Showing bets for user: {}", request.getGamblerEmail());
@@ -50,9 +48,6 @@ public class ShowBetsManagerService implements ShowBetsUseCase {
 
         // Get the bets
         Set<BetPlaced> bets = gambler.getBets();
-
-        // Order the OddStatic of each BetPlaced
-        bets.forEach(BetPlaced::orderOddStatic);
 
         log.info("Bets for user {} retrieved", request.getGamblerEmail());
 

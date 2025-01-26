@@ -78,4 +78,13 @@ public class InfrastructureUserMapper {
                         .stream().map(infrastructureBetMapper::toBetModelWithOddStatic).collect(Collectors.toSet()))
                 .build();
     }
+
+    public Gambler toGamblerModel(GamblerEntity gamblerEntity) {
+        return Gambler.builder()
+                .email(gamblerEntity.getEmail())
+                .name(gamblerEntity.getName())
+                .surname(gamblerEntity.getSurname())
+                .username(gamblerEntity.getUsername())
+                .build();
+    }
 }

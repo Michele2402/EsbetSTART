@@ -22,7 +22,7 @@ public class TicketEntity {
     private String category;
     private String assignedOperator;
 
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private List<MessageEntity> messages;
 
     @ManyToOne

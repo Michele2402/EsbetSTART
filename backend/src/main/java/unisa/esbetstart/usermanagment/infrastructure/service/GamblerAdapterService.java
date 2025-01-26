@@ -2,7 +2,6 @@ package unisa.esbetstart.usermanagment.infrastructure.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import unisa.esbetstart.slipmanagment.infrastructure.mapper.InfrastructureBetMapper;
 import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
@@ -46,5 +45,12 @@ public class GamblerAdapterService implements GetGamblerPortOut {
         Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmailWithRunningBets(email);
 
         return optionalGambler.map(infrastructureUserMapper::toGabmlerModelWithBets).orElse(null);
+    }
+
+    @Override
+    public Gambler getGamblerByEmail(String email) {
+        Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmail(email);
+
+        return optionalGambler.map(infrastructureUserMapper::toGamblerModel).orElse(null);
     }
 }

@@ -4,15 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class OpenTicketRequest {
 
-    private String gamblerId;
+    private String gamblerEmail;
     private String category;
-    private LocalDateTime messageDate;
+    private String messageDate;
     private String messageText;
 }

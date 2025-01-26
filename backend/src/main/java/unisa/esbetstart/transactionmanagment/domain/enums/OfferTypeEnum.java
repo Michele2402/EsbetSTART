@@ -2,8 +2,8 @@ package unisa.esbetstart.transactionmanagment.domain.enums;
 
 
 public enum OfferTypeEnum {
-    DEPOSIT("Deposit"),
-    BET("Bet");
+    DEPOSIT("DEPOSIT"),
+    BET("BET");
 
     OfferTypeEnum(String displayName) {
     }

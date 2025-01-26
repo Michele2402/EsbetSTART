@@ -7,9 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
-import unisa.esbetstart.usermanagment.domain.model.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Data
@@ -19,20 +20,18 @@ public class Ticket {
     private UUID id;
     private String category;
     private TicketStatusEnum status;
-    private UUID assignedOperator;
+    private String assignedOperator;
     private Gambler openedBy;
     private List<Message> messages = new ArrayList<>();
 
     @Builder
-    public Ticket(String category, UUID assignedOperator, TicketStatusEnum status, UUID id, List<Message> messages, Gambler openedBy) {
-
+    public Ticket(String category, String assignedOperator, TicketStatusEnum status, UUID id, List<Message> messages, Gambler openedBy) {
         this.category = category;
         this.assignedOperator = assignedOperator;
         this.status = status;
         this.id = id;
         this.messages = messages;
         this.openedBy = openedBy;
-
     }
 
     /**

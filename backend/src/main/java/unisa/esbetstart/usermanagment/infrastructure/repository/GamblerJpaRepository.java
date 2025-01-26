@@ -27,4 +27,6 @@ public interface GamblerJpaRepository extends JpaRepository<GamblerEntity, Strin
             "JOIN FETCH o.odd " +
             "WHERE g.email = :email AND b.resultEnum = 'PLAYING'")
     Optional<GamblerEntity> findByEmailWithRunningBets(String email);
+
+    Optional<GamblerEntity> findByEmail(String email);
 }
