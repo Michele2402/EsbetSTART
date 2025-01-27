@@ -11,7 +11,13 @@ import unisa.esbetstart.slipmanagment.application.port.out.PlaceBetPortOut;
 import unisa.esbetstart.slipmanagment.application.port.out.UpdateSlipPortOut;
 import unisa.esbetstart.slipmanagment.domain.model.BetPlaced;
 import unisa.esbetstart.slipmanagment.domain.model.Slip;
+import unisa.esbetstart.transactionmanagment.application.port.out.DeleteActivatedOfferPortOut;
+import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
+import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
+import unisa.esbetstart.usermanagment.application.port.out.UpdateUserPortOut;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,6 +30,9 @@ public class PlaceBetManagerService implements PlaceBetUseCase {
     private final GetSlipPortOut getSlipPortOut;
     private final PlaceBetPortOut placeBetPortOut;
     private final UpdateSlipPortOut updateSlipPortOut;
+    private final GetGamblerPortOut getGamblerPortOut;
+    private final DeleteActivatedOfferPortOut deleteActivatedOfferPortOut;
+    private final UpdateUserPortOut updateGamblerPortOut;
 
     @Override
     public void placeBet(String slipId) {
@@ -45,6 +54,28 @@ public class PlaceBetManagerService implements PlaceBetUseCase {
 
         betPlaced.getOddStatics().forEach(oddStatic -> oddStatic.setBetPlaced(BetPlaced.builder().id(betPlaced.getId()).build()));
 
+        //get the gambler
+        Gambler gambler = getGamblerPortOut.getGamblerByEmailWithOffers(slip.getGambler().getEmail());
+
+        //get the list of the activated offers
+        List<UUID> oldActivatedOffers = gambler.getActivatedOffers().stream()
+                .map(ActivatedOffer::getId)
+                .toList();
+
+        //place the bet on the gambler object
+        gambler.placeBet(betPlaced.getAmount());
+
+        //delete all the activated offers that are completed
+        for (UUID activatedOfferId : oldActivatedOffers) {
+            if(!gambler.getActivatedOffers().stream().map(ActivatedOffer::getId).toList().contains(activatedOfferId)) {
+                deleteActivatedOfferPortOut.deleteActivatedOfferById(activatedOfferId);
+            }
+        }
+
+        //update the gambler
+        updateGamblerPortOut.updateGambler(gambler);
+
+        //place the bet on the database
         placeBetPortOut.placeBet(betPlaced);
 
         slip.resetslip();

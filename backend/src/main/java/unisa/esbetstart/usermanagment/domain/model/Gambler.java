@@ -132,5 +132,43 @@ public class Gambler extends User {
 
     }
 
+    /**
+     * This method places a bet
+     *
+     * @param amount the amount to be bet
+     */
+    public void placeBet(Double amount) {
+
+        if (amount > this.balance + this.bonusBalance + this.withdrawableBalance) {
+            log.error("Bet amount cannot be greater than balance");
+            throw new DomainAttributeException("Bet amount cannot be greater than balance");
+        }
+
+        //first subtract from the bonus balance, if ends subtract from the balance, if ends subtract from the withdrawable balance
+        if (this.bonusBalance >= amount) {
+            this.bonusBalance -= amount;
+        } else if (this.bonusBalance + this.balance >= amount) {
+            this.balance -= amount - this.bonusBalance;
+            this.bonusBalance = 0;
+        } else {
+            this.withdrawableBalance -= amount - this.bonusBalance - this.balance;
+            this.balance = 0;
+            this.bonusBalance = 0;
+        }
+
+        //check if any activated offer has progress to be made and if the goal is reached, add the bonus to the bonus balance and remove the offer from the activated offers
+        activatedOffers.removeIf(activatedOffer -> {
+            if (activatedOffer.getOffer().getType().equals(OfferTypeEnum.BET)) {
+                activatedOffer.setProgress(activatedOffer.getProgress() + amount);
+                if (activatedOffer.getProgress() >= activatedOffer.getOffer().getGoal()) {
+                    this.bonusBalance += activatedOffer.getOffer().getBonus();
+                    log.info("Bonus added to bonus balance");
+                    return true;
+                }
+            }
+            return false;
+        });
+
+    }
 
 }
