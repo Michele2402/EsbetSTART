@@ -93,9 +93,10 @@ export class AddGameButtonComponent implements OnDestroy {
         .pipe(
           takeUntil(this._destroy$),
           catchError((error) => {
-            this._snackBarService.showSnackbarMessage(
-              error.error.errors, 'error-snackbar'
-            )
+
+            let errorMessage: string = 'Failed to add game'
+            this._snackBarService.errorHandler(errorMessage, error)
+
             return [];
           })
         )

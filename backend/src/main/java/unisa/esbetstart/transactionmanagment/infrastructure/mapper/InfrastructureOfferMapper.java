@@ -8,6 +8,10 @@ import unisa.esbetstart.transactionmanagment.infrastructure.entity.ActivatedOffe
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class InfrastructureOfferMapper {
@@ -34,6 +38,13 @@ public class InfrastructureOfferMapper {
                 .type(offer.getType())
                 .name(offer.getName())
                 .build();
+    }
+
+    public Set<Offer> toOfferModelSet (List<OfferEntity> offerEntitySet) {
+        return offerEntitySet
+                .stream()
+                .map(this::toOfferModel)
+                .collect(Collectors.toSet());
     }
 
     /**

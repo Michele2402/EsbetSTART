@@ -3,6 +3,33 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.competition-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-field {
+  width: 300px;
+}
+
+.competition-form button {
+  margin-top: 10px;
+}
+
+mat-form-field {
+  margin-right: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 2em; /* Incrementa la dimensione */
+  font-weight: 700;
+  background: linear-gradient(to right, #B71C1C, #880E4F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #333333; /* Per il fallback */
+}
+
 .championships {
   margin-top: 40px;
   display: flex;
@@ -34,8 +61,14 @@
 .competition-name {
   font-size: 1.2em;
   font-weight: 600;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
   margin-bottom: 5px;
-  color: #212121;
+}
+
+.competition-name:hover {
+  color: #d32f2f;
 }
 
 .origin-country {

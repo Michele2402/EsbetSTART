@@ -20,6 +20,8 @@ import unisa.esbetstart.eventmanagement.presentation.request.AddEventRequest;
 import unisa.esbetstart.eventmanagement.presentation.request.AddOddRequest;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -45,6 +47,9 @@ public class CreateEventManagerService implements CreateEventUseCase {
         //check and get competition id
         UUID competitionId = parseAttribute.checkUUIDIsNullOrInvalid(request.getCompetitionId(), "Competition Id in event");
 
+        //check if the date format is correct
+        LocalDateTime date = parseAttribute.convertStringIntoDate(request.getDate(), "Date in event");
+
         //get competition
         Competition competition = getCompetitionPortOut.getCompetitionByIdWithRules(competitionId);
 
@@ -58,13 +63,13 @@ public class CreateEventManagerService implements CreateEventUseCase {
         Set<Rule> rules = competition.getGame().getRules();
 
         //check the event request
-        checkAddEventRequest(request, rules);
+        checkAddEventRequest(request, rules, date);
 
         //build the event object
         Event event = Event.builder()
                 .id(UUID.randomUUID())
                 .name(request.getName())
-                .date(request.getDate())
+                .date(date)
                 .isEnded(false)
                 .odds(request.getOdds().stream().map(applicationOddMapper::toOddModel).collect(Collectors.toSet()))
                 .build();
@@ -86,7 +91,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
      * Checks the AddEventRequest object.
      * @param request the AddEventRequest object to check
      */
-    private void checkAddEventRequest(AddEventRequest request, Set<Rule> rules) {
+    private void checkAddEventRequest(AddEventRequest request, Set<Rule> rules, LocalDateTime date) {
 
         //null check
         if(request == null){
@@ -96,7 +101,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
 
         checkTypeAttribute.checkStringIsNullOrEmpty(request.getName(), "Name of the event");
         checkTypeAttribute.checkStringIsLessThan(request.getName(), 30, "Name of the event");
-        checkTypeAttribute.checkIfDateIsNullOrInThePast(request.getDate(), "Date of the event");
+        checkTypeAttribute.checkIfDateIsNullOrInThePast(date, "Date of the event");
 
         if(rules.size() != request.getOdds().size()) {
             log.error("The number of rules and odds must be the same");

@@ -14,7 +14,9 @@ import unisa.esbetstart.transactionmanagment.infrastructure.mapper.Infrastructur
 import unisa.esbetstart.transactionmanagment.infrastructure.repository.ActivatedOfferJpaRepository;
 import unisa.esbetstart.transactionmanagment.infrastructure.repository.OfferJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -22,72 +24,89 @@ import java.util.UUID;
 @Slf4j
 public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut, RemoveOfferPortOut, CreateActivatedOfferPortOut {
 
-        private final OfferJpaRepository offerJpaRepository;
+    private final OfferJpaRepository offerJpaRepository;
 
-        private final ActivatedOfferJpaRepository activatedOfferJpaRepository;
+    private final ActivatedOfferJpaRepository activatedOfferJpaRepository;
 
-        private final InfrastructureOfferMapper infrastructureOfferMapper;
+    private final InfrastructureOfferMapper infrastructureOfferMapper;
 
-        /**
-        * Gets an offer by its id from the database.
-        * @param offerId the id of the offer
-        */
-        @Override
-        public Offer getOfferById(UUID offerId) {
-            Optional<OfferEntity> optionalOfferEntity = offerJpaRepository.findById(offerId);
+    /**
+     * Gets an offer by its id from the database.
+     *
+     * @param offerId the id of the offer
+     */
+    @Override
+    public Offer getOfferById(UUID offerId) {
+        Optional<OfferEntity> optionalOfferEntity = offerJpaRepository.findById(offerId);
 
-            return optionalOfferEntity
-                    .map(infrastructureOfferMapper::toOfferModel)
-                    .orElse(null);
-        }
+        return optionalOfferEntity
+                .map(infrastructureOfferMapper::toOfferModel)
+                .orElse(null);
+    }
 
-        /**
-        * Gets an offer by its name from the database.
-        * @param offerName the name of the offer
-        */
-        @Override
-        public Offer getOfferByName(String offerName) {
+    /**
+     * Gets an offer by its name from the database.
+     *
+     * @param offerName the name of the offer
+     */
+    @Override
+    public Offer getOfferByName(String offerName) {
 
-            Optional<OfferEntity> optionalOfferEntity = offerJpaRepository.findByName(offerName);
+        Optional<OfferEntity> optionalOfferEntity = offerJpaRepository.findByName(offerName);
 
-            return optionalOfferEntity
-                    .map(infrastructureOfferMapper::toOfferModel)
-                    .orElse(null);
-        }
+        return optionalOfferEntity
+                .map(infrastructureOfferMapper::toOfferModel)
+                .orElse(null);
+    }
 
-        /**
-        * Adds a new offer to the database.
-        * @param offer the offer to add
-        */
-        @Override
-        public void addOffer(Offer offer) {
-            offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
-        }
+    /**
+     * Gets all offers from the database.
+     */
+    @Override
+    public Set<Offer> getAllOffers() {
 
-        /**
-        * Updates an existing offer in the database.
-        * @param offer the offer to update
-        */
-        @Override
-        public void updateOffer(Offer offer) {
-            offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
-        }
+        List<OfferEntity> offerEntities = offerJpaRepository.findAll();
 
-        /**
-        * Removes an offer from the database.
-        * @param offerId the id of the offer
-        */
-        @Override
-        public void removeOffer(UUID offerId) {
-            offerJpaRepository.deleteById(offerId);
-        }
+        return infrastructureOfferMapper.toOfferModelSet(offerEntities);
+    }
 
-        /**
-        * Adds an accepted offer to the database.
-        * @param offer the offer to add
-        */
-        @Override
-        public void addAcceptedOffer(ActivatedOffer offer) {
-            activatedOfferJpaRepository.save(infrastructureOfferMapper.toActivatedOfferEntity(offer));
-        }
+    /**
+     * Adds a new offer to the database.
+     *
+     * @param offer the offer to add
+     */
+    @Override
+    public void addOffer(Offer offer) {
+        offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
+    }
+
+    /**
+     * Updates an existing offer in the database.
+     *
+     * @param offer the offer to update
+     */
+    @Override
+    public void updateOffer(Offer offer) {
+        offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
+    }
+
+    /**
+     * Removes an offer from the database.
+     *
+     * @param offerId the id of the offer
+     */
+    @Override
+    public void removeOffer(UUID offerId) {
+        offerJpaRepository.deleteById(offerId);
+    }
+
+    /**
+     * Adds an accepted offer to the database.
+     *
+     * @param offer the offer to add
+     */
+    @Override
+    public void addAcceptedOffer(ActivatedOffer offer) {
+        activatedOfferJpaRepository.save(infrastructureOfferMapper.toActivatedOfferEntity(offer));
+    }
 }

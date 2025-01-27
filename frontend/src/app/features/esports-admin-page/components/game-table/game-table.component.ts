@@ -45,9 +45,10 @@ export class GameTableComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
-          this.snackBarService.showSnackbarMessage(
-            error.error.errors, 'error-snackbar'
-          );
+
+          let errorMessage: string = 'Failed to load games'
+          this.snackBarService.errorHandler(errorMessage, error)
+
           return [];
         })
       );
@@ -63,13 +64,18 @@ export class GameTableComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
-          console.log(error)
-          this.snackBarService.showSnackbarMessage(
-            error.error.errors, 'error-snackbar'
-          )
+
+          let errorMessage: string = 'Failed to remove game'
+          this.snackBarService.errorHandler(errorMessage, error)
+
           return [];
         })
-      ).subscribe(() => this.loadAllGames())
+      ).subscribe(() => {
+        this.snackBarService.showSnackbarMessage(
+          'Game successfully removed', 'success-snackbar'
+        )
+      this.loadAllGames()
+    })
   }
 
   toggleEditing(game: GameWithRulesResponse): void {
@@ -138,15 +144,16 @@ export class GameTableComponent implements OnInit, OnDestroy {
         .pipe(
           takeUntil(this._destroy$),
           catchError((error) => {
-            this.snackBarService.showSnackbarMessage(
-              error.error.errors, 'error-snackbar'
-            );
+
+            let errorMessage: string = 'Failed to update game'
+            this.snackBarService.errorHandler(errorMessage, error)
+
             return [];
           })
         ).subscribe(() => {
         this.loadAllGames();
         this.snackBarService.showSnackbarMessage(
-          'Game updated successfully', 'success-snackbar'
+          'Game updated', 'success-snackbar'
         )
       });
     }

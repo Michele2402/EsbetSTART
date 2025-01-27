@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Injectable} from "@angular/core";
 
 @Injectable({
@@ -6,7 +6,10 @@ import {Injectable} from "@angular/core";
 })
 export class SnackbarService {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private snackBar: MatSnackBar
+  ) {
+  }
 
   showSnackbarMessage(message: string, panelClass: string): void {
     this.snackBar.open(message, 'Close', {
@@ -15,5 +18,21 @@ export class SnackbarService {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
+  }
+
+  errorHandler(defaultMessage: string, error: any) {
+
+    let errorMessage = defaultMessage;
+    if (error.status === 401) {
+      errorMessage = "You are not authorized to perform this action";
+    }
+
+    if (error && error.error && error.error.errors) {
+      errorMessage = error.error.errors
+    }
+
+    this.showSnackbarMessage(
+      errorMessage, 'error-snackbar'
+    );
   }
 }

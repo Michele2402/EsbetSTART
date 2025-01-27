@@ -2,10 +2,13 @@ package unisa.esbetstart.eventmanagement.application.port.out;
 
 import unisa.esbetstart.eventmanagement.domain.model.Event;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface GetEventPortOut {
 
-    public Event getEventByIdWithoutOdds(UUID eventId);
-    public Event getEventByIdToBetPlaced(UUID eventId);
+    Event getEventByIdWithoutOdds(UUID eventId);
+    Event getEventByIdToBetPlaced(UUID eventId);
+    List<Event> getAllByCompetitionId(UUID competitionId);
+
 }

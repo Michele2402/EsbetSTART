@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import unisa.esbetstart.slipmanagment.domain.model.Slip;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
+import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.domain.model.User;
@@ -30,20 +31,27 @@ public class InfrastructureUserMapper {
     }
 
     public GamblerEntity toGamblerEntity(User user) {
-        return GamblerEntity.builder()
+
+        GamblerEntity gambler = GamblerEntity.builder()
                 .email(user.getEmail())
                 .name(user.getName())
                 .surname(user.getSurname())
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .balance(0.0)
-                .bonusBalance(0.0)
-                .withdrawableBalance(0.0)
-                .slip(SlipEntity.builder()
-                        .id(UUID.randomUUID())
-                        .gambler(GamblerEntity.builder().email(user.getEmail()).build())
-                        .build())
+                .balance(0)
+                .bonusBalance(0)
+                .withdrawableBalance(0)
                 .build();
+
+        SlipEntity slip = SlipEntity.builder()
+                .id(UUID.randomUUID())
+                .amount(0)
+                .gambler(gambler)
+                .build();
+
+        gambler.setSlip(slip);
+
+        return gambler;
     }
 
     public Gambler toGamblerModelWithActivatedOffers(GamblerEntity gamblerEntity) {

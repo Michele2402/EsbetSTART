@@ -2,105 +2,112 @@
 
 <h1>Registration</h1>
 
-<form class="registration-form" [formGroup]="precisionForm">
-
-  <mat-card appearance="outlined">
-    <mat-card-content>
-      <div class="registration">
+<div class="container">
 
 
-        <td>
-          <mat-form-field appearance="outline" class="name-container">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name">
-            @if (precisionForm.get('name')?.invalid && (precisionForm.get('name')?.touched)) {
+  @if (requestStatus === RequestStatus.LOADING) {
+    <mat-spinner color="primary"></mat-spinner>
+  } @else () {
+
+    <form class="registration-form" [formGroup]="precisionForm" (ngSubmit)="onSubmit()">
+
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="registration">
+
+            <td>
+              <mat-form-field appearance="outline" class="name-container">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+                @if (precisionForm.get('name')?.invalid && (precisionForm.get('name')?.touched && precisionForm.get('name')?.dirty)) {
+                }
+                @if (precisionForm.get('name')?.errors?.['required']) {
+                  <mat-error>Name is required</mat-error>
+                } @else if (precisionForm.get('name')?.errors?.['maxlength']) {
+                  <mat-error>Please enter a name with a max of 30 characters</mat-error>
+                }
+              </mat-form-field>
+            </td>
+
+
+            <td>
+              <mat-form-field appearance="outline" class="surname-container">
+                <mat-label>Surname</mat-label>
+                <input matInput formControlName="surname">
+                @if (precisionForm.get('surname')?.invalid && (precisionForm.get('surname')?.touched && precisionForm.get('surname')?.dirty)) {
+                }
+                @if (precisionForm.get('surname')?.errors?.['required']) {
+                  <mat-error>Surname is required</mat-error>
+                } @else if (precisionForm.get('surname')?.errors?.['maxlength']) {
+                  <mat-error>Please enter a surname with a max of 30 characters</mat-error>
+                }
+              </mat-form-field>
+            </td>
+
+
+            <mat-form-field appearance="outline" class="email-container">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput formControlName="email" placeholder="miao@example.com">
+              @if (precisionForm.get('email')?.invalid && (precisionForm.get('email')?.touched && precisionForm.get('email')?.dirty)) {
+              }
+              @if (precisionForm.get('email')?.errors?.['required']) {
+                <mat-error>Email is required</mat-error>
+              }
+              @if (precisionForm.get('email')?.errors?.['maxlength']) {
+                <mat-error>Please enter an email address with a max of 30 characters</mat-error>
+              } @else if (precisionForm.get('email')?.errors?.['email']) {
+                <mat-error>Please enter a valid email address</mat-error>
+              }
+            </mat-form-field>
+
+
+            <mat-form-field class="username-container" appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username"/>
+              @if (precisionForm.get('username')?.invalid && (precisionForm.get('username')?.touched && precisionForm.get('username')?.dirty)) {
+              }
+              @if (precisionForm.get('username')?.errors?.['required']) {
+                <mat-error>Username is required</mat-error>
+              } @else if (precisionForm.get('username')?.errors?.['maxlength']) {
+                <mat-error>Please enter a username with a max of 30 characters</mat-error>
+              }
+            </mat-form-field>
+
+
+            <mat-form-field class="password-container" appearance="outline">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="clickEvent($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()"
+              >
+                <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+            @if (precisionForm.get('password')?.invalid && (precisionForm.get('password')?.touched && precisionForm.get('password')?.dirty)) {
+              @if (precisionForm.get('password')?.errors?.['required']) {
+                <mat-error class="password-error">Password is required</mat-error>
+              }
+              @if (precisionForm.get('password')?.errors?.['minlength'] || precisionForm.get('password')?.errors?.['maxlength']) {
+                <mat-error class="password-error">Please enter a value between 8 and 30</mat-error>
+              } @else if (precisionForm.get('password')?.errors?.['pattern']) {
+                <mat-error class="password-error">Password must have at least one number, one uppercase letter, one
+                  lowercase letter and must not contain spaces or white characters
+                </mat-error>
+              }
             }
-            @if (precisionForm.get('name')?.errors?.['required']) {
-              <mat-error>Name is required</mat-error>
-            } @else if (precisionForm.get('name')?.errors?.['maxlength']) {
-              <mat-error>Please enter a name with a max of 30 characters</mat-error>
-            }
-          </mat-form-field>
-        </td>
+          </div>
 
-
-        <td>
-          <mat-form-field appearance="outline" class="surname-container">
-            <mat-label>Surname</mat-label>
-            <input matInput formControlName="surname">
-            @if (precisionForm.get('surname')?.invalid && (precisionForm.get('surname')?.touched)) {
-            }
-            @if (precisionForm.get('surname')?.errors?.['required']) {
-              <mat-error>Surname is required</mat-error>
-            } @else if (precisionForm.get('surname')?.errors?.['maxlength']) {
-              <mat-error>Please enter a surname with a max of 30 characters</mat-error>
-            }
-          </mat-form-field>
-        </td>
-
-
-        <mat-form-field appearance="outline" class="email-container">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="email" placeholder="miao@example.com">
-          @if (precisionForm.get('email')?.invalid && (precisionForm.get('email')?.touched)) {
-          }
-          @if (precisionForm.get('email')?.errors?.['required']) {
-            <mat-error>Email is required</mat-error>
-          }
-          @if (precisionForm.get('email')?.errors?.['maxlength']) {
-            <mat-error>Please enter an email address with a max of 30 characters</mat-error>
-          } @else if (precisionForm.get('email')?.errors?.['email']) {
-            <mat-error>Please enter a valid email address</mat-error>
-          }
-        </mat-form-field>
-
-
-        <mat-form-field class="username-container" appearance="outline">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username"/>
-          @if (precisionForm.get('username')?.invalid && (precisionForm.get('username')?.touched)) {
-          }
-          @if (precisionForm.get('username')?.errors?.['required']) {
-            <mat-error>Username is required</mat-error>
-          } @else if (precisionForm.get('username')?.errors?.['maxlength']) {
-            <mat-error>Please enter a username with a max of 30 characters</mat-error>
-          }
-        </mat-form-field>
-
-
-        <mat-form-field class="password-container" appearance="outline">
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="clickEvent($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide()"
-          >
-            <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          <button mat-fab class="registration-button" type="submit" >
+            Join Now
           </button>
-        </mat-form-field>
-        @if (precisionForm.get('password')?.invalid && (precisionForm.get('password')?.touched)) {
-          @if (precisionForm.get('password')?.errors?.['required']) {
-            <mat-error class="password-error">Password is required</mat-error>
-          }
-          @if (precisionForm.get('password')?.errors?.['minlength'] || precisionForm.get('password')?.errors?.['maxlength']) {
-            <mat-error class="password-error">Please enter a value between 8 and 30</mat-error>
-          } @else if (precisionForm.get('password')?.errors?.['pattern']) {
-            <mat-error class="password-error">Password must have at least one number, one uppercase letter, one
-              lowercase letter and must not contain spaces or white characters
-            </mat-error>
-          }
-        }
-      </div>
 
-      <form (ngSubmit)="onSubmit()">
-        <a mat-fab class="registration-button">
-          Join Now
-        </a>
-      </form>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  }
 
-    </mat-card-content>
-  </mat-card>
-</form>
+</div>

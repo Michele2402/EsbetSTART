@@ -1,5 +1,7 @@
 package unisa.esbetstart.common.configuration;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -63,6 +65,21 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     @ExceptionHandler({InvalidParsingException.class})
     private ResponseEntity<Object> invalidDateException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({AuthorizationException.class})
+    private ResponseEntity<Object> authorizationException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({ExpiredJwtException.class})
+    private ResponseEntity<Object> expiredJwtException(Exception exception) {
+        return exceptionHandled(exception, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({MalformedJwtException.class})
+    private ResponseEntity<Object> exception(Exception exception) {
         return exceptionHandled(exception, HttpStatus.BAD_REQUEST);
     }
 }

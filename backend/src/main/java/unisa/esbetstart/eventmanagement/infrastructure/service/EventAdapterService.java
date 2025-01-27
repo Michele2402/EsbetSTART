@@ -13,6 +13,7 @@ import unisa.esbetstart.eventmanagement.infrastructure.mapper.InfrastructureEven
 import unisa.esbetstart.eventmanagement.infrastructure.repository.EventJpaRepository;
 import unisa.esbetstart.slipmanagment.infrastructure.repository.OddStaticJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,7 +21,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventAdapterService implements CreateEventPortOut, UpdateEventPortOut, GetEventPortOut, RemoveEventPortOut{
+public class EventAdapterService implements
+        CreateEventPortOut,
+        UpdateEventPortOut,
+        GetEventPortOut,
+        RemoveEventPortOut
+{
 
     private final EventJpaRepository eventJpaRepository;
     private final InfrastructureEventMapper infrastructureEventMapper;
@@ -59,6 +65,18 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
         Optional<EventEntity> event = eventJpaRepository.findByIdWithCompetition(eventId);
         return event.map(infrastructureEventMapper::toEventModelWithoutOdds).orElse(null);
 
+    }
+
+    /**
+     * Gets a list of events by their competition ID
+     * @param competitionId the ID of the competition
+     * @return the list of events
+     */
+    @Override
+    public List<Event> getAllByCompetitionId(UUID competitionId) {
+
+        List<EventEntity> events = eventJpaRepository.findAllByCompetitionIdWithOdds(competitionId);
+        return infrastructureEventMapper.toModelWithOddsList(events);
     }
 
     /**

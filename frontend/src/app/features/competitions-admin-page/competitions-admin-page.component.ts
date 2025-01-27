@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {CompetitionListComponent} from "./components/competition-list/competition-list.component";
 
 @Component({
   selector: 'app-competitions-admin-page',
@@ -7,4 +8,9 @@ import {Component} from '@angular/core';
 })
 export class CompetitionsAdminPageComponent {
 
+  @ViewChild(CompetitionListComponent) competitionList!: CompetitionListComponent;
+
+  loadCompetitions(): void {
+    this.competitionList.loadAllCompetitions();
+  }
 }

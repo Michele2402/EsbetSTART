@@ -14,7 +14,7 @@ public class AddEventRequest {
 
     private String competitionId;
     private String name;
-    private LocalDateTime date;
+    private String date;
     private List<AddOddRequest> odds;
 
 }

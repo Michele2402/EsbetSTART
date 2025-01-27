@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {RegisterRequest} from "../../model/request/register-request";
 import {environmentPaths} from "../../environments/environment";
+import {Observable} from "rxjs";
+import {LoginRequest} from "../../model/request/login-request";
+import {LoginResponse} from "../../model/response/login-response";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +15,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  signIn(body: RegisterRequest) {
-    return this.http.post(this.basePath + environmentPaths.login, body);
+  login(request: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.basePath + environmentPaths.login, request);
   }
-
-
 }

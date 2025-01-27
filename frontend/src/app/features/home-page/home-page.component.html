@@ -4,18 +4,25 @@
       <mat-icon>search</mat-icon>
       Search on ESbet START...
     </a>
-    <a mat-fab class="search-button" (click)="toLogin()">
-      Login
-    </a>
-    <a mat-fab class="search-button" (click)="toRegister()">
-      Join Now
-    </a>
+    @if (this.role != null) {
+
+      @if (this.role == Role.EVENT_MANAGER) {
+        <button mat-fab class="admin-button" routerLink="/esports-admin"> Events management </button>
+      }
+      <a mat-fab class="logout-button" (click)="logout()">
+        <mat-icon (click)="logout()" aria-label="Logout icon">logout</mat-icon>
+      </a>
+    } @else {
+      <a mat-fab class="search-button" (click)="toLogin()">
+        Login
+      </a>
+      <a mat-fab class="search-button" (click)="toRegister()">
+        Join Now
+      </a>
+    }
   </div>
 </app-navbar>
 <div class="container">
   <app-leftbar></app-leftbar>
   <app-banner></app-banner>
 </div>
-
-
-

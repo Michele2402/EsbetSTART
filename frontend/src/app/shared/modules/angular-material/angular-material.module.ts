@@ -19,6 +19,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MatChip, MatChipsModule} from "@angular/material/chips";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatRippleLoader} from "@angular/material/core";
 
 
 
@@ -51,7 +52,8 @@ const modules = [
   MatSelect,
   MatOption,
   MatCard,
-  MatChipsModule
+  MatChipsModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
