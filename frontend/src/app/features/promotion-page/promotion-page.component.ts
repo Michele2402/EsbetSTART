@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class PromotionPageComponent {
 
+
+
+  activePromotion() : void {
+    this
+  }
+
 }

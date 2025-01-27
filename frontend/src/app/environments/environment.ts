@@ -38,4 +38,6 @@ export const environmentPaths = {
 
   register: 'users/register',
   login: 'users/login',
+
+  accept_offer: 'offers/accept',
 }
