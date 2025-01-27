@@ -22,7 +22,7 @@ public class MessageEntity {
     private String text;
     @Enumerated(EnumType.STRING)
     private SenderEnum sender;
-    private boolean status;
+    private boolean read;
     private LocalDateTime date;
 
     @ManyToOne

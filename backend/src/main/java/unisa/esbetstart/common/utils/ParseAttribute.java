@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import unisa.esbetstart.common.exceptions.AttributeIsNullException;
 import unisa.esbetstart.common.exceptions.InvalidParsingException;
 import unisa.esbetstart.common.exceptions.InvalidUUIDException;
+import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
 import unisa.esbetstart.transactionmanagment.domain.enums.OfferTypeEnum;
 import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 
@@ -71,6 +72,15 @@ public class ParseAttribute {
         }
     }
 
+    /**
+     * Converts a string representation of a TransactionType into a TransactionTypeEnum object.
+     * If the string is not a valid TransactionType, logs an error message and throws an exception.
+     *
+     * @param type the string representation of the TransactionType to convert
+     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
+     * @return the TransactionTypeEnum object representing the TransactionType
+     * @throws InvalidParsingException if the string is not a valid TransactionType
+     */
     public TransactionTypeEnum convertStringIntoTransactionType(String type, String infoAttribute) {
         try {
             return TransactionTypeEnum.valueOf(type);
@@ -79,5 +89,15 @@ public class ParseAttribute {
             throw new InvalidParsingException(infoAttribute + " is not a valid TransactionType");
         }
     }
+
+    public SenderEnum convertStringIntoSenderType(String type, String infoAttribute) {
+        try {
+            return SenderEnum.valueOf(type);
+        } catch (IllegalArgumentException e) {
+            log.error("{} is not a valid SenderType", infoAttribute);
+            throw new InvalidParsingException(infoAttribute + " is not a valid SenderType");
+        }
+    }
+
 
 }
