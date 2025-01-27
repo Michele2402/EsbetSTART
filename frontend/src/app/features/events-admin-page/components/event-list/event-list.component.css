@@ -52,3 +52,10 @@
 .event-detail-description-attribution {
   opacity: 0.5;
 }
+
+
+.event-detail-container form {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}

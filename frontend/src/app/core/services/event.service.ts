@@ -4,6 +4,7 @@ import {environmentPaths} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {EventResponse} from "../../model/response/event-response";
 import {AddEventRequest} from "../../model/request/add-event-request";
+import {UpdateEventRequest} from "../../model/request/update-event-request";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,17 @@ export class EventService {
     return this.http.post<EventResponse>(
       environmentPaths.base_path + environmentPaths.add_event,
       addEventRequest,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
+  }
+
+  updateEvent(updateEventRequest: UpdateEventRequest) {
+
+    const token = sessionStorage.getItem('token');
+
+    return this.http.post<EventResponse>(
+      environmentPaths.base_path + environmentPaths.update_event,
+      updateEventRequest,
       {headers: {'Authorization': 'Bearer ' + token}}
     );
   }

@@ -25,8 +25,7 @@ public class EventAdapterService implements
         CreateEventPortOut,
         UpdateEventPortOut,
         GetEventPortOut,
-        RemoveEventPortOut
-{
+        RemoveEventPortOut {
 
     private final EventJpaRepository eventJpaRepository;
     private final InfrastructureEventMapper infrastructureEventMapper;
@@ -34,6 +33,7 @@ public class EventAdapterService implements
 
     /**
      * Adds a new event to the database.
+     *
      * @param event the event to add
      */
     @Override
@@ -45,17 +45,19 @@ public class EventAdapterService implements
 
     /**
      * Updates an event in the database.
+     *
      * @param event the event to update
      */
     @Override
     public void updateEvent(Event event) {
 
-            eventJpaRepository.save(infrastructureEventMapper.toEventEntityWithoutOdds(event));
+        eventJpaRepository.save(infrastructureEventMapper.toEventEntityWithoutOdds(event));
 
     }
 
     /**
      * Gets an event by its ID, it has the competition in it.
+     *
      * @param eventId the ID of the event
      * @return the event
      */
@@ -69,6 +71,7 @@ public class EventAdapterService implements
 
     /**
      * Gets a list of events by their competition ID
+     *
      * @param competitionId the ID of the competition
      * @return the list of events
      */
@@ -81,6 +84,7 @@ public class EventAdapterService implements
 
     /**
      * Gets an event by its ID. Has the odds in it.
+     *
      * @param eventId the ID of the event
      * @return the event
      */
@@ -92,6 +96,7 @@ public class EventAdapterService implements
 
     /**
      * Removes an event from the database.
+     *
      * @param eventId the ID of the event to remove
      */
     @Override
