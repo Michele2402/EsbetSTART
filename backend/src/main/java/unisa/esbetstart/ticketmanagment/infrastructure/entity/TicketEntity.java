@@ -2,6 +2,7 @@ package unisa.esbetstart.ticketmanagment.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class TicketEntity {
     private UUID id;
     private String category;
     private String assignedOperator;
+    @Enumerated(EnumType.STRING)
+    private TicketStatusEnum status;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private List<MessageEntity> messages;

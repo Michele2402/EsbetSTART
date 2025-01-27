@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import unisa.esbetstart.ticketmanagment.domain.model.Ticket;
 import unisa.esbetstart.ticketmanagment.infrastructure.entity.TicketEntity;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
+
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -17,12 +20,27 @@ public class InfrastructureTicketMapper {
         return TicketEntity.builder()
                 .category(ticket.getCategory())
                 .assignedOperator(ticket.getAssignedOperator())
+                .status(ticket.getStatus())
                 .gambler(GamblerEntity.builder()
                         .email(ticket.getOpenedBy().getEmail())
                         .build())
                 .id(ticket.getId())
                 .messages(ticket.getMessages()
-                        .stream().map(infrastructureMessageMapper::toMessageEntity).toList())
+                        .stream().map(infrastructureMessageMapper::toMessageEntity).collect(Collectors.toList()))
+                .build();
+    }
+
+    public Ticket toTicketModel(TicketEntity ticketEntity) {
+
+        return Ticket.builder()
+                .category(ticketEntity.getCategory())
+                .assignedOperator(ticketEntity.getAssignedOperator())
+                .status(ticketEntity.getStatus())
+                .id(ticketEntity.getId())
+                .messages(ticketEntity.getMessages()
+                        .stream().map(infrastructureMessageMapper::toMessageModel).collect(Collectors.toList()))
+                .openedBy(Gambler.builder()
+                        .email(ticketEntity.getGambler().getEmail()).build())
                 .build();
     }
 }

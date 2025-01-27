@@ -13,10 +13,20 @@ public class InfrastructureMessageMapper {
         return MessageEntity.builder()
                 .id(message.getId())
                 .text(message.getText())
-                .sender(message.getSender().toString())
+                .sender(message.getSender())
                 .status(message.isRead())
                 .ticket(TicketEntity.builder()
                         .id(message.getTicket().getId()).build())
+                .build();
+    }
+
+    public Message toMessageModel(MessageEntity messageEntity) {
+        return Message.builder()
+                .id(messageEntity.getId())
+                .text(messageEntity.getText())
+                .date(messageEntity.getDate())
+                .sender(messageEntity.getSender())
+                .read(messageEntity.isStatus())
                 .build();
     }
 }
