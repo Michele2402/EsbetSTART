@@ -56,8 +56,7 @@ const modules = [
   MatOption,
   MatCard,
   MatChipsModule,
-  MatProgressSpinnerModule
-  MatChipsModule,
+  MatProgressSpinnerModule,
   MatDivider,
   MatTabGroup,
   MatTab,

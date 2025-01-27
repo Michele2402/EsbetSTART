@@ -34,6 +34,10 @@ export class HomePageComponent implements OnInit {
     this.router.navigate([environmentPaths.registration_page]);
   }
 
+  toProfile() {
+    this.router.navigate([environmentPaths.profile_page]);
+  }
+
   logout() {
     sessionStorage.removeItem('token');
     this.router.navigate([environmentPaths.login_page]);

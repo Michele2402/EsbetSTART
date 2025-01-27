@@ -7,9 +7,13 @@
     @if (this.role != null) {
 
       @if (this.role == Role.EVENT_MANAGER) {
-        <button mat-fab class="admin-button" routerLink="/esports-admin"> Events management </button>
+        <button mat-fab class="admin-button" routerLink="/esports-admin"> Events management</button>
+      } @else if (this.role == Role.GAMBLER) {
+        <a mat-fab class="action-button">
+          <mat-icon (click)="toProfile()" aria-label="Profile icon">account_circle</mat-icon>
+        </a>
       }
-      <a mat-fab class="logout-button" (click)="logout()">
+      <a mat-fab class="action-button" (click)="logout()">
         <mat-icon (click)="logout()" aria-label="Logout icon">logout</mat-icon>
       </a>
     } @else {
