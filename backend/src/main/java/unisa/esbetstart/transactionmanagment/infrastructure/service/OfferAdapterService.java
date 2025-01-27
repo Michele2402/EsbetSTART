@@ -9,6 +9,7 @@ import unisa.esbetstart.transactionmanagment.application.port.out.GetOfferPortOu
 import unisa.esbetstart.transactionmanagment.application.port.out.RemoveOfferPortOut;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
+import unisa.esbetstart.transactionmanagment.infrastructure.entity.ActivatedOfferEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
 import unisa.esbetstart.transactionmanagment.infrastructure.repository.ActivatedOfferJpaRepository;
@@ -25,7 +26,6 @@ import java.util.UUID;
 public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut, RemoveOfferPortOut, CreateActivatedOfferPortOut {
 
     private final OfferJpaRepository offerJpaRepository;
-
     private final ActivatedOfferJpaRepository activatedOfferJpaRepository;
 
     private final InfrastructureOfferMapper infrastructureOfferMapper;
@@ -68,6 +68,14 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut,
         List<OfferEntity> offerEntities = offerJpaRepository.findAll();
 
         return infrastructureOfferMapper.toOfferModelSet(offerEntities);
+    }
+
+    @Override
+    public Set<ActivatedOffer> getActivatedOffersByGamblerEmail(String gamblerEmail) {
+        List<ActivatedOfferEntity> activatedOffers = activatedOfferJpaRepository
+                .findAllByGamblerEmailWithOffers(gamblerEmail);
+
+        return infrastructureOfferMapper.toActivatedOfferWithOfferModelSet(activatedOffers);
     }
 
     /**

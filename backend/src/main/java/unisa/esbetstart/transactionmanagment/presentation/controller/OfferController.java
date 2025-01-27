@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unisa.esbetstart.transactionmanagment.application.port.in.GetOfferUseCase;
 import unisa.esbetstart.transactionmanagment.application.port.in.*;
+import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
 import unisa.esbetstart.transactionmanagment.presentation.mapper.PresentationOfferMapper;
 import unisa.esbetstart.transactionmanagment.presentation.request.AcceptOfferRequest;
 import unisa.esbetstart.transactionmanagment.presentation.request.AddOfferRequest;
 import unisa.esbetstart.transactionmanagment.presentation.request.UpdateOfferRequest;
+import unisa.esbetstart.transactionmanagment.presentation.response.ActivatedOfferResponse;
 import unisa.esbetstart.transactionmanagment.presentation.response.OfferResponse;
 
 import java.util.Set;
@@ -28,10 +30,12 @@ public class OfferController {
     private final AcceptOfferUseCase acceptOfferUseCase;
     private final GetOfferUseCase getOfferUseCase;
 
+
     private final PresentationOfferMapper presentationOfferMapper;
 
     /**
      * Adds a new offer to the database.
+     *
      * @param request the AddOfferRequest containing the offer data
      */
     @PostMapping("/add")
@@ -43,6 +47,7 @@ public class OfferController {
 
     /**
      * Updates an offer in the database.
+     *
      * @param request the UpdateOfferRequest containing the offer data
      */
     @PostMapping("/update")
@@ -54,6 +59,7 @@ public class OfferController {
 
     /**
      * Removes an offer from the database.
+     *
      * @param offerId the id of the offer
      */
     @DeleteMapping("/remove/{offerId}")
@@ -76,5 +82,15 @@ public class OfferController {
         Set<Offer> offers = getOfferUseCase.getALlOffers();
 
         return ResponseEntity.ok(presentationOfferMapper.toResponseSet(offers));
+    }
+
+    @GetMapping("/get-activated-by/{gamblerEmail}")
+    public ResponseEntity<Set<ActivatedOfferResponse>> getOffersByGamblerId(
+            @PathVariable String gamblerEmail
+    ) {
+
+        Set<ActivatedOffer> activatedOffers = getOfferUseCase.getActivatedOffersByGamblerEmail(gamblerEmail);
+
+        return ResponseEntity.ok(presentationOfferMapper.toActivatedResponseSet(activatedOffers));
     }
 }
