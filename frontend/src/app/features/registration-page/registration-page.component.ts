@@ -3,8 +3,6 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {signal} from "@angular/core";
 import {RegistrationService} from "../../core/services/registration.service";
 import {RegisterRequest} from "../../model/request/register-request";
-import {catchError, takeUntil} from "rxjs";
-import {SnackbarService} from "../../core/services/snackbar/snackbar.service";
 
 @Component({
   selector: 'app-registration-page',

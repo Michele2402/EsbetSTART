@@ -1,0 +1,101 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 20px;
+}
+
+.sidebar {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 30%;
+}
+.sidebar-button {
+  width: 200%;
+  background: black;
+  color: white;
+  border-radius: 20px;
+  height: 50px;
+  padding: 0 40px;
+}
+.logout-button {
+  background: black;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
+  padding: 0 40px;
+}
+.navbar-buttons {
+  width: auto;
+  display: flex;
+  gap: 10px;
+}
+.sidebar-button:hover, .logout-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.profile-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar mat-card {
+  background-color: white;
+  width: 60%;
+  text-align: center;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+mat-divider {
+  height: 1px;
+  margin: 8px 0;
+}
+h1, h2 {
+  color: black;
+  font-family: Arial, sans-serif;
+  margin-bottom: 15px;
+}
+
+mat-card-content {
+  font-size: 16px;
+  color: black;
+}
+.edit {
+  margin-left: 75%;
+}
+.data-access{
+  margin-top: 5%;
+}
+.data-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+.data-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+  align-items: center;
+}
+
+.data-container mat-card {
+  background-color: white;
+  width: 100%;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}

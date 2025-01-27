@@ -15,10 +15,13 @@ import {
   MatDatepickerInput,
   MatDatepickerToggle
 } from "@angular/material/datepicker";
-import {MatOption, MatSelect} from "@angular/material/select";
+import {MatOption, MatSelect, MatSelectTrigger} from "@angular/material/select";
 import {MatChip, MatChipsModule} from "@angular/material/chips";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDivider} from "@angular/material/divider";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 
 
 
@@ -51,7 +54,16 @@ const modules = [
   MatSelect,
   MatOption,
   MatCard,
-  MatChipsModule
+  MatChipsModule,
+  MatDivider,
+  MatTabGroup,
+  MatTab,
+  MatChip,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogTitle,
+  MatSelectTrigger,
 ];
 
 @NgModule({

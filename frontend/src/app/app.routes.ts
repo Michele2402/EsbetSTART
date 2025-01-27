@@ -28,6 +28,30 @@ export const routes: Routes = [
     loadChildren: () => import('./features/esports-admin-page/esports-admin-page.module').then(m => m.EsportsAdminPageModule)
   },
   {
+    path: environmentPaths.promotion_page,
+    loadChildren: () => import('./features/promotion-page/promotion-page.module').then(m => m.PromotionPageModule)
+  },
+  {
+    path: environmentPaths.profile_page,
+    loadChildren: () => import('./features/profile-page/profile-page.module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: environmentPaths.bets_page,
+    loadChildren: () => import('./features/bets-page/bets-page.module').then(m => m.BetsPageModule)
+  },
+  {
+    path: environmentPaths.message_page,
+    loadChildren: () => import('./features/message-page/message-page.module').then(m => m.MessagePageModule)
+  },
+  {
+    path: environmentPaths.bank_account_page,
+    loadChildren: () => import('./features/bank-account-page/bank-account-page.module').then(m => m.BankAccountPageModule)
+  },
+  {
+    path: environmentPaths.customer_service_ticket_page,
+    loadChildren: () => import('./features/home-page/components/customer-service-ticket/customer-service-ticket.module').then(m => m.CustomerServiceTicketModule)
+  },
+  {
     path: environmentPaths.competitions_admin_page,
     loadChildren: () => import('./features/competitions-admin-page/competitions-admin-page.module').then(m => m.CompetitionsAdminPageModule)
   },

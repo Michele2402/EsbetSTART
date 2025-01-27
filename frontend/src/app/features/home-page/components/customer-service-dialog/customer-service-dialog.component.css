@@ -1,0 +1,20 @@
+.container{
+
+
+}
+h2{
+  text-align: center;
+}
+.chat-button {
+  background: black;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
+  padding: 0 40px;
+  margin-right: 17%;
+}
+.chat-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

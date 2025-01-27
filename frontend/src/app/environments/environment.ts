@@ -11,6 +11,12 @@ export const environmentPaths = {
   e_sports_admin_page: 'esports-admin',
   competitions_admin_page: 'competitions-admin',
   search_page: 'search',
+  promotion_page: 'promotion',
+  profile_page: 'profile',
+  bets_page: 'bets',
+  message_page: 'message',
+  bank_account_page:'bank-account',
+  customer_service_ticket_page: 'customer-service-ticket',
 
   //BACKEND
   base_path: 'http://localhost:8080/',

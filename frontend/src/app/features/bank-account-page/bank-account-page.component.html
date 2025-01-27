@@ -1,0 +1,40 @@
+<app-navbar>
+  <div class="navbar-buttons">
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
+  </div>
+</app-navbar>
+
+<div class="container">
+
+  <div class="sidebar">
+    <mat-card appearance="outlined">
+      <mat-list>
+        <mat-list-item routerLink="/profile">Profile</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/bets">Bets</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/message">Messages</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/bank-account">Bank account movement</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+
+  <div class="options">
+
+    <h1>Bank account movement</h1>
+
+    <mat-card appearance="outlined">
+      <mat-card-content>Withdrawals</mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-content>Deposits</mat-card-content>
+    </mat-card>
+
+
+  </div>
+
+
+</div>

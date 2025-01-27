@@ -4,12 +4,16 @@ import {HomePageComponent} from "./home-page.component";
 import {HomePageRoutingModule} from "./home-page-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {BannerComponent} from "./components/banner/banner.component";
+import {CustomerServiceComponent} from "./components/customer-service/customer-service.component";
+import {CustomerServiceDialogComponent} from "./components/customer-service-dialog/customer-service-dialog.component";
 
 @NgModule({
   declarations: [
     HomePageComponent,
-    BannerComponent
-  ],
+    BannerComponent,
+    CustomerServiceComponent,
+    CustomerServiceDialogComponent,
+      ],
   imports: [
     CommonModule,
     HomePageRoutingModule,
