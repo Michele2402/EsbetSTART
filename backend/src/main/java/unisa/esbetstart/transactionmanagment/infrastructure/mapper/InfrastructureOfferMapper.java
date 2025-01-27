@@ -6,6 +6,7 @@ import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.ActivatedOfferEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.OfferEntity;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
 @Component
@@ -30,7 +31,7 @@ public class InfrastructureOfferMapper {
                 .description(offer.getDescription())
                 .expirationDate(offer.getExpirationDate())
                 .goal(offer.getGoal())
-                .price(offer.getPrice())
+                .price(offer.getBonus())
                 .type(offer.getType())
                 .name(offer.getName())
                 .build();
@@ -54,6 +55,24 @@ public class InfrastructureOfferMapper {
     }
 
     /**
+     * Maps an ActivatedOffer to an ActivatedOfferEntity with details
+     * @param activatedOffer is the activated offer to be mapped
+     * @return ActivatedOfferEntity
+     */
+    public ActivatedOfferEntity toActivatedOfferEntityWithDetails (ActivatedOffer activatedOffer) {
+        return ActivatedOfferEntity.builder()
+                .progress(activatedOffer.getProgress())
+                .id(activatedOffer.getId())
+                .gambler(GamblerEntity.builder().
+                        email(activatedOffer.getGambler().getEmail()).build()
+                )
+                .offer(OfferEntity.builder()
+                        .id(activatedOffer.getOffer().getId())
+                .build())
+                .build();
+    }
+
+    /**
      * Maps an ActivatedOfferEntity to an ActivatedOffer with only id and Offer
      * @param activatedOfferEntity is the activated offer entity to be mapped
      * @return ActivatedOffer
@@ -64,6 +83,22 @@ public class InfrastructureOfferMapper {
                 .offer(Offer.builder()
                         .id(activatedOfferEntity.getOffer().getId())
                         .build())
+                .build();
+    }
+
+    /**
+     * Maps an ActivatedOfferEntity to an ActivatedOffer with details
+     * @param activatedOfferEntity is the activated offer entity to be mapped
+     * @return ActivatedOffer
+     */
+    public ActivatedOffer toActivatedOfferModelWithDetails (ActivatedOfferEntity activatedOfferEntity) {
+        return ActivatedOffer.builder()
+                .id(activatedOfferEntity.getId())
+                .progress(activatedOfferEntity.getProgress())
+                .gambler(Gambler.builder()
+                        .email(activatedOfferEntity.getGambler().getEmail())
+                        .build())
+                .offer(toOfferModel(activatedOfferEntity.getOffer()))
                 .build();
     }
 }

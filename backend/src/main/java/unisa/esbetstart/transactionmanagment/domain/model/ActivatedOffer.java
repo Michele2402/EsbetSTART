@@ -26,4 +26,16 @@ public class ActivatedOffer {
         this.progress = progress;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        ActivatedOffer activatedOffer = (ActivatedOffer) obj;
+        return id.equals(activatedOffer.id);
+    }
+
 }

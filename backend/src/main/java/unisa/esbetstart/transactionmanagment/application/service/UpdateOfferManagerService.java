@@ -57,7 +57,7 @@ public class UpdateOfferManagerService implements UpdateOfferUseCase {
         existingOffer.setExpirationDate(date);
         existingOffer.setGoal(request.getGoal());
         existingOffer.setType(type);
-        existingOffer.setPrice(request.getPrice());
+        existingOffer.setBonus(request.getPrice());
 
         // Update the offer in the database
         createOfferPortOut.updateOffer(existingOffer);

@@ -4,4 +4,6 @@ import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
 public interface GetGamblerPortOut {
     Gambler getGamblerByEmail(String email);
+    Gambler getGamblerByEmailWithOffers(String email);
+
 }

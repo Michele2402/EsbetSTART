@@ -36,7 +36,7 @@ public class GamblerEntity extends UserEntity {
     @OneToMany(mappedBy = "gambler")
     private Set<BetPlacedEntity> bets;
 
-    @OneToMany(mappedBy = "gambler", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gambler", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ActivatedOfferEntity> activatedOffers;
 
     @OneToMany(mappedBy = "gambler")

@@ -26,6 +26,12 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
     }
 
     @Override
+    public Gambler getGamblerByEmailWithOffers(String email) {
+        Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmailWithOffers(email);
+        return optionalGambler.map(infrastructureUserMapper::toGamblerModelWithOffers).orElse(null);
+    }
+
+    @Override
     public void updateWithdrawableBalance(String userId, double amount) {
         Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmail(userId);
 
@@ -34,5 +40,10 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
             gamblerEntity.setWithdrawableBalance(gamblerEntity.getWithdrawableBalance() + amount);
             gamblerJpaRepository.save(gamblerEntity);
         }
+    }
+
+    @Override
+    public void updateGambler(Gambler gambler) {
+        gamblerJpaRepository.save(infrastructureUserMapper.toGamblerEntityWithActivatedOffers(gambler));
     }
 }

@@ -22,7 +22,7 @@ public class Offer {
     private LocalDateTime expirationDate;
     private OfferTypeEnum type;
     private double goal;
-    private double price;
+    private double bonus;
 
     @Builder
     public Offer(UUID id, String description, String name, LocalDateTime expirationDate, OfferTypeEnum type, double goal, double price) {
@@ -32,7 +32,7 @@ public class Offer {
         this.expirationDate = expirationDate;
         this.type = type;
         this.goal = goal;
-        this.price = price;
+        this.bonus = price;
     }
 
 }

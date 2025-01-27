@@ -32,7 +32,7 @@ public class OfferEntity {
 
     private double goal;
 
-    @OneToMany(mappedBy = "offer")
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ActivatedOfferEntity> activatedOffers;
 
 }

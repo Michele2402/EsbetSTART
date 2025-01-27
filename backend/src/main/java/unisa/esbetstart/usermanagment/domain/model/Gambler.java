@@ -1,7 +1,6 @@
 package unisa.esbetstart.usermanagment.domain.model;
 
 
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +11,8 @@ import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.model.Slip;
 import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.ticketmanagment.domain.model.Ticket;
+import unisa.esbetstart.transactionmanagment.domain.enums.OfferTypeEnum;
+import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
 import unisa.esbetstart.usermanagment.domain.enums.RolesEnum;
@@ -57,6 +58,18 @@ public class Gambler extends User {
             throw new DomainAttributeException("Deposit amount must be greater than 0");
         }
         this.balance += amount;
+
+        //check if you made any progress in the activated offers present in the gambler, and if the goal is reached, add the bonus to the bonus balance
+        for (ActivatedOffer activatedOffer : activatedOffers) {
+            if (activatedOffer.getOffer().getType().equals(OfferTypeEnum.DEPOSIT)) {
+                activatedOffer.setProgress(activatedOffer.getProgress() + amount);
+                if (activatedOffer.getProgress() >= activatedOffer.getOffer().getGoal()) {
+                    this.bonusBalance += activatedOffer.getOffer().getBonus();
+                    log.info("Bonus added to bonus balance");
+                }
+            }
+        }
+        activatedOffers.removeIf(activatedOffer -> activatedOffer.getProgress() >= activatedOffer.getOffer().getGoal());
     }
 
 
@@ -72,6 +85,8 @@ public class Gambler extends User {
             log.error("Withdraw amount cannot be greater than balance");
             throw new DomainAttributeException("Withdraw amount cannot be greater than balance");
         }
+
+        this.withdrawableBalance -= amount;
 
     }
 
