@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import unisa.esbetstart.eventmanagement.domain.model.Odd;
 import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 
 import java.time.LocalDateTime;
@@ -21,9 +22,11 @@ public class OddStatic {
     private ResultEnum result;
     private String name;
     private double value;
+    private BetPlaced betPlaced;
+    private Odd odd;
 
     @Builder
-    public OddStatic(UUID id, LocalDateTime date, String competition, String game, ResultEnum result, String name, double value) {
+    public OddStatic(UUID id, LocalDateTime date, String competition, String game, ResultEnum result, String name, double value, BetPlaced betPlaced, Odd odd) {
 
         this.id = id;
         this.date = date;
@@ -32,6 +35,8 @@ public class OddStatic {
         this.result = result;
         this.name = name;
         this.value = value;
+        this.betPlaced = betPlaced;
+        this.odd = odd;
     }
 
 }

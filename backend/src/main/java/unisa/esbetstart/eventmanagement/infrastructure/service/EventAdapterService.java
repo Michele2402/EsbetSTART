@@ -11,17 +11,20 @@ import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.EventEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.mapper.InfrastructureEventMapper;
 import unisa.esbetstart.eventmanagement.infrastructure.repository.EventJpaRepository;
+import unisa.esbetstart.slipmanagment.infrastructure.repository.OddStaticJpaRepository;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventAdapterService implements CreateEventPortOut, UpdateEventPortOut, GetEventPortOut, RemoveEventPortOut {
+public class EventAdapterService implements CreateEventPortOut, UpdateEventPortOut, GetEventPortOut, RemoveEventPortOut{
 
     private final EventJpaRepository eventJpaRepository;
     private final InfrastructureEventMapper infrastructureEventMapper;
+    private final OddStaticJpaRepository oddStaticJpaRepository;
 
     /**
      * Adds a new event to the database.
@@ -59,11 +62,39 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     }
 
     /**
+     * Gets an event by its ID. Has the odds in it.
+     * @param eventId the ID of the event
+     * @return the event
+     */
+    @Override
+    public Event getEventByIdToBetPlaced(UUID eventId) {
+        Optional<EventEntity> event = eventJpaRepository.findByIdToBetPlaced(eventId);
+        return event.map(infrastructureEventMapper::toEventModelWithAlotOfDetails).orElse(null);
+    }
+
+    /**
      * Removes an event from the database.
      * @param eventId the ID of the event to remove
      */
     @Override
     public void removeEvent(UUID eventId) {
         eventJpaRepository.deleteById(eventId);
+
+    }
+
+    @Override
+    public void endEvent(Event event) {
+
+        EventEntity eventEntity = infrastructureEventMapper.toEventEntityToBetPlaced(event);
+        eventJpaRepository.save(eventEntity);
+
+        eventEntity.getOdds()
+                .forEach(oddEntity -> oddStaticJpaRepository.saveAll(oddEntity.getOddStatics()
+                        .stream().peek(oddStatic -> oddStatic.setOdd(null)).collect(Collectors.toSet())));
+
+        eventEntity.getOdds().forEach(odd -> oddStaticJpaRepository.saveAll(odd.getOddStatics()));
+
+        eventJpaRepository.deleteById(event.getId());
+
     }
 }

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -113,9 +114,12 @@ public class Event implements Searchable {
      * This method ends the event by setting the odds as won or lost
      *
      * @param winningOdds the list of winning odds
+     * @return the list of OddStatic ids
      * @throws DomainAttributeException if the winning odds are null
      */
-    public void endEvent(List<UUID> winningOdds) {
+    public List<UUID> endEvent(List<UUID> winningOdds) {
+
+        List<UUID> oddStaticsToReturn = new ArrayList<>();
 
         // null check
         if (winningOdds == null) {
@@ -123,11 +127,20 @@ public class Event implements Searchable {
             throw new DomainAttributeException("Winning odds cannot be null");
         }
 
+        //check if the list of winning odds only has odds that are in the event
+        if (winningOdds.stream().anyMatch(oddId -> odds.stream().noneMatch(odd -> odd.getId().equals(oddId)))) {
+            log.error("Winning odds must be in the event");
+            throw new DomainAttributeException("Winning odds must be in the event");
+        }
+
         for (Odd odd : odds) {
-            odd.evaluate(winningOdds.contains(odd.getId()));
+            oddStaticsToReturn.addAll(odd.evaluate(winningOdds.contains(odd.getId())));
         }
 
         isEnded = true;
+
+        return oddStaticsToReturn;
+
     }
 
 }

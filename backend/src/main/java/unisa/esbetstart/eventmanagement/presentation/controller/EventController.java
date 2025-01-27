@@ -8,6 +8,7 @@ import unisa.esbetstart.eventmanagement.application.port.in.RemoveEventUseCase;
 import unisa.esbetstart.eventmanagement.application.port.in.UpdateEventUseCase;
 import unisa.esbetstart.eventmanagement.application.port.in.UpdateOddUseCase;
 import unisa.esbetstart.eventmanagement.presentation.request.AddEventRequest;
+import unisa.esbetstart.eventmanagement.presentation.request.EndEventRequest;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateEventRequest;
 import unisa.esbetstart.eventmanagement.presentation.request.UpdateOddRequest;
 
@@ -50,6 +51,13 @@ public class EventController {
     public void removeEvent(@RequestParam String eventId) {
 
         removeEventUseCase.removeEvent(eventId);
+
+    }
+
+    @PostMapping("/end")
+    public void endEvent(@RequestBody EndEventRequest event) {
+
+        removeEventUseCase.endEvent(event);
 
     }
 }

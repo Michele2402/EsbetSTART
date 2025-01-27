@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.model.OddStatic;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,29 +29,41 @@ public class Odd {
     private Set<OddStatic> oddStatics;
 
     @Builder
-    public Odd(UUID id, String name, double value, Event event, int position) {
+    public Odd(UUID id, String name, double value, Event event, int position, Set<OddStatic> oddStatics) {
         this.id = id;
         this.name = name;
         this.value = value;
         this.event = event;
         this.position = position;
+        this.oddStatics = oddStatics;
+
     }
 
 
     /**
      * This method evaluates the Odd
+     *
      * @param isWon true if the Odd is won, false otherwise
+     * @return the list of OddStatic ids
      */
-    public void evaluate(boolean isWon) {
+    public List<UUID> evaluate(boolean isWon) {
+
+        List<UUID> oddStaticList = new ArrayList<>();
 
         if(isWon) {
             log.info("Odd with id {} is won", id);
-            oddStatics.forEach(oddStatic -> oddStatic.setResult(WON));
+            oddStatics.forEach(oddStatic -> {
+                oddStatic.setResult(WON);
+                oddStaticList.add(oddStatic.getId());});
         } else {
             log.info("Odd with id {} is lost", id);
-            oddStatics.forEach(oddStatic -> oddStatic.setResult(LOST));
-
+            oddStatics.forEach(oddStatic -> {
+                oddStatic.setResult(LOST);
+                oddStaticList.add(oddStatic.getId());});
         }
+
+        return oddStaticList;
+
     }
 
     /**
@@ -78,6 +93,9 @@ public class Odd {
                 .result(PLAYING)
                 .name(name)
                 .value(value)
+                .odd(Odd.builder()
+                        .id(id)
+                        .build())
                 .build();
     }
 
