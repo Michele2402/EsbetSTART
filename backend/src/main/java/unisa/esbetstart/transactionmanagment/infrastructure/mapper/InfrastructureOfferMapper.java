@@ -77,4 +77,27 @@ public class InfrastructureOfferMapper {
                         .build())
                 .build();
     }
+
+    public ActivatedOffer toActivatedOfferWithOfferModel (ActivatedOfferEntity activatedOfferEntity) {
+        return ActivatedOffer.builder()
+                .id(activatedOfferEntity.getId())
+                .progress(activatedOfferEntity.getProgress())
+                .offer(Offer.builder()
+                        .id(activatedOfferEntity.getOffer().getId())
+                        .name(activatedOfferEntity.getOffer().getName())
+                        .description(activatedOfferEntity.getOffer().getDescription())
+                        .price(activatedOfferEntity.getOffer().getPrice())
+                        .type(activatedOfferEntity.getOffer().getType())
+                        .goal(activatedOfferEntity.getOffer().getGoal())
+                        .expirationDate(activatedOfferEntity.getOffer().getExpirationDate())
+                        .build())
+                .build();
+    }
+
+    public Set<ActivatedOffer> toActivatedOfferWithOfferModelSet (List<ActivatedOfferEntity> activatedOfferEntitySet) {
+        return activatedOfferEntitySet
+                .stream()
+                .map(this::toActivatedOfferWithOfferModel)
+                .collect(Collectors.toSet());
+    }
 }
