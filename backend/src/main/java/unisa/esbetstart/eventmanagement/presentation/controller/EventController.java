@@ -55,7 +55,7 @@ public class EventController {
     }
 
     @PostMapping("/end")
-    public void endEvent(@RequestParam EndEventRequest event) {
+    public void endEvent(@RequestBody EndEventRequest event) {
 
         removeEventUseCase.endEvent(event);
 

@@ -32,6 +32,6 @@ public class OddStaticEntity {
     private BetPlacedEntity betPlaced;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "odd_id", nullable = false)
+    @JoinColumn(name = "odd_id", nullable = true)
     private OddEntity odd;
 }

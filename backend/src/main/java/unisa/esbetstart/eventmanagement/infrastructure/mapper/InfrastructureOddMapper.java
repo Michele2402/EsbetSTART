@@ -64,6 +64,11 @@ public class InfrastructureOddMapper {
     public Odd toOddModelWithAlotOfDetails (OddEntity oddEntity) {
         return Odd.builder()
                 .id(oddEntity.getId())
+                .name(oddEntity.getName())
+                .value(oddEntity.getValue())
+                .position(oddEntity.getPosition())
+                .event(Event.builder()
+                        .id(oddEntity.getEvent().getId()).build())
                 .oddStatics(oddEntity.getOddStatics().stream()
                         .map(infrastructureOddStaticMapper::toOddStaticModelWithAlotOfDetails)
                         .collect(Collectors.toSet()))
@@ -74,6 +79,11 @@ public class InfrastructureOddMapper {
 
         return OddEntity.builder()
                 .id(odd.getId())
+                .name(odd.getName())
+                .value(odd.getValue())
+                .position(odd.getPosition())
+                .event(EventEntity.builder()
+                        .id(odd.getEvent().getId()).build())
                 .oddStatics(odd.getOddStatics().stream()
                         .map(infrastructureOddStaticMapper::toOddStaticEntityWithAlotOfDetails)
                         .collect(Collectors.toSet()))

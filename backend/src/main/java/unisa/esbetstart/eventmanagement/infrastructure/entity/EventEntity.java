@@ -27,7 +27,7 @@ public class EventEntity {
     @JoinColumn(name = "competition_id", nullable = false)
     private CompetitionEntity competition;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OddEntity> odds;
 
 }

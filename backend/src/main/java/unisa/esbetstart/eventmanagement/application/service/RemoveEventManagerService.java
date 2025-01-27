@@ -11,8 +11,14 @@ import unisa.esbetstart.eventmanagement.application.port.out.RemoveEventPortOut;
 import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.common.utils.*;
 import unisa.esbetstart.eventmanagement.presentation.request.EndEventRequest;
+import unisa.esbetstart.slipmanagment.application.port.out.GetOddStaticPortOut;
+import unisa.esbetstart.slipmanagment.application.port.out.UpdateBetPlacedPortOut;
+import unisa.esbetstart.slipmanagment.domain.model.BetPlaced;
+import unisa.esbetstart.usermanagment.application.port.out.UpdateUserPortOut;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -22,6 +28,9 @@ public class RemoveEventManagerService implements RemoveEventUseCase {
     private final RemoveEventPortOut removeEventPortOut;
     private final GetEventPortOut getEventPortOut;
     private final ParseAttribute parseAttribute;
+    private final GetOddStaticPortOut getOddStaticPortOut;
+    private final UpdateBetPlacedPortOut updateBetPlacedPortOut;
+    private final UpdateUserPortOut updateUserPortOut;
 
     @Override
     public void removeEvent(String eventId) {
@@ -57,20 +66,41 @@ public class RemoveEventManagerService implements RemoveEventUseCase {
         if (eventToBeEnded == null || eventToBeEnded.isEnded()) {
             throw new ObjectNotFoundException("Event with id " + id + " not found or already ended");
         }
-//
-//        //set the event in its odds
-//        eventToBeEnded.getOdds().forEach(odd -> odd.setEvent(eventToBeEnded));
-//
-//        eventToBeEnded.getOdds()
-//                .forEach(odd -> odd.getOddStatics()
-//                .forEach(oddStatic -> oddStatic.setOdd(odd)));
-//
-//        eventToBeEnded.getOdds()
-//                .forEach(odd -> odd.getOddStatics()
-//                        .forEach(oddStatic -> oddStatic.getBetPlaced().set));
 
-        eventToBeEnded.endEvent(event.getWinningOdds());
+        //get the ids of the winning odds
+        List<UUID> winningOdds = event.getWinningOdds()
+                .stream()
+                .map(odd -> parseAttribute.checkUUIDIsNullOrInvalid(odd, "Winning Odd Id"))
+                .collect(Collectors.toList());
 
+        //check if the list is empty
+        if(winningOdds.isEmpty()){
+            throw new ObjectNotFoundException("Winning odds list can't be empty");
+        }
+
+        // End the event
+        List<UUID> oddStaticsModified =  eventToBeEnded.endEvent(winningOdds);
+
+        // end the event in the database
+        removeEventPortOut.endEvent(eventToBeEnded);
+
+        // check for each oddStatic if the bet is won and update the balance of the gambler
+        oddStaticsModified.forEach(oddStaticId -> {
+
+            BetPlaced betPlaced = getOddStaticPortOut.getOddStaticToGamblerById(oddStaticId).getBetPlaced();
+            double amount = betPlaced.evaluateResult();
+            if(amount > 0) {
+                log.info("Gambler with email {} won {} on odd with id {}", betPlaced.getGambler().getEmail(), amount, oddStaticId);
+                betPlaced.getGambler().setWithdrawableBalance(betPlaced.getGambler().getWithdrawableBalance() + amount);
+            }
+
+            // update the bet placed
+            updateBetPlacedPortOut.updateBetPlaced(betPlaced);
+            updateUserPortOut.updateWithdrawableBalance(betPlaced.getGambler().getEmail(), betPlaced.getGambler().getWithdrawableBalance());
+
+        });
+
+        log.info("Event with id {} ended", id);
 
 
     }

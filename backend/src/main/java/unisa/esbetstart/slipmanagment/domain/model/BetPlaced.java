@@ -59,13 +59,13 @@ public class BetPlaced {
      * Sets the result of the BetPlaced to PLAYING if at least one OddStatic is PLAYING and none are LOST
      * @return the result of the BetPlaced
      */
-    public ResultEnum evaluateResult() {
+    public double evaluateResult() {
 
         for(OddStatic oddStatic : oddStatics) {
 
             if(oddStatic.getResult() == ResultEnum.LOST) {
                 result = ResultEnum.LOST;
-                return ResultEnum.LOST;
+                return 0;
             }
         }
 
@@ -73,12 +73,13 @@ public class BetPlaced {
 
             if(oddStatic.getResult() == ResultEnum.PLAYING) {
                 result = ResultEnum.PLAYING;
-                return ResultEnum.PLAYING;
+                return 0;
+
             }
         }
 
         result = ResultEnum.WON;
-        return ResultEnum.WON;
+        return amount*oddStatics.stream().mapToDouble(OddStatic::getValue).reduce(1, (a, b) -> a * b);
 
     }
 

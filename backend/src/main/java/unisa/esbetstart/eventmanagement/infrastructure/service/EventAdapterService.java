@@ -11,9 +11,11 @@ import unisa.esbetstart.eventmanagement.domain.model.Event;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.EventEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.mapper.InfrastructureEventMapper;
 import unisa.esbetstart.eventmanagement.infrastructure.repository.EventJpaRepository;
+import unisa.esbetstart.slipmanagment.infrastructure.repository.OddStaticJpaRepository;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
 
     private final EventJpaRepository eventJpaRepository;
     private final InfrastructureEventMapper infrastructureEventMapper;
+    private final OddStaticJpaRepository oddStaticJpaRepository;
 
     /**
      * Adds a new event to the database.
@@ -76,10 +79,22 @@ public class EventAdapterService implements CreateEventPortOut, UpdateEventPortO
     @Override
     public void removeEvent(UUID eventId) {
         eventJpaRepository.deleteById(eventId);
+
     }
 
     @Override
     public void endEvent(Event event) {
-        eventJpaRepository.save(infrastructureEventMapper.toEventEntitytoBetPlaced(event));
+
+        EventEntity eventEntity = infrastructureEventMapper.toEventEntityToBetPlaced(event);
+        eventJpaRepository.save(eventEntity);
+
+        eventEntity.getOdds()
+                .forEach(oddEntity -> oddStaticJpaRepository.saveAll(oddEntity.getOddStatics()
+                        .stream().peek(oddStatic -> oddStatic.setOdd(null)).collect(Collectors.toSet())));
+
+        eventEntity.getOdds().forEach(odd -> oddStaticJpaRepository.saveAll(odd.getOddStatics()));
+
+        eventJpaRepository.deleteById(event.getId());
+
     }
 }

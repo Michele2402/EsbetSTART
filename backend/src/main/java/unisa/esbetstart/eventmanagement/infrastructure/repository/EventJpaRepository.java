@@ -25,7 +25,7 @@ public interface EventJpaRepository extends JpaRepository<EventEntity, UUID> {
      * @param eventId the id of the event
      * @return the event entity
      */
-    @EntityGraph(attributePaths = {"odds.oddstatics.betplaced"})
+    @EntityGraph(attributePaths = {"odds.oddStatics.betPlaced", "competition"})
     @Query("SELECT e FROM EventEntity e WHERE e.id = :eventId")
     Optional<EventEntity> findByIdToBetPlaced(UUID eventId);
     

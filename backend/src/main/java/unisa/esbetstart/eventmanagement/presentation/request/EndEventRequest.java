@@ -13,5 +13,5 @@ import java.util.UUID;
 public class EndEventRequest {
 
     private String eventId;
-    private List<UUID> winningOdds;
+    private List<String> winningOdds;
 }

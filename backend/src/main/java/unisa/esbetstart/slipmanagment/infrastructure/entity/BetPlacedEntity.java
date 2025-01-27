@@ -24,7 +24,7 @@ public class BetPlacedEntity {
 
     private double amount;
 
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private ResultEnum result;
 
     @ManyToOne

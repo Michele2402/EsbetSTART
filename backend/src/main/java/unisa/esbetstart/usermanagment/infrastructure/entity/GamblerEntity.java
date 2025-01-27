@@ -24,11 +24,11 @@ import java.util.Set;
 @DiscriminatorValue("GAMBLER")
 public class GamblerEntity extends UserEntity {
 
-    private Integer balance;
+    private Double balance;
 
-    private Integer bonusBalance;
+    private Double bonusBalance;
 
-    private Integer withdrawableBalance;
+    private Double withdrawableBalance;
 
     @OneToOne(mappedBy = "gambler", cascade = CascadeType.ALL)
     private SlipEntity slip;
