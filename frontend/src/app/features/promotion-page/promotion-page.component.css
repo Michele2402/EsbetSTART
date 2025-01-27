@@ -1,0 +1,39 @@
+h1{
+  text-align: center;
+}
+.search-button {
+  background: black;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
+  padding: 0 40px;
+}
+
+.navbar-buttons {
+  width: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.search-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.promotion-card{
+  background-color: white;
+  cursor: pointer;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  position: relative;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.promotion-card:hover {
+  transform: scale(1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

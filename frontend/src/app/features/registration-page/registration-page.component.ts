@@ -1,5 +1,6 @@
-import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {signal} from "@angular/core";
 import {RegistrationService} from "../../core/services/registration.service";
 import {RegisterRequest} from "../../model/request/register-request";
 import {SnackbarService} from "../../core/services/snackbar.service";
