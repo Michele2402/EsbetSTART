@@ -38,9 +38,6 @@ public class InfrastructureUserMapper {
                 .surname(user.getSurname())
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .balance(0)
-                .bonusBalance(0)
-                .withdrawableBalance(0)
                 .build();
 
         SlipEntity slip = SlipEntity.builder()
