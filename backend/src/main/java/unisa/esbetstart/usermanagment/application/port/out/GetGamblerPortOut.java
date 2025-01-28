@@ -11,5 +11,4 @@ public interface GetGamblerPortOut {
     Gambler getGamblerByEmailWithTransactions(String email, TransactionTypeEnum typeEnum);
     Gambler getGamblerByEmailWithBets(String email);
     Gambler getGamblerByEmailWithRunningBets(String email);
-    Gambler getGamblerByEmail (String email);
 }
