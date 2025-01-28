@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public interface GetTicketPortOut {
         Ticket getTicketById(UUID ticketId);
-        void updateTicket(Ticket ticket);
         List<Ticket> getTicketsByGamblerEmail(String gamblerEmail);
         List<Ticket> getTicketsByAssignedOperatorEmail(String assignedOperatorEmail);
 }

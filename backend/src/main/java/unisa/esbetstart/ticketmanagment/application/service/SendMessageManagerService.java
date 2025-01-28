@@ -8,6 +8,7 @@ import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.ticketmanagment.application.port.in.SendMessageUseCase;
+import unisa.esbetstart.ticketmanagment.application.port.out.CreateMessagePortOut;
 import unisa.esbetstart.ticketmanagment.application.port.out.GetTicketPortOut;
 import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
 import unisa.esbetstart.ticketmanagment.domain.model.Message;
@@ -25,6 +26,7 @@ public class SendMessageManagerService implements SendMessageUseCase {
     private final ParseAttribute parseAttribute;
     private final CheckTypeAttribute checkTypeAttribute;
     private final GetTicketPortOut getTicketPortOut;
+    private final CreateMessagePortOut createMessagePortOut;
 
     @Override
     public void sendMessage(SendMessageRequest request) {
@@ -51,16 +53,18 @@ public class SendMessageManagerService implements SendMessageUseCase {
         }
 
         // Create the message
-        ticket.sendMessage(Message.builder()
+        Message message = Message.builder()
                 .id(UUID.randomUUID())
                 .text(request.getText())
                 .date(date)
                 .sender(sender)
                 .read(false)
-                .build());
+                .build();
 
-        // Update the ticket
-        getTicketPortOut.updateTicket(ticket);
+        ticket.sendMessage(message);
+
+        // Save the message
+        createMessagePortOut.saveMessage(message);
 
         log.info("Message sent");
     }

@@ -22,7 +22,6 @@ public class PresentationMessageMapper {
                 .date(message.getDate())
                 .sender(message.getSender())
                 .read(message.isRead())
-                .ticket(message.getTicket())
                 .build();
     }
 }

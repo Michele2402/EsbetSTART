@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import unisa.esbetstart.ticketmanagment.application.port.in.AcceptTicketUseCase;
-import unisa.esbetstart.ticketmanagment.application.port.in.GetTicketsUseCase;
-import unisa.esbetstart.ticketmanagment.application.port.in.OpenTicketUseCase;
-import unisa.esbetstart.ticketmanagment.application.port.in.SendMessageUseCase;
+import unisa.esbetstart.ticketmanagment.application.port.in.*;
 import unisa.esbetstart.ticketmanagment.domain.model.Ticket;
 import unisa.esbetstart.ticketmanagment.presentation.mapper.PresentationTicketMapper;
 import unisa.esbetstart.ticketmanagment.presentation.request.AcceptTicketRequest;
 import unisa.esbetstart.ticketmanagment.presentation.request.OpenTicketRequest;
+import unisa.esbetstart.ticketmanagment.presentation.request.ReadMessageRequest;
 import unisa.esbetstart.ticketmanagment.presentation.request.SendMessageRequest;
 import unisa.esbetstart.ticketmanagment.presentation.response.TicketResponse;
 
@@ -30,6 +28,7 @@ public class TicketController {
     private final SendMessageUseCase sendMessageUseCase;
     private final GetTicketsUseCase getTicketsUseCase;
     private final PresentationTicketMapper presentationTicketMapper;
+    private final ReadMessageUseCase readMessageUseCase;
 
     @PostMapping("/open")
     public void openTicket(
@@ -68,6 +67,13 @@ public class TicketController {
         List<Ticket> tickets = getTicketsUseCase.getTicketsByAssignedOperatorId(operatorEmail);
 
         return ResponseEntity.ok(presentationTicketMapper.toTicketResponseSet(tickets));
+    }
+
+    @PostMapping("/readMessages")
+    public void readMessages(
+            @RequestBody ReadMessageRequest request
+    ) {
+        readMessageUseCase.readMessages(request);
     }
 
 }

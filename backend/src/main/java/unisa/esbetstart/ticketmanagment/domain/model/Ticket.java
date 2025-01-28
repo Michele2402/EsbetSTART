@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
+import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
 import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
@@ -47,6 +48,19 @@ public class Ticket {
 
         message.setTicket(this);
         this.messages.add(message);
+    }
+
+    public List<Message> readMessages(SenderEnum sender) {
+        List<Message> readMessages = new ArrayList<>();
+
+        for(Message message : messages) {
+            if(message.getSender() != sender) {
+                message.setRead(true);
+                readMessages.add(message);
+            }
+        }
+
+        return readMessages;
     }
 
 }

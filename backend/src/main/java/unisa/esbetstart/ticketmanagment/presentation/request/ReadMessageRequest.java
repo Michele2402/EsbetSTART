@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AcceptTicketRequest {
-
+public class ReadMessageRequest {
     private String ticketId;
-    private String messageDate;
-    private String messageText;
-    private String assignedOperator;
+    private String sender;
 }

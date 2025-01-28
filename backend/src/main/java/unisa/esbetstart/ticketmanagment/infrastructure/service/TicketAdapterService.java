@@ -33,12 +33,6 @@ public class TicketAdapterService implements CreateTicketPortOut, GetTicketPortO
         return optionalTicketEntity
                 .map(infrastructureTicketMapper::toTicketModel).orElse(null);
     }
-
-    @Override
-    public void updateTicket(Ticket ticket) {
-        ticketJpaRepository.save(infrastructureTicketMapper.toTicketEntity(ticket));
-    }
-
     @Override
     public List<Ticket> getTicketsByGamblerEmail(String gamblerEmail) {
         List<Optional<TicketEntity>> optionalTicketEntity = ticketJpaRepository.findByGamblerEmail(gamblerEmail);
