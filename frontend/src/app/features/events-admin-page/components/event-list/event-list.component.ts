@@ -9,126 +9,208 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {RuleResponse} from "../../../../model/response/rule-response";
 import {GameWithRulesResponse} from "../../../../model/response/game-response";
 import {FormBuilder, Validators} from "@angular/forms";
-import {AddEventRequest} from "../../../../model/request/add-event-request";
 import {UpdateEventRequest} from "../../../../model/request/update-event-request";
+import {OddResponse} from "../../../../model/response/odd-response";
+import {UpdateOddRequest} from "../../../../model/request/update-odd-request";
+import {EndEventRequest} from "../../../../model/request/end-event-request";
 
 @Component({
-    selector: 'app-event-list',
-    templateUrl: './event-list.component.html',
-    styleUrl: './event-list.component.css',
-    animations: [
-        trigger('detailExpand', [
-            state('collapsed,void', style({height: '0px', minHeight: '0'})),
-            state('expanded', style({height: '*'})),
-            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-        ]),
-    ],
+  selector: 'app-event-list',
+  templateUrl: './event-list.component.html',
+  styleUrl: './event-list.component.css',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class EventListComponent implements OnDestroy, OnInit {
 
-    selectedCompetition: CompetitionResponse | null = null
-    selectedGameRules: RuleResponse[] | undefined;
+  selectedCompetition: CompetitionResponse | null = null
+  selectedGameRules: RuleResponse[] | undefined;
 
-    events$: Observable<EventResponse[]> = new Observable()
+  events$: Observable<EventResponse[]> = new Observable()
 
-    private destroy$ = new Subject<void>();
+  private destroy$ = new Subject<void>();
 
-    editEventForm = this.fb.group({
-        name: ['', [Validators.required, Validators.maxLength(50)]],
-        date: ['', Validators.required],
-    });
+  editEventForm = this.fb.group({
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    date: ['', Validators.required],
+  });
 
-    editOddsForm = this.fb.group({
-        odds: this.fb.array([] as number[], Validators.required)
-    });
+  columnsToDisplay: string[] = [];
+  columnsToDisplayWithExpand: string[] = []
 
-    columnsToDisplay: string[] = [];
-    columnsToDisplayWithExpand: string[] = []
+  expandedElement: EventResponse | null = null;
 
-    expandedElement: EventResponse | null = null;
+  editingOdd: OddResponse | null = null;
 
-    onRowClick(element: EventResponse): void {
-        this.expandedElement = this.expandedElement === element ? null : element;
+  isUpdating: boolean = false;
+  isEnding: boolean = false;
 
-        if (this.expandedElement) {
-            this.editEventForm.patchValue({
-                name: this.expandedElement.name,
-                date: this.expandedElement.date,
-            });
-        }
+  selectedOdds: { [key: string]: boolean } = {};
+
+  constructor(
+    private eventService: EventService,
+    private snackBarService: SnackbarService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.selectedCompetition = JSON.parse(sessionStorage.getItem('selectedCompetition')!);
+
+    const selectedGame: GameWithRulesResponse | null = JSON.parse(sessionStorage.getItem('selectedGame')!);
+    this.selectedGameRules = selectedGame?.rules;
+
+    this.columnsToDisplay = ['name', ...(this.selectedGameRules?.map((rule) => rule.name) || [])];
+    this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+
+    this.loadAllEvents();
+  }
+
+  onRowClick(element: EventResponse, event: MouseEvent, mode: string): void {
+    event.stopPropagation();
+
+    this.expandedElement = this.expandedElement === element ? null : element;
+    this.selectedOdds = {};
+
+    if (mode === 'update') {
+      this.isUpdating = true;
+      this.isEnding = false;
+
+      if (this.expandedElement) {
+        this.editEventForm.patchValue({
+          name: this.expandedElement.name,
+          date: this.expandedElement.date,
+        });
+      }
+    } else if (mode === 'end') {
+      this.isUpdating = false;
+      this.isEnding = true;
     }
+  }
 
-    constructor(
-        private eventService: EventService,
-        private snackBarService: SnackbarService,
-        private router: Router,
-        private fb: FormBuilder
-    ) {
+
+  onSubmit(currentEvent: EventResponse | null): void {
+
+    const name = this.editEventForm.get('name')?.value;
+    const date = this.editEventForm.get('date')?.value;
+
+    console.log(currentEvent)
+
+    if (this.editEventForm.valid && name && date && currentEvent) {
+
+      const updateEventRequest: UpdateEventRequest = {
+        eventId: currentEvent.id,
+        name: name,
+        date: date
+      };
+
+      this.eventService.updateEvent(updateEventRequest)
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError((error) => {
+            this.snackBarService.errorHandler('Failed to update event', error);
+            return [];
+          })
+        )
+        .subscribe(() => {
+
+          this.snackBarService.showSnackbarMessage(
+            'Event updated', 'success-snackbar'
+          )
+
+          this.expandedElement = null;
+          this.loadAllEvents();
+        });
     }
+  }
 
-    ngOnInit(): void {
-        this.selectedCompetition = JSON.parse(sessionStorage.getItem('selectedCompetition')!);
+  submitOdds(): void {
+    const selectedOddIds = Object.keys(this.selectedOdds).filter(id => this.selectedOdds[id]);
 
-        const selectedGame: GameWithRulesResponse | null = JSON.parse(sessionStorage.getItem('selectedGame')!);
-        this.selectedGameRules = selectedGame?.rules;
+    const endEventRequest: EndEventRequest = {
+      eventId: this.expandedElement?.id!,
+      winningOdds: selectedOddIds
+    };
 
-        this.columnsToDisplay = ['name', ...(this.selectedGameRules?.map((rule) => rule.name) || [])];
-        this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-
+    this.eventService.endEvent(endEventRequest)
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error) => {
+          this.snackBarService.errorHandler('Failed to end event', error);
+          return [];
+        })
+      )
+      .subscribe(() => {
+        this.snackBarService.showSnackbarMessage(
+          'Event ended', 'success-snackbar'
+        )
         this.loadAllEvents();
+      });
+  }
+
+  loadAllEvents() {
+    if (this.selectedCompetition) {
+      this.events$ = this.eventService.getAllByCompetitionId(this.selectedCompetition?.id!)
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError((error) => {
+            let defaultErrorMessage: string = 'Failed to load events';
+            this.snackBarService.errorHandler(defaultErrorMessage, error);
+            return [];
+          })
+        );
     }
+  }
 
-    onSubmit(currentEvent: EventResponse | null): void {
+  getRuleValue(event: EventResponse, ruleName: string): number | undefined {
+    return event.odds.find(odd => odd.name === ruleName)?.value;
+  }
 
-        const name = this.editEventForm.get('name')?.value;
-        const date = this.editEventForm.get('date')?.value;
+  startEditing(odd: OddResponse): void {
+    this.editingOdd = odd;
+  }
 
-        console.log(currentEvent)
+  stopEditing(odd: OddResponse): void {
 
-        if (this.editEventForm.valid && name && date && currentEvent) {
+    if (this.editingOdd) {
 
-            const updateEventRequest: UpdateEventRequest = {
-                eventId: currentEvent.id,
-                name: name,
-                date: date
-            };
+      const updateOddRequest: UpdateOddRequest = {
+        oddId: odd.id,
+        oddValue: odd.value
+      };
 
-            this.eventService.updateEvent(updateEventRequest)
-                .pipe(
-                    takeUntil(this.destroy$),
-                    catchError((error) => {
-                        this.snackBarService.errorHandler('Failed to update event', error);
-                        return [];
-                    })
-                )
-                .subscribe(() => {
-                    this.editEventForm.reset();
-                    this.expandedElement = null;
-                    this.loadAllEvents();
-                });
-        }
+      console.log(updateOddRequest)
+
+      this.eventService.updateOdd(updateOddRequest)
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError((error) => {
+            this.snackBarService.errorHandler('Failed to update odd', error);
+            return [];
+          })
+        )
+        .subscribe(() => {
+          this.snackBarService.showSnackbarMessage(
+            'Odd updated', 'success-snackbar'
+          )
+          this.loadAllEvents();
+          this.editingOdd = null;
+        });
     }
+  }
 
-    loadAllEvents() {
-        if (this.selectedCompetition) {
-            this.events$ = this.eventService.getAllByCompetitionId(this.selectedCompetition?.id!)
-                .pipe(
-                    takeUntil(this.destroy$),
-                    catchError((error) => {
-                        let defaultErrorMessage: string = 'Failed to load events';
-                        this.snackBarService.errorHandler(defaultErrorMessage, error);
-                        return [];
-                    })
-                );
-        }
-    }
+  endEvent(event: EventResponse): void {
+  }
 
-    getRuleValue(event: EventResponse, ruleName: string): number | undefined {
-        return event.odds.find(odd => odd.name === ruleName)?.value;
-    }
 
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

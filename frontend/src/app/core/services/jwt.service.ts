@@ -26,4 +26,25 @@ export class JwtService {
     return null;
   }
 
+
+  getEmailFromToken(token: string): string | null {
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.sub || null;
+      } catch (error) {
+        return null;
+      }
+    }
+    return null
+  }
+
+  getCurrentUserEmail(): string | null {
+    const token = sessionStorage.getItem('token');
+    if(token) {
+      return this.getEmailFromToken(token)
+    }
+    return null;
+  }
+
 }

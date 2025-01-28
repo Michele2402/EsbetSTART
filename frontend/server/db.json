@@ -1,0 +1,6 @@
+{
+  "games": [
+    {"id": 1, "name": "Halo", "rules": []},
+    {"id": 2, "name": "LOL", "rules": []}
+  ]
+}
