@@ -7,8 +7,8 @@ import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.ticketmanagment.application.port.in.AcceptTicketUseCase;
+import unisa.esbetstart.ticketmanagment.application.port.out.CreateTicketPortOut;
 import unisa.esbetstart.ticketmanagment.application.port.out.GetTicketPortOut;
-import unisa.esbetstart.ticketmanagment.application.port.out.CreateMessagePortOut;
 import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
 import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.ticketmanagment.domain.model.Message;
@@ -28,7 +28,7 @@ public class AcceptTicketManagerService implements AcceptTicketUseCase {
     private final ParseAttribute parseAttribute;
     private final GetUserPortOut getUserPortOut;
     private final CheckTypeAttribute checkTypeAttribute;
-    private final CreateMessagePortOut createMessagePortOut;
+    private final CreateTicketPortOut createTicketPortOut;
 
     @Override
     public void acceptTicket(AcceptTicketRequest request) {
@@ -60,12 +60,13 @@ public class AcceptTicketManagerService implements AcceptTicketUseCase {
         // Set the assigned operator
         ticket.setAssignedOperator(request.getAssignedOperator());
 
-        LocalDateTime date = parseAttribute.convertStringIntoDate(request.getMessageDate(), "acceptDate");
+        Message firstMessage = ticket.getMessages().getFirst();
+        firstMessage.setTicket(ticket);
 
         Message message = Message.builder()
                 .id(UUID.randomUUID())
                 .text(request.getMessageText())
-                .date(date)
+                .date(LocalDateTime.now())
                 .sender(SenderEnum.OPERATOR)
                 .read(false)
                 .ticket(ticket)
@@ -73,8 +74,8 @@ public class AcceptTicketManagerService implements AcceptTicketUseCase {
 
         ticket.sendMessage(message);
 
-        // Save the message
-        createMessagePortOut.saveMessage(message);
+        // Save the ticket
+        createTicketPortOut.updateTicket(ticket);
 
         log.info("Ticket accepted");
     }

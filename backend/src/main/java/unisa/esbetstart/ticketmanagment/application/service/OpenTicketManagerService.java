@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
-import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.ticketmanagment.application.port.in.OpenTicketUseCase;
 import unisa.esbetstart.ticketmanagment.application.port.out.CreateTicketPortOut;
 import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
@@ -28,7 +27,6 @@ public class OpenTicketManagerService implements OpenTicketUseCase {
 
     private final CheckTypeAttribute checkTypeAttribute;
     private final GetGamblerPortOut getGamblerPortOut;
-    private final ParseAttribute parseAttribute;
     private final CreateTicketPortOut createTicketPortOut;
 
     @Override
@@ -37,9 +35,6 @@ public class OpenTicketManagerService implements OpenTicketUseCase {
 
         // Check the request
         checkOpenTicketRequest(request);
-
-        // Parse the date attribute
-        LocalDateTime messageDate = parseAttribute.convertStringIntoDate(request.getMessageDate(), "messageDate");
 
         // Get the gambler
         Gambler gambler = getGamblerPortOut.getGamblerByEmail(request.getGamblerEmail());
@@ -67,7 +62,7 @@ public class OpenTicketManagerService implements OpenTicketUseCase {
         messages.add(Message.builder()
                 .id(UUID.randomUUID())
                 .text(request.getMessageText())
-                .date(messageDate)
+                .date(LocalDateTime.now())
                 .sender(SenderEnum.CLIENT)
                 .ticket(ticket)
                 .read(false)
