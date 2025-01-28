@@ -85,6 +85,13 @@ public class CheckTypeAttribute {
         }
     }
 
+    public void checkFloatIsNullOrSmallerThan(Float value, Float limit, String infoAttribute) {
+        if (value == null || value < limit) {
+            log.error("{} is null or less than {}", infoAttribute, limit);
+            throw new AttributeIsNullException(infoAttribute + " is null or less than " + limit);
+        }
+    }
+
     /**
      * Checks if a double is null or negative. If so, logs an error message and throws an exception.
      *

@@ -42,7 +42,7 @@ public class User {
             throw new DomainAttributeException("User attributes cannot be empty");
         }
 
-        if(name.length() > 30 || surname.length() > 30 || email.length() > 30 || username.length() > 30 || password.length() > 30) {
+        if(name.length() > 30 || surname.length() > 30 || email.length() > 30 || username.length() > 30) {
             log.error("User attributes cannot be longer than 30 characters");
             throw new DomainAttributeException("User attributes cannot be longer than 30 characters");
         }
@@ -60,5 +60,13 @@ public class User {
         }
 
 
+    }
+
+    public User update(String name, String surname, String username) {
+        return User.builder()
+                .name(name)
+                .surname(surname)
+                .username(username)
+                .build();
     }
 }

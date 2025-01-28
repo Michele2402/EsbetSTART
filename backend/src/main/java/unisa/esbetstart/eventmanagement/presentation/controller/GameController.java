@@ -2,6 +2,8 @@ package unisa.esbetstart.eventmanagement.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unisa.esbetstart.eventmanagement.application.port.in.CreateGameUseCase;
@@ -39,6 +41,18 @@ public class GameController {
             @RequestBody AddGameRequest request
     ) {
         createGameUseCase.createGame(request);
+    }
+
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<GameWithRulesResponse>> getFiltered(
+            @RequestParam(defaultValue = "", required = false, name = "name") String name,
+            @RequestParam(defaultValue = "100", required = false) int size,
+            @RequestParam(defaultValue = "0", required = false) int page
+    ) {
+
+        this.getGameUseCase.getFiltered(name, size, page);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

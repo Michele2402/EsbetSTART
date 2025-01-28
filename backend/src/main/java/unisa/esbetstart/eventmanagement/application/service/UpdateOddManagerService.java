@@ -55,7 +55,7 @@ public class UpdateOddManagerService implements UpdateOddUseCase {
 
     private void checkUpdateOddRequest(UpdateOddRequest request) {
 
-        checkTypeAttribute.checkFloatIsNullOrNegative(request.getOddValue(), "Odd value in update odd call");
+        checkTypeAttribute.checkFloatIsNullOrSmallerThan(request.getOddValue(), 1.0F, "Odd value in update odd call");
 
     }
 

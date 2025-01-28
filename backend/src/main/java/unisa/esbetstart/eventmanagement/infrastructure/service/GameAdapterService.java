@@ -2,6 +2,8 @@ package unisa.esbetstart.eventmanagement.infrastructure.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import unisa.esbetstart.eventmanagement.application.port.out.CreateGamePortOut;
 import unisa.esbetstart.eventmanagement.application.port.out.GetGamePortOut;
@@ -11,6 +13,7 @@ import unisa.esbetstart.eventmanagement.domain.model.Game;
 import unisa.esbetstart.eventmanagement.infrastructure.entity.GameEntity;
 import unisa.esbetstart.eventmanagement.infrastructure.mapper.InfrastructureGameMapper;
 import unisa.esbetstart.eventmanagement.infrastructure.repository.GameJpaRepository;
+import unisa.esbetstart.eventmanagement.presentation.response.GameWithRulesResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +81,13 @@ public class GameAdapterService implements GetGamePortOut, CreateGamePortOut, Up
         return optionalGameEntity
                 .map(infrastructureGameMapper::toGameModelWithCompetitionsAndEvents)
                 .orElse(null);
+    }
+
+    @Override
+    public Page<Game> getFiltered(String name, Pageable pageable) {
+        this.gameJpaRepository.getPagination(name, pageable);
+
+        return null;
     }
 
     /**
