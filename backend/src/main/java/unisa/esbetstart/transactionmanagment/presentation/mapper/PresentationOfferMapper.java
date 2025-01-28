@@ -18,7 +18,7 @@ public class PresentationOfferMapper {
 
         return OfferResponse.builder()
                 .id(offer.getId().toString())
-                .price(offer.getPrice())
+                .price(offer.getBonus())
                 .description(offer.getDescription())
                 .name(offer.getName())
                 .expirationDate(offer.getExpirationDate().toString())

@@ -45,7 +45,7 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
     }
 
     @Override
-    public void updateGambler(Gambler gambler) {
+    public void updateGamblerCredentials(Gambler gambler) {
         gamblerJpaRepository.save(infrastructureUserMapper.toSimpleGamblerEntity(gambler));
     }
 

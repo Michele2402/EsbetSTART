@@ -25,8 +25,6 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut,
     private final OfferJpaRepository offerJpaRepository;
 
     private final ActivatedOfferJpaRepository activatedOfferJpaRepository;
-    private final OfferJpaRepository offerJpaRepository;
-    private final ActivatedOfferJpaRepository activatedOfferJpaRepository;
 
     private final InfrastructureOfferMapper infrastructureOfferMapper;
 
@@ -87,15 +85,6 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut,
     public void addOffer(Offer offer) {
         offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
     }
-    /**
-     * Adds a new offer to the database.
-     *
-     * @param offer the offer to add
-     */
-    @Override
-    public void addOffer(Offer offer) {
-        offerJpaRepository.save(infrastructureOfferMapper.toOfferEntity(offer));
-    }
 
     /**
      * Updates an existing offer in the database.
@@ -135,14 +124,5 @@ public class OfferAdapterService implements GetOfferPortOut, CreateOfferPortOut,
     @Override
     public void deleteActivatedOfferById(UUID activatedOfferId) {
         activatedOfferJpaRepository.deleteById(activatedOfferId);
-    }
-    /**
-     * Adds an accepted offer to the database.
-     *
-     * @param offer the offer to add
-     */
-    @Override
-    public void addAcceptedOffer(ActivatedOffer offer) {
-        activatedOfferJpaRepository.save(infrastructureOfferMapper.toActivatedOfferEntity(offer));
     }
 }

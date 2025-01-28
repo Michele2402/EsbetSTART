@@ -31,7 +31,7 @@ public class UpdateUserManagerService implements UpdateUserUseCase {
 
         Gambler updatedGambler = gambler.update(request.getName(), request.getSurname(), request.getUsername());
 
-        updateUserPortOut.updateGambler(updatedGambler);
+        updateUserPortOut.updateGamblerCredentials(updatedGambler);
 
         log.info("user {} updated", request.getEmail());
     }
