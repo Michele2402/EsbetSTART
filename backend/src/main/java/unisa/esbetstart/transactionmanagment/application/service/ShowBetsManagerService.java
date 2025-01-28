@@ -25,8 +25,6 @@ public class ShowBetsManagerService implements ShowBetsUseCase {
     public Set<BetPlaced> showBets(ShowUserBetsRequest request) {
         log.info("Showing bets for user: {}", request.getGamblerEmail());
 
-        //TODO Testare questa funzione
-
         // Check if the gambler email is valid
         checkTypeAttribute.checkStringIsNullOrEmpty(request.getGamblerEmail(), "Gambler Email");
 

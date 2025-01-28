@@ -14,7 +14,7 @@ public class InfrastructureMessageMapper {
                 .id(message.getId())
                 .text(message.getText())
                 .sender(message.getSender())
-                .status(message.isRead())
+                .read(message.isRead())
                 .ticket(TicketEntity.builder()
                         .id(message.getTicket().getId()).build())
                 .build();
@@ -26,7 +26,7 @@ public class InfrastructureMessageMapper {
                 .text(messageEntity.getText())
                 .date(messageEntity.getDate())
                 .sender(messageEntity.getSender())
-                .read(messageEntity.isStatus())
+                .read(messageEntity.isRead())
                 .build();
     }
 }

@@ -10,8 +10,8 @@ import unisa.esbetstart.ticketmanagment.infrastructure.entity.TicketEntity;
 import unisa.esbetstart.ticketmanagment.infrastructure.mapper.InfrastructureTicketMapper;
 import unisa.esbetstart.ticketmanagment.infrastructure.repository.TicketJpaRepository;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +37,27 @@ public class TicketAdapterService implements CreateTicketPortOut, GetTicketPortO
     @Override
     public void updateTicket(Ticket ticket) {
         ticketJpaRepository.save(infrastructureTicketMapper.toTicketEntity(ticket));
+    }
+
+    @Override
+    public List<Ticket> getTicketsByGamblerEmail(String gamblerEmail) {
+        List<Optional<TicketEntity>> optionalTicketEntity = ticketJpaRepository.findByGamblerEmail(gamblerEmail);
+
+        return optionalTicketEntity
+                .stream()
+                .map(opt -> opt.map(infrastructureTicketMapper::toTicketModel).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Ticket> getTicketsByAssignedOperatorEmail(String assignedOperatorEmail){
+        List<Optional<TicketEntity>> optionalTicketEntity = ticketJpaRepository.findByAssignedOperator(assignedOperatorEmail);
+
+        return optionalTicketEntity
+                .stream()
+                .map(opt -> opt.map(infrastructureTicketMapper::toTicketModel).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }
