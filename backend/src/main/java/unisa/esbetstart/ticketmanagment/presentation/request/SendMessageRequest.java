@@ -14,6 +14,6 @@ public class SendMessageRequest {
 
     private String ticketId;
     private String text;
-    private LocalDateTime date;
-    private RolesEnum sender;
+    private String date;
+    private String sender;
 }

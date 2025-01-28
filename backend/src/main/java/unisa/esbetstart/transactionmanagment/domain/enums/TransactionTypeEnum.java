@@ -2,8 +2,8 @@ package unisa.esbetstart.transactionmanagment.domain.enums;
 
 public enum TransactionTypeEnum {
 
-    DEPOSIT("Deposit"),
-    WITHDRAWAL("Withdrawal");
+    DEPOSIT("DEPOSIT"),
+    WITHDRAWAL("WITHDRAWAL");
 
     TransactionTypeEnum(String displayName) {
     }

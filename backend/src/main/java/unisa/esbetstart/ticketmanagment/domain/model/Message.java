@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Data
 public class Message {
 
+    private UUID id;
     private Ticket ticket;
     private String text;
     private LocalDateTime date;
@@ -19,8 +20,8 @@ public class Message {
     private boolean read;
 
     @Builder
-    public Message(String text, LocalDateTime date, SenderEnum sender, boolean read, Ticket ticket) {
-
+    public Message(UUID id, String text, LocalDateTime date, SenderEnum sender, boolean read, Ticket ticket) {
+        this.id = id;
         this.text = text;
         this.date = date;
         this.sender = sender;

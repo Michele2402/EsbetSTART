@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ShowUserBetsRequest {
 
-    private String gamblerId;
+    private String gamblerEmail;
     private boolean pending;
 }

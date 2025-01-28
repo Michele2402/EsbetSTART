@@ -8,7 +8,7 @@ import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.enums.ResultEnum;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
-import java.util.Map;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,15 +22,17 @@ public class BetPlaced {
     private ResultEnum result;
     private Gambler gambler;
     private Set<OddStatic> oddStatics;
+    private LocalDateTime date;
 
     @Builder
-    public BetPlaced(double amount, Gambler gambler, ResultEnum result, Set<OddStatic> oddStatics, UUID id) {
+    public BetPlaced(double amount, Gambler gambler, ResultEnum result, Set<OddStatic> oddStatics, UUID id, LocalDateTime date) {
 
         this.gambler = gambler;
         this.id = id;
         this.amount = amount;
         this.result = result;
         this.oddStatics = oddStatics;
+        this.date = date;
 
     }
 

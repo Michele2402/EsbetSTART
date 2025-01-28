@@ -23,6 +23,8 @@ public class OddStaticEntity {
     private LocalDateTime date;
     private String name;
     private double value;
+    @Enumerated(EnumType.STRING)
+    private ResultEnum result;
     private ResultEnum result;
     private String competition;
     private String game;

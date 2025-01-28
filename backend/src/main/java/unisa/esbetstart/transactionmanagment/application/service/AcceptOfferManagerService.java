@@ -3,6 +3,7 @@ package unisa.esbetstart.transactionmanagment.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.common.utils.CheckTypeAttribute;
 import unisa.esbetstart.common.utils.ParseAttribute;
@@ -15,6 +16,7 @@ import unisa.esbetstart.transactionmanagment.presentation.request.AcceptOfferReq
 import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -40,7 +42,7 @@ public class AcceptOfferManagerService implements AcceptOfferUseCase {
 
         // Get the offer and the gambler
         Offer offer = getOfferPortOut.getOfferById(offerId);
-        Gambler gambler = getGamblerPortOut.getGamblerByEmail(request.getGamblerEmail());
+        Gambler gambler = getGamblerPortOut.getGamblerByEmailWithActivatedOffers(request.getGamblerEmail());
 
         if(offer == null) {
             log.error("Offer not found");
@@ -50,6 +52,12 @@ public class AcceptOfferManagerService implements AcceptOfferUseCase {
         if(gambler == null) {
             log.error("Gambler not found");
             throw new ObjectNotFoundException("Gambler not found");
+        }
+
+        // Check if the offer is still active
+        if(offer.getExpirationDate().isBefore(LocalDateTime.now())) {
+            log.error("Offer is not active");
+            throw new ObjectIsNullException("Offer is not active");
         }
 
         // Accept the offer

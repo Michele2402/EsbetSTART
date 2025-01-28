@@ -106,4 +106,18 @@ public class CheckTypeAttribute {
         }
     }
 
+    /**
+     * Checks if a boolean is null. If so, logs an error message and throws an exception.
+     *
+     * @param value         the boolean to check
+     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
+     * @throws AttributeIsNullException if the boolean is null
+     */
+    public void checkIfBooleanIsNull(Boolean value, String infoAttribute) {
+        if (value == null) {
+            log.error("{} is null", infoAttribute);
+            throw new AttributeIsNullException(infoAttribute + " is null");
+        }
+    }
+
 }

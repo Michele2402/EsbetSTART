@@ -9,12 +9,14 @@ import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import unisa.esbetstart.common.exceptions.DomainAttributeException;
 import unisa.esbetstart.slipmanagment.domain.model.Slip;
+import unisa.esbetstart.slipmanagment.domain.model.BetPlaced;
 import unisa.esbetstart.ticketmanagment.domain.enums.TicketStatusEnum;
 import unisa.esbetstart.ticketmanagment.domain.model.Ticket;
 import unisa.esbetstart.transactionmanagment.domain.enums.OfferTypeEnum;
 import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
 import unisa.esbetstart.transactionmanagment.domain.model.Offer;
+import unisa.esbetstart.transactionmanagment.domain.model.Transaction;
 import unisa.esbetstart.usermanagment.domain.enums.RolesEnum;
 
 import java.util.Set;
@@ -33,8 +35,10 @@ public class Gambler extends User {
     private Set<ActivatedOffer> activatedOffers;
     private Set<Ticket> tickets;
     private Slip slip;
+    private Set<BetPlaced> bets;
+    private Set<Transaction> transactions;
 
-    public Gambler(String name, String surname, String email, String username, String password, double balance, double bonusBalance, double withdrawalBalance, Set<ActivatedOffer> activatedOffers, Set<Ticket> tickets, Slip slip) {
+    public Gambler(String name, String surname, String email, String username, String password, double balance, double bonusBalance, double withdrawalBalance, Set<ActivatedOffer> activatedOffers, Set<Ticket> tickets, Set<BetPlaced> bets, Set<Transaction> transactions, Slip slip) {
         super(name, surname, email, username, password, RolesEnum.GAMBLER);
         this.balance = balance;
         this.bonusBalance = bonusBalance;
@@ -42,6 +46,8 @@ public class Gambler extends User {
         this.activatedOffers = activatedOffers;
         this.tickets = tickets;
         this.slip = slip;
+        this.bets = bets;
+        this.transactions = transactions;
     }
 
 

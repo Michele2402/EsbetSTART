@@ -22,6 +22,7 @@ public class TransactionEntity {
     @Column(columnDefinition = "UUID")
     private UUID id;
     private double amount;
+    @Enumerated(EnumType.STRING)
     private TransactionTypeEnum type;
     private LocalDateTime date;
 

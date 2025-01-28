@@ -2,9 +2,9 @@ package unisa.esbetstart.ticketmanagment.domain.enums;
 
 public enum TicketStatusEnum {
 
-    OPEN("Open"),
-    CLOSED("Closed"),
-    PENDING("Pending");
+    OPEN("OPEN"),
+    CLOSED("CLOSED"),
+    PENDING("PENDING");
 
     TicketStatusEnum(String value) {
     }

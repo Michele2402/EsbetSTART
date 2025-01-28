@@ -2,7 +2,9 @@ package unisa.esbetstart.ticketmanagment.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import unisa.esbetstart.ticketmanagment.domain.enums.SenderEnum;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -18,8 +20,10 @@ public class MessageEntity {
     @Column(columnDefinition = "UUID")
     private UUID id;
     private String text;
-    private String sender;
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    private SenderEnum sender;
+    private boolean read;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "ticket_id", nullable = false)
