@@ -10,7 +10,8 @@ import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 @AllArgsConstructor
 public class CreateTransactionRequest {
 
-    private String gamblerId;
+    private String gamblerEmail;
     private TransactionTypeEnum transactionType;
-    private Integer transactionValue;
+    private Double transactionValue;
+
 }

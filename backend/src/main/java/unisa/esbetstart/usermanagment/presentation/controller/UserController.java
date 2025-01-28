@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unisa.esbetstart.usermanagment.application.port.in.CreateTransactionUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.LoginUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.RegistrationUseCase;
 import unisa.esbetstart.usermanagment.presentation.mapper.PresentationAuthMapper;
+import unisa.esbetstart.usermanagment.presentation.request.CreateTransactionRequest;
 import unisa.esbetstart.usermanagment.presentation.request.LoginRequest;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
 import unisa.esbetstart.usermanagment.presentation.response.LoginResponse;
@@ -19,7 +21,7 @@ import unisa.esbetstart.usermanagment.presentation.response.LoginResponse;
 public class UserController {
 
     private final RegistrationUseCase registrationUseCase;
-
+    private final CreateTransactionUseCase createTransactionUseCase;
     private final LoginUseCase loginUseCase;
 
     private final PresentationAuthMapper presentationAuthMapper;
@@ -40,6 +42,13 @@ public class UserController {
         LoginResponse loginResponse = presentationAuthMapper.mapToLoginResponse(token);
 
         return ResponseEntity.ok(loginResponse);
+    }
+
+    @PostMapping("/transaction/create")
+    public void transaction(
+            @RequestBody CreateTransactionRequest request
+    ) {
+        createTransactionUseCase.createTransaction(request);
     }
 
 }

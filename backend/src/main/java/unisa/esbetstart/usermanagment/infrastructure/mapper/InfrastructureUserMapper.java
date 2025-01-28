@@ -1,8 +1,8 @@
 package unisa.esbetstart.usermanagment.infrastructure.mapper;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.stereotype.Component;
-import unisa.esbetstart.slipmanagment.domain.model.Slip;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
@@ -30,6 +30,11 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
+    /**
+     * Maps a User to a new GamblerEntity with initialized values
+     * @param user
+     * @return the new GamblerEntity
+     */
     public GamblerEntity toGamblerEntity(User user) {
 
         GamblerEntity gambler = GamblerEntity.builder()
@@ -51,6 +56,23 @@ public class InfrastructureUserMapper {
         return gambler;
     }
 
+    public GamblerEntity toGamblerEntityWithActivatedOffers(Gambler gambler) {
+
+        return GamblerEntity.builder()
+                .email(gambler.getEmail())
+                .name(gambler.getName())
+                .surname(gambler.getSurname())
+                .username(gambler.getUsername())
+                .password(gambler.getPassword())
+                .balance(gambler.getBalance())
+                .bonusBalance(gambler.getBonusBalance())
+                .withdrawableBalance(gambler.getWithdrawableBalance())
+                .activatedOffers(gambler.getActivatedOffers()
+                        .stream().map(infrastructureOfferMapper::toActivatedOfferEntityWithDetails).collect(Collectors.toSet()))
+                .build();
+
+    }
+
     public Gambler toGamblerModelWithActivatedOffers(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())
@@ -59,7 +81,26 @@ public class InfrastructureUserMapper {
                 .username(gamblerEntity.getUsername())
                 .password("Password123!")
                 .activatedOffers(gamblerEntity.getActivatedOffers()
-                        .stream().map(infrastructureOfferMapper::toActivatedOfferModel).collect(Collectors.toSet()))
+                        .stream().map(infrastructureOfferMapper::toActivatedOfferModelWithDetails).collect(Collectors.toSet()))
                 .build();
+    }
+
+    public Gambler toGamblerModelWithOffers(GamblerEntity gamblerEntity) {
+
+        Gambler toReturn = this.toGamblerModelWithActivatedOffers(gamblerEntity);
+        toReturn.setPassword(gamblerEntity.getPassword());
+        toReturn.setBalance(gamblerEntity.getBalance());
+        toReturn.setBonusBalance(gamblerEntity.getBonusBalance());
+        toReturn.setWithdrawableBalance(gamblerEntity.getWithdrawableBalance());
+        toReturn.getActivatedOffers().forEach(activatedOffer ->
+                activatedOffer
+                        .setOffer(infrastructureOfferMapper.toOfferModel(gamblerEntity
+                                .getActivatedOffers()
+                                .stream()
+                                .filter(activatedOfferEntity -> activatedOfferEntity.getId()
+                                        .equals(activatedOffer.getId()))
+                                .findFirst()
+                                .get().getOffer())));
+        return toReturn;
     }
 }

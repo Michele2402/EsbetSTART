@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SlipAdapterService implements GetSlipPortOut, UpdateSlipPortOut{
+public class SlipAdapterService implements GetSlipPortOut, UpdateSlipPortOut {
 
     private final SlipJpaRepository slipJpaRepository;
     private final InfrastructureSlipMapper infrastructureSlipMapper;
@@ -34,15 +34,15 @@ public class SlipAdapterService implements GetSlipPortOut, UpdateSlipPortOut{
     @Override
     public Slip getSlipCompleteById(UUID slipId) {
 
-            Optional<SlipEntity> slipEntity = slipJpaRepository.findSlipCompleteById(slipId);
-            return slipEntity.map(infrastructureSlipMapper::toSlipModelComplete).orElse(null);
+        Optional<SlipEntity> slipEntity = slipJpaRepository.findSlipCompleteById(slipId);
+        return slipEntity.map(infrastructureSlipMapper::toSlipModelComplete).orElse(null);
 
     }
 
     @Override
     public void updateSlip(Slip slip) {
 
-            slipJpaRepository.save(infrastructureSlipMapper.toSlipEntity(slip));
+        slipJpaRepository.save(infrastructureSlipMapper.toSlipEntity(slip));
 
     }
 }

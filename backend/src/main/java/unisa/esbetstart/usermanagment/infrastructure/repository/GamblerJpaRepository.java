@@ -11,4 +11,14 @@ public interface GamblerJpaRepository extends JpaRepository<GamblerEntity, Strin
     @EntityGraph(attributePaths = {"activatedOffers"})
     @Query("SELECT g FROM GamblerEntity g WHERE g.email = :email")
     Optional<GamblerEntity> findByEmail(String email);
+
+    /**
+     * Find a gambler by email up until offers
+     * @param email
+     * @return Optional of GamblerEntity
+     */
+    @EntityGraph(attributePaths = {"activatedOffers.offer"})
+    @Query("SELECT g FROM GamblerEntity g WHERE g.email = :email")
+    Optional<GamblerEntity> findByEmailWithOffers(String email);
+
 }
