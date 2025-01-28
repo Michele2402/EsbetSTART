@@ -36,7 +36,11 @@ export const environmentPaths = {
   get_all_events: 'events/get-all-by-competition',
   add_event: 'events/add',
   update_event: 'events/update',
+  update_odd: 'events/odds/update',
+  end_event: 'events/end',
 
   register: 'users/register',
   login: 'users/login',
+  get: 'users/',
+  update: 'users/update',
 }

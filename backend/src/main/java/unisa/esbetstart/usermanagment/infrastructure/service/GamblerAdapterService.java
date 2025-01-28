@@ -8,6 +8,7 @@ import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 import unisa.esbetstart.usermanagment.infrastructure.mapper.InfrastructureUserMapper;
 import unisa.esbetstart.usermanagment.infrastructure.repository.GamblerJpaRepository;
+import unisa.esbetstart.usermanagment.infrastructure.repository.UserJpaRepository;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
     private final GamblerJpaRepository gamblerJpaRepository;
 
     private final InfrastructureUserMapper infrastructureUserMapper;
+    private final UserJpaRepository userJpaRepository;
 
     @Override
     public Gambler getGamblerByEmail(String email) {
@@ -41,6 +43,12 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
             gamblerJpaRepository.save(gamblerEntity);
         }
     }
+
+    @Override
+    public void updateGambler(Gambler gambler) {
+        gamblerJpaRepository.save(infrastructureUserMapper.toSimpleGamblerEntity(gambler));
+    }
+
 
     @Override
     public void updateGambler(Gambler gambler) {

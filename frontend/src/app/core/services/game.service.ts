@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {environmentPaths} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {GameWithRulesResponse} from "../../model/response/game-response";
 import {AddGameRequest} from "../../model/request/add-game-request";
 import {UpdateGameRequest} from "../../model/request/update-game-request";
+import {SearchBarFilterData} from "../../model/html/search-bar-filter-data";
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,18 @@ export class GameService {
   constructor(private http: HttpClient) {
   }
 
+  getFilteredGames(filters: SearchBarFilterData): Observable<GameWithRulesResponse[]> {
+    return this.http.get<GameWithRulesResponse[]>("http://localhost:3000/games").pipe(
+      //map((response: any) => response['content']) //todo: decommentare quando avrai le api con la paginazione
+    );
+  }
+
   getAllGames(): Observable<GameWithRulesResponse[]> {
     const token = sessionStorage.getItem('token');
 
     return this.http.get<GameWithRulesResponse[]>(
-      this.basePath + environmentPaths.get_all_games
-/*      {headers: {'Authorization': 'Bearer ' + token}}*/
+      this.basePath + environmentPaths.get_all_games,
+      {headers: {'Authorization': 'Bearer ' + token}}
     );
   }
 

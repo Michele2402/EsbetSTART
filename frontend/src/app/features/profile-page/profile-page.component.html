@@ -1,85 +1,96 @@
 <app-navbar>
   <div class="navbar-buttons">
-  <a mat-fab class="logout-button">
-    Logout
-  </a>
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
   </div>
 </app-navbar>
 
 <div class="container">
 
-<div class="sidebar">
-<mat-card appearance="outlined">
-<mat-list>
-  <mat-list-item routerLink="/profile">Profile</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item routerLink="/bets">Bets</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item routerLink="/message">Messages</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item routerLink="/bank-account">Bank account movement</mat-list-item>
-</mat-list>
-</mat-card>
-  <div class="sidebar-buttons">
-    <a mat-fab class="sidebar-button">
-      Recharge
-    </a>
-    <a mat-fab class="sidebar-button">
-      Withdraw
-    </a>
-  </div>
-</div>
-
-<div class="profile-section">
-<h1>Profile</h1>
-
-<h2>Access Data</h2>
-
- <!-- <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"> -->
-  <div class="data-container">
+  <div class="sidebar">
     <mat-card appearance="outlined">
-      <mat-card-content>Name</mat-card-content>
-      <mat-form-field appearance="outline" class="data-access">
-        <input matInput>
-      </mat-form-field>
+      <mat-list>
+        <mat-list-item routerLink="/profile">Profile</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/bets">Bets</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/message">Messages</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/bank-account">Bank account movement</mat-list-item>
+      </mat-list>
     </mat-card>
-
-    <mat-card appearance="outlined">
-      <mat-card-content>Surname</mat-card-content>
-      <mat-form-field appearance="outline" class="data-access">
-        <input matInput>
-      </mat-form-field>
-    </mat-card>
-
-<mat-card appearance="outlined">
-  <mat-card-content>Username</mat-card-content>
-  <mat-form-field appearance="outline" class="data-access">
-    <input matInput>
-  </mat-form-field>
-</mat-card>
-
-<mat-card appearance="outlined">
-  <mat-card-content>Password</mat-card-content>
-  <mat-form-field appearance="outline" class="data-access">
-    <input matInput>
-  </mat-form-field>
-</mat-card>
-
-  <mat-card appearance="outlined">
-    <mat-card-content>E-mail</mat-card-content>
-    <mat-form-field appearance="outline" class="data-access">
-      <input matInput>
-    </mat-form-field>
-  </mat-card>
+    <div class="sidebar-buttons">
+      <a mat-fab class="sidebar-button">
+        Recharge
+      </a>
+      <a mat-fab class="sidebar-button">
+        Withdraw
+      </a>
+    </div>
   </div>
-  <div class="edit">
-<a mat-fab class="logout-button">
-  Edit
-</a>
-   </div>
 
- <!-- </form> -->
+  <div class="profile-section">
+    <h1>Profile</h1>
 
+    @if((loggedUser | async) != null) {
+      <h2>Access Data</h2>
+
+      <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+        <div class="data-container">
+          <mat-card appearance="outlined">
+            <mat-card-content>Name</mat-card-content>
+            <mat-form-field appearance="outline" class="data-access">
+              <input matInput formControlName="name">
+              @if (editProfileForm.get('name')?.invalid && (editProfileForm.get('name')?.touched && editProfileForm.get('name')?.dirty)) {
+              }
+              @if (editProfileForm.get('name')?.errors?.['required']) {
+                <mat-error>Name is required</mat-error>
+              } @else if (editProfileForm.get('name')?.errors?.['maxlength']) {
+                <mat-error>Please enter a name with a max of 30 characters</mat-error>
+              }
+            </mat-form-field>
+          </mat-card>
+
+          <mat-card appearance="outlined">
+            <mat-card-content>Surname</mat-card-content>
+            <mat-form-field appearance="outline" class="data-access">
+              <input matInput formControlName="surname">
+              @if (editProfileForm.get('surname')?.invalid && (editProfileForm.get('surname')?.touched && editProfileForm.get('surname')?.dirty)) {
+              }
+              @if (editProfileForm.get('surname')?.errors?.['required']) {
+                <mat-error>Surname is required</mat-error>
+              } @else if (editProfileForm.get('surname')?.errors?.['maxlength']) {
+                <mat-error>Please enter a surname with a max of 30 characters</mat-error>
+              }
+            </mat-form-field>
+          </mat-card>
+
+          <mat-card appearance="outlined">
+            <mat-card-content>Username</mat-card-content>
+            <mat-form-field appearance="outline" class="data-access">
+              <input matInput formControlName="username">
+              @if (editProfileForm.get('username')?.invalid && (editProfileForm.get('username')?.touched && editProfileForm.get('username')?.dirty)) {
+              }
+              @if (editProfileForm.get('username')?.errors?.['required']) {
+                <mat-error>Username is required</mat-error>
+              } @else if (editProfileForm.get('username')?.errors?.['maxlength']) {
+                <mat-error>Please enter a username with a max of 30 characters</mat-error>
+              }
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+
+        <div class="edit">
+          <button mat-fab class="logout-button" type="submit">
+            Edit
+          </button>
+        </div>
+
+      </form>
+    }
+    
   </div>
 
 </div>

@@ -6,4 +6,5 @@ public interface UpdateUserPortOut {
 
     void updateWithdrawableBalance(String userId, double amount);
     void updateGambler(Gambler gambler);
+    void updateGambler(Gambler user);
 }

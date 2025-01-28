@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {ProfilePageComponent} from "./profile-page.component";
 import {SharedModule} from "../../shared/shared.module";
 import {ProfilePageRoutingModule} from "./profile-page-routing.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -10,10 +11,12 @@ import {ProfilePageRoutingModule} from "./profile-page-routing.module";
   declarations: [
     ProfilePageComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ProfilePageRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        ProfilePageRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 export class ProfilePageModule { }

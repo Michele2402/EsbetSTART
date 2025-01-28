@@ -5,13 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unisa.esbetstart.usermanagment.application.port.in.CreateTransactionUseCase;
+import unisa.esbetstart.usermanagment.application.port.in.GetUserUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.LoginUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.RegistrationUseCase;
+import unisa.esbetstart.usermanagment.application.port.in.UpdateUserUseCase;
+import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.presentation.mapper.PresentationAuthMapper;
 import unisa.esbetstart.usermanagment.presentation.request.CreateTransactionRequest;
 import unisa.esbetstart.usermanagment.presentation.request.LoginRequest;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
+import unisa.esbetstart.usermanagment.presentation.request.UpdateGamblerRequest;
 import unisa.esbetstart.usermanagment.presentation.response.LoginResponse;
+import unisa.esbetstart.usermanagment.presentation.response.SimpleUserResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +28,8 @@ public class UserController {
     private final RegistrationUseCase registrationUseCase;
     private final CreateTransactionUseCase createTransactionUseCase;
     private final LoginUseCase loginUseCase;
+    private final GetUserUseCase getUserUseCase;
+    private final UpdateUserUseCase updateUserUseCase;
 
     private final PresentationAuthMapper presentationAuthMapper;
 
@@ -51,4 +58,22 @@ public class UserController {
         createTransactionUseCase.createTransaction(request);
     }
 
+    @GetMapping("{email}")
+    public ResponseEntity<SimpleUserResponse> getUser(
+            @PathVariable String email
+    ) {
+
+        User user = getUserUseCase.getUserByEmail(email);
+
+        SimpleUserResponse simpleUserResponse = presentationAuthMapper.toSimpleUserResponse(user);
+
+        return ResponseEntity.ok(simpleUserResponse);
+    }
+
+    @PostMapping("/update")
+    public void updateGambler(
+            @RequestBody UpdateGamblerRequest request
+    ) {
+        updateUserUseCase.updateGambler(request);
+    }
 }

@@ -35,7 +35,7 @@ public class RemoveCompetitionManagerService implements RemoveCompetitionUseCase
         Competition competition = getCompetitionPortOut.getCompetitionByIdWithEventsList(id);
 
         if (competition == null || competition.hasNotEndedEvents()) {
-            throw new ObjectNotFoundException("Competition with id " + competitionId + " not found or has not ended events");
+            throw new ObjectNotFoundException("The competition has events that are not ended");
         }
 
         // Remove the competition

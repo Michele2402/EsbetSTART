@@ -6,13 +6,16 @@ import unisa.esbetstart.eventmanagement.domain.model.Odd;
 import unisa.esbetstart.eventmanagement.presentation.response.EventResponse;
 import unisa.esbetstart.eventmanagement.presentation.response.OddResponse;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Component
 public class PresentationEventMapper {
 
     public EventResponse toResponse(Event event) {
-        List<OddResponse> odds = event.getOdds().stream().map(this::toOddResponse).toList();
+        List<OddResponse> odds = event.getOdds().stream().map(this::toOddResponse)
+                .sorted(Comparator.comparingInt(OddResponse::getPosition))
+                .toList();
 
         return EventResponse.builder()
                 .id(event.getId().toString())

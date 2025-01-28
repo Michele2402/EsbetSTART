@@ -1,61 +1,164 @@
 .event-list-container {
- margin: 20px;
+    margin: 20px;
 }
 
 .event-table {
-  width: 100%;
-  border: 1px solid black;
-  background-color: #f9f9f9;
+    width: 100%;
+    border: 1px solid black;
+    background-color: #f9f9f9;
 }
 
 .event-detail-row {
-  height: 0;
-
+    height: 0;
 }
 
 .event-data-row:not(.event-expanded-row):hover {
-  background: whitesmoke;
+    background: whitesmoke;
 }
 
 .event-data-row:not(.event-expanded-row):active {
-  background: #efefef;
+    background: #efefef;
 }
 
 .event-data-row td {
-  border-bottom-width: 0;
+    border-bottom-width: 0;
 }
 
 .event-detail-container {
-  overflow: hidden;
-  display: flex;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .event-detail-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
 }
 
 .event-detail-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
 }
 
 .event-detail-description {
-  padding: 16px;
+    padding: 16px;
 }
 
 .event-detail-description-attribution {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
-
 .event-detail-container form {
-  display: flex;
-  gap: 30px;
-  width: 100%;
+    display: flex;
+    margin-top: 10px;
+    gap: 30px;
+    width: 100%;
+}
+
+.event-header-cell {
+    background-color: #d32f2f;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.event-data-cell {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.event-data-cell button {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.event-data-cell input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80px;
+    font-size: 14px;
+}
+
+.event-data-cell input:focus {
+    outline: none;
+    border-color: #d32f2f;
+    box-shadow: 0 0 4px rgba(211, 47, 47, 0.5);
+}
+
+.event-data-cell .mat-icon-button {
+    padding: 4px;
+    background-color: transparent;
+}
+
+.event-data-cell .mat-icon-button:hover {
+    background-color: #f0f0f0;
+}
+
+.event-expanded-detail-cell {
+    background-color: #f5f5f5;
+}
+
+.event-expanded-row {
+    background-color: #f1f1f1;
+}
+
+.end-button,
+.remove-button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.end-button:hover,
+.remove-button:hover {
+    background-color: #c62828;
+}
+
+.end-button:focus,
+.remove-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.4);
+}
+
+.remove-button {
+    background-color: #ff4d4d;
+}
+
+.remove-button:hover {
+    background-color: #e63939;
+}
+
+.odds-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.odds-container label {
+    font-weight: normal;
+    margin-right: 20px;
+}
+
+.odds-checkbox-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+  justify-content: space-between;
+}
+
+.odds-checkbox-container button{
+  margin-right: 50px;
 }

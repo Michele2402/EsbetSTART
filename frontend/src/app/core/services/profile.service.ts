@@ -1,9 +1,35 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environmentPaths} from "../../environments/environment";
+import {UserResponse} from "../../model/response/user-response";
+import {UpdateUserRequest} from "../../model/request/update-user-request";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor() { }
+  private baseUrl = environmentPaths.base_path;
+
+  constructor(private http: HttpClient) { }
+
+  getProfile(email: string): Observable<UserResponse> {
+    const token = sessionStorage.getItem('token');
+
+    return this.http.get<UserResponse>(
+      this.baseUrl + environmentPaths.get + email,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
+  }
+
+  updateUser(updateUserRequest: UpdateUserRequest) {
+    const token = sessionStorage.getItem('token');
+
+      return this.http.post(
+        this.baseUrl +  environmentPaths.update,
+        updateUserRequest,
+        {headers: {'Authorization': 'Bearer ' + token}}
+      );
+  }
 }

@@ -1,9 +1,7 @@
 package unisa.esbetstart.usermanagment.infrastructure.mapper;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.stereotype.Component;
-import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.SlipEntity;
 import unisa.esbetstart.transactionmanagment.infrastructure.mapper.InfrastructureOfferMapper;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
@@ -26,7 +24,7 @@ public class InfrastructureUserMapper {
                 .name(userEntity.getName())
                 .surname(userEntity.getSurname())
                 .username(userEntity.getUsername())
-                .password("Password123!")
+                .password(userEntity.getPassword())
                 .build();
     }
 
@@ -79,9 +77,25 @@ public class InfrastructureUserMapper {
                 .name(gamblerEntity.getName())
                 .surname(gamblerEntity.getSurname())
                 .username(gamblerEntity.getUsername())
-                .password("Password123!")
+                .password(gamblerEntity.getPassword())
+                .withdrawableBalance(gamblerEntity.getWithdrawableBalance())
+                .balance(gamblerEntity.getBalance())
+                .bonusBalance(gamblerEntity.getBonusBalance())
                 .activatedOffers(gamblerEntity.getActivatedOffers()
                         .stream().map(infrastructureOfferMapper::toActivatedOfferModelWithDetails).collect(Collectors.toSet()))
+                .build();
+    }
+
+    public GamblerEntity toSimpleGamblerEntity(Gambler gambler) {
+        return GamblerEntity.builder()
+                .email(gambler.getEmail())
+                .name(gambler.getName())
+                .surname(gambler.getSurname())
+                .username(gambler.getUsername())
+                .password(gambler.getPassword())
+                .withdrawableBalance(gambler.getWithdrawableBalance())
+                .balance(gambler.getBalance())
+                .bonusBalance(gambler.getBonusBalance())
                 .build();
     }
 
