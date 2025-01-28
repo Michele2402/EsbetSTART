@@ -38,9 +38,6 @@ public class SendMessageManagerService implements SendMessageUseCase {
         // Parse the ticketId
         UUID ticketId = parseAttribute.checkUUIDIsNullOrInvalid(request.getTicketId(), "ticketId");
 
-        // Parse the Date attribute
-        LocalDateTime date = parseAttribute.convertStringIntoDate(request.getDate(), "date");
-
         // Parse the Sender attribute
         SenderEnum sender = parseAttribute.convertStringIntoSenderType(request.getSender(), "sender");
 
@@ -56,7 +53,7 @@ public class SendMessageManagerService implements SendMessageUseCase {
         Message message = Message.builder()
                 .id(UUID.randomUUID())
                 .text(request.getText())
-                .date(date)
+                .date(LocalDateTime.now())
                 .sender(sender)
                 .read(false)
                 .build();

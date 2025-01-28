@@ -11,6 +11,5 @@ public class OpenTicketRequest {
 
     private String gamblerEmail;
     private String category;
-    private String messageDate;
     private String messageText;
 }

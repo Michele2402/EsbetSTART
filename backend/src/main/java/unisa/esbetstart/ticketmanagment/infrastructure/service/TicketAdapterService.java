@@ -54,4 +54,9 @@ public class TicketAdapterService implements CreateTicketPortOut, GetTicketPortO
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void updateTicket(Ticket ticket) {
+        ticketJpaRepository.save(infrastructureTicketMapper.toTicketEntity(ticket));
+    }
 }

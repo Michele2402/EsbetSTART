@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class AcceptTicketRequest {
 
     private String ticketId;
-    private String messageDate;
     private String messageText;
     private String assignedOperator;
 }

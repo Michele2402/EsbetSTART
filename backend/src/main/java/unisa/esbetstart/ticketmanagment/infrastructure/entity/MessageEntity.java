@@ -23,6 +23,7 @@ public class MessageEntity {
     @Enumerated(EnumType.STRING)
     private SenderEnum sender;
     private boolean read;
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
 
     @ManyToOne
