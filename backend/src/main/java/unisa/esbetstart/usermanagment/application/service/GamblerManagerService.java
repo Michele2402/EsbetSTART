@@ -18,6 +18,7 @@ import unisa.esbetstart.usermanagment.application.port.out.UpdateUserPortOut;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.presentation.request.CreateTransactionRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,6 +75,7 @@ public class GamblerManagerService implements CreateTransactionUseCase {
         Transaction toSave = Transaction.builder()
                 .amount(request.getTransactionValue())
                 .type(request.getTransactionType())
+                .date(LocalDateTime.now())
                 .gambler(gambler)
                 .build();
 
