@@ -22,7 +22,7 @@ public class BetsController {
     private final ShowBetsUseCase showBetsUseCase;
     private final PresentationBetPlacedMapper presentationBetPlacedMapper;
 
-    @PostMapping("/show")
+    @GetMapping("/show")
     public ResponseEntity<Set<BetPlacedResponse>> showBets(
             @RequestBody ShowUserBetsRequest request
     ) {

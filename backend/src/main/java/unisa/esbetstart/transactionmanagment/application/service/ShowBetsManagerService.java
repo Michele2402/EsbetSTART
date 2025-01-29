@@ -11,6 +11,7 @@ import unisa.esbetstart.transactionmanagment.presentation.request.ShowUserBetsRe
 import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -33,11 +34,19 @@ public class ShowBetsManagerService implements ShowBetsUseCase {
 
         Gambler gambler;
 
+        if(getGamblerPortOut.getGamblerByEmail(request.getGamblerEmail()) == null) {
+            log.error("Gambler with email {} not found", request.getGamblerEmail());
+            throw new ObjectIsNullException("Gambler with email " + request.getGamblerEmail() + " not found");
+        }
+
         // Get the gambler
         if(!request.isPending())
             gambler = getGamblerPortOut.getGamblerByEmailWithBets(request.getGamblerEmail());
-        else
+        else {
             gambler = getGamblerPortOut.getGamblerByEmailWithRunningBets(request.getGamblerEmail());
+            if (gambler == null)
+                return new HashSet<BetPlaced>() {};
+        }
 
         if(gambler == null) {
             log.error("Gambler with email {} not found", request.getGamblerEmail());

@@ -40,14 +40,14 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
     public Gambler getGamblerByEmailWithBets(String email) {
         Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmailWithBets(email);
 
-        return optionalGambler.map(infrastructureUserMapper::toGabmlerModelWithBets).orElse(null);
+        return optionalGambler.map(infrastructureUserMapper::toGamblerModelWithBets).orElse(null);
     }
 
     @Override
     public Gambler getGamblerByEmailWithRunningBets(String email) {
         Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmailWithRunningBets(email);
 
-        return optionalGambler.map(infrastructureUserMapper::toGabmlerModelWithBets).orElse(null);
+        return optionalGambler.map(infrastructureUserMapper::toGamblerModelWithBets).orElse(null);
     }
 
     @Override
