@@ -16,18 +16,37 @@
 
 <h1>Promotion</h1>
 
-
-<mat-card class="promotion-card" appearance="outlined">
-  <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Large</mat-card-subtitle>
-      <img mat-card-lg-image src="" >
-    </mat-card-title-group>
-  </mat-card-header>
-  <mat-card-content>
-  </mat-card-content>
-</mat-card>
+<mat-tab-group>
+  <mat-tab label="All offer">
+    <div class="promotion-container">
+    <mat-card class="promotion-card" appearance="outlined">
+      <mat-card-content>
+        @for (promotion of (allPromotion$ | async); track promotion) {
+          <img src="assets/{{promotion.name}}.png" class="promotion-image"/>
+          <div class="promotion-name">
+            {{ promotion.name }}
+          </div>
+        }
+        <div class="active" (click)="acceptPromotion">
+          <a mat-fab class="active-button">
+            Active promotion
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div> </mat-tab>
+  <mat-tab label="Actived offer">  </mat-tab>
+  <mat-card class="promotion-card" appearance="outlined">
+    <mat-card-content>
+      @for (activePromotion of (allActivedPromotion$ | async); track activePromotion) {
+        <img src="assets/{{activePromotion.name}}.png" class="promotion-image"/>
+        <div class="promotion-name">
+          {{ activePromotion.name }}
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</mat-tab-group>
 
 
 

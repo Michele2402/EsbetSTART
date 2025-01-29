@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Location} from "@angular/common";
+
 
 @Component({
   selector: 'app-current-bets-page',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class CurrentBetsPageComponent {
 
+  constructor(private location: Location) {}
+
+  goBack(): void {
+    this.location.back();
+  }
 }

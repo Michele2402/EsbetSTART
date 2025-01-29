@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-bets-concluded-page',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './bets-concluded-page.component.css'
 })
 export class BetsConcludedPageComponent {
+  constructor(private location: Location) {}
 
+  goBack(): void {
+    this.location.back();
+  }
 }
