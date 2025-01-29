@@ -1,1 +1,17 @@
-<p>bets-concluded-page works!</p>
+<app-navbar>
+  <div class="navbar-buttons">
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
+  </div>
+</app-navbar>
+<h1> Bets Concluded</h1>
+
+<button mat-button (click)="goBack()" class="return">
+  <mat-icon>arrow_back</mat-icon>
+  Return back
+</button>
+
+<mat-card appearance="outlined">
+  <mat-card-content></mat-card-content>
+</mat-card>

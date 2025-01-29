@@ -41,7 +41,11 @@
   gap: 10px;
 }
 
-.search-button:hover{
+.action-button:hover,.search-button:hover{
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.balance{
+  align-items: center;
 }

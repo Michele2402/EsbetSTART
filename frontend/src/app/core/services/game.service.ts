@@ -21,7 +21,6 @@ export class GameService {
 
     return this.http.get<GameWithRulesResponse[]>(
       this.basePath + environmentPaths.get_all_games
-/*      {headers: {'Authorization': 'Bearer ' + token}}*/
     );
   }
 

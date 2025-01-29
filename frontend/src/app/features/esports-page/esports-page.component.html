@@ -15,10 +15,10 @@
 
 <app-leftbar></app-leftbar>
 
-<div class="sport-container">
+<div class="sport-container" >
   @for (sport of (allGames$ | async); track sport) {
-    <img src="assets/esports/{{sport.name}}.png" class="sport-image"/>
-      <div class="sport-name">
+    <img src="assets/esports/{{sport.name}}.png" class="sport-image" />
+      <div class="sport-name" (click) ="selectGame(sport)">
         {{ sport.name }}
       </div>
   }
