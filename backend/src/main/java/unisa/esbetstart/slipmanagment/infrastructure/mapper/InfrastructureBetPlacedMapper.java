@@ -9,6 +9,7 @@ import unisa.esbetstart.slipmanagment.infrastructure.entity.BetPlacedEntity;
 import unisa.esbetstart.slipmanagment.infrastructure.entity.OddStaticEntity;
 import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class InfrastructureBetPlacedMapper {
         return BetPlacedEntity.builder()
                 .id(betPlaced.getId())
                 .amount(betPlaced.getAmount())
+                .date(LocalDateTime.now())
                 .gambler(GamblerEntity.builder()
                         .email(betPlaced.getGambler().getEmail())
                         .withdrawableBalance(betPlaced.getGambler().getWithdrawableBalance())

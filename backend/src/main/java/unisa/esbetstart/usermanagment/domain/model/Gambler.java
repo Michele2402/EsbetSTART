@@ -138,18 +138,17 @@ public class Gambler extends User {
 
     }
 
-    public Gambler update(String name, String surname, String username) {
-        return Gambler.builder()
-                .name(name)
-                .surname(surname)
-                .username(username)
-                .email(getEmail())
-                .password(getPassword())
-                .balance(getBalance())
-                .bonusBalance(getBonusBalance())
-                .withdrawableBalance(getWithdrawableBalance())
-                .build();
+    /**
+     * This method updates the gambler's information
+     *
+     * @param name     the new name
+     * @param surname  the new surname
+     * @param username the new username
+     */
+    public void update(String name, String surname, String username) {
+        super.update(name, surname, username);
     }
+
     /**
      * This method places a bet
      *

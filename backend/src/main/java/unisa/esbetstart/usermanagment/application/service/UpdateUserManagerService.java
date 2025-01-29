@@ -22,16 +22,16 @@ public class UpdateUserManagerService implements UpdateUserUseCase {
     public void updateGambler(UpdateGamblerRequest request) {
         log.info("updating user {}", request.getEmail());
 
-        Gambler gambler = getGamblerPortOut.getGamblerByEmail(request.getEmail());
+        Gambler gambler = getGamblerPortOut.getGamblerByEmailWithActivatedOffers(request.getEmail());
 
         if(gambler == null) {
             log.error("gambler with email {} not found", request.getEmail());
             throw new ObjectNotFoundException("gambler with email " + request.getEmail() + " not found");
         }
 
-        Gambler updatedGambler = gambler.update(request.getName(), request.getSurname(), request.getUsername());
+        gambler.update(request.getName(), request.getSurname(), request.getUsername());
 
-        updateUserPortOut.updateGamblerCredentials(updatedGambler);
+        updateUserPortOut.updateGamblerCredentials(gambler);
 
         log.info("user {} updated", request.getEmail());
     }
