@@ -8,8 +8,10 @@ import unisa.esbetstart.common.exceptions.ObjectIsNullException;
 import unisa.esbetstart.common.exceptions.ObjectNotFoundException;
 import unisa.esbetstart.common.utils.ParseAttribute;
 import unisa.esbetstart.transactionmanagment.application.port.out.DeleteActivatedOfferPortOut;
+import unisa.esbetstart.transactionmanagment.application.port.out.SaveTransactionPortOut;
 import unisa.esbetstart.transactionmanagment.domain.enums.TransactionTypeEnum;
 import unisa.esbetstart.transactionmanagment.domain.model.ActivatedOffer;
+import unisa.esbetstart.transactionmanagment.domain.model.Transaction;
 import unisa.esbetstart.usermanagment.application.port.in.CreateTransactionUseCase;
 import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
 import unisa.esbetstart.usermanagment.application.port.out.UpdateUserPortOut;
@@ -30,6 +32,7 @@ public class GamblerManagerService implements CreateTransactionUseCase {
     private final GetGamblerPortOut getGamblerPortOut;
     private final UpdateUserPortOut updateGamblerPortOut;
     private final DeleteActivatedOfferPortOut deleteActivatedOfferPortOut;
+    private final SaveTransactionPortOut saveTransactionPortOut;
 
     @Override
     public void createTransaction(CreateTransactionRequest request) {
@@ -67,6 +70,14 @@ public class GamblerManagerService implements CreateTransactionUseCase {
 
         //update the gambler
         updateGamblerPortOut.updateGambler(gambler);
+
+        Transaction toSave = Transaction.builder()
+                .amount(request.getTransactionValue())
+                .type(request.getTransactionType())
+                .gambler(gambler)
+                .build();
+
+        saveTransactionPortOut.saveTransaction(toSave);
 
         log.info("Transaction created successfully");
 
