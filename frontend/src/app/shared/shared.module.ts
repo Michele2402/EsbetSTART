@@ -6,6 +6,7 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
 import {FormsModule} from "@angular/forms";
 import {LeftbarComponent} from "./components/leftbar/leftbar.component";
 import {RouterLink} from "@angular/router";
+import {ProfileLeftbarComponent} from "./components/profile-leftbar/profile-leftbar.component";
 
 
 
@@ -13,7 +14,8 @@ import {RouterLink} from "@angular/router";
   declarations: [
     NavbarComponent,
     FooterComponent,
-    LeftbarComponent
+    LeftbarComponent,
+    ProfileLeftbarComponent
   ],
     imports: [
         CommonModule,
@@ -26,6 +28,7 @@ import {RouterLink} from "@angular/router";
     FooterComponent,
     NavbarComponent,
     LeftbarComponent,
+    ProfileLeftbarComponent,
   ]
 })
 export class SharedModule { }
