@@ -62,11 +62,10 @@ public class User {
 
     }
 
-    public User update(String name, String surname, String username) {
-        return User.builder()
-                .name(name)
-                .surname(surname)
-                .username(username)
-                .build();
+    public void update(String name, String surname, String username) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        validate();
     }
 }

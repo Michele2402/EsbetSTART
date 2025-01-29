@@ -72,11 +72,11 @@ public class PlaceBetManagerService implements PlaceBetUseCase {
             }
         }
 
-        //update the gambler
-        updateGamblerPortOut.updateGambler(gambler);
-
         //place the bet on the database
         placeBetPortOut.placeBet(betPlaced);
+
+        //update the gambler
+        updateGamblerPortOut.updateGambler(gambler);
 
         slip.resetslip();
         updateSlipPortOut.updateSlip(slip);

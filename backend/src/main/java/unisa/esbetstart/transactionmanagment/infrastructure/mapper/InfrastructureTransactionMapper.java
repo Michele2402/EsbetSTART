@@ -14,6 +14,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InfrastructureTransactionMapper {
 
+    /**
+     * Maps a TransactionEntity to a domain model Transaction.
+     *
+     * @param transactionEntity The TransactionEntity object to map from.
+     * @return A Transaction object mapped from the TransactionEntity.
+     */
     public Transaction toTransactionModel(TransactionEntity transactionEntity) {
         return Transaction.builder()
                 .id(transactionEntity.getId())
@@ -23,12 +29,25 @@ public class InfrastructureTransactionMapper {
                 .build();
     }
 
+    /**
+     * Maps a list of TransactionEntity objects to a set of domain model Transactions,
+     * including Gambler details.
+     *
+     * @param transactionEntities The list of TransactionEntity objects to map from.
+     * @return A set of Transactions mapped from the TransactionEntity objects, including Gambler details.
+     */
     public Set<Transaction> toTransactionModelWithGambler(List<TransactionEntity> transactionEntities) {
         return transactionEntities.stream()
                 .map(this::toTransactionModelWithGambler)
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Maps a TransactionEntity to a domain model Transaction, including Gambler details.
+     *
+     * @param transactionEntity The TransactionEntity object to map from.
+     * @return A Transaction object mapped from the TransactionEntity, including Gambler details.
+     */
     public Transaction toTransactionModelWithGambler(TransactionEntity transactionEntity) {
         return Transaction.builder()
                 .id(transactionEntity.getId())
@@ -36,6 +55,22 @@ public class InfrastructureTransactionMapper {
                 .type(transactionEntity.getType())
                 .date(transactionEntity.getDate())
                 .gambler(Gambler.builder().email(transactionEntity.getGambler().getEmail()).build())
+                .build();
+    }
+
+
+    /**
+     * Maps a domain model Transaction to a TransactionEntity.
+     *
+     * @param transaction The Transaction object to map from.
+     * @return A TransactionEntity object mapped from the Transaction.
+     */
+    public TransactionEntity toTransactionEntity(Transaction transaction) {
+        return TransactionEntity.builder()
+                .id(transaction.getId())
+                .amount(transaction.getAmount())
+                .type(transaction.getType())
+                .date(transaction.getDate())
                 .build();
     }
 }
