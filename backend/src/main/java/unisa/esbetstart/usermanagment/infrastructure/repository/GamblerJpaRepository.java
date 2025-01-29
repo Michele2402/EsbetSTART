@@ -17,7 +17,7 @@ public interface GamblerJpaRepository extends JpaRepository<GamblerEntity, Strin
     Optional<GamblerEntity> findByEmailWithTransactions(String email, TransactionTypeEnum typeEnum);
 
     @EntityGraph(attributePaths = {"bets.odds.odd", "bets.odds"})
-    @Query("SELECT g FROM GamblerEntity g JOIN FETCH g.bets b JOIN FETCH b.odds o JOIN FETCH o.odd WHERE g.email = :email")
+    @Query("SELECT g FROM GamblerEntity g WHERE g.email = :email")
     Optional<GamblerEntity> findByEmailWithBets(String email);
 
     @EntityGraph(attributePaths = {"bets.odds.odd", "bets.odds"})
@@ -25,7 +25,7 @@ public interface GamblerJpaRepository extends JpaRepository<GamblerEntity, Strin
             "JOIN FETCH g.bets b " +
             "JOIN FETCH b.odds o " +
             "JOIN FETCH o.odd " +
-            "WHERE g.email = :email AND b.resultEnum = 'PLAYING'")
+            "WHERE g.email = :email AND b.result = 'PLAYING'")
     Optional<GamblerEntity> findByEmailWithRunningBets(String email);
 
     Optional<GamblerEntity> findByEmail(String email);

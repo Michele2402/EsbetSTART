@@ -133,7 +133,7 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
-    public Gambler toGabmlerModelWithBets(GamblerEntity gamblerEntity) {
+    public Gambler toGamblerModelWithBets(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())
                 .name(gamblerEntity.getName())

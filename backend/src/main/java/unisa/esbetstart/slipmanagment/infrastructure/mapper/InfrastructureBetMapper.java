@@ -24,13 +24,12 @@ public class InfrastructureBetMapper {
                         .result(oddStaticEntity.getResult())
                         .competition(oddStaticEntity.getCompetition())
                         .game(oddStaticEntity.getGame())
-                        .odd(Odd.builder().position(oddStaticEntity.getOdd().getPosition()).build())
                         .build()
                 ).collect(Collectors.toSet());
 
         return BetPlaced.builder()
                 .amount(betPlacedEntity.getAmount())
-                .result(betPlacedEntity.getResultEnum())
+                .result(betPlacedEntity.getResult())
                 .date(betPlacedEntity.getDate())
                 .oddStatics(oddStatics)
                 .build();

@@ -24,8 +24,6 @@ public class BetPlacedEntity {
     private UUID id;
 
     private double amount;
-    @Enumerated(EnumType.STRING)
-    private ResultEnum resultEnum;
     private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
