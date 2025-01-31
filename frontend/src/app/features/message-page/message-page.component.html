@@ -1,39 +1,24 @@
 <app-navbar>
   <div class="navbar-buttons">
-  <a mat-fab class="logout-button">
-    Logout
-  </a>
-</div>
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
+  </div>
 </app-navbar>
 
 <div class="container">
 
-  <div class="sidebar">
-    <mat-card appearance="outlined">
-      <mat-list>
-        <mat-list-item routerLink="/profile">Profile</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item routerLink="/bets">Bets</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item routerLink="/message">Messages</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item routerLink="/bank-account">Bank account movement</mat-list-item>
-      </mat-list>
-    </mat-card>
-  </div>
+  <app-profile-leftbar></app-profile-leftbar>
 
   <div class="messages">
 
-    <h1>Messages</h1>
+    <h1>Tickets</h1>
 
     <mat-tab-group>
-      <mat-tab label="All messages"> Content 1 </mat-tab>
-      <mat-tab label="Unread messages"> Content 2 </mat-tab>
-      <mat-tab label="Read messages"> Content 3 </mat-tab>
+      <mat-tab label="All tickets"> Content 1</mat-tab>
+      <mat-tab label="Resolved tickets"> Content 2</mat-tab>
     </mat-tab-group>
 
-
   </div>
 
-
-  </div>
+</div>

@@ -1,42 +1,34 @@
-.search-button {
-  background: black;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-  height: 50px;
-  padding: 0 40px;
-}
-
-.navbar-buttons {
-  width: auto;
-  display: flex;
-  gap: 10px;
-}
-
-.search-button:hover{
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
 .sport-container {
-  flex-direction: row;
-  gap: 20px;
-  margin-top: 50px;
-  margin-left: 160px;
-  display:flex;
-  width: 60px;
-  height: 60px;
-  border-radius: 40px;
+  max-width: 70%;
+  margin-top: 40px;
+  margin-left: 50px;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sport-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sport-item:hover {
+  background-color: #d3d3d3;
 }
 
 .sport-image {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 15px;
 }
 
 .sport-name {
-
+  font-size: 18px;
+  font-weight: bold;
 }

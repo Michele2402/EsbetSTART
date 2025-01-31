@@ -16,8 +16,14 @@ export const environmentPaths = {
   profile_page: 'profile',
   bets_page: 'bets',
   message_page: 'message',
-  bank_account_page:'bank-account',
+  bank_account_page: 'bank-account',
   customer_service_ticket_page: 'customer-service-ticket',
+  competition_page: 'competition',
+  event_page: 'event',
+  current_bets_page: 'current-bets',
+  bets_concluded_page: 'bets-concluded',
+  recharge_page: 'recharge',
+  withdraw_page: 'withdraw',
 
   //BACKEND
   base_path: 'http://localhost:8080/',
@@ -43,4 +49,23 @@ export const environmentPaths = {
   login: 'users/login',
   get: 'users/',
   update: 'users/update',
+  balance: 'users/balance',
+  transactions: 'users/transaction/create',
+
+  accept_offer: 'offers/accept',
+  get_all_offer: 'offers/get-all',
+  get_activated_offer: 'offers/get-activated-by',
+
+  get_slip: 'slip/get-slip',
+  save_slip: 'slip/save',
+  place_bet: 'slip/place-bet',
+
+  show_transaction:'transactions/show',
+  show_all_transaction:'transactions/showAll',
+  show_bets:'bets/show',
+
+  open_ticket:'tickets/open',
+  accept_ticket:'tickets/accept',
+  send_ticket:'tickets/sendMessage',
+
 }

@@ -1,1 +1,29 @@
-<p>current-bets-page works!</p>
+<app-navbar>
+  <div class="navbar-buttons">
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
+  </div>
+</app-navbar>
+
+<h1>Current Bets</h1>
+
+<button mat-button (click)="goBack()" class="return">
+  <mat-icon>arrow_back</mat-icon>
+  Return back
+</button>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <div class="container" >
+      @for (bets of (currentBets$ | async); track bets) {
+        <div class="amount" >
+          {{ bets.amount }}
+          {{ bets.date }}
+          {{ bets.result }}
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>
+

@@ -62,7 +62,9 @@ export class LoginPageComponent implements OnDestroy {
           catchError((error) => {
 
             let errorMessage: string = 'Authentication failed'
-            this.snackBarService.errorHandler(errorMessage, error)
+            this.snackBarService.showSnackbarMessage(
+              errorMessage, 'error-snackbar'
+            )
 
             this.requestStatus = RequestStatus.ERROR
             return []

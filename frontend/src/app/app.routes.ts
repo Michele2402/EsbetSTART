@@ -62,6 +62,38 @@ export const routes: Routes = [
     canActivate: [EventManagerGuardService]
   },
   {
+    path: environmentPaths.competition_page,
+    loadChildren: () => import('./features/competition-page/competition-page.module').then(m => m.CompetitionPageModule)
+  },
+  {
+    path: environmentPaths.event_page,
+    loadChildren: () => import('./features/event-page/event-page.module').then(m => m.EventPageModule)
+  },
+  {
+    path: environmentPaths.current_bets_page,
+    loadChildren: () => import('./features/current-bets-page/current-bets-page.module').then(m => m.CurrentBetsPageModule)
+  },
+  {
+    path: environmentPaths.bets_concluded_page,
+    loadChildren: () => import('./features/bets-concluded/bets-concluded-page.module').then(m => m.BetsConcludedPageModule)
+  },
+  {
+    path: environmentPaths.recharge_page,
+    loadChildren: () => import('./features/recharge-page/recharge-page.module').then(m => m.RechargePageModule)
+  },
+  {
+    path: environmentPaths.withdraw_page,
+    loadChildren: () => import('./features/withdraw-page/withdraw-page.module').then(m => m.WithdrawPageModule)
+  },
+  {
+    path: environmentPaths.withdrawals_page,
+    loadChildren: () => import('./features/withdrawals-page/withdrawals-page.module').then(m => m.WithdrawalsPageModule)
+  },
+  {
+    path: environmentPaths.deposits_page,
+    loadChildren: () => import('./features/deposits-page/deposits-page.module').then(m => m.DepositsPageModule)
+  },
+  {
     path: environmentPaths.events_admin_page,
     loadChildren: () => import('./features/events-admin-page/events-admin-page.module').then(m => m.EventsAdminPageModule),
     canActivate: [EventManagerGuardService]

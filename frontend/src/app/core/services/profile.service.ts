@@ -4,6 +4,7 @@ import {environmentPaths} from "../../environments/environment";
 import {UserResponse} from "../../model/response/user-response";
 import {UpdateUserRequest} from "../../model/request/update-user-request";
 import {Observable} from "rxjs";
+import {TransactionRequest} from "../../model/request/transaction-request";
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,15 @@ export class ProfileService {
         updateUserRequest,
         {headers: {'Authorization': 'Bearer ' + token}}
       );
+  }
+
+  transaction(request: TransactionRequest) {
+    const token = sessionStorage.getItem('token');
+
+    return this.http.post(
+      this.baseUrl +  environmentPaths.transactions,
+      request,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
   }
 }

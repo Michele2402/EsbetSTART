@@ -13,7 +13,7 @@ import {
   MatDatepicker,
   MatDatepickerActions, MatDatepickerApply, MatDatepickerCancel,
   MatDatepickerInput,
-  MatDatepickerToggle
+  MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker
 } from "@angular/material/datepicker";
 import {MatOption, MatSelect, MatSelectTrigger} from "@angular/material/select";
 import {MatChip, MatChipsModule} from "@angular/material/chips";
@@ -22,7 +22,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRippleLoader} from "@angular/material/core";
 import {MatDivider} from "@angular/material/divider";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogModule,
+  MatDialogTitle
+} from "@angular/material/dialog";
+import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 
@@ -66,6 +74,12 @@ const modules = [
   MatDialogActions,
   MatDialogTitle,
   MatSelectTrigger,
+  MatDateRangePicker,
+  MatDateRangeInput,
+  MatMenu,
+  MatMenuTrigger,
+  MatDialogModule,
+  MatProgressBarModule
 ];
 
 @NgModule({

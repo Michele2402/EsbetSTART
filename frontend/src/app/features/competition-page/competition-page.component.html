@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<app-leftbar></app-leftbar>
+
+<app-slip></app-slip>
+
+<h2 class="title">Competitions for {{ selectedGame?.name }}</h2>
+
+<div class="competition-container">
+  @for (competition of (competitions$ | async); track competition) {
+    <div class="competition-item" (click)="selectCompetition(competition)" matRipple>
+      <img src="assets/countries/{{competition.originCountry}}.png" class="competition-image" />
+      <span class="competition-name">{{ competition.name }}</span>
+    </div>
+  }
+</div>
