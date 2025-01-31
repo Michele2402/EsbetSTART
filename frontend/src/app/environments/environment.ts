@@ -24,6 +24,8 @@ export const environmentPaths = {
   bets_concluded_page:'bets-concluded',
   recharge_page:'recharge',
   withdraw_page:'withdraw',
+  withdrawals_page:'withdrawals',
+  deposits_page:'deposits',
 
   //BACKEND
   base_path: 'http://localhost:8080/',
@@ -53,4 +55,13 @@ export const environmentPaths = {
   accept_offer: 'offers/accept',
   get_all_offer: 'offers/get-all',
   get_activated_offer: 'offers/get-activated-by',
+
+  show_transaction:'transactions/show',
+  show_all_transaction:'transactions/showAll',
+  show_bets:'bets/show',
+
+  open_ticket:'tickets/open',
+  accept_ticket:'tickets/accept',
+  send_ticket:'tickets/sendMessage',
+
 }

@@ -5,8 +5,7 @@
     </a>
   </div>
 </app-navbar>
-
-<h1>Current Bets</h1>
+<h1> All bets</h1>
 
 <button mat-button (click)="goBack()" class="return">
   <mat-icon>arrow_back</mat-icon>
@@ -16,7 +15,7 @@
 <mat-card appearance="outlined">
   <mat-card-content>
     <div class="container" >
-      @for (bets of (currentBets$ | async); track bets) {
+      @for (bets of (allBets$ | async); track bets) {
         <div class="amount" >
           {{ bets.amount }}
           {{ bets.date }}
@@ -26,4 +25,3 @@
     </div>
   </mat-card-content>
 </mat-card>
-

@@ -29,9 +29,28 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.loadAllPromotion();
-    this.loadAllActivePromotion('id');
+    this.loadAllActivePromotion(this.getCurrentUserEmail() || '');
   }
 
+  getEmailFromToken(token: string): string | null {
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.sub || null;
+      } catch (error) {
+        return null;
+      }
+    }
+    return null
+  }
+
+  getCurrentUserEmail(): string | null {
+    const token = sessionStorage.getItem('token');
+    if(token) {
+      return this.getEmailFromToken(token)
+    }
+    return null;
+  }
 
   loadAllPromotion(): void {
 
@@ -48,8 +67,8 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
       );
   }
 
-  loadAllActivePromotion(id: string): void {
-    this.allActivedPromotion$ = this.promotionService.getActivatedOffer(id)
+  loadAllActivePromotion(email: string): void {
+    this.allActivedPromotion$ = this.promotionService.getActivatedOffer(email)
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
@@ -63,9 +82,14 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
 
   }
 
-  acceptPromotion(promotion: AcceptOfferRequest): void{
+  acceptPromotion(id: string): void{
 
-    this.promotionService.acceptOffer(promotion)
+    let acceptOfferRequest: AcceptOfferRequest = {
+      offerId: id,
+      gamblerEmail: this.getCurrentUserEmail() || ''
+    };
+
+    this.promotionService.acceptOffer(acceptOfferRequest)
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
@@ -79,7 +103,7 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
       .subscribe(() => {
         this.snackBarService.showSnackbarMessage(
           'Promotion Added', 'success-snackbar');
-        this.loadAllActivePromotion('id');
+        this.loadAllActivePromotion(this.getCurrentUserEmail() || '');
       });
 
 }

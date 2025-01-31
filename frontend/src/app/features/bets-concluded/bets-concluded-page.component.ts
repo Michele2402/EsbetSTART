@@ -5,17 +5,16 @@ import {BetsService} from "../../core/services/bets.service";
 import {SnackbarService} from "../../core/services/snackbar.service";
 import {ShowUserBetsRequest} from "../../model/request/show-user-bets-request";
 import {BetPlacedResponse} from "../../model/response/bet-placed-response";
-
-
+import {OddStaticResponse} from "../../model/response/odd-static-response";
 
 @Component({
-  selector: 'app-current-bets-page',
-  templateUrl: './current-bets-page.component.html',
-  styleUrl: './current-bets-page.component.css'
+  selector: 'app-bets-concluded-page',
+  templateUrl: './bets-concluded-page.component.html',
+  styleUrl: './bets-concluded-page.component.css'
 })
-export class CurrentBetsPageComponent implements OnInit{
+export class BetsConcludedPageComponent implements OnInit{
 
-  currentBets$ = new Observable<BetPlacedResponse[]>();
+  allBets$ = new Observable<BetPlacedResponse[]>();
 
   private _destroy$ = new Subject<void>();
 
@@ -56,10 +55,10 @@ export class CurrentBetsPageComponent implements OnInit{
 
     let showUserBetsRequest: ShowUserBetsRequest = {
       gamblerEmail: this.getCurrentUserEmail() || '',
-      pending: true
+      pending: false
     };
 
-    this.currentBets$ = this.betsService.showBets(showUserBetsRequest)
+    this.allBets$ =this.betsService.showBets(showUserBetsRequest)
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
@@ -69,7 +68,6 @@ export class CurrentBetsPageComponent implements OnInit{
 
           return [];
         })
-
       );
 
   }
