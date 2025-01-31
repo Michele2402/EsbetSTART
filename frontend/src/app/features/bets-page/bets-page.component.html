@@ -1,0 +1,25 @@
+<app-navbar>
+  <div class="navbar-buttons">
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
+  </div>
+</app-navbar>
+
+<div class="container">
+
+  <app-profile-leftbar></app-profile-leftbar>
+
+  <div class="options">
+
+    <h1>Bets</h1>
+
+<mat-card appearance="outlined">
+  <mat-card-content routerLink="/current-bets">Current bets</mat-card-content>
+</mat-card>
+<mat-card appearance="outlined">
+  <mat-card-content routerLink="/bets-concluded">All bets</mat-card-content>
+</mat-card>
+</div>
+
+</div>

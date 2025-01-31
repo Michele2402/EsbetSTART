@@ -1,0 +1,97 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.banner-card1 {
+  margin-top: 20px;
+  position: relative;
+  width: 320px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url('/assets/banner.webp');
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  font-family: Dubai, sans-serif;
+  color: white;
+}
+.banner-card2 {
+  margin-top: 20px;
+  position: relative;
+  width: 320px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url('/assets/banner1.webp');
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  font-family: Dubai, sans-serif;
+  color: white;
+}
+.banner-card3 {
+  margin-top: 20px;
+  position: relative;
+  width: 320px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url('/assets/banner3.webp');
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  font-family: Dubai, sans-serif;
+  color: white;
+}
+.banner-card4 {
+  margin-top: 20px;
+  position: relative;
+  width: 320px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url('/assets/banner4.webp');
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  font-family: Dubai, sans-serif;
+  color: white;
+}
+ .banner-card1 mat-card-content {
+  font-family: Dubai, sans-serif;
+  margin-top: 30px;
+  font-size: 14px;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background: black;
+}
+.banner-card2 mat-card-content {
+  font-family: Dubai, sans-serif;
+  margin-top: 315px;
+  font-size: 14px;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background: black;
+}
+.banner-button {
+  white-space: nowrap;
+  margin-top: 230px;
+  margin-left: 120px;
+  padding:10px 40px;
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-family: Cambria, sans-serif;
+}
+
+.banner-card1:hover, .banner-card2:hover, .banner-card3:hover,.banner-card4:hover,.banner-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

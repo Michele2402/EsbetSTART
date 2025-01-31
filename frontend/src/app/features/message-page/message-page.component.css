@@ -1,0 +1,23 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 20px;
+}
+
+.logout-button {
+  background: black;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 50px;
+  padding: 0 40px;
+}
+.logout-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1{
+  font-family: Arial, sans-serif;
+  text-align: left;
+}

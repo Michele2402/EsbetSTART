@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+
+<h1>Withdrawals</h1>
+
+
+
+<div class="sport-container" >
+  @for (withdrawals of (withdrawals$ | async); track withdrawals) {
+    <div class="sport-name">
+      {{ withdrawals.amount }}
+      {{ withdrawals.date }}
+    </div>
+  }
+</div>
+

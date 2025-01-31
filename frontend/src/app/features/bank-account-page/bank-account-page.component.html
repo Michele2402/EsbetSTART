@@ -1,0 +1,28 @@
+<app-navbar>
+  <div class="navbar-buttons">
+    <a mat-fab class="logout-button">
+      Logout
+    </a>
+  </div>
+</app-navbar>
+
+<div class="container">
+
+  <app-profile-leftbar></app-profile-leftbar>
+
+  <div class="options">
+
+    <h1>Bank account movement</h1>
+
+    <mat-card appearance="outlined">
+      <mat-card-content routerLink="/withdrawals">Withdrawals</mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-content routerLink="/deposits">Deposits</mat-card-content>
+    </mat-card>
+
+
+  </div>
+
+
+</div>

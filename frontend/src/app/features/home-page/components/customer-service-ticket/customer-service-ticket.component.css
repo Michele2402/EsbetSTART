@@ -1,0 +1,60 @@
+mat-card {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ h3 {
+   font-family: Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 15px;
+  color: black;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+.message-area textarea {
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+}
+
+
+mat-card-content button {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  align-self: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  height: 50px;
+  padding: 0 40px;
+}
+
+mat-card-content button:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+mat-option{
+  background-color: white;
+}
+
+.return{
+  color: black;
+  margin-top: 2%;
+}

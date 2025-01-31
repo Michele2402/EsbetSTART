@@ -1,0 +1,44 @@
+.add-game-section {
+  margin-top: 20px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  font-weight: 700;
+  background: linear-gradient(to right, #B71C1C, #880E4F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #333333;
+}
+
+.static-form-container {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+}
+
+.hidden {
+  display: none;
+}
+
+.static-form-container button {
+  margin-top: 8px;
+}
+
+.rules-to-add {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rule-to-add-input {
+  width: 100px;
+  max-width: 300px;
+}

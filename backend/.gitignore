@@ -31,5 +31,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### MyFiles ###
+src/main/java/unisa/esbetstart/TestController.java
+
 ### VS Code ###
 .vscode/

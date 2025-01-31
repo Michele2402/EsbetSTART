@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<app-leftbar></app-leftbar>
+
+<app-slip></app-slip>
+
+<div class="sport-container">
+  @for (sport of (allGames$ | async); track sport) {
+    <div class="sport-item" (click)="selectGame(sport)">
+      <img src="assets/esports/{{sport.name}}.png" class="sport-image" />
+      <span class="sport-name">{{ sport.name }}</span>
+    </div>
+  }
+</div>

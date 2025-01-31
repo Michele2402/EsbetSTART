@@ -1,0 +1,34 @@
+.sport-container {
+  max-width: 70%;
+  margin-top: 40px;
+  margin-left: 50px;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sport-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sport-item:hover {
+  background-color: #d3d3d3;
+}
+
+.sport-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.sport-name {
+  font-size: 18px;
+  font-weight: bold;
+}

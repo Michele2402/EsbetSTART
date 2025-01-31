@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+      <h1>Deposits </h1>
+
+   <div class="deposits" >
+        @for (transaction of ( deposit$ | async ); track transaction) {
+          <div class="amount">
+            {{transaction.amount}}
+          </div>
+          <div class="date">
+            {{transaction.date}}
+          </div>
+        }
+
+      </div>
+

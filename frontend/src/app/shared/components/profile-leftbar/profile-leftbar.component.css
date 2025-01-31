@@ -1,0 +1,52 @@
+.sidebar {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 30%;
+}
+
+.sidebar-button {
+  width: 200%;
+  background: black;
+  color: white;
+  border-radius: 20px;
+  height: 50px;
+  padding: 0 40px;
+}
+
+.sidebar-button:hover, .logout-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar mat-card {
+  background-color: white;
+  width: 60%;
+  text-align: center;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+mat-card-content {
+  font-size: 16px;
+  color: black;
+}
+
+mat-divider {
+  height: 1px;
+  margin: 8px 0;
+}
+
+.input-container {
+  margin-top: 10px;
+}

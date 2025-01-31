@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+
+<button mat-button (click)="goBack()" class="return">
+  <mat-icon>arrow_back</mat-icon>
+  Return back
+</button>
+
+<form (ngSubmit)="onSubmit()">
+
+<mat-card appearance="outlined">
+  <h3>Type of problem</h3>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-select>
+      @for (problems of problem; track problems) {
+        <mat-option [value]="problems.value">{{problems.viewValue}}</mat-option>
+      }
+      </mat-select>
+    </mat-form-field>
+
+    <h3>Write a message</h3>
+    <mat-form-field appearance="outline" class="message-area">
+      <textarea matInput></textarea>
+    </mat-form-field>
+
+
+    <button mat-fab color="primary">Send</button>
+
+  </mat-card-content>
+</mat-card>
+
+</form>

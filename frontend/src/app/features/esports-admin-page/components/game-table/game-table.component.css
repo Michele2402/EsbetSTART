@@ -1,0 +1,154 @@
+.games-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  border: 1px solid black;
+}
+
+.game-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+}
+
+.game-name {
+  font-size: 18px;
+  font-weight: bold;
+  width: 200px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.game-name:hover {
+  color: #d32f2f;
+}
+
+.rules-list {
+  display: flex;
+  gap: 8px;
+  flex-grow: 1;
+  padding-left: 15px;
+  flex-wrap: wrap;
+}
+
+.rule {
+  background-color: #d3d3d3;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.modify-button,
+.remove-button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.modify-button:hover,
+.remove-button:hover {
+  background-color: #c62828;
+}
+
+.modify-button:focus,
+.remove-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.4);
+}
+
+.remove-button {
+  background-color: #ff4d4d;
+}
+
+.remove-button:hover {
+  background-color: #e63939;
+}
+
+.edit-form {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 40px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.hidden {
+  display: none;
+}
+
+.name-input-to-update {
+  min-width: 200px;
+}
+
+.rules-to-edit {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.rule-item {
+  display: flex;
+  gap: 10px;
+  width: 150px;
+}
+
+.rule-item mat-form-field {
+  flex: 1 1 200px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-rule-button,
+.save-button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  min-width: 120px;
+  height: 44px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.add-rule-button:hover,
+.save-button:hover {
+  background-color: #c62828;
+}
+
+.add-rule-button:focus,
+.save-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.4);
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
