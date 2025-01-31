@@ -4,5 +4,9 @@ import unisa.esbetstart.transactionmanagment.presentation.request.AddOfferReques
 
 public interface CreateOfferUseCase {
 
+    /**
+     * Creates an offer
+     * @param request the request
+     */
     void createOffer(AddOfferRequest request);
 }

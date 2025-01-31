@@ -15,6 +15,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InfrastructureBetMapper {
 
+    /**
+     * Maps a BetPlacedEntity to a BetPlaced model with the OddStatics.
+     * @param betPlacedEntity the BetPlacedEntity to map
+     * @return the BetPlaced model with OddStatic
+     * */
     public BetPlaced toBetModelWithOddStatic(BetPlacedEntity betPlacedEntity) {
         Set<OddStatic> oddStatics = betPlacedEntity.getOdds().stream()
                 .map(oddStaticEntity -> OddStatic.builder()

@@ -4,5 +4,10 @@ import unisa.esbetstart.slipmanagment.presentation.request.UpdateSlipRequest;
 
 public interface UpdateSlipUseCase {
 
-        void updateSlip(UpdateSlipRequest request);
+    /**
+     * Updates a slip.
+     * @param request the request to update the slip
+     */
+    void updateSlip(UpdateSlipRequest request);
+
 }

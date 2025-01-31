@@ -11,6 +11,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ApplicationOddMapper {
 
+    /**
+     * Maps an AddOddRequest to an Odd model.
+     * @param request the AddOddRequest to map
+     * @return the Odd model
+     */
     public Odd toOddModel (AddOddRequest request) {
         return Odd.builder()
 

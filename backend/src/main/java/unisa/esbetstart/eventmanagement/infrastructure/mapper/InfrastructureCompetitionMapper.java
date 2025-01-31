@@ -45,6 +45,11 @@ public class  InfrastructureCompetitionMapper {
                 .build();
     }
 
+    /**
+     * Maps a List of CompetitionEntity to a List of Competition model with simple details (no external objects).
+     * @param competitionEntities the List of CompetitionEntity to map
+     * @return the List of Competition model
+     */
     public List<Competition> toCompetitionModelWithSimpleDetailsList(List<CompetitionEntity> competitionEntities) {
 
         return competitionEntities

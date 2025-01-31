@@ -15,6 +15,11 @@ public class InfrastructureTicketMapper {
 
     private final InfrastructureMessageMapper infrastructureMessageMapper;
 
+    /**
+     * Maps a ticket model to a ticket entity
+     * @param ticket the ticket model
+     * @return the ticket entity
+     */
     public TicketEntity toTicketEntity(Ticket ticket) {
 
         return TicketEntity.builder()
@@ -30,6 +35,11 @@ public class InfrastructureTicketMapper {
                 .build();
     }
 
+    /**
+     * Maps a ticket entity to a ticket model
+     * @param ticketEntity the ticket entity
+     * @return the ticket model
+     */
     public Ticket toTicketModel(TicketEntity ticketEntity) {
 
         return Ticket.builder()

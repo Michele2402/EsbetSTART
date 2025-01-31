@@ -11,6 +11,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ApplicationRuleMapper {
 
+        /**
+         * Maps an AddRuleRequest to a Rule model.
+         * @param request the AddRuleRequest to map
+         * @return the Rule model
+         */
         public Rule toRuleModel (AddRuleRequest request) {
             return Rule.builder()
 

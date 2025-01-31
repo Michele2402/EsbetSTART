@@ -6,5 +6,12 @@ import unisa.esbetstart.transactionmanagment.presentation.request.ShowUserBetsRe
 import java.util.Set;
 
 public interface ShowBetsUseCase {
+
+    /**
+     * Shows the bets of a user
+     * @param request the request
+     * @return the set of bets
+     */
     Set<BetPlaced> showBets(ShowUserBetsRequest request);
+
 }

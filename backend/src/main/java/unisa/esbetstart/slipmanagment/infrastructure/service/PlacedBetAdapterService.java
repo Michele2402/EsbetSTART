@@ -21,6 +21,10 @@ public class PlacedBetAdapterService implements PlaceBetPortOut, UpdateBetPlaced
     private final BetPlacedJpaRepository betPlacedJpaRepository;
     private final InfrastructureBetPlacedMapper infrastructureBetPlacedMapper;
 
+    /**
+     * This method places a bet
+     * @param betPlaced
+     */
     @Override
     public void placeBet(BetPlaced betPlaced) {
 
@@ -28,6 +32,9 @@ public class PlacedBetAdapterService implements PlaceBetPortOut, UpdateBetPlaced
 
     }
 
+    /**
+     * This updates a BetPlaced
+     */
     @Override
     public void updateBetPlaced(BetPlaced betPlaced) {
 

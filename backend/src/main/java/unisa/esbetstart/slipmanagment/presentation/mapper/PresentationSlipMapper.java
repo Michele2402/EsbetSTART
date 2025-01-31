@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 @Component
 public class PresentationSlipMapper {
 
+    /**
+     * This method maps a Slip to a SlipResponse
+     *
+     * @param slip
+     * @return SlipResponse
+     */
     public SlipResponse toSlipResponse(Slip slip) {
         return SlipResponse.builder()
                 .amount(slip.getAmount())

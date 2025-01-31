@@ -11,10 +11,20 @@ import java.util.stream.Collectors;
 @Component
 public class PresentationMessageMapper {
 
+    /**
+     * Maps a list of messages to a set of message responses
+     * @param messages the list of messages
+     * @return the set of message responses
+     */
     public Set<MessageResponse> toMessageResponseSet(List<Message> messages) {
         return messages.stream().map(this::toMessageResponse).collect(Collectors.toSet());
     }
 
+    /**
+     * Maps a message to a message response
+     * @param message the message
+     * @return the message response
+     */
     public MessageResponse toMessageResponse(Message message) {
         return MessageResponse.builder()
                 .id(message.getId())

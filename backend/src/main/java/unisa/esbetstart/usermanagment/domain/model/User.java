@@ -30,6 +30,9 @@ public class User {
         validate();
     }
 
+    /**
+     * This method validates the user's attributes
+     */
     private void validate() {
 
         if(name == null || surname == null || email == null || username == null || password == null) {
@@ -62,6 +65,12 @@ public class User {
 
     }
 
+    /**
+     * This method updates the user's information
+     * @param name the new name
+     * @param surname the new surname
+     * @param username the new username
+     */
     public void update(String name, String surname, String username) {
         this.name = name;
         this.surname = surname;

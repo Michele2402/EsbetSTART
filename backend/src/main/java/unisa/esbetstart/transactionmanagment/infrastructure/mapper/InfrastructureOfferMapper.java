@@ -17,6 +17,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InfrastructureOfferMapper {
 
+    /**
+     * Maps an OfferEntity to an Offer
+     * @param offerEntity is the offer entity to be mapped
+     * @return Offer
+     */
     public Offer toOfferModel (OfferEntity offerEntity) {
         return Offer.builder()
                 .id(offerEntity.getId())
@@ -29,6 +34,11 @@ public class InfrastructureOfferMapper {
                 .build();
     }
 
+    /**
+     * Maps an Offer to an OfferEntity
+     * @param offer is the offer to be mapped
+     * @return OfferEntity
+     */
     public OfferEntity toOfferEntity (Offer offer) {
         return OfferEntity.builder()
                 .id(offer.getId())
@@ -41,6 +51,11 @@ public class InfrastructureOfferMapper {
                 .build();
     }
 
+    /**
+     * Maps a set of OfferEntity to a set of Offer
+     * @param offerEntitySet is the set of offer entities to be mapped
+     * @return Set<Offer>
+     */
     public Set<Offer> toOfferModelSet (List<OfferEntity> offerEntitySet) {
         return offerEntitySet
                 .stream()
@@ -113,6 +128,11 @@ public class InfrastructureOfferMapper {
                 .build();
     }
 
+    /**
+     * Maps an ActivatedOfferEntity to an ActivatedOffer with the offer model
+     * @param activatedOfferEntity
+     * @return the activated offer with the offer model
+     */
     public ActivatedOffer toActivatedOfferWithOfferModel (ActivatedOfferEntity activatedOfferEntity) {
         return ActivatedOffer.builder()
                 .id(activatedOfferEntity.getId())
@@ -129,6 +149,11 @@ public class InfrastructureOfferMapper {
                 .build();
     }
 
+    /**
+     * Maps a set of ActivatedOfferEntity to a set of ActivatedOffer with the offer model
+     * @param activatedOfferEntitySet
+     * @return the set of activated offers with the offer model
+     */
     public Set<ActivatedOffer> toActivatedOfferWithOfferModelSet (List<ActivatedOfferEntity> activatedOfferEntitySet) {
         return activatedOfferEntitySet
                 .stream()

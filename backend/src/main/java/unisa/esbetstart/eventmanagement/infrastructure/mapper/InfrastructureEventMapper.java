@@ -17,6 +17,11 @@ public class InfrastructureEventMapper {
     private final InfrastructureOddMapper infrastructureOddMapper;
     private final InfrastructureCompetitionMapper infrastructureCompetitionMapper;
 
+    /**
+     * Maps an event entity to an event model
+     * @param event the event entity
+     * @return the event model
+     */
     public EventEntity toEventEntity (Event event) {
         return EventEntity.builder()
                 .id(event.getId())
@@ -35,7 +40,6 @@ public class InfrastructureEventMapper {
      * @param eventEntity the event entity
      * @return the event model
      */
-
     public Event toEventModelWithAlotOfDetails(EventEntity eventEntity) {
 
         return Event.builder()
@@ -82,10 +86,20 @@ public class InfrastructureEventMapper {
                 .build();
     }
 
+    /**
+     * Maps a list of event entities to a list of event models with odds
+     * @param eventEntityList the list of event entities
+     * @return the list of event models
+     */
     public List<Event> toModelWithOddsList (List<EventEntity> eventEntityList) {
         return eventEntityList.stream().map(this::toModelWithOdds).collect(Collectors.toList());
     }
 
+    /**
+     * Maps an event entity to an event model with odds
+     * @param eventEntity the event entity
+     * @return the event model
+     */
     public Event toModelWithOdds (EventEntity eventEntity) {
         return Event.builder()
                 .id(eventEntity.getId())
@@ -96,6 +110,11 @@ public class InfrastructureEventMapper {
                 .build();
     }
 
+    /**
+     * Maps an event model to an event entity up until the bets placed
+     * @param event the event model
+     * @return the event entity
+     */
     public EventEntity toEventEntityToBetPlaced(Event event) {
         return EventEntity.builder()
                 .id(event.getId())

@@ -50,6 +50,11 @@ public class Ticket {
         this.messages.add(message);
     }
 
+    /**
+     * Method to read messages
+     * @param sender the sender of the message
+     * @return List<Message>
+     */
     public List<Message> readMessages(SenderEnum sender) {
         List<Message> readMessages = new ArrayList<>();
 

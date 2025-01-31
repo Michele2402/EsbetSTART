@@ -8,6 +8,12 @@ import org.springframework.data.domain.Page;
 import java.util.Set;
 
 public interface GetGameUseCase {
+
+    /**
+     * Gets all games from the database.
+     *
+     * @return a set of all games
+     */
     Set<Game> getAllGames();
     Page<Game> getFiltered(String name, int size, int page);
 }

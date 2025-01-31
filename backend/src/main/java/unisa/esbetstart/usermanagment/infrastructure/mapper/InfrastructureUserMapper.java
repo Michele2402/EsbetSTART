@@ -23,6 +23,11 @@ public class InfrastructureUserMapper {
     private final InfrastructureTransactionMapper infrastructureTransactionMapper;
     private final InfrastructureBetMapper  infrastructureBetMapper;
 
+    /**
+     * Maps a UserEntity to a User model
+     * @param userEntity
+     * @return the new User
+     */
     public User toUserModel(UserEntity userEntity) {
         return User.builder()
                 .email(userEntity.getEmail())
@@ -59,6 +64,11 @@ public class InfrastructureUserMapper {
         return gambler;
     }
 
+    /**
+     * Maps a Gambler to a new GamblerEntity with initialized values
+     * @param gambler
+     * @return the new GamblerEntity
+     */
     public GamblerEntity toGamblerEntityWithActivatedOffers(Gambler gambler) {
 
         return GamblerEntity.builder()
@@ -75,6 +85,11 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
+    /**
+     * Maps a GamblerEntity to a Gambler model with activated offers
+     * @param gamblerEntity
+     * @return the new GamblerEntity
+     */
     public Gambler toGamblerModelWithActivatedOffers(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())
@@ -90,6 +105,11 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
+    /**
+     * Maps a Gambler to a GamblerEntity
+     * @param gambler
+     * @return the new GamblerEntity
+     */
     public GamblerEntity toSimpleGamblerEntity(Gambler gambler) {
         return GamblerEntity.builder()
                 .email(gambler.getEmail())
@@ -103,6 +123,11 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
+    /**
+     * Maps a GamblerEntity to a Gambler model with offers
+     * @param gamblerEntity
+     * @return the new Gambler
+     */
     public Gambler toGamblerModelWithOffers(GamblerEntity gamblerEntity) {
 
         Gambler toReturn = this.toGamblerModelWithActivatedOffers(gamblerEntity);
@@ -122,6 +147,11 @@ public class InfrastructureUserMapper {
         return toReturn;
     }
 
+    /**
+     * Maps a GamblerEntity to a Gambler model with its transactions
+     * @param gamblerEntity
+     * @return the new Gambler
+     */
     public Gambler toGamblerModelWithTransactions(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())
@@ -134,6 +164,11 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
+    /**
+     * Maps a GamblerEntity to a Gambler model with its bets
+     * @param gamblerEntity
+     * @return the new Gambler
+     */
     public Gambler toGamblerModelWithBets(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())
@@ -146,6 +181,11 @@ public class InfrastructureUserMapper {
                 .build();
     }
 
+    /**
+     * Maps a GamblerEntity to a Gambler model
+     * @param gamblerEntity
+     * @return the new Gambler
+     */
     public Gambler toGamblerModel(GamblerEntity gamblerEntity) {
         return Gambler.builder()
                 .email(gamblerEntity.getEmail())

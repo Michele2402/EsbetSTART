@@ -9,6 +9,12 @@ import unisa.esbetstart.ticketmanagment.infrastructure.entity.TicketEntity;
 @Component
 @RequiredArgsConstructor
 public class InfrastructureMessageMapper {
+
+    /**
+     * Maps a message model to a message entity
+     * @param message the message model
+     * @return the message entity
+     */
     public MessageEntity toMessageEntity(Message message) {
         return MessageEntity.builder()
                 .id(message.getId())
@@ -21,6 +27,11 @@ public class InfrastructureMessageMapper {
                 .build();
     }
 
+    /**
+     * Maps a message entity to a message model
+     * @param messageEntity the message entity
+     * @return the message model
+     */
     public Message toMessageModel(MessageEntity messageEntity) {
         return Message.builder()
                 .id(messageEntity.getId())

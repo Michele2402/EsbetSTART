@@ -21,6 +21,9 @@ import unisa.esbetstart.usermanagment.presentation.response.BalanceResponse;
 import unisa.esbetstart.usermanagment.presentation.response.LoginResponse;
 import unisa.esbetstart.usermanagment.presentation.response.SimpleUserResponse;
 
+/**
+ * Controller for handling user-related operations.
+ */
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -37,6 +40,11 @@ public class UserController {
 
     private final PresentationAuthMapper presentationAuthMapper;
 
+    /**
+     * Registers a new user.
+     *
+     * @param request the registration request
+     */
     @PostMapping("/register")
     public void register(
             @RequestBody RegisterRequest request
@@ -44,6 +52,12 @@ public class UserController {
         registrationUseCase.register(request);
     }
 
+    /**
+     * Logs in a user.
+     *
+     * @param request the login request
+     * @return the login response containing the authentication token
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(
             @RequestBody LoginRequest request
@@ -55,6 +69,11 @@ public class UserController {
         return ResponseEntity.ok(loginResponse);
     }
 
+    /**
+     * Creates a new transaction.
+     *
+     * @param request the create transaction request
+     */
     @PostMapping("/transaction/create")
     public void transaction(
             @RequestBody CreateTransactionRequest request
@@ -62,6 +81,12 @@ public class UserController {
         createTransactionUseCase.createTransaction(request);
     }
 
+    /**
+     * Retrieves a user by email.
+     *
+     * @param email the email of the user
+     * @return the simple user response
+     */
     @GetMapping("{email}")
     public ResponseEntity<SimpleUserResponse> getUser(
             @PathVariable String email
@@ -74,6 +99,11 @@ public class UserController {
         return ResponseEntity.ok(simpleUserResponse);
     }
 
+    /**
+     * Updates a gambler's information.
+     *
+     * @param request the update gambler request
+     */
     @PostMapping("/update")
     public void updateGambler(
             @RequestBody UpdateGamblerRequest request
@@ -81,6 +111,12 @@ public class UserController {
         updateUserUseCase.updateGambler(request);
     }
 
+    /**
+     * Retrieves the balance of a gambler by email.
+     *
+     * @param email the email of the gambler
+     * @return the balance response
+     */
     @GetMapping("/balance/{email}")
     public ResponseEntity<BalanceResponse> getBalance(
             @PathVariable String email
