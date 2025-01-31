@@ -74,11 +74,6 @@ public class EventController {
 
     }
 
-    @GetMapping("/get-all-by-competition/{competitionId}")
-    /**
-     * Gets all events by competition id.
-     * @param competitionId the id of the competition
-     */
     @GetMapping("get-all-by-competition/{competitionId}")
     public ResponseEntity<List<EventResponse>> getAllByCompetitionId(
             @PathVariable String competitionId
