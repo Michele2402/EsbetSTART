@@ -13,6 +13,6 @@ public class UpdateSlipRequest {
 
     private double amount;
     private Set<String> oddsIds;
-    private String slipId;
+    private String gamblerEmail;
 
 }
