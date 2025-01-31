@@ -92,6 +92,7 @@ public class Odd {
                 .result(PLAYING)
                 .name(name)
                 .value(value)
+                .date(event.getDate())
                 .odd(Odd.builder()
                         .id(id)
                         .build())

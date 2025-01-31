@@ -73,6 +73,7 @@ public class GamblerManagerService implements CreateTransactionUseCase {
         updateGamblerPortOut.updateGambler(gambler);
 
         Transaction toSave = Transaction.builder()
+                .id(UUID.randomUUID())
                 .amount(request.getTransactionValue())
                 .type(request.getTransactionType())
                 .date(LocalDateTime.now())
