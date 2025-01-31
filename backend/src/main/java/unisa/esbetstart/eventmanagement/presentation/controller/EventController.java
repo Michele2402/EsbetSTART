@@ -28,9 +28,12 @@ public class EventController {
     private final UpdateOddUseCase updateOddUseCase;
     private final RemoveEventUseCase removeEventUseCase;
     private final GetEventUseCase getEventUseCase;
-
     private final PresentationEventMapper presentationEventMapper;
 
+    /**
+     * Adds a new event to a competition.
+     * @param request the AddEventRequest containing the event data
+     */
     @PostMapping("/add")
     public void addEvent(@RequestBody AddEventRequest request) {
 
@@ -38,6 +41,10 @@ public class EventController {
 
     }
 
+    /**
+     * Updates the event name and date.
+     * @param request the UpdateEventRequest containing the event data
+     */
     @PostMapping("/update")
     public void updateEvent(@RequestBody UpdateEventRequest request) {
 
@@ -45,6 +52,10 @@ public class EventController {
 
     }
 
+    /**
+     * Updates the odd value.
+     * @param request the UpdateOddRequest containing the odd data
+     */
     @PostMapping("/odds/update")
     public void updateOdd(@RequestBody UpdateOddRequest request) {
 
@@ -52,6 +63,10 @@ public class EventController {
 
     }
 
+    /**
+     * Removes an event.
+     * @param eventId the id of the event to remove
+     */
     @DeleteMapping("/remove")
     public void removeEvent(@RequestParam String eventId) {
 
@@ -60,6 +75,11 @@ public class EventController {
     }
 
     @GetMapping("/get-all-by-competition/{competitionId}")
+    /**
+     * Gets all events by competition id.
+     * @param competitionId the id of the competition
+     */
+    @GetMapping("get-all-by-competition/{competitionId}")
     public ResponseEntity<List<EventResponse>> getAllByCompetitionId(
             @PathVariable String competitionId
     ) {
@@ -68,6 +88,10 @@ public class EventController {
         return ResponseEntity.ok(events.stream().map(presentationEventMapper::toResponse).toList());
     }
 
+    /**
+     * Ends an event by its id.
+     * @param event the id of the event
+     */
     @PostMapping("/end")
     public void endEvent(@RequestBody EndEventRequest event) {
 

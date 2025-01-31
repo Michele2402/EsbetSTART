@@ -63,6 +63,11 @@ public class InfrastructureOddMapper {
                 .build();
     }
 
+    /**
+     * Maps an OddEntity to an Odd model with details up to gamblers.
+     * @param oddEntity the OddEntity to map
+     * @return the Odd model
+     */
     public Odd toOddModelWithAlotOfDetails (OddEntity oddEntity) {
         return Odd.builder()
                 .id(oddEntity.getId())
@@ -77,6 +82,11 @@ public class InfrastructureOddMapper {
                 .build();
     }
 
+    /**
+     * Maps an Odd model to an OddEntity with details up to gamblers.
+     * @param odd the Odd model to map
+     * @return the OddEntity
+     */
     public OddEntity toOddEntityWithAlotOfDetails (Odd odd) {
 
         return OddEntity.builder()

@@ -34,9 +34,11 @@ public class Transaction {
         validate();
     }
 
-
+    /**
+     * Validates the transaction
+     */
     public void validate() {
-        if (this.amount < 0) {
+        if (this.amount <= 0) {
             log.error("Amount must be positive");
             throw new DomainAttributeException("Amount must be positive");
         }

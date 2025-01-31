@@ -38,6 +38,11 @@ public class InfrastructureBetPlacedMapper {
                 .build();
     }
 
+    /**
+     * This method maps a BetPlaced to a BetPlacedEntity up to the gambler
+     * @param betPlaced
+     * @return BetPlacedEntity
+     */
     public BetPlacedEntity toBetPlacedEntityToGambler(BetPlaced betPlaced) {
         return BetPlacedEntity.builder()
                 .id(betPlaced.getId())

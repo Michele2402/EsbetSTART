@@ -30,6 +30,10 @@ public class TicketController {
     private final PresentationTicketMapper presentationTicketMapper;
     private final ReadMessageUseCase readMessageUseCase;
 
+    /**
+     * Opens a ticket
+     * @param request the request
+     */
     @PostMapping("/open")
     public void openTicket(
             @RequestBody OpenTicketRequest request
@@ -37,6 +41,10 @@ public class TicketController {
         openTicketUseCase.openTicket(request);
     }
 
+    /**
+     * Accepts a ticket
+     * @param request the request
+     */
     @PostMapping("/accept")
     public void acceptTicket(
             @RequestBody AcceptTicketRequest request
@@ -44,6 +52,10 @@ public class TicketController {
         acceptTicketUseCase.acceptTicket(request);
     }
 
+    /**
+     * Sends a message to a ticket
+     * @param request the request
+     */
     @PostMapping("/sendMessage")
     public void sendMessage(
             @RequestBody SendMessageRequest request
@@ -51,6 +63,10 @@ public class TicketController {
         sendMessageUseCase.sendMessage(request);
     }
 
+    /**
+     * Gets all tickets from a gambler email
+     * @return the tickets
+     */
     @PostMapping("/getByGamblerEmail")
     public ResponseEntity<Set<TicketResponse>> getTicketsByGamblerEmail(
             @RequestBody String gamblerEmail
@@ -60,6 +76,10 @@ public class TicketController {
         return ResponseEntity.ok(presentationTicketMapper.toTicketResponseSet(tickets));
     }
 
+    /**
+     * Gets all tickets from an operator email
+     * @return the tickets
+     */
     @PostMapping("/getByOperatorEmail")
     public ResponseEntity<Set<TicketResponse>> getTicketsByOperatorId(
             @RequestBody String operatorEmail

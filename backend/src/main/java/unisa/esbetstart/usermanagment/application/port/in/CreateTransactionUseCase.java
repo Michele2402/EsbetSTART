@@ -4,6 +4,10 @@ import unisa.esbetstart.usermanagment.presentation.request.CreateTransactionRequ
 
 public interface CreateTransactionUseCase {
 
+    /**
+     * Saves a transaction in the database
+     * @param request the request
+     */
     void createTransaction(CreateTransactionRequest request);
 
 }

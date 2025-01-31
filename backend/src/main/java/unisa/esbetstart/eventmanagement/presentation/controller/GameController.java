@@ -66,6 +66,10 @@ public class GameController {
         return ResponseEntity.ok(presentationGameMapper.toGameWithRulesResponseSet(games));
     }
 
+    /**
+     * Updates the game name and origin country.
+     * @param request the UpdateGameRequest containing the game data
+     */
     @PostMapping("/update")
     public void updateGame(
             @RequestBody UpdateGameRequest request
@@ -73,6 +77,10 @@ public class GameController {
         updateGameUseCase.updateGame(request);
     }
 
+    /**
+     * Removes a game.
+     * @param gameId the id of the game to remove
+     */
     @DeleteMapping("/remove/{gameId}")
     public void removeGame(
             @PathVariable String gameId

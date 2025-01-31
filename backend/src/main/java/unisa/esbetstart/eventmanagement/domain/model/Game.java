@@ -108,6 +108,11 @@ public class Game implements Searchable{
 
     }
 
+    /**
+     * This method checks if there are events that have not ended in the competitions of the game.
+     *
+     * @return true if there are events that have not ended, false otherwise
+     */
     public boolean hasNotEndedEventsInCompetitions() {
 
         for (Competition competition : competitions) {

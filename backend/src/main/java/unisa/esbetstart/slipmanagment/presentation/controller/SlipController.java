@@ -24,6 +24,10 @@ public class SlipController {
     private final GetSlipUseCase getSlipUseCase;
     private final PresentationSlipMapper presentationSlipMapper;
 
+    /**
+     * This method saves a slip
+     * @param request
+     */
     @PostMapping("/save")
     public void saveSlip(@RequestBody UpdateSlipRequest request) {
 
@@ -31,6 +35,10 @@ public class SlipController {
 
     }
 
+    /**
+     * This method places a bet
+     * @param slipId
+     */
     @PostMapping("/place-bet")
     public void placeBet(@RequestParam String slipId) {
 
@@ -38,6 +46,11 @@ public class SlipController {
 
     }
 
+    /**
+     * This method gets a slip from a gamblerEmail
+     * @param gamblerEmail
+     * @return SlipResponse
+     */
     @GetMapping("/get-slip/{gamblerEmail}")
     public ResponseEntity<SlipResponse> getSlip(@PathVariable String gamblerEmail) {
 

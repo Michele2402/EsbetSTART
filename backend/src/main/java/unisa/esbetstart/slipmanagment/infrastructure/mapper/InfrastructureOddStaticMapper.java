@@ -42,6 +42,12 @@ public class InfrastructureOddStaticMapper {
                 .build();
     }
 
+    /**
+     * This method maps an OddStaticEntity to an OddStatic
+     *
+     * @param oddStaticEntity
+     * @return OddStatic
+     */
     public OddStatic toOddStaticModelUpToGambler(OddStaticEntity oddStaticEntity) {
 
         return OddStatic.builder()
@@ -73,6 +79,12 @@ public class InfrastructureOddStaticMapper {
                         .build();
     }
 
+    /**
+     * This method maps an OddStaticEntity to an OddStaticModel
+     *
+     * @param oddStaticEntity
+     * @return OddStatic
+     */
     public OddStatic toOddStaticModelWithAlotOfDetails(OddStaticEntity oddStaticEntity) {
 
         return OddStatic.builder()

@@ -90,6 +90,15 @@ public class ParseAttribute {
         }
     }
 
+    /**
+     * Converts a string representation of a SenderType into a SenderEnum object.
+     * If the string is not a valid SenderType, logs an error message and throws an exception.
+     *
+     * @param type the string representation of the SenderType to convert
+     * @param infoAttribute a description of the associated attribute, used for logging and exception messages
+     * @return the SenderEnum object representing the SenderType
+     * @throws InvalidParsingException if the string is not a valid SenderType
+     */
     public SenderEnum convertStringIntoSenderType(String type, String infoAttribute) {
         try {
             return SenderEnum.valueOf(type);

@@ -47,6 +47,11 @@ public class InfrastructureGameMapper {
                 .build();
     }
 
+    /**
+     * Maps a List of GameEntity to a Set of Game model with rules
+     * @param gameEntities the List of GameEntity to map
+     * @return the Set of Game model with rules
+     */
     public Set<Game> toGameModelWithRulesSet (List<GameEntity> gameEntities) {
         return gameEntities.stream()
                 .map(this::toGameModelWithRules)
@@ -54,6 +59,11 @@ public class InfrastructureGameMapper {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
+    /**
+     * Maps a GameEntity to a Game model with rules
+     * @param gameEntity the GameEntity to map
+     * @return the Game model with rules
+     */
     public Game toGameModelWithRules(GameEntity gameEntity) {
 
         return Game.builder()
@@ -79,6 +89,11 @@ public class InfrastructureGameMapper {
                 .build();
     }
 
+    /**
+     * Maps a GameEntity to a Game model with competitions and events
+     * @param gameEntity the GameEntity to map
+     * @return the Game model with competitions and events
+     */
     public Game toGameModelWithCompetitionsAndEvents(GameEntity gameEntity) {
         return Game.builder()
                 .id(gameEntity.getId())

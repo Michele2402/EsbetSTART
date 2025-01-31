@@ -15,10 +15,20 @@ public class PresentationTicketMapper {
 
     private final PresentationMessageMapper presentationMessageMapper;
 
+    /**
+     * Maps a list of tickets to a set of ticket responses
+     * @param tickets the list of tickets
+     * @return the set of ticket responses
+     */
     public Set<TicketResponse> toTicketResponseSet(List<Ticket> tickets) {
         return tickets.stream().map(this::toTicketResponse).collect(Collectors.toSet());
     }
 
+    /**
+     * Maps a ticket to a ticket response
+     * @param ticket the ticket
+     * @return the ticket response
+     */
     public TicketResponse toTicketResponse(Ticket ticket) {
         return TicketResponse.builder()
                 .id(ticket.getId())

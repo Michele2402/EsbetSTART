@@ -20,6 +20,11 @@ public class OddStaticAdapterService implements GetOddStaticPortOut {
     private final OddStaticJpaRepository oddStaticJpaRepository;
     private final InfrastructureOddStaticMapper infrastructureOddStaticMapper;
 
+    /**
+     * This method gets an OddStatic by its id
+     * @param oddStaticId
+     * @return OddStatic
+     */
     @Override
     public OddStatic getOddStaticToGamblerById(UUID oddStaticId) {
 
