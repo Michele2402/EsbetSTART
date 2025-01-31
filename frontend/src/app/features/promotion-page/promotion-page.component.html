@@ -1,40 +1,52 @@
 <app-navbar></app-navbar>
-
 <app-leftbar></app-leftbar>
 
-<h1>Promotion</h1>
+<div class="promotions-container">
+  <h1>Offers</h1>
 
-<mat-tab-group>
-  <mat-tab label="All offer">
-    <div class="promotion-container">
-    <mat-card class="promotion-card" appearance="outlined">
-      <mat-card-content>
-        @for (promotion of (allPromotion$ | async); track promotion) {
-          <img src="assets/{{promotion.name}}.png" class="promotion-image"/>
-          <div class="promotion-name">
-            {{ promotion.name }}
-          </div>
+  <mat-tab-group>
+    <mat-tab label="All offers">
+        <div class="promotion-list">
+          @for(promotion of (allPromotions$ | async); track promotion) {
+            <mat-card class="promotion-card" appearance="outlined">
+              <mat-card-content class="promotion-card-content">
+                <div class="promotion-name">{{ promotion.name }}</div>
+                <div class="promotion-description">{{ promotion.description }}</div>
+                <div class="promotion-details">
+                  <span>Expires: {{ promotion.expirationDate }}</span>
+                  <span>Type: {{ promotion.type }}</span>
+                  <span>Goal: {{ promotion.goal }}</span>
+                  <span>Bonus: ${{ promotion.price }}</span>
+                </div>
+                <div class="active">
+                  <button mat-fab class="active-button" (click)="acceptPromotion(promotion.id)">
+                    Activate
+                  </button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Activated offers">
+      <div class="promotion-list">
+        @for(activatedPromotion of (allActivedPromotion$ | async); track activatedPromotion) {
+          <mat-card class="promotion-card" appearance="outlined">
+            <mat-card-content>
+              <div class="promotion-name">{{ activatedPromotion.name }}</div>
+              <div class="promotion-description">{{ activatedPromotion.description }}</div>
+              <div class="promotion-details">
+                <span>Type: {{ activatedPromotion.type }}</span>
+                <span>Goal: {{ activatedPromotion.goal }}</span>
+                <span>Bonus: ${{ activatedPromotion.bonus }}</span>
+                <span>Progress: {{ activatedPromotion.progress }} / {{ activatedPromotion.goal }}</span>
+                <mat-progress-bar mode="determinate" [value]="(activatedPromotion.progress / activatedPromotion.goal) * 100"></mat-progress-bar>
+              </div>
+            </mat-card-content>
+          </mat-card>
         }
-        <div class="active" (click)="acceptPromotion()">
-          <a mat-fab class="active-button">
-            Active promotion
-          </a>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div> </mat-tab>
-  <mat-tab label="Actived offer">  </mat-tab>
-  <mat-card class="promotion-card" appearance="outlined">
-    <mat-card-content>
-      @for (activePromotion of (allActivedPromotion$ | async); track activePromotion) {
-        <img src="assets/{{activePromotion.name}}.png" class="promotion-image"/>
-        <div class="promotion-name">
-          {{ activePromotion.name }}
-        </div>
-      }
-    </mat-card-content>
-  </mat-card>
-</mat-tab-group>
-
-
-
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

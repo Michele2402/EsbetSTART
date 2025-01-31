@@ -30,6 +30,7 @@ import {
   MatDialogTitle
 } from "@angular/material/dialog";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 
@@ -77,7 +78,8 @@ const modules = [
   MatDateRangeInput,
   MatMenu,
   MatMenuTrigger,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressBarModule
 ];
 
 @NgModule({

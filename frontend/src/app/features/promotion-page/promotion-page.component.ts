@@ -5,7 +5,7 @@ import {ActivatedOfferResponse} from "../../model/response/activated-offer-respo
 import {PromotionService} from "../../core/services/promotion.service";
 import {SnackbarService} from "../../core/services/snackbar.service";
 import {AcceptOfferRequest} from "../../model/request/accept-offer-request";
-
+import {JwtService} from "../../core/services/jwt.service";
 
 
 @Component({
@@ -13,9 +13,9 @@ import {AcceptOfferRequest} from "../../model/request/accept-offer-request";
   templateUrl: './promotion-page.component.html',
   styleUrl: './promotion-page.component.css'
 })
-export class PromotionPageComponent implements OnInit,OnDestroy {
+export class PromotionPageComponent implements OnInit, OnDestroy {
 
-  allPromotion$ = new Observable<OfferResponse[]>();
+  allPromotions$ = new Observable<OfferResponse[]>();
 
   allActivedPromotion$ = new Observable<ActivatedOfferResponse[]>();
 
@@ -24,18 +24,19 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
   constructor(
     private promotionService: PromotionService,
     private snackBarService: SnackbarService,
-
-    ) {  }
+    private jwtService: JwtService
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadAllPromotion();
-    this.loadAllActivePromotion('id');
+    this.loadAllActivePromotion();
   }
 
 
   loadAllPromotion(): void {
 
-    this.allPromotion$ = this.promotionService.getAllOffer()
+    this.allPromotions$ = this.promotionService.getAllOffer()
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
@@ -48,8 +49,17 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
       );
   }
 
-  loadAllActivePromotion(id: string): void {
-    this.allActivedPromotion$ = this.promotionService.getActivatedOffer(id)
+  loadAllActivePromotion(): void {
+
+    const email = this.jwtService.getCurrentUserEmail();
+
+    if(email == null){
+      this.snackBarService.showSnackbarMessage(
+        'Please login first', 'error-snackbar');
+      return;
+    }
+
+    this.allActivedPromotion$ = this.promotionService.getActivatedOffer(email)
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
@@ -63,10 +73,22 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
 
   }
 
-  acceptPromotion(): void{
-/*
+  acceptPromotion(id: string): void {
 
-    this.promotionService.acceptOffer(promotion)
+    const email = this.jwtService.getCurrentUserEmail();
+
+    if(email == null){
+      this.snackBarService.showSnackbarMessage(
+        'Please login first', 'error-snackbar');
+      return;
+    }
+
+    const acceptOfferRequest: AcceptOfferRequest = {
+      gamblerEmail: email,
+      offerId: id
+    }
+
+    this.promotionService.acceptOffer(acceptOfferRequest)
       .pipe(
         takeUntil(this._destroy$),
         catchError((error) => {
@@ -80,14 +102,13 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
       .subscribe(() => {
         this.snackBarService.showSnackbarMessage(
           'Promotion Added', 'success-snackbar');
-        this.loadAllActivePromotion('id');
+        this.loadAllActivePromotion();
       });
-*/
 
-}
+  }
 
 
-ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
   }
