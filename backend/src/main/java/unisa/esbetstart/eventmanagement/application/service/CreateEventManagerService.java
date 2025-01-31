@@ -41,6 +41,10 @@ public class CreateEventManagerService implements CreateEventUseCase {
 
     @Override
     public void createEvent(AddEventRequest request) {
+        if (request == null) {
+            log.error("Event request is null");
+            throw new ObjectIsNullException("Event request is null");
+        }
 
         log.info("Adding event {} to database", request.getName());
 
@@ -91,14 +95,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
      * Checks the AddEventRequest object.
      * @param request the AddEventRequest object to check
      */
-    private void checkAddEventRequest(AddEventRequest request, Set<Rule> rules, LocalDateTime date) {
-
-        //null check
-        if(request == null){
-            log.error("Event request is null");
-            throw new ObjectIsNullException("Event request is null");
-        }
-
+    public void checkAddEventRequest(AddEventRequest request, Set<Rule> rules, LocalDateTime date) {
         checkTypeAttribute.checkStringIsNullOrEmpty(request.getName(), "Name of the event");
         checkTypeAttribute.checkStringIsLessThan(request.getName(), 30, "Name of the event");
         checkTypeAttribute.checkIfDateIsNullOrInThePast(date, "Date of the event");
@@ -116,7 +113,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
      * Checks the AddOddRequest object.
      * @param request the AddOddRequest object to check
      */
-    private void checkAddOddRequest(AddOddRequest request) {
+    public void checkAddOddRequest(AddOddRequest request) {
 
         //null check
         if(request == null){
@@ -132,7 +129,7 @@ public class CreateEventManagerService implements CreateEventUseCase {
      * @param request the list of AddOddRequest objects
      * @param rules the set of Rule objects
      */
-    private void checkRuleMatch(List<AddOddRequest> request, Set<Rule> rules) {
+    public void checkRuleMatch(List<AddOddRequest> request, Set<Rule> rules) {
 
         if(request.stream().map(AddOddRequest::getName).distinct().count() != request.size()) {
             log.error("The odd names must be unique");
