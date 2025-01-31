@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WithdrawPageComponent } from './withdraw-page.component';
+import { TermsComponent } from './terms.component';
 
-describe('WithdrawPageComponent', () => {
-  let component: WithdrawPageComponent;
-  let fixture: ComponentFixture<WithdrawPageComponent>;
+describe('TermsComponent', () => {
+  let component: TermsComponent;
+  let fixture: ComponentFixture<TermsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WithdrawPageComponent]
+      imports: [TermsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WithdrawPageComponent);
+    fixture = TestBed.createComponent(TermsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

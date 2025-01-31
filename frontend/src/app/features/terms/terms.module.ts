@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {WithdrawPageComponent} from "./withdraw-page.component";
+import {TermsComponent} from "./terms.component";
 import {SharedModule} from "../../shared/shared.module";
-import {WithdrawPageRoutingModule} from "./withdraw-page-routing.module";
+import {TermsRoutingModule} from "./terms-routing.module";
 
 
 
 @NgModule({
   declarations: [
-    WithdrawPageComponent
+    TermsComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    WithdrawPageRoutingModule,
+    TermsRoutingModule
   ]
 })
-export class WithdrawPageModule { }
+export class TermsModule { }

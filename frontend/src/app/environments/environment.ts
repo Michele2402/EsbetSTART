@@ -22,8 +22,9 @@ export const environmentPaths = {
   event_page: 'event',
   current_bets_page: 'current-bets',
   bets_concluded_page: 'bets-concluded',
-  recharge_page: 'recharge',
-  withdraw_page: 'withdraw',
+  deposits_page: 'deposit',
+  withdrawals_page: 'withdrawal',
+  terms_page: 'terms',
 
   //BACKEND
   base_path: 'http://localhost:8080/',
@@ -47,7 +48,7 @@ export const environmentPaths = {
 
   register: 'users/register',
   login: 'users/login',
-  get: 'users/',
+  get: 'users/get',
   update: 'users/update',
   balance: 'users/balance',
   transactions: 'users/transaction/create',

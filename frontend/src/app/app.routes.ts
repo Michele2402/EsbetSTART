@@ -38,11 +38,13 @@ export const routes: Routes = [
   },
   {
     path: environmentPaths.profile_page,
-    loadChildren: () => import('./features/profile-page/profile-page.module').then(m => m.ProfilePageModule)
+    loadChildren: () => import('./features/profile-page/profile-page.module').then(m => m.ProfilePageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.bets_page,
-    loadChildren: () => import('./features/bets-page/bets-page.module').then(m => m.BetsPageModule)
+    loadChildren: () => import('./features/bets-page/bets-page.module').then(m => m.BetsPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.message_page,
@@ -50,11 +52,13 @@ export const routes: Routes = [
   },
   {
     path: environmentPaths.bank_account_page,
-    loadChildren: () => import('./features/bank-account-page/bank-account-page.module').then(m => m.BankAccountPageModule)
+    loadChildren: () => import('./features/bank-account-page/bank-account-page.module').then(m => m.BankAccountPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.customer_service_ticket_page,
-    loadChildren: () => import('./features/home-page/components/customer-service-ticket/customer-service-ticket.module').then(m => m.CustomerServiceTicketModule)
+    loadChildren: () => import('./features/home-page/components/customer-service-ticket/customer-service-ticket.module').then(m => m.CustomerServiceTicketModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.competitions_admin_page,
@@ -71,32 +75,32 @@ export const routes: Routes = [
   },
   {
     path: environmentPaths.current_bets_page,
-    loadChildren: () => import('./features/current-bets-page/current-bets-page.module').then(m => m.CurrentBetsPageModule)
+    loadChildren: () => import('./features/current-bets-page/current-bets-page.module').then(m => m.CurrentBetsPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.bets_concluded_page,
-    loadChildren: () => import('./features/bets-concluded/bets-concluded-page.module').then(m => m.BetsConcludedPageModule)
-  },
-  {
-    path: environmentPaths.recharge_page,
-    loadChildren: () => import('./features/recharge-page/recharge-page.module').then(m => m.RechargePageModule)
-  },
-  {
-    path: environmentPaths.withdraw_page,
-    loadChildren: () => import('./features/withdraw-page/withdraw-page.module').then(m => m.WithdrawPageModule)
+    loadChildren: () => import('./features/bets-concluded/bets-concluded-page.module').then(m => m.BetsConcludedPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.withdrawals_page,
-    loadChildren: () => import('./features/withdrawals-page/withdrawals-page.module').then(m => m.WithdrawalsPageModule)
+    loadChildren: () => import('./features/withdrawals-page/withdrawals-page.module').then(m => m.WithdrawalsPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.deposits_page,
-    loadChildren: () => import('./features/deposits-page/deposits-page.module').then(m => m.DepositsPageModule)
+    loadChildren: () => import('./features/deposits-page/deposits-page.module').then(m => m.DepositsPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.events_admin_page,
     loadChildren: () => import('./features/events-admin-page/events-admin-page.module').then(m => m.EventsAdminPageModule),
     canActivate: [EventManagerGuardService]
+  },
+  {
+    path: environmentPaths.terms_page,
+    loadChildren: () => import('./features/terms/terms.module').then(m => m.TermsModule)
   },
   {
     path: '',

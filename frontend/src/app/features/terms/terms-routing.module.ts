@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {RechargePageComponent} from "./recharge-page.component";
-
+import {TermsComponent} from "./terms.component";
 
 
 const routes: Routes = [
   {
     path: '',
-    component: RechargePageComponent,
+    component: TermsComponent,
   }
 ]
 
@@ -15,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RechargePageRoutingModule { }
+export class TermsRoutingModule { }

@@ -62,7 +62,7 @@ public class UserController {
         createTransactionUseCase.createTransaction(request);
     }
 
-    @GetMapping("{email}")
+    @GetMapping("/get/{email}")
     public ResponseEntity<SimpleUserResponse> getUser(
             @PathVariable String email
     ) {

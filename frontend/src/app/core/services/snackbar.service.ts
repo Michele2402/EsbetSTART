@@ -22,6 +22,7 @@ export class SnackbarService {
 
   errorHandler(defaultMessage: string, error: any) {
 
+    console.log(error)
     let errorMessage = defaultMessage;
     if (error.status === 401) {
       errorMessage = "You are not authorized to perform this action";

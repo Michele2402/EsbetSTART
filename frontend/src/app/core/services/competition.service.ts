@@ -18,11 +18,9 @@ export class CompetitionService {
   constructor(private http: HttpClient) { }
 
   getAllByGameId(gameId: string): Observable<CompetitionResponse[]> {
-    const token = sessionStorage.getItem('token');
 
     return this.http.get<CompetitionResponse[]>(
       this.basePath + environmentPaths.get_all_competitions + '/' + gameId,
-      {headers: {'Authorization': 'Bearer ' + token}}
     );
   }
 

@@ -25,6 +25,32 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private final String[] unauthorizedPaths = {
+            "/users/login", "users/register", "games/get-all",
+            "competitions/get-all-by-game/**", "/events/get-all-by-competition/**", "users/get/**"
+    };
+
+    private final String[] eventManagerPaths = {
+            "/events/add", "/events/update", "/events/odds/update", "/events/remove/**", "/events/end",
+            "/competitions/add", "/competitions/update", "/competitions/remove/**",
+            "/games/add", "/games/update", "/games/remove",
+    };
+
+    private final String[] gamblerPaths = {
+            "/slip/**", "/tickets/open", "/tickets/getByGamblerEmail", "/transactions/show",
+            "offers/accept", "offers/get-all", "offers/get-activated-by/**",
+            "/bets/show", "users/transaction/create", "users/email", "users/update",
+            "users/balance/**"
+    };
+
+    private final String [] transactionManagerPaths = {
+            "/transactions/showAll", "/offers/add", "offers/update", "offers/remove/**"
+    };
+
+    private final String[] customerServiceOperatorPaths = {
+            "/tickets/accept", "/tickets/getByOperatorEmail"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -32,9 +58,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         (requests) -> requests
-                                .requestMatchers("/**").permitAll()
-                                .requestMatchers("/games/**", "/competitions/**").hasAuthority("EVENT_MANAGER")
-                                .requestMatchers("/events/**").hasAuthority("EVENT_MANAGER")
+                                .requestMatchers(unauthorizedPaths).permitAll()
+                                .requestMatchers(gamblerPaths).hasAuthority("GAMBLER")
+                                .requestMatchers(eventManagerPaths).hasAuthority("EVENT_MANAGER")
+                                .requestMatchers("tickets/sendMessage", "tickets/readMessage").hasAnyAuthority("GAMBLER", "CUSTOMER_SERVICE_OPERATOR")
+                                .requestMatchers(transactionManagerPaths).hasAuthority("TRANSACTION_MANAGER")
+                                .requestMatchers(customerServiceOperatorPaths).hasAuthority("CUSTOMER_SERVICE_OPERATOR")
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

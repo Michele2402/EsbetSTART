@@ -59,7 +59,7 @@ public class EventController {
 
     }
 
-    @GetMapping("get-all-by-competition/{competitionId}")
+    @GetMapping("/get-all-by-competition/{competitionId}")
     public ResponseEntity<List<EventResponse>> getAllByCompetitionId(
             @PathVariable String competitionId
     ) {

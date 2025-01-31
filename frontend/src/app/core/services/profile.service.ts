@@ -19,7 +19,7 @@ export class ProfileService {
     const token = sessionStorage.getItem('token');
 
     return this.http.get<UserResponse>(
-      this.baseUrl + environmentPaths.get + email,
+      this.baseUrl + environmentPaths.get + '/' + email,
       {headers: {'Authorization': 'Bearer ' + token}}
     );
   }

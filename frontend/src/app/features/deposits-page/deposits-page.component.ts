@@ -49,7 +49,7 @@ export class DepositsPageComponent implements OnInit, OnDestroy{
 
   loadAllTransaction(): void {
 
-    let transactionRequest: TransactionRequest = {
+/*    let transactionRequest: TransactionRequest = {
       gamblerEmail: this.getCurrentUserEmail() || '',
       type: TransactionType.DEPOSIT,
     };
@@ -64,7 +64,7 @@ export class DepositsPageComponent implements OnInit, OnDestroy{
 
           return [];
         })
-      );
+      );*/
   }
 
 

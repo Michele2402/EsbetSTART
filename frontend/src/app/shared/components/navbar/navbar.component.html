@@ -6,7 +6,7 @@
     </div>
 
     <div class="navbar-buttons">
-      <a mat-fab class="search-button" extended routerLink="/search">
+      <a mat-fab class="search-button" extended >
         <mat-icon>search</mat-icon>
         Search on ESbet START...
       </a>
@@ -15,8 +15,8 @@
         @if (this.role == Role.EVENT_MANAGER) {
           <button mat-fab class="admin-button" routerLink="/esports-admin"> Events management</button>
         } @else if (this.role == Role.GAMBLER) {
-          <a mat-fab class="action-button">
-            <mat-icon (click)="toProfile()" aria-label="Profile icon">account_circle</mat-icon>
+          <a mat-fab class="action-button" (click)="toProfile()">
+            <mat-icon  aria-label="Profile icon">account_circle</mat-icon>
           </a>
           <div class="balance">
             <a mat-fab class="action-button" (click)="toggleBalance()">

@@ -18,11 +18,8 @@ export class EventService {
 
   getAllByCompetitionId(competitionId: string): Observable<EventResponse[]> {
 
-    const token = sessionStorage.getItem('token');
-
     return this.http.get<EventResponse[]>(
       environmentPaths.base_path + environmentPaths.get_all_events + '/' + competitionId,
-      {headers: {'Authorization': 'Bearer ' + token}}
     );
   }
 

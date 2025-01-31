@@ -51,7 +51,7 @@ export class WithdrawalsPageComponent implements OnInit, OnDestroy{
 
   loadAllTransaction(): void {
 
-    let transactionRequest: TransactionRequest = {
+   /* let transactionRequest: TransactionRequest = {
       gamblerEmail: this.getCurrentUserEmail() || '',
       type: TransactionType.WITHDRAWAL,
     };
@@ -66,7 +66,7 @@ export class WithdrawalsPageComponent implements OnInit, OnDestroy{
 
           return [];
         })
-      );
+      );*/
   }
 
 

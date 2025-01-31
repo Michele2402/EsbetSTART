@@ -12,6 +12,18 @@ export const environmentPaths = {
   competitions_admin_page: 'competitions-admin',
   events_admin_page: 'events-admin',
   search_page: 'search',
+  promotion_page: 'promotion',
+  profile_page: 'profile',
+  bets_page: 'bets',
+  message_page: 'message',
+  bank_account_page: 'bank-account',
+  customer_service_ticket_page: 'customer-service-ticket',
+  competition_page: 'competition',
+  event_page: 'event',
+  current_bets_page: 'current-bets',
+  bets_concluded_page: 'bets-concluded',
+  deposits_page: 'deposit',
+  withdrawals_page: 'withdrawal',
 
   //BACKEND
   base_path: 'http://79.49.37.224:12312/',
@@ -29,7 +41,31 @@ export const environmentPaths = {
 
   get_all_events: 'events/get-all-by-competition',
   add_event: 'events/add',
+  update_event: 'events/update',
+  update_odd: 'events/odds/update',
+  end_event: 'events/end',
 
   register: 'users/register',
   login: 'users/login',
+  get: 'users/',
+  update: 'users/update',
+  balance: 'users/balance',
+  transactions: 'users/transaction/create',
+
+  accept_offer: 'offers/accept',
+  get_all_offer: 'offers/get-all',
+  get_activated_offer: 'offers/get-activated-by',
+
+  get_slip: 'slip/get-slip',
+  save_slip: 'slip/save',
+  place_bet: 'slip/place-bet',
+
+  show_transaction:'transactions/show',
+  show_all_transaction:'transactions/showAll',
+  show_bets:'bets/show',
+
+  open_ticket:'tickets/open',
+  accept_ticket:'tickets/accept',
+  send_ticket:'tickets/sendMessage',
+
 }
