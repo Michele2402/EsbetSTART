@@ -9,12 +9,15 @@ import unisa.esbetstart.usermanagment.application.port.in.GetUserUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.LoginUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.RegistrationUseCase;
 import unisa.esbetstart.usermanagment.application.port.in.UpdateUserUseCase;
+import unisa.esbetstart.usermanagment.application.port.out.GetGamblerPortOut;
+import unisa.esbetstart.usermanagment.domain.model.Gambler;
 import unisa.esbetstart.usermanagment.domain.model.User;
 import unisa.esbetstart.usermanagment.presentation.mapper.PresentationAuthMapper;
 import unisa.esbetstart.usermanagment.presentation.request.CreateTransactionRequest;
 import unisa.esbetstart.usermanagment.presentation.request.LoginRequest;
 import unisa.esbetstart.usermanagment.presentation.request.RegisterRequest;
 import unisa.esbetstart.usermanagment.presentation.request.UpdateGamblerRequest;
+import unisa.esbetstart.usermanagment.presentation.response.BalanceResponse;
 import unisa.esbetstart.usermanagment.presentation.response.LoginResponse;
 import unisa.esbetstart.usermanagment.presentation.response.SimpleUserResponse;
 
@@ -30,6 +33,7 @@ public class UserController {
     private final LoginUseCase loginUseCase;
     private final GetUserUseCase getUserUseCase;
     private final UpdateUserUseCase updateUserUseCase;
+    private final GetGamblerPortOut getGamblerPortOut;
 
     private final PresentationAuthMapper presentationAuthMapper;
 
@@ -75,5 +79,17 @@ public class UserController {
             @RequestBody UpdateGamblerRequest request
     ) {
         updateUserUseCase.updateGambler(request);
+    }
+
+    @GetMapping("/balance/{email}")
+    public ResponseEntity<BalanceResponse> getBalance(
+            @PathVariable String email
+    ) {
+        Gambler gambler = getGamblerPortOut.getGamblerByEmail(email);
+        return ResponseEntity.ok(BalanceResponse.builder()
+                        .withdrawableBalance(gambler.getWithdrawableBalance())
+                        .balance(gambler.getBalance())
+                        .bonusBalance(gambler.getBonusBalance())
+                .build());
     }
 }
