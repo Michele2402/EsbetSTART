@@ -46,7 +46,7 @@ public class InfrastructureOddMapper {
     }
 
     /**
-     * Maps an OddEntity to an Odd model with only the event id.
+     * Maps an OddEntity to an Odd model with only the event id and name.
      * @param oddEntity the OddEntity to map
      * @return the Odd model
      */
@@ -57,7 +57,9 @@ public class InfrastructureOddMapper {
                 .value(oddEntity.getValue())
                 .position(oddEntity.getPosition())
                 .event(Event.builder()
-                        .id(oddEntity.getEvent().getId()).build())
+                        .id(oddEntity.getEvent().getId())
+                        .name(oddEntity.getEvent().getName())
+                        .build())
                 .build();
     }
 
@@ -90,4 +92,5 @@ public class InfrastructureOddMapper {
                 .build();
 
     }
+
 }

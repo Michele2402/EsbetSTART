@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface GetSlipUseCase {
 
-    Slip getSlip(String slipId);
+    Slip getSlip(String gamblerEmail);
 
 }

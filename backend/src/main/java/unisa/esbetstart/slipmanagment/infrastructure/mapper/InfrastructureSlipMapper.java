@@ -23,6 +23,7 @@ public class InfrastructureSlipMapper {
 
     /**
      * Map a SlipEntity to a Slip, only has the gambler email
+     *
      * @param slipEntity SlipEntity
      * @return Slip
      */
@@ -39,6 +40,7 @@ public class InfrastructureSlipMapper {
 
     /**
      * Map a Slip to a SlipEntity, only has the gambler email and the odds ids
+     *
      * @param slip Slip
      * @return SlipEntity
      */
@@ -57,6 +59,7 @@ public class InfrastructureSlipMapper {
 
     /**
      * Map a SlipEntity to a Slip, with links till game
+     *
      * @param slipEntity SlipEntity
      * @return Slip
      */
@@ -90,6 +93,27 @@ public class InfrastructureSlipMapper {
                                                         .build())
                                                 .build())
                                         .build())
+                        .collect(Collectors.toSet()))
+                .build();
+    }
+
+    /**
+     * Map a SlipEntity to a Slip, with links till odds
+     *
+     * @param slipEntity SlipEntity
+     * @return Slip
+     */
+    public Slip toSlipModelWithOdds(SlipEntity slipEntity) {
+        return Slip.builder()
+                .amount(slipEntity.getAmount())
+                .gambler(Gambler
+                        .builder()
+                        .email(slipEntity.getGambler().getEmail())
+                        .build())
+                .id(slipEntity.getId())
+                .odds(slipEntity.getOdds()
+                        .stream()
+                        .map(infrastructureOddMapper::toOddModelWithSimpleDetails)
                         .collect(Collectors.toSet()))
                 .build();
     }

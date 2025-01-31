@@ -40,6 +40,12 @@ public class SlipAdapterService implements GetSlipPortOut, UpdateSlipPortOut {
     }
 
     @Override
+    public Slip getSlipWithOddsById(UUID slipId) {
+        Optional<SlipEntity> slipEntity = slipJpaRepository.findSlipWithOddsById(slipId);
+        return slipEntity.map(infrastructureSlipMapper::toSlipModelWithOdds).orElse(null);
+    }
+
+    @Override
     public void updateSlip(Slip slip) {
 
         slipJpaRepository.save(infrastructureSlipMapper.toSlipEntity(slip));
