@@ -39,4 +39,12 @@ public interface GamblerJpaRepository extends JpaRepository<GamblerEntity, Strin
     @Query("SELECT g FROM GamblerEntity g WHERE g.email = :email")
     Optional<GamblerEntity> findByEmailWithOffers(String email);
 
+    /**
+     * Find a gambler by email with the slip
+     * @param email
+     * @return Optional of GamblerEntity
+     */
+    @EntityGraph(attributePaths = {"slip"})
+    @Query("SELECT g FROM GamblerEntity g WHERE g.email = :email")
+    Optional<GamblerEntity> findByEmailWithSlip(String email);
 }

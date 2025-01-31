@@ -18,7 +18,6 @@ import java.util.Optional;
 public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortOut {
 
     private final GamblerJpaRepository gamblerJpaRepository;
-
     private final InfrastructureUserMapper infrastructureUserMapper;
     private final UserJpaRepository userJpaRepository;
 
@@ -48,6 +47,14 @@ public class GamblerAdapterService implements GetGamblerPortOut, UpdateUserPortO
         Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmailWithRunningBets(email);
 
         return optionalGambler.map(infrastructureUserMapper::toGamblerModelWithBets).orElse(null);
+    }
+
+    @Override
+    public Gambler getGamblerByEmailWithSlip(String email) {
+
+        Optional<GamblerEntity> optionalGambler = gamblerJpaRepository.findByEmailWithSlip(email);
+        return optionalGambler.map(infrastructureUserMapper::toGamblerModelWithSlip).orElse(null);
+
     }
 
     @Override
