@@ -7,11 +7,11 @@
   <div class="bet-slip" [class.open]="isOpen" (click)="$event.stopPropagation()">
     <h3>Your Bet Slip</h3>
 
-    @if((slipOdds$ | async)?.length == 0) {
+    @if(!(slip$ | async)?.odds) {
       <div>No odds selected yet</div>
     }
 
-    @for(slipOdd of (slipOdds$ | async); track slipOdd) {
+    @for(slipOdd of (slip$ | async)?.odds; track slipOdd) {
       <div class="bet-item">
         <span class="bet-name">{{ slipOdd.eventName }}</span>
         <span class="bet-odd">{{ slipOdd.oddName }}</span>

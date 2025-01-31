@@ -1,4 +1,4 @@
-export interface SlipOdd {
+export interface SlipOddResponse {
   eventName: string;
   oddId: string;
   oddName: string;

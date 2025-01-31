@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {SlipOdd} from "../../../model/internal/slip-odd";
 import {SlipService} from "../../../core/services/slip.service";
 import {Observable} from "rxjs";
-import {UpdateSlipRequest} from "../../../model/request/update-slip-request";
 import {JwtService} from "../../../core/services/jwt.service";
 import {SnackbarService} from "../../../core/services/snackbar.service";
+import {SlipResponse} from "../../../model/response/slip-response";
 
 @Component({
   selector: 'app-slip',
@@ -15,7 +14,7 @@ export class SlipComponent implements OnInit {
 
   isOpen = false;
 
-  slipOdds$: Observable<SlipOdd[]> | undefined;
+  slip$: Observable<SlipResponse> = new Observable();
 
   constructor(
     private slipService: SlipService,
@@ -24,17 +23,17 @@ export class SlipComponent implements OnInit {
   ) {
   }
 
+  ngOnInit(): void {
+    this.slip$ = this.slipService.getSlip();
+  }
+
   toggleBetSlip() {
     this.isOpen = !this.isOpen;
   }
 
-  ngOnInit(): void {
-    this.slipOdds$ = this.slipService.slipOdds$;
-  }
-
   updateSlipOdd() {
 
-    const slipOdds = this.slipService.getSlipOdds();
+/*    const slipOdds = this.slipService.getSlipOdds();
     const oddIds = slipOdds.map(odd => odd.oddId);
 
     const gamblerEmail = this.jwtService.getCurrentUserEmail();
@@ -51,7 +50,7 @@ export class SlipComponent implements OnInit {
       oddIds: oddIds,
       gamblerEmail: gamblerEmail,
       amount : 0
-    }
+    }*/
 
 /*    this.slipService.updateSlipOdd();*/
   }

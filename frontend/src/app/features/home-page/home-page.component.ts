@@ -40,6 +40,7 @@ export class HomePageComponent implements OnInit {
 
   logout() {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('slip');
     this.router.navigate([environmentPaths.login_page]);
 
     this.snackBarService.showSnackbarMessage(

@@ -1,41 +1,56 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {SlipOdd} from "../../model/internal/slip-odd";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+import {SlipResponse} from "../../model/response/slip-response";
+import {SlipOddResponse} from "../../model/response/slip-odd-response";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SlipService {
 
-  private slipOddsSubject = new BehaviorSubject<SlipOdd[]>(this.getSlipOddsFromStorage());
-  slipOdds$ = this.slipOddsSubject.asObservable();
+    private slipSubject = new BehaviorSubject<SlipResponse>(this.fetchSlip());
+    private slip$ = this.slipSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  private getSlipOddsFromStorage(): SlipOdd[] {
-    return JSON.parse(sessionStorage.getItem('slipOdds')!) || [];
-  }
+    private fetchSlip(): SlipResponse {
+        return JSON.parse(sessionStorage.getItem('slip')!);
 
-  private updateSlipOdds(odds: SlipOdd[]) {
-    sessionStorage.setItem('slipOdds', JSON.stringify(odds));
-    this.slipOddsSubject.next(odds);
-  }
+        //se non c'è l'oggetto, chiama dal db e lo mette nella sessione
+    }
 
-  addOddToSlip(odd: SlipOdd) {
-    const slipOdds = this.getSlipOddsFromStorage();
-    slipOdds.push(odd);
-    this.updateSlipOdds(slipOdds);
-  }
+    private updateSlipOdds(odds: SlipOddResponse[]) {
+        const slip: SlipResponse = JSON.parse(sessionStorage.getItem('slip')!);
 
-  removeOddFromSlip(oddId: string) {
-    let slipOdds = this.getSlipOddsFromStorage();
-    slipOdds = slipOdds.filter(odd => odd.oddId !== oddId);
-    this.updateSlipOdds(slipOdds);
-  }
+        sessionStorage.setItem('slip', JSON.stringify({amount: slip.amount, odds: odds}));
 
-  getSlipOdds(): SlipOdd[] {
-    return this.slipOddsSubject.getValue();
-  }
+        this.slipSubject.next(this.fetchSlip());
+    }
+
+    addOddToSlip(odd: SlipOddResponse) {
+        const slipOdds: SlipOddResponse[] = this.fetchSlip().odds
+
+        this.updateSlipOdds([...slipOdds, odd])
+    }
+
+    removeOddFromSlip(oddId: string) {
+        const slipOdds: SlipOddResponse[] = this.fetchSlip().odds
+
+        this.updateSlipOdds(slipOdds.filter(odd => odd.oddId !== oddId))
+    }
+
+
+     updateSlipAmount(amount: number) {
+        const slip: SlipResponse = JSON.parse(sessionStorage.getItem('slip')!);
+
+        sessionStorage.setItem('slip', JSON.stringify({amount: amount, odds: slip.odds}));
+
+        this.slipSubject.next(this.fetchSlip());
+    }
+
+    getSlip(): Observable<SlipResponse>{
+        return this.slip$
+    }
 }

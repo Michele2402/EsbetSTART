@@ -8,8 +8,8 @@ import {SnackbarService} from "../../core/services/snackbar.service";
 import {Router} from "@angular/router";
 import {GameWithRulesResponse} from "../../model/response/game-response";
 import {SlipService} from "../../core/services/slip.service";
-import {SlipOdd} from "../../model/internal/slip-odd";
 import {OddResponse} from "../../model/response/odd-response";
+import {SlipOddResponse} from "../../model/response/slip-odd-response";
 
 @Component({
   selector: 'app-event-page',
@@ -66,7 +66,7 @@ export class EventPageComponent implements OnInit, OnDestroy {
       position: rule.position
     }
 
-    const slipOddToAdd: SlipOdd = {
+    const slipOddToAdd: SlipOddResponse = {
       oddId: odd.id!,
       eventName: event.name,
       oddName: odd.name,
