@@ -126,7 +126,7 @@ public class Slip {
     /**
      * This method resets the slip
      */
-    public void resetslip() {
+    public void resetSlip() {
         this.amount = 0;
         this.odds.clear();
     }
