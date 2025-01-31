@@ -60,9 +60,9 @@ export class EventPageComponent implements OnInit, OnDestroy {
   addOddToSlip(event: EventResponse, rule: RuleResponse) {
 
     const odd: OddResponse = {
-      id: event.odds[rule.position - 1]?.id,
+      id: event.odds[rule.position ]?.id,
       name: rule.name,
-      value: event.odds[rule.position - 1]?.value,
+      value: event.odds[rule.position]?.value,
       position: rule.position
     }
 
@@ -75,6 +75,8 @@ export class EventPageComponent implements OnInit, OnDestroy {
 
     this.slipService.addOddToSlip(slipOddToAdd);
   }
+
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

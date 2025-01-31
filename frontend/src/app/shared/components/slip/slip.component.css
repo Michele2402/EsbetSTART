@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  z-index: 1;
 }
 
 .open-slip {
@@ -23,14 +24,13 @@ mat-icon {
 }
 
 .bet-slip {
-  width: 250px;
+  width: 280px;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 15px;
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 0.3s ease-in-out;
   margin-top: 10px;
   position: absolute;
   top: 60px;
@@ -47,11 +47,25 @@ mat-icon {
   margin-bottom: 10px;
 }
 
+.bet-item-container {
+  min-height: 100px;
+  padding: 10px 0;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .bet-item {
   display: grid;
-  grid-template-columns: 3fr 3fr 1fr;
+  grid-template-columns: 3fr 3fr 1fr 1fr;
   padding: 8px 0;
   border-bottom: 1px solid #ddd;
+}
+
+.bet-odd {
+  text-align: center;
 }
 
 .bet-value {
@@ -66,4 +80,16 @@ mat-icon {
 .bet-button {
   width: 100%;
   margin-top: 10px;
+}
+
+.remove-icon {
+  justify-self: right;
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.remove-icon:hover {
+  color: darkred;
 }

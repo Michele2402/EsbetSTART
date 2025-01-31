@@ -34,7 +34,6 @@ export class CompetitionPageComponent implements OnInit, OnDestroy {
   }
 
   loadAllCompetitions() {
-    console.log(this.selectedGame)
 
     if (this.selectedGame) {
       this.competitions$ = this.competitionService.getAllByGameId(this.selectedGame.id).pipe(

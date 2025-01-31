@@ -53,4 +53,8 @@ export const environmentPaths = {
   accept_offer: 'offers/accept',
   get_all_offer: 'offers/get-all',
   get_activated_offer: 'offers/get-activated-by',
+
+  get_slip: 'slip/get-slip',
+  save_slip: 'slip/save',
+  place_bet: 'slip/place-bet',
 }

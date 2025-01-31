@@ -1,6 +1,7 @@
 .event-container {
   max-width: 70%;
-  margin: 40px auto;
+  margin-top: 40px;
+  margin-left: 50px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;

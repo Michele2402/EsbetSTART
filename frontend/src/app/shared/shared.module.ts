@@ -8,6 +8,7 @@ import {LeftbarComponent} from "./components/leftbar/leftbar.component";
 import {RouterLink} from "@angular/router";
 import {ProfileLeftbarComponent} from "./components/profile-leftbar/profile-leftbar.component";
 import {SlipComponent} from "./components/slip/slip.component";
+import {BetConfirmationDialogComponent} from "./components/slip/bet-confirmation-dialog.component";
 
 
 
@@ -17,7 +18,8 @@ import {SlipComponent} from "./components/slip/slip.component";
     FooterComponent,
     LeftbarComponent,
     ProfileLeftbarComponent,
-    SlipComponent
+    SlipComponent,
+    BetConfirmationDialogComponent
   ],
     imports: [
         CommonModule,

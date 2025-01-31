@@ -13,7 +13,6 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
     signUp(body: RegisterRequest) {
-    console.log(environmentPaths.register);
     return this.http.post(this.basePath + environmentPaths.register, body);
   }
 

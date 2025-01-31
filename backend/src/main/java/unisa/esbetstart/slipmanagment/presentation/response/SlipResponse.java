@@ -11,6 +11,7 @@ import java.util.Set;
 @Builder
 public class SlipResponse {
 
+    private String id;
     private double amount;
     private Set<SlipOddResponse> odds;
 

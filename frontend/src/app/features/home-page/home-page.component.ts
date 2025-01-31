@@ -4,6 +4,7 @@ import {environmentPaths} from "../../environments/environment";
 import {JwtService} from "../../core/services/jwt.service";
 import {SnackbarService} from "../../core/services/snackbar.service";
 import {Role} from "../../model/enum/role";
+import {SlipService} from "../../core/services/slip.service";
 
 @Component({
   selector: 'app-home-page',
@@ -17,13 +18,15 @@ export class HomePageComponent implements OnInit {
   constructor(
     private router: Router,
     private jwtService: JwtService,
-    private snackBarService: SnackbarService
+    private snackBarService: SnackbarService,
+    private slipService: SlipService
   ) {
 
   }
 
   ngOnInit(): void {
     this.role = this.jwtService.getCurrentUserRole();
+    this.slipService.fetchSlip();
   }
 
   toLogin() {

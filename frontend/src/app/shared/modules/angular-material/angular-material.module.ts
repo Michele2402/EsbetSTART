@@ -22,7 +22,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRippleLoader} from "@angular/material/core";
 import {MatDivider} from "@angular/material/divider";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogModule,
+  MatDialogTitle
+} from "@angular/material/dialog";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 
 
@@ -70,7 +76,8 @@ const modules = [
   MatDateRangePicker,
   MatDateRangeInput,
   MatMenu,
-  MatMenuTrigger
+  MatMenuTrigger,
+  MatDialogModule
 ];
 
 @NgModule({

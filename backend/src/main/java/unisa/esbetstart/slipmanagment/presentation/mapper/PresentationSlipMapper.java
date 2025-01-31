@@ -12,6 +12,7 @@ public class PresentationSlipMapper {
 
     public SlipResponse toSlipResponse(Slip slip) {
         return SlipResponse.builder()
+                .id(slip.getId().toString())
                 .amount(slip.getAmount())
                 .odds(slip.getOdds().stream().map(slipOdd -> SlipOddResponse.builder()
                                 .oddId(slipOdd.getId().toString())
