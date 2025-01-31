@@ -46,3 +46,7 @@ mat-divider {
   height: 1px;
   margin: 8px 0;
 }
+
+.input-container {
+  margin-top: 10px;
+}

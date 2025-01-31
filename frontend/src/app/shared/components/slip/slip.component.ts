@@ -8,6 +8,7 @@ import {BetsService} from "../../../core/services/bets.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BetConfirmationDialogComponent} from "./bet-confirmation-dialog.component";
 import {SlipSaverService} from "../../../core/services/slip-saver.service";
+import {BalanceService} from "../../../core/services/balance.service";
 
 @Component({
   selector: 'app-slip',
@@ -27,7 +28,9 @@ export class SlipComponent implements OnInit, OnDestroy {
     private slipSaver: SlipSaverService,
     private snackBarService: SnackbarService,
     private betsService: BetsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private balanceService: BalanceService,
+    private jwtService: JwtService
   ) {
   }
 
@@ -83,6 +86,12 @@ export class SlipComponent implements OnInit, OnDestroy {
             .subscribe(() => {
               this.snackBarService.showSnackbarMessage('Bet placed', 'success-snackbar');
               this.slipService.resetSlip();
+
+              const email = this.jwtService.getCurrentUserEmail();
+
+              if(email) {
+                this.balanceService.updateBalance(email);
+              }
             });
         }
       });

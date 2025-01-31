@@ -103,7 +103,7 @@ public class GamblerManagerService implements CreateTransactionUseCase {
         //check if the transaction value is valid
         if (request.getTransactionValue() == null || request.getTransactionValue() <= 0) {
             log.error("Invalid transaction value: {}", request.getTransactionValue());
-            throw new IndexOutOfBoundException("Invalid transaction value: " + request.getTransactionValue());
+            throw new ObjectNotFoundException("Invalid transaction value: " + request.getTransactionValue());
         }
     }
 
