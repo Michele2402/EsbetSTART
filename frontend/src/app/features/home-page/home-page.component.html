@@ -13,17 +13,18 @@
           <mat-icon (click)="toProfile()" aria-label="Profile icon">account_circle</mat-icon>
         </a>
         <div class="balance">
-        <a mat-fab [matMenuTriggerFor]="menu" class="action-button">
-          <mat-icon>monetization_on</mat-icon>
-        </a>
-        <mat-menu #menu="matMenu">
-          <mat-card appearance="outlined">
-            <mat-card-content>
-              <h3>Balance</h3>
-
-            </mat-card-content>
-          </mat-card>
-        </mat-menu>
+          <a mat-fab class="action-button" (click)="toggleBalance()">
+            <mat-icon>monetization_on</mat-icon>
+          </a>
+          <!-- Balance box shown if isBalanceVisible is true -->
+          <div *ngIf="isBalanceVisible" class="balance-box">
+            <span>Balance:</span>
+            <span>0</span>
+            <span>Bonus Balance:</span>
+            <span>0</span>
+            <span>Withdrawable Balance:</span>
+            <span>0</span>
+          </div>
         </div>
       }
       <a mat-fab class="action-button" (click)="logout()">

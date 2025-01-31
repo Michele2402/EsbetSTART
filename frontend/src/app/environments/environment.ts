@@ -49,6 +49,7 @@ export const environmentPaths = {
   login: 'users/login',
   get: 'users/',
   update: 'users/update',
+  balance: 'users/balance',
 
   accept_offer: 'offers/accept',
   get_all_offer: 'offers/get-all',

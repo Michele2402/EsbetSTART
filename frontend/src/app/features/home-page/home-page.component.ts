@@ -5,6 +5,9 @@ import {JwtService} from "../../core/services/jwt.service";
 import {SnackbarService} from "../../core/services/snackbar.service";
 import {Role} from "../../model/enum/role";
 import {SlipService} from "../../core/services/slip.service";
+import {BalanceService} from "../../core/services/balance.service";
+import {Observable} from "rxjs";
+import {BalanceResponse} from "../../model/response/balance-response";
 
 @Component({
   selector: 'app-home-page',
@@ -15,18 +18,32 @@ export class HomePageComponent implements OnInit {
 
   role: string | null = null;
 
+  isBalanceVisible: boolean = false;
+
+  balance = new Observable<BalanceResponse>()
+
   constructor(
     private router: Router,
     private jwtService: JwtService,
     private snackBarService: SnackbarService,
-    private slipService: SlipService
+    private slipService: SlipService,
+    private balanceService: BalanceService
   ) {
 
   }
 
+  toggleBalance(): void {
+    this.isBalanceVisible = !this.isBalanceVisible;
+  }
+
   ngOnInit(): void {
     this.role = this.jwtService.getCurrentUserRole();
-    this.slipService.fetchSlip();
+
+    if (this.role == Role.GAMBLER) {
+      this.slipService.fetchSlip();
+    }
+
+    this.balance = this.balanceService.getBalance();
   }
 
   toLogin() {
