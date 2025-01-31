@@ -34,9 +34,9 @@ public class CreateCompetitionManagerService implements AddCompetitionUseCase {
     @Override
     public void addCompetition(AddCompetitionRequest request) {
 
-        log.info("Adding competition to game {}", request.getGameId());
-
         checkAddCompetitionRequest(request);
+
+        log.info("Adding competition to game {}", request.getGameId());
 
         //check and get Game id
         UUID gameId =  parseAttribute.checkUUIDIsNullOrInvalid(request.getGameId(), "Game Id");

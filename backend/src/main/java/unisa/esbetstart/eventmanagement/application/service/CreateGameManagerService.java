@@ -35,10 +35,10 @@ public class CreateGameManagerService implements CreateGameUseCase {
      */
     @Override
     public void createGame(AddGameRequest request) {
-        log.info("Adding game {} to database", request.getName());
-
         // Check the game data
         checkAddGameRequest(request);
+
+        log.info("Adding game {} to database", request.getName());
 
         // Build the Game object
         Game game = Game.builder()
@@ -47,13 +47,18 @@ public class CreateGameManagerService implements CreateGameUseCase {
                 .rules(request.getRules().stream().map(applicationRuleMapper::toRuleModel).collect(Collectors.toSet()))
                 .build();
 
-        game.getRules().forEach(rule -> rule.setGame(game));
+        if(game.getRules().isEmpty()) {
+            log.error("Game {} has no rules", request.getName());
+            throw new ObjectIsNullException("Game " + request.getName() + " has no rules");
+        }
 
         // Check if a game with the same name already exists
         if (getGamePortOut.getGameByName(request.getName()) != null) {
             log.error("Game with name {} already exists", request.getName());
             throw new ObjectIsNullException("Game with name " + request.getName() + " already exists");
         }
+
+        game.getRules().forEach(rule -> rule.setGame(game));
 
         // Add the game to the database
         createGamePortOut.addGame(game);
@@ -65,7 +70,7 @@ public class CreateGameManagerService implements CreateGameUseCase {
      * Checks if the AddGameRequest is valid.
      * @param request the AddGameRequest to check
      */
-    private void checkAddGameRequest(AddGameRequest request) {
+    public void checkAddGameRequest(AddGameRequest request) {
         if (request == null) {
             log.error("AddGameRequest is null");
             throw new ObjectIsNullException("AddGameRequest is null");
@@ -87,7 +92,7 @@ public class CreateGameManagerService implements CreateGameUseCase {
      * Checks if the AddRuleRequest is valid.
      * @param request the AddRuleRequest to check
      */
-    private void checkAddRuleRequest(AddRuleRequest request) {
+    public void checkAddRuleRequest(AddRuleRequest request) {
         if (request == null ) {
             log.error("AddRuleRequest is null");
             throw new ObjectIsNullException("AddRuleRequest is null");
