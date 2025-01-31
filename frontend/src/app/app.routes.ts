@@ -75,7 +75,7 @@ export const routes: Routes = [
   },
   {
     path: environmentPaths.bets_concluded_page,
-    loadChildren: () => import('./features/bets-concluded-page/bets-concluded-page.module').then(m => m.BetsConcludedPageModule)
+    loadChildren: () => import('./features/bets-concluded/bets-concluded-page.module').then(m => m.BetsConcludedPageModule)
   },
   {
     path: environmentPaths.recharge_page,
@@ -84,6 +84,14 @@ export const routes: Routes = [
   {
     path: environmentPaths.withdraw_page,
     loadChildren: () => import('./features/withdraw-page/withdraw-page.module').then(m => m.WithdrawPageModule)
+  },
+  {
+    path: environmentPaths.withdrawals_page,
+    loadChildren: () => import('./features/withdrawals-page/withdrawals-page.module').then(m => m.WithdrawalsPageModule)
+  },
+  {
+    path: environmentPaths.deposits_page,
+    loadChildren: () => import('./features/deposits-page/deposits-page.module').then(m => m.DepositsPageModule)
   },
   {
     path: environmentPaths.events_admin_page,

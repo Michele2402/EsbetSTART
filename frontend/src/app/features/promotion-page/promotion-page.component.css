@@ -43,7 +43,32 @@ h1{
   color: white;
   border-radius: 20px;
   cursor: pointer;
-  height: 50px;
-  padding: 42px;
+  min-width: 150px;
+  padding: 10px 20px;
+  white-space: nowrap;
   text-align: center;
+  font-family: Arial, sans-serif;
 }
+
+.promotion-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+  margin: 10px auto;
+}
+
+.promotion-name, .promotion-description, .promotion-date, .promotion-goal,.promotion-price,.promotion-type{
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 10px 0;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
