@@ -94,8 +94,6 @@ export class AddEventComponent implements OnInit, OnDestroy {
         odds: addOddRequests
       }
 
-      console.log(eventRequest)
-
       this.eventService.addEvent(eventRequest)
         .pipe(
           takeUntil(this._destroy$),

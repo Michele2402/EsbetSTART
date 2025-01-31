@@ -1,43 +1,5 @@
 <app-navbar>
-  <div class="navbar-buttons">
-    <a mat-fab class="search-button" extended routerLink="/search">
-      <mat-icon>search</mat-icon>
-      Search on ESbet START...
-    </a>
-    @if (this.role != null) {
 
-      @if (this.role == Role.EVENT_MANAGER) {
-        <button mat-fab class="admin-button" routerLink="/esports-admin"> Events management</button>
-      } @else if (this.role == Role.GAMBLER) {
-        <a mat-fab class="action-button">
-          <mat-icon (click)="toProfile()" aria-label="Profile icon">account_circle</mat-icon>
-        </a>
-        <div class="balance">
-        <a mat-fab [matMenuTriggerFor]="menu" class="action-button">
-          <mat-icon>monetization_on</mat-icon>
-        </a>
-        <mat-menu #menu="matMenu">
-          <mat-card appearance="outlined">
-            <mat-card-content>
-              <h3>Balance</h3>
-
-            </mat-card-content>
-          </mat-card>
-        </mat-menu>
-        </div>
-      }
-      <a mat-fab class="action-button" (click)="logout()">
-        <mat-icon (click)="logout()" aria-label="Logout icon">logout</mat-icon>
-      </a>
-    } @else {
-      <a mat-fab class="search-button" (click)="toLogin()">
-        Login
-      </a>
-      <a mat-fab class="search-button" (click)="toRegister()">
-        Join Now
-      </a>
-    }
-  </div>
 </app-navbar>
 <div class="container">
   <app-leftbar></app-leftbar>

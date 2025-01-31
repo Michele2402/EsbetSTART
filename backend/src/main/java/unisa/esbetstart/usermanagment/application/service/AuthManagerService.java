@@ -47,6 +47,9 @@ public class AuthManagerService implements RegistrationUseCase, LoginUseCase {
                 .email(request.getEmail())
                 .password(request.getPassword())
                 .username(request.getUsername())
+                .balance(0)
+                .bonusBalance(0)
+                .withdrawableBalance(0)
                 .build();
 
         //TODO fare un api setROle, in cui si cambia il ruolo ad un utente e si cancella la schedina

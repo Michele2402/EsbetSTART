@@ -61,7 +61,7 @@ public class Gambler extends User {
 
         if (amount <= 10) {
             log.error("Deposit amount must be greater than 10");
-            throw new DomainAttributeException("Deposit amount must be greater than 0");
+            throw new DomainAttributeException("Deposit amount must be greater than 10");
         }
         this.balance += amount;
 

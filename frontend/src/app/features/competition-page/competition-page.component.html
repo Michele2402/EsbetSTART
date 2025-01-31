@@ -1,31 +1,15 @@
-<app-navbar><div class="navbar-buttons">
-  <a mat-fab class="search-button" extended routerLink="/search">
-    <mat-icon>search</mat-icon>
-    Search on ESbet START...
-  </a>
-  <a mat-fab class="search-button" routerLink="/login">
-    Login
-  </a>
-  <a mat-fab class="search-button" routerLink="/registration">
-    Join Now
-  </a>
-</div></app-navbar>
-
-
+<app-navbar></app-navbar>
 <app-leftbar></app-leftbar>
 
-<h2>Competitions for {{ selectedGame?.name }}</h2>
+<app-slip></app-slip>
+
+<h2 class="title">Competitions for {{ selectedGame?.name }}</h2>
 
 <div class="competition-container">
-  <mat-card class="competition-card" appearance="outlined">
-    <mat-card-content>
-      @for (competition of (competitions$ | async); track competition) {
-        <img src="assets/{{competition.name}}.png" class="competition-image"/>
-        <div class="competition-name" (click) ="selectCompetition(competition)">
-          {{ competition.name }}
-          {{competition.originCountry}}
-        </div>
-      }
-    </mat-card-content>
-  </mat-card>
+  @for (competition of (competitions$ | async); track competition) {
+    <div class="competition-item" (click)="selectCompetition(competition)" matRipple>
+      <img src="assets/countries/{{competition.originCountry}}.png" class="competition-image" />
+      <span class="competition-name">{{ competition.name }}</span>
+    </div>
+  }
 </div>

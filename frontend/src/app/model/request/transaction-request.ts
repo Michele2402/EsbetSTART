@@ -1,5 +1,5 @@
-
 export interface TransactionRequest {
   gamblerEmail: string;
-  type:string;
+  transactionType: string;
+  transactionValue: number;
 }

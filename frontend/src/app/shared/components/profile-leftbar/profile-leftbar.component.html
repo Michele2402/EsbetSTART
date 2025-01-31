@@ -10,12 +10,33 @@
       <mat-list-item routerLink="/bank-account">Bank account</mat-list-item>
     </mat-list>
   </mat-card>
+
   <div class="sidebar-buttons">
-    <a mat-fab class="sidebar-button">
+    <a mat-fab class="sidebar-button" (click)="toggleDepositInput()">
       Recharge
     </a>
-    <a mat-fab class="sidebar-button">
+
+    <div *ngIf="isDepositVisible" class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Deposit Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="depositAmount" (input)="onInputChange()" [min]="0" />
+        <mat-error *ngIf="depositAmount < 0">Amount cannot be negative.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button (click)="deposit()">Deposit</button>
+    </div>
+
+    <a mat-fab class="sidebar-button" (click)="toggleWithdrawInput()">
       Withdraw
     </a>
+
+    <div *ngIf="isWithdrawVisible" class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Withdraw Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="withdrawAmount" (input)="onInputChange()" [min]="0" />
+        <mat-error *ngIf="withdrawAmount < 0">Amount cannot be negative.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button (click)="withdraw()">Withdraw</button>
+    </div>
+
   </div>
 </div>

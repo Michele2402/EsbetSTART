@@ -14,4 +14,5 @@ public class ActivatedOfferResponse {
     private String type;
     private double progress;
     private double goal;
+    private double bonus;
 }

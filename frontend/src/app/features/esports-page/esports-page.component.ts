@@ -5,6 +5,7 @@ import {GameWithRulesResponse} from "../../model/response/game-response";
 import {SnackbarService} from "../../core/services/snackbar.service";
 import {environmentPaths} from "../../environments/environment";
 import {Router} from "@angular/router";
+import {SlipService} from "../../core/services/slip.service";
 
 @Component({
   selector: 'app-esports-page',

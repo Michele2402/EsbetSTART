@@ -7,6 +7,8 @@ import {FormsModule} from "@angular/forms";
 import {LeftbarComponent} from "./components/leftbar/leftbar.component";
 import {RouterLink} from "@angular/router";
 import {ProfileLeftbarComponent} from "./components/profile-leftbar/profile-leftbar.component";
+import {SlipComponent} from "./components/slip/slip.component";
+import {BetConfirmationDialogComponent} from "./components/slip/bet-confirmation-dialog.component";
 
 
 
@@ -15,7 +17,9 @@ import {ProfileLeftbarComponent} from "./components/profile-leftbar/profile-left
     NavbarComponent,
     FooterComponent,
     LeftbarComponent,
-    ProfileLeftbarComponent
+    ProfileLeftbarComponent,
+    SlipComponent,
+    BetConfirmationDialogComponent
   ],
     imports: [
         CommonModule,
@@ -29,6 +33,7 @@ import {ProfileLeftbarComponent} from "./components/profile-leftbar/profile-left
     NavbarComponent,
     LeftbarComponent,
     ProfileLeftbarComponent,
+    SlipComponent,
   ]
 })
 export class SharedModule { }

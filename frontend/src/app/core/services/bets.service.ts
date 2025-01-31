@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environmentPaths} from "../../environments/environment";
 import {BetPlacedResponse} from "../../model/response/bet-placed-response";
 import {ShowUserBetsRequest} from "../../model/request/show-user-bets-request";
-import {OddStaticResponse} from "../../model/response/odd-static-response";
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +19,14 @@ export class BetsService {
     return this.http.post<BetPlacedResponse[]>(this.basePath + environmentPaths.show_bets, body,
       {headers: {'Authorization': 'Bearer ' + token}}
     );
-
   }
 
+  placeBet(slipId: string) {
+    const token = sessionStorage.getItem('token');
 
-
-
+    return this.http.post(
+      this.basePath + environmentPaths.place_bet + '?slipId=' + slipId,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    )
+  }
 }

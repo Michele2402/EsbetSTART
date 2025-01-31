@@ -1,80 +1,52 @@
-<app-navbar><div class="navbar-buttons">
-  <a mat-fab class="search-button" extended routerLink="/search">
-    <mat-icon>search</mat-icon>
-    Search on ESbet START...
-  </a>
-  <a mat-fab class="search-button" routerLink="/login">
-    Login
-  </a>
-  <a mat-fab class="search-button" routerLink="/registration">
-    Join Now
-  </a>
-</div></app-navbar>
-
-
+<app-navbar></app-navbar>
 <app-leftbar></app-leftbar>
 
-<h1>Promotion</h1>
+<div class="promotions-container">
+  <h1>Offers</h1>
 
-<mat-tab-group>
-  <mat-tab label="All offer">
-    <div class="promotion-container">
-    <mat-card class="promotion-card" appearance="outlined">
-      <mat-card-content>
-        @for (promotion of (allPromotion$ | async); track promotion) {
-          <img src="assets/offer/{{promotion.name}}.png" class="promotion-image"/>
-          <div class="promotion-name">
-            {{ promotion.name }}
-            </div>
-          <div class="promotion-description">
-            {{ promotion.description }}
-            </div>
-          <div class="promotion-date">
-           Expiration Date: {{ promotion.expirationDate }}
-            </div>
-          <div class="promotion-goal">
-           {{ promotion.goal }} GOAL
-          </div>
-          <div class="promotion-price">
-             {{ promotion.price }}$
-          </div>
-          <div class="promotion-type">
-           Type of promotion: {{ promotion.type }}
-          </div>
-
-        <div class="active" (click)="acceptPromotion(promotion.id)">
-          <a mat-fab class="active-button">
-            Active promotion
-          </a>
+  <mat-tab-group>
+    <mat-tab label="All offers">
+        <div class="promotion-list">
+          @for(promotion of (allPromotions$ | async); track promotion) {
+            <mat-card class="promotion-card" appearance="outlined">
+              <mat-card-content class="promotion-card-content">
+                <div class="promotion-name">{{ promotion.name }}</div>
+                <div class="promotion-description">{{ promotion.description }}</div>
+                <div class="promotion-details">
+                  <span>Expires: {{ promotion.expirationDate }}</span>
+                  <span>Type: {{ promotion.type }}</span>
+                  <span>Goal: {{ promotion.goal }}</span>
+                  <span>Bonus: ${{ promotion.price }}</span>
+                </div>
+                <div class="active">
+                  <button mat-fab class="active-button" (click)="acceptPromotion(promotion.id)">
+                    Activate
+                  </button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          }
         </div>
+    </mat-tab>
+
+    <mat-tab label="Activated offers">
+      <div class="promotion-list">
+        @for(activatedPromotion of (allActivedPromotion$ | async); track activatedPromotion) {
+          <mat-card class="promotion-card" appearance="outlined">
+            <mat-card-content>
+              <div class="promotion-name">{{ activatedPromotion.name }}</div>
+              <div class="promotion-description">{{ activatedPromotion.description }}</div>
+              <div class="promotion-details">
+                <span>Type: {{ activatedPromotion.type }}</span>
+                <span>Goal: {{ activatedPromotion.goal }}</span>
+                <span>Bonus: ${{ activatedPromotion.bonus }}</span>
+                <span>Progress: {{ activatedPromotion.progress }} / {{ activatedPromotion.goal }}</span>
+                <mat-progress-bar mode="determinate" [value]="(activatedPromotion.progress / activatedPromotion.goal) * 100"></mat-progress-bar>
+              </div>
+            </mat-card-content>
+          </mat-card>
         }
-      </mat-card-content>
-    </mat-card>
-  </div> </mat-tab>
-  <mat-tab label="Actived offer">  </mat-tab>
-  <mat-card class="promotion-card" appearance="outlined">
-    <mat-card-content>
-      @for (activePromotion of (allActivedPromotion$ | async); track activePromotion) {
-        <img src="assets/offer/{{activePromotion.name}}.png" class="promotion-image"/>
-        <div class="promotion-name">
-          {{ activePromotion.name }}
-        </div>
-        <div class="promotion-description">
-          {{ activePromotion.description }}
-        </div>
-        <div class="promotion-date">
-           {{ activePromotion.progress }}
-        </div>
-        <div class="promotion-goal">
-          {{ activePromotion.goal }} GOAL
-        </div>
-        <div class="promotion-type">
-          Type of promotion: {{ activePromotion.type }}
-        </div>
-      }
-    </mat-card-content>
-  </mat-card>
-</mat-tab-group>
-
-
-
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

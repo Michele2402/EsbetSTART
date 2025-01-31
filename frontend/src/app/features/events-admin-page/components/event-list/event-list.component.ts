@@ -100,8 +100,6 @@ export class EventListComponent implements OnDestroy, OnInit {
     const name = this.editEventForm.get('name')?.value;
     const date = this.editEventForm.get('date')?.value;
 
-    console.log(currentEvent)
-
     if (this.editEventForm.valid && name && date && currentEvent) {
 
       const updateEventRequest: UpdateEventRequest = {
@@ -184,8 +182,6 @@ export class EventListComponent implements OnDestroy, OnInit {
         oddId: odd.id,
         oddValue: odd.value
       };
-
-      console.log(updateOddRequest)
 
       this.eventService.updateOdd(updateOddRequest)
         .pipe(

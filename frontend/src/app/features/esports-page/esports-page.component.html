@@ -1,25 +1,13 @@
-<app-navbar>
-  <div class="navbar-buttons">
-    <a mat-fab class="search-button" extended routerLink="/search">
-      <mat-icon>search</mat-icon>
-      Search on ESbet START...
-    </a>
-    <a mat-fab class="search-button" routerLink="/login">
-      Login
-    </a>
-    <a mat-fab class="search-button" routerLink="/registration">
-      Join Now
-    </a>
-  </div>
-</app-navbar>
-
+<app-navbar></app-navbar>
 <app-leftbar></app-leftbar>
 
-<div class="sport-container" >
+<app-slip></app-slip>
+
+<div class="sport-container">
   @for (sport of (allGames$ | async); track sport) {
-      <div class="sport-name" (click) ="selectGame(sport)">
-        <img src="assets/esports/{{sport.name}}.png" class="sport-image" />
-        {{ sport.name }}
-      </div>
+    <div class="sport-item" (click)="selectGame(sport)">
+      <img src="assets/esports/{{sport.name}}.png" class="sport-image" />
+      <span class="sport-name">{{ sport.name }}</span>
+    </div>
   }
 </div>

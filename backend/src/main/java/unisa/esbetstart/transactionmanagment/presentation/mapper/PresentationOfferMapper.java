@@ -40,6 +40,7 @@ public class PresentationOfferMapper {
                 .type(activatedOffer.getOffer().getType().toString())
                 .progress(activatedOffer.getProgress())
                 .goal(activatedOffer.getOffer().getGoal())
+                .bonus(activatedOffer.getOffer().getBonus())
                 .build();
     }
 
