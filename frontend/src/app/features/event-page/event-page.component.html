@@ -1,16 +1,35 @@
-<app-navbar><div class="navbar-buttons">
-  <a mat-fab class="search-button" extended routerLink="/search">
-    <mat-icon>search</mat-icon>
-    Search on ESbet START...
-  </a>
-  <a mat-fab class="search-button" routerLink="/login">
-    Login
-  </a>
-  <a mat-fab class="search-button" routerLink="/registration">
-    Join Now
-  </a>
-</div></app-navbar>
-
-
+<app-navbar></app-navbar>
 <app-leftbar></app-leftbar>
+
+<app-slip></app-slip>
+
+<div class="event-container">
+  <h2 class="title">Events for {{ selectedCompetition?.name }}</h2>
+
+  <table class="event-table" *ngIf="selectedGameRules && selectedGameRules.length > 0">
+    <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+      @for(rule of selectedGameRules; track rule) {
+        <th>{{ rule.name }}</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+    @for(event of (events$ | async); track event) {
+      <tr>
+        <td class="event-name">{{ event.name }}</td>
+        <td class="event-date">{{ event.date | date:'short' }}</td>
+        @for(rule of selectedGameRules; track rule) {
+          <td class="event-odd" (click)="addOddToSlip(event, rule)">
+            {{ event.odds[rule.position - 1]?.value }}
+          </td>
+        }
+      </tr>
+    }
+
+    </tbody>
+  </table>
+</div>
 

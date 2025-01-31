@@ -1,0 +1,69 @@
+.bet-slip-container {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.open-slip {
+  background-color: white;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+mat-icon {
+  font-size: 40px;
+  color: black;
+  width: fit-content;
+  height: fit-content;
+}
+
+.bet-slip {
+  width: 250px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease-in-out;
+  margin-top: 10px;
+  position: absolute;
+  top: 60px;
+  right: 0;
+}
+
+.bet-slip.open {
+  transform: scaleY(1);
+}
+
+.bet-slip h3 {
+  text-align: center;
+  color: #b30000;
+  margin-bottom: 10px;
+}
+
+.bet-item {
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.bet-value {
+  text-align: right;
+}
+
+.bet-input {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.bet-button {
+  width: 100%;
+  margin-top: 10px;
+}

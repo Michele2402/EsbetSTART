@@ -1,16 +1,4 @@
-<app-navbar><div class="navbar-buttons">
-  <a mat-fab class="search-button" extended routerLink="/search">
-    <mat-icon>search</mat-icon>
-    Search on ESbet START...
-  </a>
-  <a mat-fab class="search-button" routerLink="/login">
-    Login
-  </a>
-  <a mat-fab class="search-button" routerLink="/registration">
-    Join Now
-  </a>
-</div></app-navbar>
-
+<app-navbar></app-navbar>
 
 <app-leftbar></app-leftbar>
 
@@ -27,7 +15,7 @@
             {{ promotion.name }}
           </div>
         }
-        <div class="active" (click)="acceptPromotion">
+        <div class="active" (click)="acceptPromotion()">
           <a mat-fab class="active-button">
             Active promotion
           </a>

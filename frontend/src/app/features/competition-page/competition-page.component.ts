@@ -49,6 +49,7 @@ export class CompetitionPageComponent implements OnInit, OnDestroy {
       )
     }
   }
+
   selectCompetition(competition: CompetitionResponse) {
     sessionStorage.setItem('selectedCompetition', JSON.stringify(competition));
     this.router.navigate([environmentPaths.event_page]);

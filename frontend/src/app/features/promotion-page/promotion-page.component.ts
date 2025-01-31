@@ -63,7 +63,8 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
 
   }
 
-  acceptPromotion(promotion: AcceptOfferRequest): void{
+  acceptPromotion(): void{
+/*
 
     this.promotionService.acceptOffer(promotion)
       .pipe(
@@ -81,6 +82,7 @@ export class PromotionPageComponent implements OnInit,OnDestroy {
           'Promotion Added', 'success-snackbar');
         this.loadAllActivePromotion('id');
       });
+*/
 
 }
 

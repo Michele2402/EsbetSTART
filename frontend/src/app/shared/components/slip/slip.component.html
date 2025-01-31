@@ -1,0 +1,29 @@
+<div class="bet-slip-container" >
+
+  <div class="open-slip" (click)="toggleBetSlip()">
+    <mat-icon>list_alt</mat-icon>
+  </div>
+
+  <div class="bet-slip" [class.open]="isOpen" (click)="$event.stopPropagation()">
+    <h3>Your Bet Slip</h3>
+
+    @if((slipOdds$ | async)?.length == 0) {
+      <div>No odds selected yet</div>
+    }
+
+    @for(slipOdd of (slipOdds$ | async); track slipOdd) {
+      <div class="bet-item">
+        <span class="bet-name">{{ slipOdd.eventName }}</span>
+        <span class="bet-odd">{{ slipOdd.oddName }}</span>
+        <span class="bet-value">{{ slipOdd.oddValue }}</span>
+      </div>
+    }
+
+    <mat-form-field appearance="outline" class="bet-input">
+      <mat-label>Bet Amount (€)</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="bet-button">Place Bet</button>
+  </div>
+</div>
