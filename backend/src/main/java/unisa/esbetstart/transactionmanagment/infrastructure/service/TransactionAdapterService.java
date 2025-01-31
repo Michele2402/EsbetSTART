@@ -27,7 +27,6 @@ public class TransactionAdapterService implements GetTransactionPortOut, SaveTra
         TransactionEntity transactionEntity = infrastructureTransactionMapper.toTransactionEntity(transaction);
         transactionJpaRepository.save(transactionEntity);
 
-
     }
 
     @Override

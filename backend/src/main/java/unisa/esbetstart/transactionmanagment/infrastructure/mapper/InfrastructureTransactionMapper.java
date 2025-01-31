@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import unisa.esbetstart.transactionmanagment.domain.model.Transaction;
 import unisa.esbetstart.transactionmanagment.infrastructure.entity.TransactionEntity;
 import unisa.esbetstart.usermanagment.domain.model.Gambler;
+import unisa.esbetstart.usermanagment.infrastructure.entity.GamblerEntity;
 
 import java.util.List;
 import java.util.Set;
@@ -71,6 +72,7 @@ public class InfrastructureTransactionMapper {
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
                 .date(transaction.getDate())
+                .gambler(GamblerEntity.builder().email(transaction.getGambler().getEmail()).build())
                 .build();
     }
 }
