@@ -8,5 +8,6 @@ public interface GetSlipPortOut {
 
     Slip getSlipById(UUID slipId);
     Slip getSlipCompleteById(UUID slipId);
+    Slip getSlipWithOddsById(UUID slipId);
 
 }

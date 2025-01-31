@@ -18,5 +18,9 @@ public interface SlipJpaRepository extends JpaRepository<SlipEntity, UUID> {
     @Query("SELECT s FROM SlipEntity s WHERE s.id = :slipId")
     Optional<SlipEntity> findSlipCompleteById(UUID slipId);
 
+    @EntityGraph(attributePaths = {"odds.event"})
+    @Query("SELECT s FROM SlipEntity s WHERE s.id = :slipId")
+    Optional<SlipEntity> findSlipWithOddsById(UUID slipId);
+
 }
 
