@@ -2,10 +2,12 @@ package unisa.esbetstart.slipmanagment.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unisa.esbetstart.slipmanagment.application.port.in.PlaceBetUseCase;
 import unisa.esbetstart.slipmanagment.application.port.in.UpdateSlipUseCase;
 import unisa.esbetstart.slipmanagment.presentation.request.UpdateSlipRequest;
+import unisa.esbetstart.slipmanagment.presentation.response.SlipResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,4 +32,12 @@ public class SlipController {
         placeBetUseCase.placeBet(slipId);
 
     }
+
+    @GetMapping("/get-slip/{gamblerEmail}")
+    public ResponseEntity<SlipResponse> getSlip(@PathVariable String gamblerEmail) {
+
+
+        return null;
+    }
+
 }
