@@ -29,7 +29,6 @@ export class SlipSaverService implements OnDestroy {
   }
 
   private handleNavigation(url: string) {
-    console.log(this.slipHasToBeSaved)
     if (!this.validPages.includes(url)) {
       this.slipService.saveSlipInStorage()
         .pipe(

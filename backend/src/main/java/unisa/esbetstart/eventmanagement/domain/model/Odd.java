@@ -87,6 +87,7 @@ public class Odd {
     public OddStatic toOddStatic() {
         return OddStatic.builder()
                 .id(UUID.randomUUID())
+                .event(event.getName())
                 .competition(event.getCompetition().getName())
                 .game(event.getCompetition().getGame().getName())
                 .result(PLAYING)

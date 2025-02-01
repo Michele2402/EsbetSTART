@@ -16,7 +16,9 @@ export class BetsService {
   showBets(body: ShowUserBetsRequest) {
     const token = sessionStorage.getItem('token');
 
-    return this.http.post<BetPlacedResponse[]>(this.basePath + environmentPaths.show_bets, body,
+    return this.http.post<BetPlacedResponse[]>(
+      this.basePath + environmentPaths.show_bets,
+      body,
       {headers: {'Authorization': 'Bearer ' + token}}
     );
   }
@@ -24,8 +26,9 @@ export class BetsService {
   placeBet(slipId: string) {
     const token = sessionStorage.getItem('token');
 
-    return this.http.post(
-      this.basePath + environmentPaths.place_bet + '?slipId=' + slipId,
+    return this.http.post<any>(
+      this.basePath + environmentPaths.place_bet,
+      slipId,
       {headers: {'Authorization': 'Bearer ' + token}}
     )
   }

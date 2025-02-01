@@ -23,7 +23,7 @@
         <td class="event-date">{{ event.date | date:'short' }}</td>
         @for(rule of selectedGameRules; track rule) {
           <td class="event-odd" (click)="addOddToSlip(event, rule)">
-            {{ event.odds[rule.position]?.value }}
+            {{ event.odds[rule.position].value }}
           </td>
         }
       </tr>

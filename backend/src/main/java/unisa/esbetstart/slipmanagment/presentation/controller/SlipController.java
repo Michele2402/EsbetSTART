@@ -40,7 +40,7 @@ public class SlipController {
      * @param slipId
      */
     @PostMapping("/place-bet")
-    public void placeBet(@RequestParam String slipId) {
+    public void placeBet(@RequestBody String slipId) {
 
         placeBetUseCase.placeBet(slipId);
 

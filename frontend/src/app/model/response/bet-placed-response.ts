@@ -5,6 +5,6 @@ export interface BetPlacedResponse{
   amount: number;
   date:string;
   result:string;
-  oddStatic: OddStaticResponse[];
+  oddStatics: OddStaticResponse[];
 
 }

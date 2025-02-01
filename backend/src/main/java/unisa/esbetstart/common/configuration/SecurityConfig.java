@@ -26,25 +26,24 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     private final String[] unauthorizedPaths = {
-            "/users/login", "users/register", "games/get-all",
-            "competitions/get-all-by-game/**", "/events/get-all-by-competition/**", "users/get/**"
+            "/users/login", "/users/register", "/games/get-all",
+            "/competitions/get-all-by-game/**", "/events/get-all-by-competition/**", "/users/get/**"
     };
 
     private final String[] eventManagerPaths = {
             "/events/add", "/events/update", "/events/odds/update", "/events/remove/**", "/events/end",
             "/competitions/add", "/competitions/update", "/competitions/remove/**",
-            "/games/add", "/games/update", "/games/remove",
+            "/games/add", "/games/update", "/games/remove"
     };
 
     private final String[] gamblerPaths = {
-            "/slip/**", "/tickets/open", "/tickets/getByGamblerEmail", "/transactions/show",
-            "offers/accept", "offers/get-all", "offers/get-activated-by/**",
-            "/bets/show", "users/transaction/create", "users/email", "users/update",
-            "users/balance/**"
+            "/slip/**", "/slip/place-bet",  "/tickets/open", "/tickets/getByGamblerEmail", "/transactions/show",
+            "/bets/show", "/users/transaction/create", "/users/email", "/users/update",
+            "/users/balance/**"
     };
 
     private final String [] transactionManagerPaths = {
-            "/transactions/showAll", "/offers/add", "offers/update", "offers/remove/**"
+            "/transactions/showAll", "/offers/add", "/offers/update", "/offers/remove/**"
     };
 
     private final String[] customerServiceOperatorPaths = {
@@ -58,7 +57,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         (requests) -> requests
-                                .requestMatchers(unauthorizedPaths).permitAll()
+                                .requestMatchers("/**").permitAll()
                                 .requestMatchers(gamblerPaths).hasAuthority("GAMBLER")
                                 .requestMatchers(eventManagerPaths).hasAuthority("EVENT_MANAGER")
                                 .requestMatchers("tickets/sendMessage", "tickets/readMessage").hasAnyAuthority("GAMBLER", "CUSTOMER_SERVICE_OPERATOR")

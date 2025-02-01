@@ -1,25 +1,55 @@
-<app-navbar>
-  <div class="navbar-buttons">
-    <a mat-fab class="logout-button">
-      Logout
-    </a>
-  </div>
-</app-navbar>
+<app-navbar></app-navbar>
 
 <div class="container">
 
   <app-profile-leftbar></app-profile-leftbar>
 
-  <div class="options">
+  <div>
+<!--    <button mat-button (click)="goBack()" class="return">
+      <mat-icon>arrow_back</mat-icon>
+      Go Back
+    </button>-->
 
-    <h1>Bets</h1>
+    <h1 class="title">All Bets</h1>
 
-<mat-card appearance="outlined">
-  <mat-card-content routerLink="/current-bets">Current bets</mat-card-content>
-</mat-card>
-<mat-card appearance="outlined">
-  <mat-card-content routerLink="/bets-concluded">All bets</mat-card-content>
-</mat-card>
-</div>
+    <div class="bets-container">
+      @for (bet of (allBets$ | async); track bet) {
+        <mat-card class="bet-card">
+          <mat-card-header>
+            <mat-card-title>Bet on {{ bet.date }}</mat-card-title>
+            <mat-card-subtitle>
+              Amount: <strong>{{ bet.amount }}€</strong>
+              <br>
+              Potential Winnings: <strong>{{ calculatePotentialWinnings(bet) }}€</strong>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="result">
+              <strong>Result:</strong>
+              <span [ngClass]="bet.result === 'WON' ? 'win-result' : 'loss-result'">
+            {{ bet.result }}
+          </span>
+            </div>
+            <div class="odds-container">
+              <h3>Placed Odds:</h3>
+              <mat-list>
+                @for (odd of bet.oddStatics; track odd) {
+                  <mat-list-item>
+                    <div class="odd-info">
+                      <div><strong>Event:</strong> {{ odd.event }} - {{ odd.competition }} - {{ odd.game }}</div>
+                      <div><strong>Odd:</strong> {{ odd.name }} <strong>Value:</strong> {{ odd.value }}
+                        ({{ odd.result }})
+                      </div>
+                    </div>
+                  </mat-list-item>
+                }
+              </mat-list>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
+
 
 </div>

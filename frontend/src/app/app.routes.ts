@@ -34,7 +34,8 @@ export const routes: Routes = [
   },
   {
     path: environmentPaths.promotion_page,
-    loadChildren: () => import('./features/promotion-page/promotion-page.module').then(m => m.PromotionPageModule)
+    loadChildren: () => import('./features/promotion-page/promotion-page.module').then(m => m.PromotionPageModule),
+    canActivate: [GamblerGuardService]
   },
   {
     path: environmentPaths.profile_page,

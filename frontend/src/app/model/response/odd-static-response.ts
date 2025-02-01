@@ -1,9 +1,8 @@
-export interface OddStaticResponse{
-
-      competition:string;
-      game:string;
-      result:string;
-      name:string;
-      value:number;
-
+export interface OddStaticResponse {
+  event: string;
+  competition: string;
+  game: string;
+  result: string;
+  name: string;
+  value: number;
 }

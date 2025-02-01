@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit{
     this.role = this.jwtService.getCurrentUserRole();
 
     if (this.role == Role.GAMBLER) {
-      console.log("ma che fai")
       this.slipService.fetchSlip();
 
       const email = this.jwtService.getCurrentUserEmail();

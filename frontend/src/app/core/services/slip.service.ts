@@ -69,7 +69,6 @@ export class SlipService implements OnDestroy {
           })
         )
         .subscribe((slipResponse: SlipResponse) => {
-          console.log(slipResponse);
           sessionStorage.setItem('slip', JSON.stringify(slipResponse));
           this.slipSubject.next(slipResponse);
         });

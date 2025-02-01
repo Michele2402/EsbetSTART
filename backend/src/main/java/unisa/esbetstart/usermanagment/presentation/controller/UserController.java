@@ -82,13 +82,6 @@ public class UserController {
     }
 
     @GetMapping("/get/{email}")
-    /**
-     * Retrieves a user by email.
-     *
-     * @param email the email of the user
-     * @return the simple user response
-     */
-    @GetMapping("/get/{email}")
     public ResponseEntity<SimpleUserResponse> getUser(
             @PathVariable String email
     ) {

@@ -17,6 +17,7 @@ public class OddStatic {
 
     private UUID id;
     private LocalDateTime date;
+    private String event;
     private String competition;
     private String game;
     private ResultEnum result;
@@ -26,10 +27,10 @@ public class OddStatic {
     private Odd odd;
 
     @Builder
-    public OddStatic(UUID id, LocalDateTime date, String competition, String game, ResultEnum result, String name, double value, BetPlaced betPlaced, Odd odd) {
-
+    public OddStatic(UUID id, LocalDateTime date, String event, String competition, String game, ResultEnum result, String name, double value, BetPlaced betPlaced, Odd odd) {
         this.id = id;
         this.date = date;
+        this.event = event;
         this.competition = competition;
         this.game = game;
         this.result = result;

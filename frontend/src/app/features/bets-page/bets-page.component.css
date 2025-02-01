@@ -4,46 +4,107 @@
   padding: 20px;
 }
 
-.logout-button {
-  background: black;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-  height: 50px;
-  padding: 0 40px;
+.title {
+  text-align: center;
+  color: #D32F2F;
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-transform: uppercase;
 }
-.logout-button:hover{
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-.navbar-buttons {
-  width: auto;
-  display: flex;
-  gap: 10px;
-}
-.options{
+
+.bets-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  max-height: 85vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.bet-card {
+  width: 90%;
+  background-color: #2C2C2C;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.bet-card:hover {
+  transform: scale(1.02);
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  font-size: 16px;
+  color: #BDBDBD;
+}
+
+.odds-container {
+  margin-top: 15px;
+  background: #1E1E1E;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.odd-info {
+  min-width: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #333;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.odd-info div {
+  font-size: 14px;
+  color: #E0E0E0;
+}
+
+.return {
+  margin: 20px;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.return:hover {
+  background-color: #B71C1C;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
   gap: 10px;
-  margin-right: 20%;
 }
-.options mat-card{
-  background-color: white;
-  width: 80%;
-  text-align: center;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+
+strong {
+  margin-left: 10px;
 }
-h1{
-  font-family: Arial, sans-serif;
-  text-align: left;
+
+.win-result {
+  color: #388E3C;
 }
-mat-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+
+.loss-result {
+  color: #D32F2F;
+}
+
+.result-icon {
+  margin-right: 10px;
 }

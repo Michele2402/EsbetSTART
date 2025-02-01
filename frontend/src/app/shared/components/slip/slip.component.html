@@ -10,7 +10,7 @@
         <div>Odds selected:</div>
 
         <div class="bet-item-container">
-            @for (slipOdd of (slip$ | async)?.odds; track slipOdd) {
+            @for (slipOdd of (slip$ | async)?.odds; track slipOdd.oddId) {
                 <div class="bet-item">
                     <span class="bet-name">{{ slipOdd.eventName }}</span>
                     <span class="bet-odd">{{ slipOdd.oddName }}</span>

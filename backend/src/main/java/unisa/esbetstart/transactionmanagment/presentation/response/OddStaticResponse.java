@@ -10,6 +10,7 @@ import lombok.*;
 @Builder
 public class OddStaticResponse {
 
+    private String event;
     private String competition;
     private String game;
     private String result;

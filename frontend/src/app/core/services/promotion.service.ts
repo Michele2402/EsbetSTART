@@ -20,26 +20,29 @@ export class PromotionService {
   acceptOffer(body: AcceptOfferRequest) {
     const token = sessionStorage.getItem('token');
 
-    return this.http.post(this.basePath + environmentPaths.accept_offer, body,
+    return this.http.post<any>(
+      this.basePath + environmentPaths.accept_offer,
+      body,
       {headers: {'Authorization': 'Bearer ' + token}});
   }
 
   getAllOffer(): Observable<OfferResponse[]> {
+
     const token = sessionStorage.getItem('token');
 
     return this.http.get<OfferResponse[]>(
       this.basePath + environmentPaths.get_all_offer,
       {headers: {'Authorization': 'Bearer ' + token}}
     );
-
   }
 
   getActivatedOffer(gamblerEmail: string): Observable<ActivatedOfferResponse[]> {
     const token = sessionStorage.getItem('token');
 
-    return this.http.get<ActivatedOfferResponse[]>(this.basePath + environmentPaths.get_activated_offer + '/' + gamblerEmail,
-      {headers: {'Authorization': 'Bearer ' + token}});
-
+    return this.http.get<ActivatedOfferResponse[]>(
+      this.basePath + environmentPaths.get_activated_offer + '/' + gamblerEmail,
+      {headers: {'Authorization': 'Bearer ' + token}}
+    );
   }
 
 

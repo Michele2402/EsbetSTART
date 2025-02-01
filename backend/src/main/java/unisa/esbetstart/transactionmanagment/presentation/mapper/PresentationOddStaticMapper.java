@@ -11,6 +11,7 @@ public class PresentationOddStaticMapper {
     public OddStaticResponse toOddStaticResponse(OddStatic oddStatic) {
 
         return OddStaticResponse.builder()
+                .event(oddStatic.getEvent())
                 .competition(oddStatic.getCompetition())
                 .game(oddStatic.getGame())
                 .name(oddStatic.getName())

@@ -36,6 +36,7 @@ public class InfrastructureOddStaticMapper {
                 .value(oddStatic.getValue())
                 .name(oddStatic.getName())
                 .result(oddStatic.getResult())
+                .event(oddStatic.getEvent())
                 .competition(oddStatic.getCompetition())
                 .game(oddStatic.getGame())
                 .date(oddStatic.getDate())
@@ -56,6 +57,7 @@ public class InfrastructureOddStaticMapper {
                         .id(oddStaticEntity.getBetPlaced().getId())
                         .amount(oddStaticEntity.getBetPlaced().getAmount())
                         .result(oddStaticEntity.getBetPlaced().getResult())
+                        .date(oddStaticEntity.getBetPlaced().getDate())
                         .oddStatics(oddStaticEntity
                                 .getBetPlaced()
                                 .getOdds()
@@ -70,13 +72,13 @@ public class InfrastructureOddStaticMapper {
                                         .game(oddStatic.getGame())
                                         .build())
                                 .collect(Collectors.toSet()))
-                                .gambler(Gambler.builder()
-                                        .email(oddStaticEntity.getBetPlaced().getGambler().getEmail())
-                                        .balance(oddStaticEntity.getBetPlaced().getGambler().getBalance())
-                                        .build())
+                        .gambler(Gambler.builder()
+                                .email(oddStaticEntity.getBetPlaced().getGambler().getEmail())
+                                .balance(oddStaticEntity.getBetPlaced().getGambler().getBalance())
                                 .build())
-                        .value(oddStaticEntity.getValue())
-                        .build();
+                        .build())
+                .value(oddStaticEntity.getValue())
+                .build();
     }
 
     /**

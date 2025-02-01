@@ -47,6 +47,7 @@ public class InfrastructureBetPlacedMapper {
         return BetPlacedEntity.builder()
                 .id(betPlaced.getId())
                 .amount(betPlaced.getAmount())
+                .date(betPlaced.getDate())
                 .gambler(GamblerEntity.builder()
                         .email(betPlaced.getGambler().getEmail())
                         .withdrawableBalance(betPlaced.getGambler().getWithdrawableBalance())

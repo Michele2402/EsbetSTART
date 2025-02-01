@@ -25,6 +25,8 @@ public class OddStaticEntity {
     private double value;
     @Enumerated(EnumType.STRING)
     private ResultEnum result;
+
+    private String event;
     private String competition;
     private String game;
 
