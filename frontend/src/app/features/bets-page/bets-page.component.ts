@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {catchError, map, Observable, Subject, takeUntil} from "rxjs";
 import {BetPlacedResponse} from "../../model/response/bet-placed-response";
 import {Location} from "@angular/common";
@@ -12,22 +12,17 @@ import {ShowUserBetsRequest} from "../../model/request/show-user-bets-request";
   templateUrl: './bets-page.component.html',
   styleUrl: './bets-page.component.css'
 })
-export class BetsPageComponent {
+export class BetsPageComponent implements OnInit {
 
   allBets$ = new Observable<BetPlacedResponse[]>();
 
   private _destroy$ = new Subject<void>();
 
   constructor(
-    private location: Location,
     private betsService: BetsService,
     private snackBarService: SnackbarService,
     private jwtService: JwtService
   ) {
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 
   ngOnInit(): void {
@@ -35,8 +30,6 @@ export class BetsPageComponent {
   }
 
   showAllBets() {
-
-    console.log("ciao")
 
     const email = this.jwtService.getCurrentUserEmail() || '';
 
@@ -57,7 +50,11 @@ export class BetsPageComponent {
               day: '2-digit',
               hour: '2-digit',
               minute: '2-digit'
-            })
+            }),
+            oddStatics: bet.oddStatics.map(oddStatic => ({
+              ...oddStatic,
+              value: parseFloat(oddStatic.value.toFixed(2))
+            }))
           }))
         ),
         takeUntil(this._destroy$),
@@ -68,16 +65,15 @@ export class BetsPageComponent {
         })
       );
 
-    this.allBets$.subscribe((bets) => {
-      console.log(bets)
-    })
   }
 
-  calculatePotentialWinnings(bet: BetPlacedResponse): number {
+  calculatePotentialWinnings(bet: BetPlacedResponse): string {
+
+    console.log(bet)
     let potentialWinnings = bet.amount;
     bet.oddStatics.forEach((odd: any) => {
-      potentialWinnings *= odd.value; // Moltiplichiamo l'importo con ogni valore degli odd
+      potentialWinnings *= odd.value;
     });
-    return potentialWinnings;
+    return potentialWinnings.toFixed(2);
   }
 }

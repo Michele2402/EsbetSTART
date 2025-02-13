@@ -9,6 +9,7 @@ import {RouterLink} from "@angular/router";
 import {ProfileLeftbarComponent} from "./components/profile-leftbar/profile-leftbar.component";
 import {SlipComponent} from "./components/slip/slip.component";
 import {BetConfirmationDialogComponent} from "./components/slip/bet-confirmation-dialog.component";
+import {GoBackComponent} from "./components/go-back/go-back.component";
 
 
 
@@ -19,7 +20,8 @@ import {BetConfirmationDialogComponent} from "./components/slip/bet-confirmation
     LeftbarComponent,
     ProfileLeftbarComponent,
     SlipComponent,
-    BetConfirmationDialogComponent
+    BetConfirmationDialogComponent,
+    GoBackComponent
   ],
     imports: [
         CommonModule,
@@ -34,6 +36,7 @@ import {BetConfirmationDialogComponent} from "./components/slip/bet-confirmation
     LeftbarComponent,
     ProfileLeftbarComponent,
     SlipComponent,
+    GoBackComponent,
   ]
 })
 export class SharedModule { }

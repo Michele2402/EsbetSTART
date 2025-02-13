@@ -28,6 +28,7 @@ public class InfrastructureBetMapper {
                         .value(oddStaticEntity.getValue())
                         .result(oddStaticEntity.getResult())
                         .event(oddStaticEntity.getEvent())
+                        .event(oddStaticEntity.getEvent())
                         .competition(oddStaticEntity.getCompetition())
                         .game(oddStaticEntity.getGame())
                         .build()

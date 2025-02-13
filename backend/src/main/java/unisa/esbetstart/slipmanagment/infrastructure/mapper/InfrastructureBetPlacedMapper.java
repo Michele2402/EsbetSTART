@@ -57,6 +57,7 @@ public class InfrastructureBetPlacedMapper {
                         .id(oddStatic.getId())
                         .betPlaced(BetPlacedEntity.builder().id(betPlaced.getId()).build())
                         .name(oddStatic.getName())
+                        .event(oddStatic.getEvent())
                         .competition(oddStatic.getCompetition())
                         .game(oddStatic.getGame())
                         .date(oddStatic.getDate())

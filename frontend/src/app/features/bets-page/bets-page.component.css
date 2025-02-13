@@ -70,20 +70,6 @@ mat-card-subtitle {
   color: #E0E0E0;
 }
 
-.return {
-  margin: 20px;
-  color: white;
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.return:hover {
-  background-color: #B71C1C;
-}
-
 .result {
   display: flex;
   align-items: center;

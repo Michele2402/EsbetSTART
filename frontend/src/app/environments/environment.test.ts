@@ -24,9 +24,10 @@ export const environmentPaths = {
   bets_concluded_page: 'bets-concluded',
   deposits_page: 'deposit',
   withdrawals_page: 'withdrawal',
+  terms_page: 'terms',
 
   //BACKEND
-  base_path: 'http://79.49.37.224:12312/',
+  base_path: 'http://95.237.17.38:12312/',
 
   //API ENDPOINTS
   get_all_games: 'games/get-all',
@@ -47,7 +48,7 @@ export const environmentPaths = {
 
   register: 'users/register',
   login: 'users/login',
-  get: 'users/',
+  get: 'users/get',
   update: 'users/update',
   balance: 'users/balance',
   transactions: 'users/transaction/create',
@@ -67,5 +68,6 @@ export const environmentPaths = {
   open_ticket:'tickets/open',
   accept_ticket:'tickets/accept',
   send_ticket:'tickets/sendMessage',
+
 
 }

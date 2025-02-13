@@ -33,8 +33,21 @@ import { SlipResponse } from "../../../model/response/slip-response";
     </div>
   `,
   styles: [`
-    .dialog-container { text-align: center; padding: 20px; }
-    .bet-list { margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+    .dialog-container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .bet-list {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 400px;
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
 
     .bet-item {
       display: grid;
@@ -50,8 +63,16 @@ import { SlipResponse } from "../../../model/response/slip-response";
       border-top: 1px solid #ddd;
     }
 
-    .bet-summary { margin: 20px 0; font-size: 18px; }
-    .dialog-actions { display: flex; justify-content: space-around; margin-top: 20px; }
+    .bet-summary {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
   `]
 })
 export class BetConfirmationDialogComponent {

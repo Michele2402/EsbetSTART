@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CompetitionResponse} from "../../model/response/competition-response";
 import {RuleResponse} from "../../model/response/rule-response";
-import {catchError, Observable, Subject, takeUntil} from "rxjs";
+import {catchError, map, Observable, Subject, takeUntil} from "rxjs";
 import {EventResponse} from "../../model/response/event-response";
 import {EventService} from "../../core/services/event.service";
 import {SnackbarService} from "../../core/services/snackbar.service";
@@ -47,6 +47,15 @@ export class EventPageComponent implements OnInit, OnDestroy {
       this.events$ = this.eventService.getAllByCompetitionId(this.selectedCompetition?.id!)
         .pipe(
           takeUntil(this.destroy$),
+          map((events: EventResponse[]) => {
+            return events.map(event => {
+              event.odds = event.odds.map(odd => {
+                odd.value = parseFloat(odd.value.toFixed(2));
+                return odd;
+              });
+              return event;
+            });
+          }),
           catchError((error) => {
             let defaultErrorMessage: string = 'Failed to load events';
             this.snackBarService.errorHandler(defaultErrorMessage, error);

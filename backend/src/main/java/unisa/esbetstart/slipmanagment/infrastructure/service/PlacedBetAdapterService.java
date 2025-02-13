@@ -38,6 +38,7 @@ public class PlacedBetAdapterService implements PlaceBetPortOut, UpdateBetPlaced
     @Override
     public void updateBetPlaced(BetPlaced betPlaced) {
 
+            BetPlacedEntity betPlacedEntity = infrastructureBetPlacedMapper.toBetPlacedEntityToGambler(betPlaced);
             betPlacedJpaRepository.save(infrastructureBetPlacedMapper.toBetPlacedEntityToGambler(betPlaced));
 
     }
